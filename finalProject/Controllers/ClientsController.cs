@@ -3,34 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using BL;
 using Entities;
 namespace finalProject.Controllers
 {
     [RoutePrefix("Api/Clients")]
-    public class ClientsController: ApiController
+    public class ClientsController : ApiController
     {
         //הוספה
         [HttpPut]
         [Route("AddClient")]
-        public IHttpActionResult AddClient(ClientsEntities c)
+        public JsonResult<ReturnObject> AddClient(ClientsEntities c)
         {
+            if (string.IsNullOrEmpty(c.Mail))
+                return Json(new ReturnObject() { Status = false, Error = "Email is required!!", Data = "" });
+            if (string.IsNullOrEmpty(c.Password))
+                return Json(new ReturnObject() { Status = false, Error = "Password is required!!", Data = "" });
+            if (ClientsBl.IsExist(c.Mail))
+                return Json(new ReturnObject() { Status = false, Error = "User is exist!!", Data = "" });
+            string error = "";
             try
             {
                 ClientsBl.AddClient(c);
-                return Ok(true);
+                return Json(new ReturnObject() { Status = true, Error = "", Data = c.Mail });
             }
-            catch
+            catch (Exception e)
             {
-                return Ok(false);
+                error = e.Message;
             }
+            return Json(new ReturnObject() { Status = false, Error = error, Data = "" });
         }
-        //בדיקה האם קיים לקוח לפי מייל וסיסמא
-        [HttpGet]
-        [Route("IsExist/{mail}/{password}")]
-        public IHttpActionResult IsExist(string mail, string password)
+        ////בדיקה האם קיים לקוח לפי מייל
+        //[HttpPost]
+        //[Route("IsExist/{mail}")]
+        //public bool IsExist(string mail)
+        //{
+        //    return ClientsBl.IsExist(mail);
+        //}
+
+        [HttpPost]
+        [Route("Login")]
+        public JsonResult<ReturnObject> Login(ClientsEntities c)
         {
-            return Ok(ClientsBl.IsExist(mail, password));
+            if (string.IsNullOrEmpty(c.Mail))
+                return Json(new ReturnObject() { Status = false, Error = "Email is required!!", Data = "" });
+            if (string.IsNullOrEmpty(c.Password))
+                return Json(new ReturnObject() { Status = false, Error = "Password is required!!", Data = "" });
+            if (ClientsBl.Login(c.Mail, c.Password))
+                return Json(new ReturnObject() { Status = true, Error = "", Data = c.Mail });
+            return Json(new ReturnObject() { Status = false, Error = "User does not exist!!", Data = "" });
         }
     }
 }

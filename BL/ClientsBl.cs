@@ -15,8 +15,13 @@ namespace BL
         {
             ClientsDal.AddClient(ClientsEntities.ConvertToDB(c));
         }
-        //בדיקה האם קיים לקוח לפי מייל וסיסמא
-        public static bool IsExist(string mail, string password)
+        //בדיקה האם קיים לקוח לפי מייל
+        public static bool IsExist(string mail)
+        {
+            return ClientsDal.GetClients().Any(x => x.MAIL.CompareTo(mail) == 0);
+        }
+
+        public static bool Login(string mail, string password)
         {
             return ClientsDal.GetClients().Any(x => x.MAIL.CompareTo(mail) == 0 && x.PASSWORD.CompareTo(password) == 0);
         }
