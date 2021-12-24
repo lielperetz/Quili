@@ -9,8 +9,12 @@ import { FormsModule } from '@angular/forms';
 import { NavComponent } from './nav/nav.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
+<<<<<<< Updated upstream
 import { AuthComponent } from './layout/auth/auth.component';
 import { SiteComponent } from './layout/site/site.component';
+=======
+import { CookieService } from 'ngx-cookie-service';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -28,7 +32,7 @@ import { SiteComponent } from './layout/site/site.component';
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
