@@ -14,7 +14,7 @@ namespace Dal
         {
             return db.CLIENTS.ToList();
         }
-        //הוספת לקוח
+        //הוספה
         public static void AddClient(CLIENTS c)
         {
             db.CLIENTS.Add(c);

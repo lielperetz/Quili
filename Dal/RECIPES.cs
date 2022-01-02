@@ -12,18 +12,24 @@ namespace Dal
     using System;
     using System.Collections.Generic;
     
-    public partial class CLIENTS
+    public partial class RECIPES
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CLIENTS()
+        public RECIPES()
         {
-            this.RECIPES = new HashSet<RECIPES>();
+            this.SCHEDULES = new HashSet<SCHEDULES>();
         }
     
+        public short CODE { get; set; }
         public string MAIL { get; set; }
-        public string PASSWORD { get; set; }
+        public string RECIPE_ID { get; set; }
+        public string RECIPE_TITLE { get; set; }
+        public string RECIPE_IMAGE { get; set; }
+        public Nullable<int> SCHEDULING_STATUSE { get; set; }
+        public System.DateTime DATE { get; set; }
     
+        public virtual CLIENTS CLIENTS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<RECIPES> RECIPES { get; set; }
+        public virtual ICollection<SCHEDULES> SCHEDULES { get; set; }
     }
 }

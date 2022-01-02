@@ -12,24 +12,138 @@
           <Property Name="MAIL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PASSWORD" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
+        <EntityType Name="RECIPES">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MAIL" Type="varchar" MaxLength="50" />
+          <Property Name="RECIPE_ID" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="RECIPE_TITLE" Type="varchar" MaxLength="50" />
+          <Property Name="RECIPE_IMAGE" Type="varchar" MaxLength="50" />
+          <Property Name="SCHEDULING_STATUSE" Type="int" />
+          <Property Name="DATE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SCHEDULES">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RECIPE_CODE" Type="smallint" Nullable="false" />
+          <Property Name="DATE" Type="datetime" />
+          <Property Name="AMOUNT" Type="int" />
+        </EntityType>
+        <Association Name="FK__RECIPES__MAIL__5441852A">
+          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
+          <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="MAIL" />
+            </Principal>
+            <Dependent Role="RECIPES">
+              <PropertyRef Name="MAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SCHEDULES__RECIP__571DF1D5">
+          <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="1" />
+          <End Role="SCHEDULES" Type="Self.SCHEDULES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECIPES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="SCHEDULES">
+              <PropertyRef Name="RECIPE_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="FINAL_PROJECTModelStoreContainer">
           <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECIPES" EntityType="Self.RECIPES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SCHEDULES" EntityType="Self.SCHEDULES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__RECIPES__MAIL__5441852A" Association="Self.FK__RECIPES__MAIL__5441852A">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="RECIPES" EntitySet="RECIPES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SCHEDULES__RECIP__571DF1D5" Association="Self.FK__SCHEDULES__RECIP__571DF1D5">
+            <End Role="RECIPES" EntitySet="RECIPES" />
+            <End Role="SCHEDULES" EntitySet="SCHEDULES" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FINAL_PROJECTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FINAL_PROJECTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLIENTS" EntityType="FINAL_PROJECTModel.CLIENTS" />
+          <EntitySet Name="RECIPES" EntityType="FINAL_PROJECTModel.RECIPES" />
+          <EntitySet Name="SCHEDULES" EntityType="FINAL_PROJECTModel.SCHEDULES" />
+          <AssociationSet Name="FK__RECIPES__MAIL__5441852A" Association="FINAL_PROJECTModel.FK__RECIPES__MAIL__5441852A">
+            <End Role="CLIENTS" EntitySet="CLIENTS" />
+            <End Role="RECIPES" EntitySet="RECIPES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SCHEDULES__RECIP__571DF1D5" Association="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__571DF1D5">
+            <End Role="RECIPES" EntitySet="RECIPES" />
+            <End Role="SCHEDULES" EntitySet="SCHEDULES" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CLIENTS">
           <Key>
             <PropertyRef Name="MAIL" />
           </Key>
-          <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RECIPES" Relationship="FINAL_PROJECTModel.FK__RECIPES__MAIL__5441852A" FromRole="CLIENTS" ToRole="RECIPES" />
         </EntityType>
-        <EntityContainer Name="FINAL_PROJECTEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CLIENTS" EntityType="Self.CLIENTS" />
-        </EntityContainer>
-      </Schema>
+        <EntityType Name="RECIPES">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECIPE_ID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RECIPE_TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECIPE_IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SCHEDULING_STATUSE" Type="Int32" />
+          <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CLIENTS" Relationship="FINAL_PROJECTModel.FK__RECIPES__MAIL__5441852A" FromRole="RECIPES" ToRole="CLIENTS" />
+          <NavigationProperty Name="SCHEDULES" Relationship="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__571DF1D5" FromRole="RECIPES" ToRole="SCHEDULES" />
+        </EntityType>
+        <EntityType Name="SCHEDULES">
+          <Key>
+            <PropertyRef Name="CODE" />
+          </Key>
+          <Property Name="CODE" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RECIPE_CODE" Type="Int16" Nullable="false" />
+          <Property Name="DATE" Type="DateTime" Precision="3" />
+          <Property Name="AMOUNT" Type="Int32" />
+          <NavigationProperty Name="RECIPES" Relationship="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__571DF1D5" FromRole="SCHEDULES" ToRole="RECIPES" />
+        </EntityType>
+        <Association Name="FK__RECIPES__MAIL__5441852A">
+          <End Type="FINAL_PROJECTModel.CLIENTS" Role="CLIENTS" Multiplicity="0..1" />
+          <End Type="FINAL_PROJECTModel.RECIPES" Role="RECIPES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTS">
+              <PropertyRef Name="MAIL" />
+            </Principal>
+            <Dependent Role="RECIPES">
+              <PropertyRef Name="MAIL" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SCHEDULES__RECIP__571DF1D5">
+          <End Type="FINAL_PROJECTModel.RECIPES" Role="RECIPES" Multiplicity="1" />
+          <End Type="FINAL_PROJECTModel.SCHEDULES" Role="SCHEDULES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RECIPES">
+              <PropertyRef Name="CODE" />
+            </Principal>
+            <Dependent Role="SCHEDULES">
+              <PropertyRef Name="RECIPE_CODE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -40,6 +154,29 @@
               <MappingFragment StoreEntitySet="CLIENTS">
                 <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
                 <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECIPES">
+            <EntityTypeMapping TypeName="FINAL_PROJECTModel.RECIPES">
+              <MappingFragment StoreEntitySet="RECIPES">
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="SCHEDULING_STATUSE" ColumnName="SCHEDULING_STATUSE" />
+                <ScalarProperty Name="RECIPE_IMAGE" ColumnName="RECIPE_IMAGE" />
+                <ScalarProperty Name="RECIPE_TITLE" ColumnName="RECIPE_TITLE" />
+                <ScalarProperty Name="RECIPE_ID" ColumnName="RECIPE_ID" />
+                <ScalarProperty Name="MAIL" ColumnName="MAIL" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCHEDULES">
+            <EntityTypeMapping TypeName="FINAL_PROJECTModel.SCHEDULES">
+              <MappingFragment StoreEntitySet="SCHEDULES">
+                <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
+                <ScalarProperty Name="DATE" ColumnName="DATE" />
+                <ScalarProperty Name="RECIPE_CODE" ColumnName="RECIPE_CODE" />
+                <ScalarProperty Name="CODE" ColumnName="CODE" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
