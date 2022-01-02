@@ -27,10 +27,24 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "src/assets/vendors/css/vendors.min.css",
+              "src/assets/css/bootstrap.css",
+              "src/assets/css/bootstrap-extended.css",
+              "src/assets/css/colors.css",
+              "src/assets/css/components.css",
+              "src/assets/css/themes/dark-layout.css",
+              "src/assets/css/themes/bordered-layout.css",
+              "src/assets/css/themes/semi-dark-layout.css",
+              "src/assets/css/core/menu/menu-types/vertical-menu.css",
+
+              "src/assets/css/style.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/vendors/js/vendors.min.js",
+              "src/assets/js/core/app-menu.js",
+              "src/assets/js/core/app.js"
+            ]
           },
           "configurations": {
             "production": {

@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/uesr';
 import { UserService } from '../services/user.service';
+import * as feather from 'feather-icons';
+
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css', '../../assets/css/pages/page-auth.css']
 })
 export class SignUpComponent implements OnInit {
 
@@ -13,6 +15,7 @@ export class SignUpComponent implements OnInit {
   constructor(public UserService:UserService) { }
 
   ngOnInit(): void {
+    feather.replace();
   }
 
   newUser(){

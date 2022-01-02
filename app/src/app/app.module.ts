@@ -9,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { NavComponent } from './nav/nav.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
+import { AuthComponent } from './layout/auth/auth.component';
+import { SiteComponent } from './layout/site/site.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { HomeComponent } from './home/home.component';
     LogInComponent,
     NavComponent,
     SignUpComponent,
-    HomeComponent
+    HomeComponent,
+    AuthComponent,
+    SiteComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,7 @@ import { HomeComponent } from './home/home.component';
     NgbModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
