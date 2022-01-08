@@ -8,26 +8,27 @@ import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-log-in',
   templateUrl: './log-in.component.html',
-  
-  styleUrls: ['./log-in.component.css' ,'../../assets/css/pages/page-auth.css']
+
+  styleUrls: ['./log-in.component.css', '../../assets/css/pages/page-auth.css']
 })
 export class LogInComponent implements OnInit {
 
-  user:User=new User()
+  user: User = new User()
 
-  constructor(public cookies:CookieService, public Router:Router, public UserService:UserService) { }
+  constructor(public cookies: CookieService, public Router: Router, public UserService: UserService) { }
 
   ngOnInit(): void {
     feather.replace();
   }
 
-  LogIn(){
+  LogIn() {
     this.UserService.LogIn(this.user).subscribe(
-      (response:any)=>{
-        if(response.Status){
-          this.cookies.set('userId', response.Data)
-          alert("wellcome "+this.cookies.get('userId'))
-        } 
-        else alert(response.Error)})
+      (response: any) => {
+        if (response.Status) {
+          this.cookies.set('Token', response.Data)
+          alert("wellcome " + this.cookies.get('Token'))
+        }
+        else alert(response.Error)
+      })
   }
 }

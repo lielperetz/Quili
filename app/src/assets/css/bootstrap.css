@@ -4214,9 +4214,9 @@ input[type='submit'].btn-block, input[type='reset'].btn-block, input[type='butto
   background-color : #EFEFEF;
 }
 
-.custom-file-input:lang(en) ~ .custom-file-label::after {
+/* .custom-file-input:lang(en) ~ .custom-file-label::after {
   content : 'Browse';
-}
+} */
 
 .custom-file-input ~ .custom-file-label[data-browse]::after {
   content : attr(data-browse);

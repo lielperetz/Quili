@@ -1,4 +1,198 @@
-<div class="alert-body">
-    <strong>Info:</strong> This layout can be useful for getting started with empty content section. Please check
-    the&nbsp;<a class="text-primary" href="https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/documentation/documentation-layout-empty.html" target="_blank">Layout empty documentation</a>&nbsp; for more details.
-</div>
+<!-- <div class="col-lg-12 control-section">
+  <div class="content-wrapper">
+    <div class="schedule-overview">
+      <div class="overview-header">
+
+        <div class="overview-content">
+          <div class="left-panel"> -->
+<div class="app-content content ">
+  <div class="content-wrapper">
+    <div class="content-body">
+      <div class="overview-scheduler">
+
+        <!-- Calendar start -->
+        <section>
+          <!-- Main: Content -->
+          <div class="sidebar-wrapper">
+            <div class="control-section">
+              <!-- <ejs-schedule #scheduleObj width='100%' height='650px' [eventSettings]='eventSettings'
+              [selectedDate]="selectedDate" (popupOpen)='onPopupOpen($event)'
+              (actionComplete)='onActionComplete($event)' (actionBegin)='onActionBegin($event)'
+              [(currentView)]="currentView" (dragStart)="onDragStart($event)" (cellClick)='onClickCell(content)'>
+              <e-views>
+                <e-view option="Month"></e-view>
+                <ng-template #cellTemplate #eventSettingsTemplate let-data>
+                  <div class="templatewrap" [innerHTML]="getCellContent(data.date)">
+                    {{data.RecipeName}}
+                  </div>
+                </ng-template>
+                <ng-template #content let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Add Recipe</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form class="form-group" (ngSubmit)="save()" #myForm="ngForm">
+                      <div class="form-group">
+                        <label for="newRecipe">Add Recipe</label>
+                        <div class="input-group">
+                          <input id="newRecipe" type="url" class="form-control" [(ngModel)]="newRecipe.RecipeTitle" placeholder="url://http..." required #myId="ngModel">
+                        </div>
+                        <div *ngIf="myId.invalid && (myId.dirty || myId.touched)" class="alert-danger">
+                          required field 
+                        </div> 
+                        <label for="startDate">Start Date</label>
+                        <div class="input-group">
+                          <input id="startDate" class="form-control" [(ngModel)]="newRecipe.Date" placeholder="yyyy-mm-dd" name="dp"
+                            ngbDatepicker #dp="ngbDatepicker">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-dark" [disabled]="!myForm.valid" (click)="save();modal.close('Save click')">Save</button>
+                  </div>
+                </ng-template>
+                
+                <hr>
+                
+                <pre>{{ closeResult }}</pre>
+              </e-views>
+            </ejs-schedule> -->
+              <ejs-schedule #scheduleObj [(currentView)]="currentView" [eventSettings]="eventSettings"
+                cssClass='schedule-overview' height='100%'>
+                <ng-template #dateHeaderTemplate let-data>
+                  <div class="date-text">{{getDateHeaderText(data.date)}}</div>
+                  <!-- <div [innerHTML]="getWeatherImage(data.date)"></div> -->
+                  <!-- <button class="e-control e-btn" style="position: absolute;" id="targetButton" (click)="onOpenDialog($event)">Open Dialog</button> -->
+                </ng-template>
+                <e-views>
+                  <e-view option="Month"></e-view>
+                </e-views>
+                <!-- Header template -->
+                <ng-template #quickInfoTemplatesHeader let-data>
+                  <div class="quick-info-header">
+                    <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
+                      <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
+                      <div class="duration-text">{{getHeaderDetails(data)}}</div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #quickInfoTemplatesContent let-data>
+                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellContent : eventContent"
+                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                </ng-template>
+                <ng-template #cellContent let-data="data">
+                  <div class="quick-info-content">
+                    <div class="e-cell-content">
+                      <div class="content-area">
+                        <ejs-textbox #titleObj id="title" placeholder="Title"></ejs-textbox>
+                      </div>
+                      <div class="content-area">
+                        <ejs-textbox #notesObj id="notes" placeholder="Notes"></ejs-textbox>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #eventContent let-data="data">
+                  <div class="quick-info-content">
+                    <div class="event-content">
+                      <div class="meeting-type-wrap">
+                        <label>Subject</label>:
+                        <span>{{data.Subject}}</span>
+                      </div>
+                      <div class="meeting-subject-wrap">
+                        <label>Type</label>:
+                        <span>{{getEventType(data)}}</span>
+                      </div>
+                      <div class="notes-wrap">
+                        <label>Notes</label>:
+                        <span>{{data.Description}}</span>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #quickInfoTemplatesFooter let-data>
+                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellFooter : eventFooter"
+                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                </ng-template>
+                <ng-template #cellFooter let-data="data">
+                  <div class="e-cell-footer">
+                    <button ejs-button id="more-details" cssClass="e-flat" (click)="buttonClickActions($event)">More
+                      Details</button>
+                    <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
+                      (click)="buttonClickActions($event)">Save</button>
+                  </div>
+                </ng-template>
+                <ng-template #eventFooter let-data="data">
+                  <div class="e-event-footer">
+                    <button ejs-button id="delete" cssClass="e-flat"
+                      (click)="buttonClickActions($event)">Delete</button>
+                    <button ejs-button id="more-details" cssClass="e-flat" [isPrimary]="true"
+                      (click)="buttonClickActions($event)">More Details</button>
+                  </div>
+                </ng-template>
+                
+                <!-- <ejs-dialog id='dialog' #dialogTemplate showCloseIcon='true' [height]='height' [target]='targetElement' width='435px'>
+                <ng-template #editorTemplatesHeader let-data>
+                  <div class="editor-header">
+                    <div class="editor-header-content" [ngStyle]="getEditorHeaderStyles(data)">
+                      <div class="editor-title">{{getEditorHeaderTitle(data)}}</div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #editorContent let-data="data">
+                  <div class="editor-content">
+                    <div class="e-cell-content">
+                      <div class="content-area">
+                        <ejs-textbox #titleObj id="title" placeholder="Title"></ejs-textbox>
+                      </div>
+                      <div class="content-area">
+                        <ejs-dropdownlist id='eventType' #eventTypeObj [dataSource]='resourceDataSource'
+                          [fields]='calendarFields' placeholder='Choose Type' [value]='calendarsValue[0]'
+                          popupHeight="150pc">
+                        </ejs-dropdownlist>
+                      </div>
+                      <div class="content-area">
+                        <ejs-textbox #notesObj id="notes" placeholder="Notes"></ejs-textbox>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+                <ng-template #editorTemplatesFooter let-data>
+                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellEditorFooter : eventEditorFooter"
+                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                </ng-template>
+                <ng-template #cellEditorFooter let-data="data">
+                  <div class="e-cell-footer">
+                    <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
+                      (click)="buttonClickActions($event)">Save</button>
+                    <button ejs-button id="cancel" cssClass="e-flat"
+                      (click)="buttonClickActions($event)">Cancel</button>
+                  </div>
+                </ng-template>
+                <ng-template #eventEditorFooter let-data="data">
+                  <div class="e-event-footer">
+                    <button ejs-button id="delete" cssClass="e-flat"
+                      (click)="buttonClickActions($event)">Delete</button>
+                    <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
+                      (click)="buttonClickActions($event)">Save</button>
+                    <button ejs-button id="cancel" cssClass="e-flat"
+                      (click)="buttonClickActions($event)">Cancel</button>
+                  </div>
+                </ng-template>
+                </ejs-dialog> -->
+              </ejs-schedule>
+            </div>
+          </div>
+          <!-- Main: Content -->
+        </section>
+        <!-- Calendar end -->
+      </div>
+    </div>
+  </div>

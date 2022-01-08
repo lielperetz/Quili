@@ -12,6 +12,12 @@ import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { SiteComponent } from './layout/site/site.component';
 import { CookieService } from 'ngx-cookie-service';
+import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
+import { ButtonModule } from '@syncfusion/ej2-angular-buttons';
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
+import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
+import { SplitButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
+import { ContextMenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
 
 @NgModule({
   declarations: [
@@ -27,7 +33,15 @@ import { CookieService } from 'ngx-cookie-service';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ScheduleModule,
+    ButtonModule,
+    DialogModule,
+    DropDownListModule,
+    SplitButtonModule,
+    SidebarModule,
+    ContextMenuModule,
+    MultiSelectModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

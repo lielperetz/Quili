@@ -10,7 +10,6 @@ import { User } from '../classes/uesr';
 export class UserService {
 
   url:string="http://localhost:44376/Api/Clients/"
-  // http://localhost:44376/Api/Clients/AddClient
 
   constructor(public httpClient:HttpClient) { }
 
@@ -20,7 +19,6 @@ export class UserService {
   LogIn(user:User):Observable<any>{
     return this.httpClient.post<any>(this.url+"Login",user).pipe(catchError(this.handleError))
   }
-
   handleError(errorResponse: HttpErrorResponse){
     console.log(errorResponse);
     return throwError(errorResponse);

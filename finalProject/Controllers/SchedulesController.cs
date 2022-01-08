@@ -15,7 +15,7 @@ namespace finalProject.Controllers
     public class SchedulesController : ApiController
     {
         [HttpGet]
-        [Route("GetSchedulesByRange")]
+        [Route("GetSchedulesByRange/{d1}/{d2}")]
 
         public Object GetSchedulesByRange(DateTime d1, DateTime d2)
         {
