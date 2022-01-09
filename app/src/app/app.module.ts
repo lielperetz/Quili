@@ -18,6 +18,7 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-dropdowns';
 import { SplitButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import { ContextMenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
+import { IngredientsComponent } from './ingredients/ingredients.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ContextMenuModule, SidebarModule } from '@syncfusion/ej2-angular-naviga
     SignUpComponent,
     HomeComponent,
     AuthComponent,
-    SiteComponent
+    SiteComponent,
+    IngredientsComponent
   ],
   imports: [
     BrowserModule,
