@@ -18,47 +18,43 @@ namespace finalProject.Controllers
     [RoutePrefix("Api/Recipes")]
     public class RecipesController : ApiController
     {
-        private const string URL = "https://api.spoonacular.com/recipes/complexSearch";
+        private const string URL = "https://api.spoonacular.com/recipes";
         private string urlParameters = "?apiKey=52b9142911034ec3b82f8d31cb7410ca";
 
         [HttpGet]
         [Route("GetTry")]
-        public JsonResult<ReturnObject> GetTry()
+        public Object GetTry(string id)
         {
             //List<JsonResult<ReturnObject>> res = new List<JsonResult<ReturnObject>>();
-            string res = " ", error = " ";
+            string error = " ";
 
             HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL);
+            client.BaseAddress = new Uri(URL+"/"+id+ "/similar");
 
             // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            // List data response.
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  // Blocking call! Program will wait here until a response is received or a timeout occurs.
+            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  
             if (response.IsSuccessStatusCode)
             {
-                // Parse the response body.
-                var dataObjects = response.Content.ReadAsAsync<JSON[]>().Result;  //Make sure to add a reference to System.Net.Http.Formatting.dll
-                foreach (var d in dataObjects)
+                try
                 {
-                    res += d;
-                    //res.Add(d);
+                    var dataObjects = response.Content.ReadAsAsync<Object>().Result;  
+                    return dataObjects;
+                }
+                catch(Exception ex)
+                {
+                    error = ex.Message;
                 }
             }
             else
             {
-                error = "err";
-                //Console.WriteLine("{0} ({1})", (int)response.StatusCode, response.ReasonPhrase);
-                //res.Add(Json(new ReturnObject() { Status = false, Error = "error", Data = "" }));
+                error = response.StatusCode.ToString();
             }
 
-            // Make any other calls using HttpClient here.
-
-            // Dispose once all HttpClient calls are complete. This is not necessary if the containing object will be disposed of; for example in this case the HttpClient instance will be disposed automatically when the application terminates so the following call is superfluous.
             client.Dispose();
-            return Json(new ReturnObject() { Status = false, Error = error, Data = res });
+            return Json(new ReturnObject() { Status = false, Error = error });
         }
 
         [HttpGet]
