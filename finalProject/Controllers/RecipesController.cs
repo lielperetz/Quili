@@ -18,23 +18,14 @@ namespace finalProject.Controllers
     [RoutePrefix("Api/Recipes")]
     public class RecipesController : ApiController
     {
-
-        [HttpGet]
-        [Route("GetSavedRecipeById")]
-        //public JsonResult<ReturnObject> GetSavedRecipeById(string id)
-        //{
-        //   return RecipesBl.
-        //}
-
         [HttpPut]
         [Route("AddRecipe")]
         public JsonResult<ReturnObject> AddRecipe(RecipesEntities r)
         {
-            //r.Mail
             System.Net.Http.Headers.HttpRequestHeaders headers = this.Request.Headers;
-            if (headers.Contains("Token"))
+            if (headers.Contains("Authorization"))
             {
-                r.Mail = headers.GetValues("Token").First();
+                r.Mail = headers.GetValues("Authorization").First();
             }
             else
             {
@@ -77,13 +68,6 @@ namespace finalProject.Controllers
                 return Json(new ReturnObject() { Status = false, Error = ex.ToString() });
             }
             return Json(new ReturnObject() { Status = true, Data = r.Mail });
-        }
-
-        [HttpGet]
-        [Route("GetRecipesByRange")]
-        public JsonResult<ReturnObject> GetRecipesByRange()
-        {
-            return Json(new ReturnObject() { Status = false, Error = "", Data = "" });
         }
     }
 }

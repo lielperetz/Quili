@@ -21,9 +21,9 @@ namespace finalProject.Controllers
         {
             string mail = "";
             System.Net.Http.Headers.HttpRequestHeaders headers = this.Request.Headers;
-            if (headers.Contains("Token"))
+            if (headers.Contains("Authorization"))
             {
-                mail = headers.GetValues("Token").First();
+                mail = headers.GetValues("Authorization").First();
             }
             else
             {
@@ -32,38 +32,12 @@ namespace finalProject.Controllers
             try
             {
                 var data = SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
-                Json(new ReturnObject() { Status = true, Data = data });
+                return Json(new ReturnObject() { Status = true, Data = data });
             }
             catch (Exception ex)
             {
                 return Json(new ReturnObject() { Status = false, Error = ex.ToString() });
             }
-            return Json(new ReturnObject() { Status = false, Error = "Unknown error" });
         }
-
-        //public List<SchedulesEntities> GetSchedulesByRange(DateTime d1,DateTime d2)
-        //{
-        //    string mail = "";
-        //    System.Net.Http.Headers.HttpRequestHeaders headers = this.Request.Headers;
-        //    if (headers.Contains("Token"))
-        //    {
-        //        mail = headers.GetValues("Token").First();
-        //    }
-        //    //else
-        //    //{
-        //    //}
-        //    //try
-        //    //{
-        //    //      return SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    //list.Add(Json(new ReturnObject() { Status = false, Error = ex.ToString() }));
-        //    //    //return list;
-        //    //}
-        //    return SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
-        //}
-
-
     }
 }
