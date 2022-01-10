@@ -17,9 +17,8 @@ namespace finalProject.Controllers
         [HttpGet]
         [Route("GetSchedulesByRange/{d1}/{d2}")]
 
-        public Object GetSchedulesByRange(DateTime d1, DateTime d2)
+        public JsonResult<ReturnObject> GetSchedulesByRange(DateTime d1, DateTime d2)
         {
-            object l = new object();
             string mail = "";
             System.Net.Http.Headers.HttpRequestHeaders headers = this.Request.Headers;
             if (headers.Contains("Token"))
@@ -32,13 +31,14 @@ namespace finalProject.Controllers
             }
             try
             {
-                l = SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
+                var data = SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
+                Json(new ReturnObject() { Status = true, Data = data });
             }
             catch (Exception ex)
             {
-                l=Json(new ReturnObject() { Status = false, Error = ex.ToString() });
+                return Json(new ReturnObject() { Status = false, Error = ex.ToString() });
             }
-            return l;
+            return Json(new ReturnObject() { Status = false, Error = "Unknown error" });
         }
 
         //public List<SchedulesEntities> GetSchedulesByRange(DateTime d1,DateTime d2)

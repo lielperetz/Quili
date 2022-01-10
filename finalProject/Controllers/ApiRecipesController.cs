@@ -23,110 +23,49 @@ namespace finalProject.Controllers
 
         [HttpGet]
         [Route("SearchRecipe/{w}")]
-        public object SearchRecipe(string w)
+        public JsonResult<ReturnObject> SearchRecipe(string w)
         {
-            string error = " ";
-
             HttpClient client = new HttpClient();
             urlParameters += "&query=" + w;
             client.BaseAddress = new Uri( URL+ "/complexSearch");
 
-            // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
             HttpResponseMessage response = client.GetAsync(urlParameters).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var dataObjects = response.Content.ReadAsAsync<Object>().Result;
-                    return dataObjects;
-                }
-                catch (Exception ex)
-                {
-                    error = ex.Message;
-                }
-            }
-            else
-            {
-                error = response.StatusCode.ToString();
-            }
 
-            client.Dispose();
-            return Json(new ReturnObject() { Status = false, Error = error });
+            try
+            {
+                var dataObjects = response.Content.ReadAsAsync<Object>().Result;
+                return Json(new ReturnObject() { Status = true, Data = dataObjects }); ;
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
         }
 
         [HttpGet]
-        [Route("GetRecipe")]
-        public Object GetRecipe(string id)
+        [Route("GetRecipe/{id}")]
+        public JsonResult<ReturnObject> GetRecipe(string id)
         {
-            //List<JsonResult<ReturnObject>> res = new List<JsonResult<ReturnObject>>();
-            string error = " ";
-
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(URL + "/" + id + "/information");
 
-            // Add an Accept header for JSON format.
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
             HttpResponseMessage response = client.GetAsync(urlParameters).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var dataObjects = response.Content.ReadAsAsync<Object>().Result;
-                    return dataObjects;
-                }
-                catch (Exception ex)
-                {
-                    error = ex.Message;
-                }
-            }
-            else
-            {
-                error = response.StatusCode.ToString();
-            }
 
-            client.Dispose();
-            return Json(new ReturnObject() { Status = false, Error = error });
+            try
+            {
+                var dataObjects = response.Content.ReadAsAsync<Object>().Result;
+                return Json(new ReturnObject() { Status = true, Data = dataObjects });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
         }
-        [HttpGet]
-        [Route("GetTry")]
-        public Object GetTry(string id)
-        {
-            //List<JsonResult<ReturnObject>> res = new List<JsonResult<ReturnObject>>();
-            string error = " ";
-
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(URL+"/"+id+ "/similar");
-
-            // Add an Accept header for JSON format.
-            client.DefaultRequestHeaders.Accept.Add(
-            new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;  
-            if (response.IsSuccessStatusCode)
-            {
-                try
-                {
-                    var dataObjects = response.Content.ReadAsAsync<Object>().Result;  
-                    return dataObjects;
-                }
-                catch(Exception ex)
-                {
-                    error = ex.Message;
-                }
-            }
-            else
-            {
-                error = response.StatusCode.ToString();
-            }
-
-            client.Dispose();
-            return Json(new ReturnObject() { Status = false, Error = error });
-        }
-
     }
 }
