@@ -22,7 +22,7 @@ namespace finalProject.Controllers
         private string urlParameters = "?apiKey=52b9142911034ec3b82f8d31cb7410ca";
 
         [HttpGet]
-        [Route("SearchRecipe")]
+        [Route("SearchRecipe/{w}")]
         public object SearchRecipe(string w)
         {
             string error = " ";
