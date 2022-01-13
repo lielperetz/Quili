@@ -28,5 +28,6 @@ namespace Dal
         public virtual DbSet<CLIENTS> CLIENTS { get; set; }
         public virtual DbSet<RECIPES> RECIPES { get; set; }
         public virtual DbSet<SCHEDULES> SCHEDULES { get; set; }
+        public virtual DbSet<PRODUCTS> PRODUCTS { get; set; }
     }
 }

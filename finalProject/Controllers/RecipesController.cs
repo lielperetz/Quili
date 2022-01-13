@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace finalProject.Controllers
 {
-    
+
     [RoutePrefix("Api/Recipes")]
     public class RecipesController : ApiController
     {
@@ -29,29 +29,27 @@ namespace finalProject.Controllers
             }
             else
             {
-                return Json(new ReturnObject() { Status = false, Error = "Token is necessary"});
+                return Json(new ReturnObject() { Status = false, Error = "Token is necessary" });
             }
             try
             {
+                RecipesBl.AddRecipe(r);
                 switch (r.SchedulingStatuse)
                 {
                     //once
                     case 1:
-                        RecipesBl.AddRecipe(r);
-                        
                         SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = r.Date, Amount = 1 });
                         break;
                     //weekly
                     case 2:
-                        RecipesBl.AddRecipe(r);
                         for (int i = 0; i < 48; i++)
                         {
                             DateTime d = r.Date;
-                            SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddDays(i*7), Amount = 1 });
+                            SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddDays(i * 7), Amount = 1 });
                         }
                         break;
+                    //monthly
                     case 3:
-                        RecipesBl.AddRecipe(r);
                         for (int i = 0; i < 12; i++)
                         {
                             DateTime d = r.Date;
@@ -62,12 +60,43 @@ namespace finalProject.Controllers
                         return Json(new ReturnObject() { Status = false, Error = "error" });
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+
                 return Json(new ReturnObject() { Status = false, Error = ex.ToString() });
             }
+            if(!ProductsController.AddProducts(r.RecipeId, r.Code))
+                return Json(new ReturnObject() { Status = false, Data = "AddProducts failed" });
+
             return Json(new ReturnObject() { Status = true, Data = r.Mail });
+        }
+
+        [HttpGet]
+        [Route("SearchRecipe/{w}")]
+        public JsonResult<ReturnObject> SearchRecipe(string w)
+        {
+            try
+            {
+                return Json(new ReturnObject() { Status = true, Data = ApiRecipes.SearchRecipe(w) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
+        }
+
+        [HttpGet]
+        [Route("GetRecipeById/{id}")]
+        public JsonResult<ReturnObject> GetRecipeById(string id)
+        {
+            try
+            {
+                return Json(new ReturnObject() { Status = true, Data = ApiRecipes.GetRecipeById(id) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
         }
     }
 }

@@ -54,9 +54,13 @@
     <Compile Include="CLIENTS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="PRODUCTS.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="RECIPES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ProductsDal.cs" />
     <Compile Include="SCHEDULES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

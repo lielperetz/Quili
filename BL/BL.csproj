@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="ProductsBl.cs" />
     <Compile Include="SchedulesBl.cs" />
     <Compile Include="RecipesBl.cs" />
     <Compile Include="ClientsBl.cs" />
