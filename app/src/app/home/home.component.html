@@ -65,21 +65,28 @@
               </e-views>
             </ejs-schedule> -->
               <ejs-schedule #scheduleObj [(currentView)]="currentView" [eventSettings]="eventSettings"
-                cssClass='schedule-overview' height='100%'>
+                cssClass='schedule-overview' width='100%' height='650px' (dragStart)="onDragStart($event)">
                 <ng-template #dateHeaderTemplate let-data>
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
-                  <!-- <div [innerHTML]="getWeatherImage(data.date)"></div> -->
-                  <!-- <button class="e-control e-btn" style="position: absolute;" id="targetButton" (click)="onOpenDialog($event)">Open Dialog</button> -->
+                </ng-template>
+                <!-- {{data.date | date: 'dd/MM/yyyy'}} -->
+                <!-- <ng-template #cellTemplate let-data>
+                        <div>
+                          <div *ngIf="hasRecipe(data.date)">
+                          <div>{{hasRecipe(data.date)}}------</div>
+                        </div>
+                      </ng-template> -->
+                <ng-template #cellTemplate let-data>
+                  <div class="templatewrap" [innerHTML]="getCellContent(data.date)"></div>
                 </ng-template>
                 <e-views>
                   <e-view option="Month"></e-view>
                 </e-views>
-                <!-- Header template -->
                 <ng-template #quickInfoTemplatesHeader let-data>
                   <div class="quick-info-header">
                     <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
                       <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
-                      <div class="duration-text">{{getHeaderDetails(data)}}</div>
+                      <!-- <div class="duration-text">{{getHeaderDetails(data)}}</div> -->
                     </div>
                   </div>
                 </ng-template>
@@ -91,10 +98,37 @@
                   <div class="quick-info-content">
                     <div class="e-cell-content">
                       <div class="content-area">
-                        <ejs-textbox #titleObj id="title" placeholder="Title"></ejs-textbox>
+                        <!-- <span class="e-icons e-search"></span> -->
+                        <input id="search" class="e-input" type="search" placeholder="Search"
+                          (ngModelChange)="searchRecipe($event)" [(ngModel)]="searchWord" />
+                      </div>
+                      <div class="row">
+                        <div *ngFor="let item of listRecipesBySearch" style="margin: 5px;">
+                          <button (click)="getRecipeInfo(item.id)">
+                            <img src="{{item.image}}" class="img-responsive"
+                              style="height:100px; width: 100px;"></button>
+                          <div style="float: inline-end;">
+                            <h3>{{item.title}}</h3>
+                          </div>
+                          <button (click)="chooseRecipe(item.id)">+</button>
+                        </div>
                       </div>
                       <div class="content-area">
-                        <ejs-textbox #notesObj id="notes" placeholder="Notes"></ejs-textbox>
+                        <input id="title" class="e-input" type="text" placeholder="Title"
+                          [(ngModel)]="newRecipe.RecipeTitle" />
+                      </div>
+                      <div class="content-area">
+                        <input id="status" class="e-input" type="number" placeholder="repeat status"
+                          [(ngModel)]="newRecipe.SchedulingStatuse" />
+                      </div>
+                      <div class="content-area">
+                        <input id="date" class="e-input" type="date" placeholder="{{data.StartTime}}"
+                          [ngTemplateOutletContext]="{data:data}" [(ngModel)]="newRecipe.Date" />
+                      </div>
+                      <div class="content-area">
+                        <img src="{{newRecipe.RecipeImage}}" />
+                        <!-- <input id="image" class="e-input" type="text" placeholder="Image"
+                        [(ngModel)]="newRecipe.RecipeImage" /> -->
                       </div>
                     </div>
                   </div>
@@ -105,10 +139,6 @@
                       <div class="meeting-type-wrap">
                         <label>Subject</label>:
                         <span>{{data.Subject}}</span>
-                      </div>
-                      <div class="meeting-subject-wrap">
-                        <label>Type</label>:
-                        <span>{{getEventType(data)}}</span>
                       </div>
                       <div class="notes-wrap">
                         <label>Notes</label>:
@@ -137,56 +167,6 @@
                       (click)="buttonClickActions($event)">More Details</button>
                   </div>
                 </ng-template>
-                
-                <!-- <ejs-dialog id='dialog' #dialogTemplate showCloseIcon='true' [height]='height' [target]='targetElement' width='435px'>
-                <ng-template #editorTemplatesHeader let-data>
-                  <div class="editor-header">
-                    <div class="editor-header-content" [ngStyle]="getEditorHeaderStyles(data)">
-                      <div class="editor-title">{{getEditorHeaderTitle(data)}}</div>
-                    </div>
-                  </div>
-                </ng-template>
-                <ng-template #editorContent let-data="data">
-                  <div class="editor-content">
-                    <div class="e-cell-content">
-                      <div class="content-area">
-                        <ejs-textbox #titleObj id="title" placeholder="Title"></ejs-textbox>
-                      </div>
-                      <div class="content-area">
-                        <ejs-dropdownlist id='eventType' #eventTypeObj [dataSource]='resourceDataSource'
-                          [fields]='calendarFields' placeholder='Choose Type' [value]='calendarsValue[0]'
-                          popupHeight="150pc">
-                        </ejs-dropdownlist>
-                      </div>
-                      <div class="content-area">
-                        <ejs-textbox #notesObj id="notes" placeholder="Notes"></ejs-textbox>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-                <ng-template #editorTemplatesFooter let-data>
-                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellEditorFooter : eventEditorFooter"
-                    [ngTemplateOutletContext]="{data:data}"></ng-container>
-                </ng-template>
-                <ng-template #cellEditorFooter let-data="data">
-                  <div class="e-cell-footer">
-                    <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
-                      (click)="buttonClickActions($event)">Save</button>
-                    <button ejs-button id="cancel" cssClass="e-flat"
-                      (click)="buttonClickActions($event)">Cancel</button>
-                  </div>
-                </ng-template>
-                <ng-template #eventEditorFooter let-data="data">
-                  <div class="e-event-footer">
-                    <button ejs-button id="delete" cssClass="e-flat"
-                      (click)="buttonClickActions($event)">Delete</button>
-                    <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
-                      (click)="buttonClickActions($event)">Save</button>
-                    <button ejs-button id="cancel" cssClass="e-flat"
-                      (click)="buttonClickActions($event)">Cancel</button>
-                  </div>
-                </ng-template>
-                </ejs-dialog> -->
               </ejs-schedule>
             </div>
           </div>

@@ -182,10 +182,10 @@
 //     args.interval = 1;
 //   }
 // }
-import { Component, ViewEncapsulation, Inject, ViewChild, AfterViewChecked, ElementRef } from '@angular/core';
+import { Component, ViewEncapsulation, Inject, ViewChild, AfterViewChecked, ElementRef, OnInit } from '@angular/core';
 import { TextBoxComponent } from '@syncfusion/ej2-angular-inputs';
 import {
-  ScheduleComponent, MonthService,View, EventSettingsModel, CurrentAction,CellClickEventArgs, ResourcesModel, EJ2Instance, CallbackFunction
+  ScheduleComponent, DragEventArgs, MonthService, View, EventSettingsModel, CurrentAction, CellClickEventArgs, ResourcesModel, EJ2Instance, CallbackFunction
 } from '@syncfusion/ej2-angular-schedule';
 import { EmitType, addClass, extend, removeClass, closest, remove, isNullOrUndefined, Internationalization, compile } from '@syncfusion/ej2-base';
 import { ChangeEventArgs as SwitchEventArgs, SwitchComponent } from '@syncfusion/ej2-angular-buttons';
@@ -194,7 +194,7 @@ import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../classes/Recipe';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { SchedulesService } from '../services/schedules.service';
-declare var moment: any;
+import { ApiRecipesService } from '../services/api-recipes.service';
 
 /**
  * Sample for overview
@@ -207,13 +207,13 @@ declare var moment: any;
   providers: [MonthService],
   encapsulation: ViewEncapsulation.None
 })
-export class HomeComponent implements AfterViewChecked {
+export class HomeComponent implements OnInit {
   @ViewChild('scheduleObj') scheduleObj: ScheduleComponent;
   @ViewChild('workWeekDaysObj') workWeek: MultiSelectComponent;
   @ViewChild('resouresObj') resources: MultiSelectComponent;
   @ViewChild('eventTypeObj') eventTypeObj: DropDownListComponent;
-  @ViewChild('titleObj') titleObj: TextBoxComponent;
-  @ViewChild('notesObj') notesObj: TextBoxComponent;
+  // @ViewChild('titleObj') titleObj: TextBoxComponent;
+  // @ViewChild('notesObj') notesObj: TextBoxComponent;
   @ViewChild('viewSwitch') viewSwitch: SwitchComponent;
   // @ViewChild('groupSwitch') groupSwitch: SwitchComponent;
   @ViewChild('gridlinesSwitch') gridlinesSwitch: SwitchComponent;
@@ -222,6 +222,11 @@ export class HomeComponent implements AfterViewChecked {
   @ViewChild('dragSwitch') dragSwitch: SwitchComponent;
   @ViewChild('dialogTemplate') template: DialogComponent;
   @ViewChild('container', { read: ElementRef }) container: ElementRef;
+
+  public newRecipe: Recipe = new Recipe()
+  public searchWord: string = ""
+  public listRecipes: Record<string, any>[] = []
+
   public showFileList = false;
   public multiple = false;
   public buttons: Record<string, any> = { browse: this.importTemplateFn({ text: 'Import' })[0] as HTMLElement };
@@ -241,10 +246,8 @@ export class HomeComponent implements AfterViewChecked {
   public calendarsValue: number[] = [1];
   // public fields: Record<string, any> = { text: 'text', value: 'value' };
   public calendarFields: Record<string, any> = { text: 'CalendarText', value: 'CalendarId' };
-  public eventSettings: EventSettingsModel = { dataSource: this.generateEvents() };
   public targetElement: HTMLElement;
   public height: string = '250px';
-  public listRecipes: Array<Recipe> = new Array<Recipe>()
   // @ViewChild('menuObj') public menuObj: ContextMenuComponent;
   // public selectedTarget: Element;
   // public menuItems: MenuItemModel[] = [
@@ -269,13 +272,13 @@ export class HomeComponent implements AfterViewChecked {
   //   }
   // ];
 
-  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService) {
-    debugger
+  public currentRecipe: Record<string, any>;
+
+  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService, private apiRecipe: ApiRecipesService) {
     this.schedulesService.GetRecipesByUser(new Date(2020, 1, 1, 0, 0, 0), new Date(2023, 1, 1, 0, 0, 0)).subscribe(
       (response: any) => {
         if (response.Status) {
-          this.listRecipes = response.Data
-          alert("get recipes " + response.Data)
+          this.listRecipes = response.Data as Record<string, any>[];
         }
         else
           alert(response.Error)
@@ -283,25 +286,58 @@ export class HomeComponent implements AfterViewChecked {
   }
 
   ngOnInit(): void {
-    // this.initilaizeTarget()
   }
 
-  // public initilaizeTarget: EmitType<object> = () => {
-  //   this.targetElement = this.container.nativeElement.parentElement;
-  // }
+  public b: boolean = true;
+  public hasRecipe(date: Date): boolean {
+    this.currentRecipe = this.listRecipes.find((x) => {
+      let d: Date = new Date(x.Date);
+      d.getFullYear() === date.getFullYear() && d.getMonth() === date.getMonth() && d.getDate() === date.getDate()
+    })
+    console.log(this.currentRecipe)
+    if (this.currentRecipe)
+      return true;
+    return false;
+  }
+  public getCellContent(date: Date): string {
+    let index = this.listRecipes.findIndex((x) =>
+      new Date(x.Date).getFullYear() === date.getFullYear() && new Date(x.Date).getMonth() === date.getMonth() && new Date(x.Date).getDate() === date.getDate()
+    )
+
+    if (index != -1) {
+      console.log(index + "index")
+      this.currentRecipe = this.listRecipes[index] as Record<string, any>
+      return `<div><img src="${this.currentRecipe.RecipeImage}"/></div>`;
+
+    }
+    else
+      this.currentRecipe = {}
+    // console.log(this.currentRecipe.RecipeTitle)
+    // let d:Date = new Date((this.listRecipes[1] as Record<string,any>).Date)
+    // let i:string = (this.listRecipes[1] as Record<string,any>).RecipeImage
+    // console.log(d + " " + i)
+    // if (date.getFullYear() === d.getFullYear() && date.getMonth() === d.getMonth() && date.getDate() === d.getDate()) {
+    // }
+    return "";
+  }
+  public eventSettings: EventSettingsModel = {
+    dataSource: this.listRecipes,
+    // dataSource: this.listRecipes,
+    // fields: {
+    //   id: 'RecipeId',
+    //   subject: { name: 'RecipeTitle', title: 'Recipe Title', validation: { required: true } },
+    //   startTime: { name: 'Date', title: 'Date', validation: { required: true } },
+    //   recurrenceRule: { name: 'SchedulingStatuse', default: 'Never' },
+    //   description: { name: 'RecipeImage' },
+    //   // recurrenceID: { name: 'RecurrenceID' },
+    //   // recurrenceException: { name: 'RecurrenceException' },
+    //   // followingID: 'followingID'
+    // }
+  };
 
   public onOpenDialog = function (event: any): void {
     // Call the show method to open the Dialog
     this.template.show();
-  }
-
-  public ngAfterViewChecked(): void {
-    // this.viewSwitch?.element?.setAttribute('tabindex', '-1');
-    // this.groupSwitch?.element?.setAttribute('tabindex', '-1');
-    // this.gridlinesSwitch?.element?.setAttribute('tabindex', '-1');
-    // this.rowHeightSwitch?.element?.setAttribute('tabindex', '-1');
-    // this.tooltipSwitch?.element?.setAttribute('tabindex', '-1');
-    // this.dragSwitch?.element?.setAttribute('tabindex', '-1');
   }
 
   public importTemplateFn(data: Record<string, any>): NodeList {
@@ -491,5 +527,22 @@ export class HomeComponent implements AfterViewChecked {
       this.scheduleObj.openEditor(eventDetails, currentAction, true);
     }
     this.scheduleObj.closeQuickInfoPopup();
+  }
+
+  //Drag Recipes
+  onDragStart(args: DragEventArgs) {
+    args.navigation = { enable: true, timeDelay: 1000 };
+    args.interval = 1;
+  }
+  public listRecipesBySearch: Record<string, any> = []
+  searchRecipe(e) {
+    this.apiRecipe.SearchRecipe(e).subscribe({
+      next: (data) => () => {
+        console.log(data);
+        this.listRecipesBySearch = data as Record<string, any>
+      },
+      error: (e) => console.error(e),
+      complete: () => console.info('complete')
+    })
   }
 }

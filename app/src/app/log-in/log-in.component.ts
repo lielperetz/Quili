@@ -15,7 +15,7 @@ export class LogInComponent implements OnInit {
 
   user: User = new User()
 
-  constructor(public cookies: CookieService, public Router: Router, public UserService: UserService) { }
+  constructor(public cookies: CookieService, public router: Router, public UserService: UserService) { }
 
   ngOnInit(): void {
     feather.replace();
