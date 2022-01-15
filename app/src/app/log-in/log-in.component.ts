@@ -27,6 +27,7 @@ export class LogInComponent implements OnInit {
         if (response.Status) {
           this.cookies.set('Token', response.Data)
           alert("wellcome " + this.cookies.get('Token'))
+          this.router.navigate(['site/home'])
         }
         else alert(response.Error)
       })

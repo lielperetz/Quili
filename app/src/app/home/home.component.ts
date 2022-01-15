@@ -195,6 +195,7 @@ import { Recipe } from '../classes/Recipe';
 import { DialogComponent } from '@syncfusion/ej2-angular-popups';
 import { SchedulesService } from '../services/schedules.service';
 import { ApiRecipesService } from '../services/api-recipes.service';
+import { formatDate } from '@angular/common';
 
 /**
  * Sample for overview
@@ -288,24 +289,12 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  public b: boolean = true;
-  public hasRecipe(date: Date): boolean {
-    this.currentRecipe = this.listRecipes.find((x) => {
-      let d: Date = new Date(x.Date);
-      d.getFullYear() === date.getFullYear() && d.getMonth() === date.getMonth() && d.getDate() === date.getDate()
-    })
-    console.log(this.currentRecipe)
-    if (this.currentRecipe)
-      return true;
-    return false;
-  }
   public getCellContent(date: Date): string {
     let index = this.listRecipes.findIndex((x) =>
       new Date(x.Date).getFullYear() === date.getFullYear() && new Date(x.Date).getMonth() === date.getMonth() && new Date(x.Date).getDate() === date.getDate()
     )
 
     if (index != -1) {
-      console.log(index + "index")
       this.currentRecipe = this.listRecipes[index] as Record<string, any>
       return `<div><img src="${this.currentRecipe.RecipeImage}"/></div>`;
 
@@ -536,13 +525,25 @@ export class HomeComponent implements OnInit {
   }
   public listRecipesBySearch: Record<string, any> = []
   searchRecipe(e) {
-    this.apiRecipe.SearchRecipe(e).subscribe({
-      next: (data) => () => {
-        console.log(data);
-        this.listRecipesBySearch = data as Record<string, any>
-      },
-      error: (e) => console.error(e),
-      complete: () => console.info('complete')
-    })
+    this.apiRecipe.SearchRecipe(e).subscribe(
+      (response: any) => {
+        if (response.Status) {
+          this.listRecipesBySearch = response.Data.results as Record<string, any>[];
+        }
+        else
+          alert(response.Error)
+      })
+  }
+
+  getRecipeInfo(id: string) {
+    console.log(this.listRecipesBySearch?.find((x: any) => x.id === id).title);
+  }
+
+  chooseRecipe(id: string){
+    let chosenR = this.listRecipesBySearch?.find((x: any) => x.id === id) as Record<string,any>;
+    this.newRecipe.RecipeTitle = chosenR.title;
+    this.newRecipe.RecipeImage = chosenR.image;
+    this.newRecipe.Date = new Date();
+    this.newRecipe.SchedulingStatuse = 3;
   }
 }

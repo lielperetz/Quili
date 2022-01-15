@@ -70,12 +70,6 @@
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
                 <!-- {{data.date | date: 'dd/MM/yyyy'}} -->
-                <!-- <ng-template #cellTemplate let-data>
-                        <div>
-                          <div *ngIf="hasRecipe(data.date)">
-                          <div>{{hasRecipe(data.date)}}------</div>
-                        </div>
-                      </ng-template> -->
                 <ng-template #cellTemplate let-data>
                   <div class="templatewrap" [innerHTML]="getCellContent(data.date)"></div>
                 </ng-template>
