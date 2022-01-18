@@ -10,8 +10,8 @@
         <EntityTypeShape EntityType="FINAL_PROJECTModel.SCHEDULES" Width="1.5" PointX="5.25" PointY="1.375" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__RECIPES__MAIL__5441852A" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__571DF1D5" />
-        <EntityTypeShape EntityType="FINAL_PROJECTModel.PRODUCTS" Width="1.5" PointX="5.375" PointY="4.125" />
-        <AssociationConnector Association="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__5CD6CB2B" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.PRODUCTS" Width="1.5" PointX="5.375" PointY="5.125" />
+        <AssociationConnector Association="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__6FE99F9F" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

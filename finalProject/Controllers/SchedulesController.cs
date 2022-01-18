@@ -51,20 +51,37 @@ namespace finalProject.Controllers
             }
             else
             {
-                return Json(new ReturnObject() { Status = false, Error = "Email is required!" });
+                //return Json(new ReturnObject() { Status = false, Error = "Email is required!" });
+                mail = "hr1020ilove@gmail.com";
             }
             try
             {
                 List<SchedulesEntities> Schedules = SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
                 List<ProductsEntities> data = new List<ProductsEntities>();
-
+                bool flag = false;
                 foreach (var s in Schedules)
                 {
                     foreach (var p in ProductsController.GetRecipeProducts(s.RecipeCode))
                     {
-                        data.Add(p);
+                        flag = false;
+                        for(int i = 0; i < data.Count; i++) {
+                            if (data[i].Code == p.Code)
+                            {
+                                if (data[i].Unit == p.Unit)
+                                {
+                                    data[i].Amount += p.Amount;
+                                    flag = true;
+                                    break;
+                                }
+                                else {//המרה של נתונים
+                                      }
+                            }
+                        }
+                        if(!flag)
+                            data.Add(p);
                     }
                 }
+
                 return Json(new ReturnObject() { Status = true, Data = data });
             }
             catch (Exception ex)

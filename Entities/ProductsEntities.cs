@@ -12,19 +12,20 @@ namespace Entities
         public short RecipeCode { get; set; }
         public string ProductName { get; set; }
         public string ProductImage { get; set; }
-        public string Amount { get; set; }
+        public int Amount { get; set; }
+        public string Unit { get; set; }
         public short? Category { get; set; }
 
         //המרה מאובייקט מסוג מסד התונים לאובייקט מסוג אנטיטיז
         public static ProductsEntities ConvertToEntities(PRODUCTS p)
         {
-            ProductsEntities p2= new ProductsEntities() {Code=p.CODE, RecipeCode = p.RECIPE_CODE, ProductName = p.PRODUCT_NAME, ProductImage = p.PRODUCT_IMAGE, Amount = p.AMOUNT, Category = p.CATEGORY };
+            ProductsEntities p2= new ProductsEntities() {Code=p.CODE, RecipeCode = p.RECIPE_CODE, ProductName = p.PRODUCT_NAME, ProductImage = p.PRODUCT_IMAGE,Unit=p.UNIT, Amount = p.AMOUNT, Category = p.CATEGORY };
             return p2;
         }
         //המרה מסוג אנטיטיז לסוג מסד נתונים
         public static PRODUCTS ConvertToDB(ProductsEntities p)
         {
-            return new PRODUCTS() { CODE = p.Code, RECIPE_CODE = p.RecipeCode, PRODUCT_NAME = p.ProductName, PRODUCT_IMAGE = p.ProductImage, AMOUNT = p.Amount, CATEGORY = p.Category };
+            return new PRODUCTS() { CODE = p.Code, RECIPE_CODE = p.RecipeCode, PRODUCT_NAME = p.ProductName, PRODUCT_IMAGE = p.ProductImage,UNIT=p.Unit, AMOUNT = p.Amount, CATEGORY = p.Category };
         }
         //המרה מסוג רשימת מסד נתונים לרשימת אנטיטיז
         public static List<ProductsEntities> ConvertToListEntities(List<PRODUCTS> listP)

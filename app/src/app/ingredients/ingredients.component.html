@@ -1,9 +1,9 @@
 <div class="app-content content ">
     <div class="content-wrapper">
         <div class="content-body">
-            <li *ngFor="" class="list-group">
-                <ul></ul>
-            </li>
+            <tr *ngFor="let item of listPro;" class="list-group">
+                <td>{{item.ProductName}}....{{item.Amount}}</td>
+            </tr>
         </div>
     </div>
 </div>

@@ -18,8 +18,7 @@ namespace finalProject.Controllers
     [RoutePrefix("Api/Products")]
     public class ProductsController : ApiController
     {
-        //[HttpPut]
-        //[Route("AddProducts/{apiId}/{id}")]
+        
         public static bool AddProducts(string apiId, short id)
         {
             try
@@ -27,7 +26,7 @@ namespace finalProject.Controllers
                 dynamic data = ApiRecipes.GetRecipeIngredients(apiId);
                 foreach (var item in data["ingredients"])
                 {
-                    ProductsBl.AddProducts(new ProductsEntities() { RecipeCode = id, ProductName = item["name"], ProductImage = item["image"], Amount = item["amount"]["metric"]["value"], Category = 0 });
+                    ProductsBl.AddProducts(new ProductsEntities() { RecipeCode = id, ProductName = item["name"], ProductImage = item["image"], Amount = item["amount"]["metric"]["value"],Unit=item["amount"]["metric"]["unit"], Category = 0 });
                 }
 
                 return true ;
@@ -38,8 +37,6 @@ namespace finalProject.Controllers
             }
         }
 
-        //[HttpGet]
-        //[Route("GetRecipeProducts/{id}")]
         public static List<ProductsEntities> GetRecipeProducts(short id)
         {
             return ProductsEntities.ConvertToListEntities(ProductsBl.GetRecipeProducts(id));

@@ -18,7 +18,8 @@ namespace Dal
         public short RECIPE_CODE { get; set; }
         public string PRODUCT_NAME { get; set; }
         public string PRODUCT_IMAGE { get; set; }
-        public string AMOUNT { get; set; }
+        public int AMOUNT { get; set; }
+        public string UNIT { get; set; }
         public Nullable<short> CATEGORY { get; set; }
     
         public virtual RECIPES RECIPES { get; set; }

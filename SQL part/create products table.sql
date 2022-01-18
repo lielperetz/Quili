@@ -1,7 +1,7 @@
 USE [FINAL_PROJECT]
 GO
 
-/****** Object:  Table [dbo].[PRODUCTS]    Script Date: 1/10/2022 11:33:11 PM ******/
+/****** Object:  Table [dbo].[PRODUCTS]    Script Date: 16/01/2022 05:47:58 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -13,7 +13,8 @@ CREATE TABLE [dbo].[PRODUCTS](
 	[RECIPE_CODE] [smallint] NOT NULL,
 	[PRODUCT……_NAME] [varchar](50) NOT NULL,
 	[PRODUCT_IMAGE] [varchar](100) NULL,
-	[AMOUNT] [varchar](50) NOT NULL,
+	[AMOUNT] [int] NOT NULL,
+	[UNIT] [varchar](50) NOT NULL,
 	[CATEGORY] [smallint] NULL,
 PRIMARY KEY CLUSTERED 
 (
