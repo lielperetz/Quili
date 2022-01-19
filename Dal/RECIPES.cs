@@ -17,8 +17,8 @@ namespace Dal
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public RECIPES()
         {
-            this.SCHEDULES = new HashSet<SCHEDULES>();
             this.PRODUCTS = new HashSet<PRODUCTS>();
+            this.SCHEDULES = new HashSet<SCHEDULES>();
         }
     
         public short CODE { get; set; }
@@ -31,8 +31,8 @@ namespace Dal
     
         public virtual CLIENTS CLIENTS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SCHEDULES> SCHEDULES { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PRODUCTS> PRODUCTS { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SCHEDULES> SCHEDULES { get; set; }
     }
 }

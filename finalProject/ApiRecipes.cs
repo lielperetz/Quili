@@ -12,13 +12,13 @@ namespace finalProject
         public static object SearchRecipe(string w)
         {
             HttpClient client = new HttpClient();
-            urlParameters += "&query=" + w;
+            string addParameters = "&query=" + w;
             client.BaseAddress = new Uri(URL + "/complexSearch");
 
             client.DefaultRequestHeaders.Accept.Add(
             new MediaTypeWithQualityHeaderValue("application/json"));
 
-            HttpResponseMessage response = client.GetAsync(urlParameters).Result;
+            HttpResponseMessage response = client.GetAsync(urlParameters+addParameters).Result;
 
             return response.Content.ReadAsAsync<Object>().Result; ;
         }

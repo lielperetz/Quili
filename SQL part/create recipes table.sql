@@ -12,8 +12,8 @@ CREATE TABLE [dbo].[RECIPES](
 	[CODE] [smallint] IDENTITY(1,1) NOT NULL,
 	[MAIL] [varchar](50) NULL,
 	[RECIPE_ID] [varchar](30) NOT NULL,
-	[RECIPE_TITLE] [varchar](50) NULL,
-	[RECIPE_IMAGE] [varchar](50) NULL,
+	[RECIPE_TITLE] [varchar](150) NULL,
+	[RECIPE_IMAGE] [varchar](150) NULL,
 	[SCHEDULING_STATUSE] [int] NULL,
 	[DATE] [datetime] NOT NULL,
 PRIMARY KEY CLUSTERED 
