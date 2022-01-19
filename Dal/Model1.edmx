@@ -18,7 +18,7 @@
           </Key>
           <Property Name="CODE" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RECIPE_CODE" Type="smallint" Nullable="false" />
-          <Property Name="PRODUCTֹֹ_NAME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PRODUCT_NAME" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PRODUCT_IMAGE" Type="varchar" MaxLength="100" />
           <Property Name="AMOUNT" Type="int" Nullable="false" />
           <Property Name="UNIT" Type="varchar" MaxLength="50" Nullable="false" />
@@ -31,8 +31,8 @@
           <Property Name="CODE" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="MAIL" Type="varchar" MaxLength="50" />
           <Property Name="RECIPE_ID" Type="varchar" MaxLength="30" Nullable="false" />
-          <Property Name="RECIPE_TITLE" Type="varchar" MaxLength="50" />
-          <Property Name="RECIPE_IMAGE" Type="varchar" MaxLength="50" />
+          <Property Name="RECIPE_TITLE" Type="varchar" MaxLength="150" />
+          <Property Name="RECIPE_IMAGE" Type="varchar" MaxLength="150" />
           <Property Name="SCHEDULING_STATUSE" Type="int" />
           <Property Name="DATE" Type="datetime" Nullable="false" />
         </EntityType>
@@ -45,7 +45,7 @@
           <Property Name="DATE" Type="datetime" />
           <Property Name="AMOUNT" Type="int" />
         </EntityType>
-        <Association Name="FK__PRODUCTS__RECIPE__6FE99F9F">
+        <Association Name="FK__PRODUCTS__RECIPE__02FC7413">
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="1" />
           <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -57,7 +57,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RECIPES__MAIL__5441852A">
+        <Association Name="FK__RECIPES__MAIL__5CD6CB2B">
           <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -69,7 +69,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SCHEDULES__RECIP__571DF1D5">
+        <Association Name="FK__SCHEDULES__RECIP__5FB337D6">
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="1" />
           <End Role="SCHEDULES" Type="Self.SCHEDULES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,15 +86,15 @@
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RECIPES" EntityType="Self.RECIPES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SCHEDULES" EntityType="Self.SCHEDULES" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__PRODUCTS__RECIPE__6FE99F9F" Association="Self.FK__PRODUCTS__RECIPE__6FE99F9F">
+          <AssociationSet Name="FK__PRODUCTS__RECIPE__02FC7413" Association="Self.FK__PRODUCTS__RECIPE__02FC7413">
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
-          <AssociationSet Name="FK__RECIPES__MAIL__5441852A" Association="Self.FK__RECIPES__MAIL__5441852A">
+          <AssociationSet Name="FK__RECIPES__MAIL__5CD6CB2B" Association="Self.FK__RECIPES__MAIL__5CD6CB2B">
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="RECIPES" EntitySet="RECIPES" />
           </AssociationSet>
-          <AssociationSet Name="FK__SCHEDULES__RECIP__571DF1D5" Association="Self.FK__SCHEDULES__RECIP__571DF1D5">
+          <AssociationSet Name="FK__SCHEDULES__RECIP__5FB337D6" Association="Self.FK__SCHEDULES__RECIP__5FB337D6">
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="SCHEDULES" EntitySet="SCHEDULES" />
           </AssociationSet>
@@ -116,7 +116,7 @@
             <End Role="SCHEDULES" EntitySet="SCHEDULES" />
           </AssociationSet>
           <EntitySet Name="PRODUCTS" EntityType="FINAL_PROJECTModel.PRODUCTS" />
-          <AssociationSet Name="FK__PRODUCTS__RECIPE__6FE99F9F" Association="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__6FE99F9F">
+          <AssociationSet Name="FK__PRODUCTS__RECIPE__02FC7413" Association="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__02FC7413">
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
@@ -136,13 +136,13 @@
           <Property Name="CODE" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RECIPE_ID" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="RECIPE_TITLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="RECIPE_IMAGE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RECIPE_TITLE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RECIPE_IMAGE" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="SCHEDULING_STATUSE" Type="Int32" />
           <Property Name="DATE" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="CLIENTS" Relationship="FINAL_PROJECTModel.FK__RECIPES__MAIL__5441852A" FromRole="RECIPES" ToRole="CLIENTS" />
           <NavigationProperty Name="SCHEDULES" Relationship="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__571DF1D5" FromRole="RECIPES" ToRole="SCHEDULES" />
-          <NavigationProperty Name="PRODUCTS" Relationship="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__6FE99F9F" FromRole="RECIPES" ToRole="PRODUCTS" />
+          <NavigationProperty Name="PRODUCTS" Relationship="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__02FC7413" FromRole="RECIPES" ToRole="PRODUCTS" />
         </EntityType>
         <EntityType Name="SCHEDULES">
           <Key>
@@ -189,9 +189,9 @@
           <Property Name="AMOUNT" Type="Int32" Nullable="false" />
           <Property Name="UNIT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CATEGORY" Type="Int16" />
-          <NavigationProperty Name="RECIPES" Relationship="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__6FE99F9F" FromRole="PRODUCTS" ToRole="RECIPES" />
+          <NavigationProperty Name="RECIPES" Relationship="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__02FC7413" FromRole="PRODUCTS" ToRole="RECIPES" />
         </EntityType>
-        <Association Name="FK__PRODUCTS__RECIPE__6FE99F9F">
+        <Association Name="FK__PRODUCTS__RECIPE__02FC7413">
           <End Type="FINAL_PROJECTModel.RECIPES" Role="RECIPES" Multiplicity="1" />
           <End Type="FINAL_PROJECTModel.PRODUCTS" Role="PRODUCTS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -247,7 +247,7 @@
                 <ScalarProperty Name="UNIT" ColumnName="UNIT" />
                 <ScalarProperty Name="AMOUNT" ColumnName="AMOUNT" />
                 <ScalarProperty Name="PRODUCT_IMAGE" ColumnName="PRODUCT_IMAGE" />
-                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCTֹֹ_NAME" />
+                <ScalarProperty Name="PRODUCT_NAME" ColumnName="PRODUCT_NAME" />
                 <ScalarProperty Name="RECIPE_CODE" ColumnName="RECIPE_CODE" />
                 <ScalarProperty Name="CODE" ColumnName="CODE" />
               </MappingFragment>

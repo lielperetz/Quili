@@ -11,7 +11,7 @@ GO
 CREATE TABLE [dbo].[PRODUCTS](
 	[CODE] [smallint] IDENTITY(1,1) NOT NULL,
 	[RECIPE_CODE] [smallint] NOT NULL,
-	[PRODUCT……_NAME] [varchar](50) NOT NULL,
+	[PRODUCT_NAME] [varchar](50) NOT NULL,
 	[PRODUCT_IMAGE] [varchar](100) NULL,
 	[AMOUNT] [int] NOT NULL,
 	[UNIT] [varchar](50) NOT NULL,

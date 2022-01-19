@@ -25,7 +25,7 @@ namespace Entities
         //המרה מאובייקט מסוג מסד התונים לאובייקט מסוג אנטיטיז
         public static SchedulesEntities ConvertToEntities(SCHEDULES s)
         {
-            return new SchedulesEntities() { Code = s.CODE, RecipeCode = s.RECIPES.CODE,Mail=s.RECIPES.MAIL,RecipeId=s.RECIPES.RECIPE_ID,RecipeTitle=s.RECIPES.RECIPE_TITLE,RecipeImage=s.RECIPES.RECIPE_IMAGE,RecipeDate=s.RECIPES.DATE, Date = s.DATE, Amount=s.AMOUNT };
+            return new SchedulesEntities() { Code = s.CODE, RecipeCode = s.RECIPES.CODE,Mail=s.RECIPES.MAIL,RecipeId=s.RECIPES.RECIPE_ID,RecipeTitle=s.RECIPES.RECIPE_TITLE,RecipeImage=s.RECIPES.RECIPE_IMAGE, SchedulingStatuse = s.RECIPES.SCHEDULING_STATUSE ,RecipeDate=s.RECIPES.DATE, Date = s.DATE, Amount=s.AMOUNT };
         }
         //המרה מסוג אנטיטיז לסוג מסד נתונים
         public static SCHEDULES ConvertToDB(SchedulesEntities s)
