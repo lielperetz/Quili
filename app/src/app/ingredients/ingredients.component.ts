@@ -1,4 +1,6 @@
+import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from '../classes/product';
 import { SchedulesService } from '../services/schedules.service';
 
@@ -9,14 +11,30 @@ import { SchedulesService } from '../services/schedules.service';
 })
 export class IngredientsComponent implements OnInit {
 
-  listPro:Array<Product>=new Array<Product>();
-  
-  constructor(public schedulesService:SchedulesService) { }
+  listPro:Array<Product>=new Array<Product>()
+
+  startDate:Date=new Date(Date.now())
+  endDate:Date=new Date(Date.now())
+
+  constructor(public schedulesService:SchedulesService,public activatedRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.schedulesService.GetProductsByRange(new Date(2020, 1, 1, 0, 0, 0), new Date(2023, 1, 1, 0, 0, 0)).subscribe(
-      (data:any)=>{if (data.Status)this.listPro=data.Data}
-      ,err=>{console.log("err")})
+    this.activatedRoute.params.subscribe(x=>
+      {
+        if(x["startDate"])
+          this.startDate=x["startDate"]
+        if(x["endDate"])
+          this.endDate=x["endDate"]    
+      })
+    this.logPage()
+  }
+  logPage(){
+    console.log("log")
+    this.schedulesService.GetProductsByRange(this.startDate,this.endDate).subscribe(
+      (data:any)=>{
+        if (data.Status)
+          this.listPro=data.Data},
+     (err)=>{console.log("err")})
   }
 
 }

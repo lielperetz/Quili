@@ -65,7 +65,7 @@ namespace finalProject.Controllers
                     {
                         flag = false;
                         for(int i = 0; i < data.Count; i++) {
-                            if (data[i].Code == p.Code)
+                            if (data[i].ProductName == p.ProductName)
                             {
                                 if (data[i].Unit == p.Unit)
                                 {

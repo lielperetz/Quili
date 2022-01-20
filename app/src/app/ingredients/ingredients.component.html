@@ -1,8 +1,12 @@
 <div class="app-content content ">
     <div class="content-wrapper">
+        <input (change)="logPage()" type="date" placeholder="start" [(ngModel)]="startDate">
+        <input (change)="logPage()" type="date" placeholder="end" [(ngModel)]="endDate">
         <div class="content-body">
             <tr *ngFor="let item of listPro;" class="list-group">
-                <td>{{item.ProductName}}....{{item.Amount}}</td>
+                <td>{{item.ProductName}}</td>
+                <td>{{item.Amount}}</td>
+                <td>{{item.RecipeCode}}</td>
             </tr>
         </div>
     </div>

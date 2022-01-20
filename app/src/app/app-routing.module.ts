@@ -21,6 +21,7 @@ const routes: Routes = [
     path: "site", component: SiteComponent, children:
       [
       { path: "home", component: HomeComponent },
+      { path: "ingredients/:startDate/:endDate", component: IngredientsComponent },
       { path: "ingredients", component: IngredientsComponent },
       {path : '' , component : HomeComponent }            
 
