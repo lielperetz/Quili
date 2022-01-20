@@ -11,9 +11,8 @@ export class RecipesService {
   isEdit: boolean = false
   url: string = "http://localhost:44376/Api/Recipes/"
   constructor(private httpClient: HttpClient, private cookies:CookieService) { }
-
   AddRecipe(rec: Recipe): Observable<any> {
-    const header = new HttpHeaders().set('Authorization', this.cookies.get('Token'))
+    const header = new HttpHeaders({'Content-Type':'application/json'}).set('Authorization', this.cookies.get('Token'))
     return this.httpClient.put<any>(this.url + "AddRecipe", JSON.stringify(rec), {headers: header}).pipe(catchError(this.handleError))
   }
   handleError(errorResponse: HttpErrorResponse) {

@@ -116,13 +116,13 @@
                           [(ngModel)]="newRecipe.SchedulingStatuse" />
                       </div>
                       <div class="content-area">
-                        <input id="date" class="e-input" type="date" placeholder="{{data.StartTime}}"
-                          [ngTemplateOutletContext]="{data:data}" [(ngModel)]="newRecipe.Date" />
+                        <input id="date" class="e-input" type="date" value="{{data.StartTime | date: 'dd/MM/yyyy'}}"
+                          [(ngModel)]="newRecipe.Date" />
+                          {{data.StartTime}}
+                          <!-- {{data.date | date: 'dd/MM/yyyy'}} -->
                       </div>
                       <div class="content-area">
                         <img src="{{newRecipe.RecipeImage}}" />
-                        <!-- <input id="image" class="e-input" type="text" placeholder="Image"
-                        [(ngModel)]="newRecipe.RecipeImage" /> -->
                       </div>
                     </div>
                   </div>

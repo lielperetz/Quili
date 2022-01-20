@@ -296,7 +296,7 @@ export class HomeComponent implements OnInit {
 
     if (index != -1) {
       this.currentRecipe = this.listRecipes[index] as Record<string, any>
-      return `<div><img src="${this.currentRecipe.RecipeImage}"/></div>`;
+      return `<div><img src="${this.currentRecipe.RecipeImage}" class="img-responsive" style="height: 30px;" alt="Image"/></div>`;
 
     }
     else
@@ -310,7 +310,7 @@ export class HomeComponent implements OnInit {
     return "";
   }
   public eventSettings: EventSettingsModel = {
-    dataSource: this.listRecipes,
+    dataSource: this.listRecipes
     // dataSource: this.listRecipes,
     // fields: {
     //   id: 'RecipeId',
@@ -476,28 +476,36 @@ export class HomeComponent implements OnInit {
   }
 
   public buttonClickActions(e: Event): void {
-    debugger
     const quickPopup: HTMLElement = closest(e.target as HTMLElement, '.e-quick-popup-wrapper') as HTMLElement;
     const getSlotData: CallbackFunction = (): Record<string, any> => {
       let cellDetails: CellClickEventArgs = this.scheduleObj.getCellDetails(this.scheduleObj.getSelectedElements());
       if (isNullOrUndefined(cellDetails)) {
         cellDetails = this.scheduleObj.getCellDetails(this.scheduleObj.activeCellsData.element);
       }
-      const subject = ((quickPopup.querySelector('#title') as EJ2Instance).ej2_instances[0] as TextBoxComponent).value;
-      const notes = ((quickPopup.querySelector('#notes') as EJ2Instance).ej2_instances[0] as TextBoxComponent).value;
+      // const subject = ((quickPopup.querySelector('#title') as EJ2Instance).ej2_instances[0] as TextBoxComponent).value;
+      // const notes = ((quickPopup.querySelector('#notes') as EJ2Instance).ej2_instances[0] as TextBoxComponent).value;
       const addObj: Record<string, any> = {};
       addObj.Id = this.scheduleObj.getEventMaxID();
-      addObj.Subject = isNullOrUndefined(subject) ? 'Add title' : subject;
+      addObj.Subject = isNullOrUndefined(this.newRecipe.RecipeTitle) ? 'Add title' : this.newRecipe.RecipeTitle;
       addObj.StartTime = new Date(+cellDetails.startTime);
       addObj.EndTime = new Date(+cellDetails.endTime);
       addObj.IsAllDay = cellDetails.isAllDay;
-      addObj.Description = isNullOrUndefined(notes) ? 'Add notes' : notes;
-      addObj.CalendarId = ((quickPopup.querySelector('#eventType') as EJ2Instance).ej2_instances[0] as DropDownListComponent).value;
+      addObj.Description = isNullOrUndefined(this.newRecipe.RecipeImage) ? 'Add notes' : this.newRecipe.RecipeImage;
+      // addObj.CalendarId = ((quickPopup.querySelector('#eventType') as EJ2Instance).ej2_instances[0] as DropDownListComponent).value;
       return addObj;
     };
     if ((e.target as HTMLElement).id === 'save') {
       const addObj: Record<string, any> = getSlotData();
       this.scheduleObj.addEvent(addObj);
+      this.recipeService.AddRecipe(this.newRecipe).subscribe(
+        (response: any) => {
+          if (response.Status) {
+            alert(response.Data + "adding recipe is success")
+          }
+          else
+            alert(response.Error)
+        })
+        this.newRecipe = new Recipe();
     } else if ((e.target as HTMLElement).id === 'delete') {
       const eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
       let currentAction: CurrentAction;
@@ -540,10 +548,13 @@ export class HomeComponent implements OnInit {
   }
 
   chooseRecipe(id: string){
-    let chosenR = this.listRecipesBySearch?.find((x: any) => x.id === id) as Record<string,any>;
-    this.newRecipe.RecipeTitle = chosenR.title;
-    this.newRecipe.RecipeImage = chosenR.image;
-    this.newRecipe.Date = new Date();
+    let chosenRecipe = this.listRecipesBySearch?.find((x: any) => x.id === id) as Record<string,any>;
+    this.newRecipe.RecipeId = chosenRecipe.id;
+    this.newRecipe.RecipeTitle = chosenRecipe.title;
+    this.newRecipe.RecipeImage = chosenRecipe.image;
+    this.newRecipe.Date?this.newRecipe.Date:new Date();
     this.newRecipe.SchedulingStatuse = 3;
+    this.searchWord = ""
+    this.listRecipesBySearch = []
   }
 }
