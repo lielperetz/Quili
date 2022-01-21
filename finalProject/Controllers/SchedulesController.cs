@@ -30,7 +30,7 @@ namespace finalProject.Controllers
             }
             try
             {
-                var data = SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
+                var data = SchedulesBl.GetSchedulesByRange(d1, d2, mail);
                 return Json(new ReturnObject() { Status = true, Data = data });
             }
             catch (Exception ex)
@@ -56,7 +56,7 @@ namespace finalProject.Controllers
             }
             try
             {
-                List<SchedulesEntities> Schedules = SchedulesEntities.ConvertToListEntities(SchedulesBl.GetSchedulesByRange(d1, d2, mail));
+                List<SchedulesEntities> Schedules = SchedulesBl.GetSchedulesByRange(d1, d2, mail);
                 List<ProductsEntities> data = new List<ProductsEntities>();
                 bool flag = false;
                 foreach (var s in Schedules)

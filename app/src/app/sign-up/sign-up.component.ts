@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../classes/uesr';
 import { UserService } from '../services/user.service';
 import * as feather from 'feather-icons';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,7 +13,7 @@ import * as feather from 'feather-icons';
 export class SignUpComponent implements OnInit {
 
   user:User=new User()
-  constructor(public UserService:UserService) { }
+  constructor(public UserService:UserService, public router:Router) { }
 
   ngOnInit(): void {
     feather.replace();
@@ -21,7 +22,9 @@ export class SignUpComponent implements OnInit {
   newUser(){
     this.UserService.Add(this.user).subscribe(
       (response:any)=>{
-        if(response.Status) alert("Email "+response.Data+" added successfully")
+        if(response.Status) {
+          this.router.navigate(['/'])
+        }
         else alert(response.Error)})
   }
 

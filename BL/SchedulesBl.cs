@@ -16,9 +16,10 @@ namespace BL
             SchedulesDal.AddSchedules(SchedulesEntities.ConvertToDB(s));
         }
         //שליפת רשומות לפי טווח תאריכים
-        public static List<SCHEDULES> GetSchedulesByRange(DateTime d1,DateTime d2, string mail)
+        public static List<SchedulesEntities> GetSchedulesByRange(DateTime d1,DateTime d2, string mail)
         {
-            return SchedulesDal.GetSchedules().FindAll(x => x.RECIPES.MAIL == mail && x.DATE >= d1 && x.DATE <= d2);
+            var l = SchedulesEntities.ConvertToListEntities(SchedulesDal.GetSchedules()).FindAll(x => x.Mail == mail && x.Date >= d1 && x.Date <= d2).ToList();
+            return l;
         }
     }
 }

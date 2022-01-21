@@ -18,9 +18,12 @@ namespace BL
         //הוספה
         public static void AddRecipe(RecipesEntities r)
         {
-            RECIPES r2 = RecipesEntities.ConvertToDB(r);
-            RecipesDal.AddRecipe(r2);
-            r.Code = r2.CODE;
+            //RECIPES r2 = RecipesEntities.ConvertToDB(r);
+            RecipesDal.AddRecipe(RecipesEntities.ConvertToDB(r));
+            //r.Code = r2.CODE;
+
+            //שליפת הקוד של המתכון האחרון שנוסף על מנת להציבו בתזמונים של המתכון
+            //int codeLastRecipe = RecipesDal.GetRecipes().OrderByDescending(x => x.CODE).FirstOrDefault().CODE;
         }
     }
 }

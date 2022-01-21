@@ -34,26 +34,33 @@ namespace finalProject.Controllers
             try
             {
                 RecipesBl.AddRecipe(r);
+                SchedulesEntities s = new SchedulesEntities() { Code = 1, RecipeCode = r.Code, Mail = r.Mail, RecipeTitle = r.RecipeTitle, RecipeImage = r.RecipeImage, RecipeDate = r.Date, SchedulingStatuse = r.SchedulingStatuse, Amount = 1, RecipeId = r.RecipeId };
                 switch (r.SchedulingStatuse)
                 {
                     //once
                     case 1:
-                        SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = r.Date, Amount = 1 });
+                        s.Date = r.Date;
+                        SchedulesBl.AddSchedules(s);
+                        //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = r.Date, Amount = 1 });
                         break;
                     //weekly
                     case 2:
                         for (int i = 0; i < 48; i++)
                         {
-                            DateTime d = r.Date;
-                            SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddDays(i * 7), Amount = 1 });
+                            s.Date = r.Date.AddDays(i * 7);
+                            SchedulesBl.AddSchedules(s);
+                            //DateTime d = r.Date;
+                            //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddDays(i * 7), Amount = 1 });
                         }
                         break;
                     //monthly
                     case 3:
                         for (int i = 0; i < 12; i++)
                         {
-                            DateTime d = r.Date;
-                            SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddMonths(i), Amount = 1 });
+                            s.Date = r.Date.AddMonths(i);
+                            SchedulesBl.AddSchedules(s); 
+                            //DateTime d = r.Date;
+                            //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddMonths(i), Amount = 1 });
                         }
                         break;
                     default:
