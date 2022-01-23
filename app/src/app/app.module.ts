@@ -19,6 +19,7 @@ import { DropDownListModule, MultiSelectModule } from '@syncfusion/ej2-angular-d
 import { SplitButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import { ContextMenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { IngredientsComponent } from './ingredients/ingredients.component';
+import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
     HomeComponent,
     AuthComponent,
     SiteComponent,
-    IngredientsComponent
+    IngredientsComponent,
+    ShowRecipeDetailsComponent
   ],
   imports: [
     BrowserModule,

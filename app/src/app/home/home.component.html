@@ -1,77 +1,27 @@
-<!-- <div class="col-lg-12 control-section">
-  <div class="content-wrapper">
-    <div class="schedule-overview">
-      <div class="overview-header">
-
-        <div class="overview-content">
-          <div class="left-panel"> -->
+<!-- [enableAllDayScroll]=true -->
 <div class="app-content content ">
   <div class="content-wrapper">
     <div class="content-body">
       <div class="overview-scheduler">
-
-        <!-- Calendar start -->
         <section>
           <!-- Main: Content -->
           <div class="sidebar-wrapper">
             <div class="control-section">
-              <!-- <ejs-schedule #scheduleObj width='100%' height='650px' [eventSettings]='eventSettings'
-              [selectedDate]="selectedDate" (popupOpen)='onPopupOpen($event)'
-              (actionComplete)='onActionComplete($event)' (actionBegin)='onActionBegin($event)'
-              [(currentView)]="currentView" (dragStart)="onDragStart($event)" (cellClick)='onClickCell(content)'>
-              <e-views>
-                <e-view option="Month"></e-view>
-                <ng-template #cellTemplate #eventSettingsTemplate let-data>
-                  <div class="templatewrap" [innerHTML]="getCellContent(data.date)">
-                    {{data.RecipeName}}
-                  </div>
-                </ng-template>
-                <ng-template #content let-modal>
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="modal-basic-title">Add Recipe</h4>
-                    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body">
-                    <form class="form-group" (ngSubmit)="save()" #myForm="ngForm">
-                      <div class="form-group">
-                        <label for="newRecipe">Add Recipe</label>
-                        <div class="input-group">
-                          <input id="newRecipe" type="url" class="form-control" [(ngModel)]="newRecipe.RecipeTitle" placeholder="url://http..." required #myId="ngModel">
-                        </div>
-                        <div *ngIf="myId.invalid && (myId.dirty || myId.touched)" class="alert-danger">
-                          required field 
-                        </div> 
-                        <label for="startDate">Start Date</label>
-                        <div class="input-group">
-                          <input id="startDate" class="form-control" [(ngModel)]="newRecipe.Date" placeholder="yyyy-mm-dd" name="dp"
-                            ngbDatepicker #dp="ngbDatepicker">
-                          <div class="input-group-append">
-                            <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-                          </div>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-dark" [disabled]="!myForm.valid" (click)="save();modal.close('Save click')">Save</button>
-                  </div>
-                </ng-template>
-                
-                <hr>
-                
-                <pre>{{ closeResult }}</pre>
-              </e-views>
-            </ejs-schedule> -->
-              <ejs-schedule #scheduleObj [(currentView)]="currentView" [eventSettings]="eventSettings"
-                cssClass='schedule-overview' width='100%' height='650px' (dragStart)="onDragStart($event)">
+              <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
+                height='650px' (popupOpen)="onPopupOpen($event)">
                 <ng-template #dateHeaderTemplate let-data>
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
-                <!-- {{data.date | date: 'dd/MM/yyyy'}} -->
                 <ng-template #cellTemplate let-data>
-                  <div class="templatewrap" [innerHTML]="getCellContent(data.date)"></div>
+                  <div *ngIf="hasEvent(data.date)" class="templatewrap">
+                    <div *ngFor="let item of recipesForDay" style="width: 100%;">
+                      <button routerLink="/site/showDetails/{{item.Code}}">
+                        <img src="{{item.RecipeImage}}" class="img-responsive" alt="image"
+                          style="width: 50px; height: 50px;">
+                        <p style="float: right; font-weight: bold;">{{item.RecipeTitle}}</p>
+                      </button>
+                    </div>
+                  </div>
                 </ng-template>
                 <e-views>
                   <e-view option="Month"></e-view>
@@ -79,86 +29,61 @@
                 <ng-template #quickInfoTemplatesHeader let-data>
                   <div class="quick-info-header">
                     <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
-                      <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
-                      <!-- <div class="duration-text">{{getHeaderDetails(data)}}</div> -->
+                      <div class="quick-info-title">{{getHeaderTitle(data.data)}}</div>
                     </div>
                   </div>
                 </ng-template>
                 <ng-template #quickInfoTemplatesContent let-data>
-                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellContent : eventContent"
-                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                  <ng-container [ngTemplateOutlet]="cellContent" [ngTemplateOutletContext]="{data:data}"></ng-container>
                 </ng-template>
                 <ng-template #cellContent let-data="data">
                   <div class="quick-info-content">
                     <div class="e-cell-content">
                       <div class="content-area">
-                        <!-- <span class="e-icons e-search"></span> -->
                         <input id="search" class="e-input" type="search" placeholder="Search"
                           (ngModelChange)="searchRecipe($event)" [(ngModel)]="searchWord" />
                       </div>
                       <div class="row">
                         <div *ngFor="let item of listRecipesBySearch" style="margin: 5px;">
-                          <button (click)="getRecipeInfo(item.id)">
-                            <img src="{{item.image}}" class="img-responsive"
-                              style="height:100px; width: 100px;"></button>
+                          <button routerLink="/site/showDetails/{{item.id}}">
+                            <img src="{{item.image}}" class="img-responsive" style="height:80px; width: 80px;"></button>
                           <div style="float: inline-end;">
                             <h3>{{item.title}}</h3>
                           </div>
-                          <button (click)="chooseRecipe(item.id)">+</button>
+                          <button (click)="chooseRecipe(item.id)">&#10011;</button>
                         </div>
                       </div>
-                      <div class="content-area">
-                        <input id="title" class="e-input" type="text" placeholder="Title"
+                      <div *ngIf="newRecipe.RecipeTitle" class="content-area">
+                        <label>Title</label>
+                        <input id="title" class="e-input" type="text" placeholder="Title" style="font-weight: bold;"
                           [(ngModel)]="newRecipe.RecipeTitle" />
-                      </div>
-                      <div class="content-area">
-                        <input id="status" class="e-input" type="number" placeholder="repeat status"
-                          [(ngModel)]="newRecipe.SchedulingStatuse" />
-                      </div>
-                      <div class="content-area">
-                        <input id="date" class="e-input" type="date" value="{{data.StartTime | date: 'dd/MM/yyyy'}}"
-                          [(ngModel)]="newRecipe.Date" />
-                          {{data.StartTime}}
-                          <!-- {{data.date | date: 'dd/MM/yyyy'}} -->
-                      </div>
-                      <div class="content-area">
                         <img src="{{newRecipe.RecipeImage}}" />
                       </div>
-                    </div>
-                  </div>
-                </ng-template>
-                <ng-template #eventContent let-data="data">
-                  <div class="quick-info-content">
-                    <div class="event-content">
-                      <div class="meeting-type-wrap">
-                        <label>Subject</label>:
-                        <span>{{data.Subject}}</span>
+                      <div class="content-area">
+                        <label>Start Date</label>
+                        <input id="date" class="e-input" type="date" [value]="newRecipe.Date | date:'yyyy-MM-dd'"
+                          (input)="newRecipe.Date=parseDate($event.target.value)" />
                       </div>
-                      <div class="notes-wrap">
-                        <label>Notes</label>:
-                        <span>{{data.Description}}</span>
+                      <div class="content-area">
+                        <label>Repeat</label>
+                        <select id="status" class="e-float-input e-input-group"
+                          [(ngModel)]="newRecipe.SchedulingStatuse">
+                          <option value="1">Never</option>
+                          <option value="2">Weekly</option>
+                          <option value="3">Monthly</option>
+                          <option value="4">Yearly</option>
+                        </select>
                       </div>
                     </div>
                   </div>
                 </ng-template>
                 <ng-template #quickInfoTemplatesFooter let-data>
-                  <ng-container [ngTemplateOutlet]="data.elementType == 'cell' ? cellFooter : eventFooter"
-                    [ngTemplateOutletContext]="{data:data}"></ng-container>
+                  <ng-container [ngTemplateOutlet]="cellFooter" [ngTemplateOutletContext]="{data:data}"></ng-container>
                 </ng-template>
                 <ng-template #cellFooter let-data="data">
                   <div class="e-cell-footer">
-                    <button ejs-button id="more-details" cssClass="e-flat" (click)="buttonClickActions($event)">More
-                      Details</button>
                     <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
                       (click)="buttonClickActions($event)">Save</button>
-                  </div>
-                </ng-template>
-                <ng-template #eventFooter let-data="data">
-                  <div class="e-event-footer">
-                    <button ejs-button id="delete" cssClass="e-flat"
-                      (click)="buttonClickActions($event)">Delete</button>
-                    <button ejs-button id="more-details" cssClass="e-flat" [isPrimary]="true"
-                      (click)="buttonClickActions($event)">More Details</button>
                   </div>
                 </ng-template>
               </ejs-schedule>
@@ -166,7 +91,8 @@
           </div>
           <!-- Main: Content -->
         </section>
-        <!-- Calendar end -->
       </div>
     </div>
   </div>
+</div>
+<!-- <router-outlet></router-outlet> -->

@@ -15,6 +15,12 @@ export class RecipesService {
     const header = new HttpHeaders({'Content-Type':'application/json'}).set('Authorization', this.cookies.get('Token'))
     return this.httpClient.put<any>(this.url + "AddRecipe", JSON.stringify(rec), {headers: header}).pipe(catchError(this.handleError))
   }
+  SearchRecipe(searchWord: string): Observable<any> {
+    return this.httpClient.get<any>(this.url + "SearchRecipe/"+ searchWord).pipe(catchError(this.handleError));
+  }
+  GetRecipeById(id:number): Observable<any> {
+    return this.httpClient.get<any>(this.url + "GetRecipeById/" + id).pipe(catchError(this.handleError))
+  }
   handleError(errorResponse: HttpErrorResponse) {
     console.log(errorResponse);
     return throwError(() => new Error('test'));
