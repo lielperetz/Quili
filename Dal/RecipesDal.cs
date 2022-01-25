@@ -19,7 +19,6 @@ namespace Dal
         {
             db.RECIPES.Add(r);
             db.SaveChanges();
-            db.SaveChangesAsync();
         }
         //מחיקה
         public static void RemoveRecipe()

@@ -33,15 +33,15 @@ namespace finalProject.Controllers
             }
             try
             {
-                RecipesBl.AddRecipe(r);
-                SchedulesEntities s = new SchedulesEntities() { Code = 1, RecipeCode = r.Code, Mail = r.Mail, RecipeTitle = r.RecipeTitle, RecipeImage = r.RecipeImage, RecipeDate = r.Date, SchedulingStatuse = r.SchedulingStatuse, Amount = 1, RecipeId = r.RecipeId };
+                var rCode = RecipesBl.AddRecipe(r);
+                SchedulesEntities s = new SchedulesEntities() { RecipeCode = rCode, Mail = r.Mail, RecipeTitle = r.RecipeTitle, RecipeImage = r.RecipeImage, RecipeDate = r.Date, SchedulingStatuse = r.SchedulingStatuse, Amount = 1, RecipeId = r.RecipeId };
                 switch (r.SchedulingStatuse)
                 {
                     //once
                     case 1:
                         s.Date = r.Date;
                         SchedulesBl.AddSchedules(s);
-                        //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = r.Date, Amount = 1 });
+                        //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = r.Date, Amount = 1 ,});
                         break;
                     //weekly
                     case 2:
@@ -66,16 +66,15 @@ namespace finalProject.Controllers
                     default:
                         return Json(new ReturnObject() { Status = false, Error = "error" });
                 }
+                if (!ProductsController.AddProducts(r.RecipeId, rCode))
+                    return Json(new ReturnObject() { Status = false, Data = "AddProducts failed" });
+                return Json(new ReturnObject() { Status = true, Data = r.Mail });
             }
             catch (Exception ex)
             {
 
                 return Json(new ReturnObject() { Status = false, Error = ex.ToString() });
             }
-            if(!ProductsController.AddProducts(r.RecipeId, r.Code))
-                return Json(new ReturnObject() { Status = false, Data = "AddProducts failed" });
-
-            return Json(new ReturnObject() { Status = true, Data = r.Mail });
         }
 
         [HttpGet]

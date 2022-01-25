@@ -1,13 +1,25 @@
 <div class="app-content content ">
-    <div class="content-wrapper">
-        <input (change)="logPage()" type="date" placeholder="start" [(ngModel)]="startDate">
-        <input (change)="logPage()" type="date" placeholder="end" [(ngModel)]="endDate">
-        <div class="content-body">
-            <tr *ngFor="let item of listPro;" class="list-group">
-                <td>{{item.ProductName}}</td>
-                <td>{{item.Amount}}</td>
-                <td>{{item.RecipeCode}}</td>
-            </tr>
+  <div class="content-wrapper">
+    <div class="content-body">
+      <input id="startDate" (change)="logPage()" type="date" placeholder="start" [(ngModel)]="startDate">
+      <input id="endDate" (change)="logPage()" type="date" placeholder="end" [(ngModel)]="endDate">
+
+      <ul class="list-group">
+        <div *ngFor="let item of listPro; index as i;">
+          <p *ngIf="lp[i]==false&&lp[i]==true;then addR(i)"> </p>
+          <li *ngIf="lp[i];" class="list-group-item row">
+            <!-- <div *ngIf="lp[i]==false;then addR(item.RecipeCode)"></div>
+            <div *ngIf="lp[i]==true;then addR(item.RecipeCode)"></div> -->
+
+            <div class="col-sm-4 cl">{{item.ProductName}} </div>
+            <div class="col-sm-4 cl">{{item.Amount}} {{item.Unit}}</div>
+            <div *ngFor="let r of Recipes;">
+              <p>working: {{r}}</p>
+            </div>
+          </li>
+          <p *ngIf="lp[i]==true;then deleteR(i)"> </p>
         </div>
+      </ul>
     </div>
+  </div>
 </div>

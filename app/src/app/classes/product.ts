@@ -3,6 +3,7 @@ export class Product{
                 public RecipeCode?:number,
                 public ProductName?:string,
                 public ProductImage?:string,
-                public Amount?:string,
+                public Amount?:number,
+                public Unit?:string,
                 public Category?:number){}
 }
