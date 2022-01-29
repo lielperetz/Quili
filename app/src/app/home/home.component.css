@@ -20,7 +20,15 @@
   } */
   /* popup add recipe */
   /* <div class="e-quick-popup-wrapper e-lib e-popup e-control e-popup-close" style="z-index: 3; left: 0px; top: 0px;"></div> */
-
+  /* p {
+    width: 100px;
+    border: 1px solid;
+    padding: 2px 5px;
+  
+    white-space: nowrap;
+    overflow: hidden;
+  } */
+  
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {
   content: "\e846";

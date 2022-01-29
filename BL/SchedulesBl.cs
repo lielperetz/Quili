@@ -13,12 +13,14 @@ namespace BL
         //הוספה
         public static void AddSchedules(SchedulesEntities s)
         {
-            SchedulesDal.AddSchedules(SchedulesEntities.ConvertToDB(s));
+            SCHEDULES s2 = SchedulesEntities.ConvertToDB(s);
+            SchedulesDal.AddSchedules(s2);
         }
         //שליפת רשומות לפי טווח תאריכים
         public static List<SchedulesEntities> GetSchedulesByRange(DateTime d1,DateTime d2, string mail)
         {
-            var l = SchedulesEntities.ConvertToListEntities(SchedulesDal.GetSchedules()).FindAll(x => x.Mail == mail && x.Date >= d1 && x.Date <= d2).ToList();
+            List<SCHEDULES> listS = SchedulesDal.GetSchedules().Where(x => x.RECIPES!=null && x.RECIPES.MAIL == mail && x.RECIPES.DATE >= d1 && x.RECIPES.DATE <= d2).ToList();
+            var l = SchedulesEntities.ConvertToListEntities(listS);
             return l;
         }
     }

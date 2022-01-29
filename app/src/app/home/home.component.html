@@ -1,4 +1,3 @@
-<!-- [enableAllDayScroll]=true -->
 <div class="app-content content ">
   <div class="content-wrapper">
     <div class="content-body">
@@ -13,13 +12,27 @@
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
                 <ng-template #cellTemplate let-data>
-                  <div *ngIf="hasEvent(data.date)" class="templatewrap">
-                    <div *ngFor="let item of recipesForDay" style="width: 100%;">
-                      <button routerLink="/site/showDetails/{{item.Code}}">
-                        <img src="{{item.RecipeImage}}" class="img-responsive" alt="image"
-                          style="width: 50px; height: 50px;">
-                        <p style="float: right; font-weight: bold;">{{item.RecipeTitle}}</p>
-                      </button>
+                  <div class="templatewrap" style="position: absolute; height: 70px;">
+                    <div *ngIf="getRecipesForDay(data.date)">
+                      <div style="position: relative; height: 100%; margin: 2px;">
+                        <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}"
+                          style="border: none; height: 100%;">
+                          <img src="{{recipesForDay[0].RecipeImage}}" class="img-responsive" alt="image"
+                            style="width: 40px; height: 40px; float: left; margin: 2px 0px;">
+                          <p style="font-weight: bold; width: 113px; float: left;
+                          white-space: nowrap;
+                          overflow: hidden;text-overflow: ellipsis;">{{recipesForDay[0].Code}}
+                            {{recipesForDay[0].RecipeTitle}}</p></button>
+                          <div style="position: absolute; right: 0; bottom: 5px; color: inherit;">
+                            <button ejs-button id="edit" cssClass="e-flat" (click)="edit(recipesForDay[0].Code)"
+                              style="border: none;"><span class="glyphicon">&#xe065;</span></button>
+                            <button ejs-button id="delete" cssClass="e-flat" (click)="delete(123)"
+                              style="border: none;"><span class="glyphicon">&#xe020;</span></button>
+                          </div>
+                      </div>
+                      <button *ngIf="numberRecipesForDay>1" id="more" (click)="showRecipesPopup(data.date)"
+                        style="border: none; background-color: inherit; position: absolute;  bottom: 0px;">+
+                        {{numberRecipesForDay - 1}} more</button>
                     </div>
                   </div>
                 </ng-template>
@@ -29,7 +42,7 @@
                 <ng-template #quickInfoTemplatesHeader let-data>
                   <div class="quick-info-header">
                     <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
-                      <div class="quick-info-title">{{getHeaderTitle(data.data)}}</div>
+                      <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
                     </div>
                   </div>
                 </ng-template>
@@ -40,17 +53,25 @@
                   <div class="quick-info-content">
                     <div class="e-cell-content">
                       <div class="content-area">
-                        <input id="search" class="e-input" type="search" placeholder="Search"
-                          (ngModelChange)="searchRecipe($event)" [(ngModel)]="searchWord" />
+                        <!-- <div class="e-input-group"> -->
+                        <input class="e-input" type="search" placeholder="Search" (ngModelChange)="searchRecipe($event)"
+                          [(ngModel)]="searchWord" />
+                        <!-- <span class="e-icons e-search" style="margin-bottom: 0px;"></span> -->
+                        <!-- </div> -->
                       </div>
-                      <div class="row">
-                        <div *ngFor="let item of listRecipesBySearch" style="margin: 5px;">
-                          <button routerLink="/site/showDetails/{{item.id}}">
-                            <img src="{{item.image}}" class="img-responsive" style="height:80px; width: 80px;"></button>
-                          <div style="float: inline-end;">
-                            <h3>{{item.title}}</h3>
-                          </div>
-                          <button (click)="chooseRecipe(item.id)">&#10011;</button>
+                      <div class="row" *ngIf="listRecipesBySearch"
+                        style="height: 300px; width: 100%; overflow-x: auto;">
+                        <div class="col-md-12" *ngFor="let item of listRecipesBySearch"
+                          style="width: 200px; margin: 5px; border: black 0.5px;">
+                          <button (click)="chooseRecipe(item.id)" style="border: none;">
+                            <button routerLink="/site/showDetails/{{item.id}}"
+                              style="float: left; margin-left: 0px; border: hidden;">
+                              <img src="{{item.image}}" class="img-responsive"
+                                style="height:80px; width: 80px;"></button>
+                            <div style="display: inline;">
+                              <h5>{{item.title}}</h5>
+                            </div>
+                          </button>
                         </div>
                       </div>
                       <div *ngIf="newRecipe.RecipeTitle" class="content-area">
@@ -95,4 +116,32 @@
     </div>
   </div>
 </div>
-<!-- <router-outlet></router-outlet> -->
+<div *ngIf="showOrHidePopup" class="e-more-popup-wrapper e-lib e-popup e-control e-popup-open"
+  style="z-index: 2; left: 600px; top: 269px;">
+  <div class="e-more-event-popup">
+    <div class="e-more-event-header">
+      <div class="e-more-event-close e-control e-btn e-lib e-round e-icon-btn" title="Close" tabindex="0"
+        (click)="hideRecipesPopup()">
+        <span class="e-btn-icon e-icons e-close-icon" style="font-weight: bold;">&#x2716;</span>
+      </div>
+      <div class="e-more-event-date-header" style="text-align: center;">
+        <div class="e-header-day">{{currentDay | date:'EEEE, MMMM d, y'}}</div>
+      </div>
+    </div>
+    <div *ngFor="let item of getRecipesForDay(currentDay)" style="position: relative; width: 100%; margin: 2px;">
+      <button routerLink="/site/showDetails/{{item.RecipeId}}" style="border: none;">
+        <img src="{{item.RecipeImage}}" class="img-responsive" alt="image"
+          style="width: 40px; height: 40px; float: left; margin: 2px 0px;">
+        <p style="font-weight: bold; color: black; width: 155px; float: left;
+            white-space: nowrap;
+            overflow: hidden;text-overflow: ellipsis;">{{item.RecipeTitle}}</p></button>
+        <div style="position: absolute; right: 15px; bottom: 3px; font: inherit;">
+          <button ejs-button id="edit" cssClass="e-flat" (click)="edit(item.Code)"
+            style="border: none;"><span class="glyphicon">&#xe065;</span></button>
+          <button ejs-button id="delete" cssClass="e-flat" (click)="delete(item.Code)"
+            style="border: none;"><span class="glyphicon">&#xe020;</span></button>
+        </div>
+      
+    </div>
+  </div>
+</div>

@@ -33,7 +33,8 @@ namespace finalProject.Controllers
             }
             try
             {
-                var rCode = RecipesBl.AddRecipe(r);
+                RecipesBl.AddRecipe(r);
+                var rCode = r.Code;
                 SchedulesEntities s = new SchedulesEntities() { RecipeCode = rCode, Mail = r.Mail, RecipeTitle = r.RecipeTitle, RecipeImage = r.RecipeImage, RecipeDate = r.Date, SchedulingStatuse = r.SchedulingStatuse, Amount = 1, RecipeId = r.RecipeId };
                 switch (r.SchedulingStatuse)
                 {
