@@ -13,8 +13,9 @@
                 </ng-template>
                 <ng-template #cellTemplate let-data>
                   <div class="templatewrap" style="position: absolute; height: 70px;">
-                    <div *ngIf="getRecipesForDay(data.date)">
+                    <div *ngIf="getRecipesForDay(data.date) as variable">
                       <div style="position: relative; height: 100%; margin: 2px;">
+                      
                         <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}"
                           style="border: none; height: 100%;">
                           <img src="{{recipesForDay[0].RecipeImage}}" class="img-responsive" alt="image"
@@ -24,9 +25,9 @@
                           overflow: hidden;text-overflow: ellipsis;">{{recipesForDay[0].Code}}
                             {{recipesForDay[0].RecipeTitle}}</p></button>
                           <div style="position: absolute; right: 0; bottom: 5px; color: inherit;">
-                            <button ejs-button id="edit" cssClass="e-flat" (click)="edit(recipesForDay[0].Code)"
+                            <button ejs-button id="edit" cssClass="e-flat" (click)="edit(variable[0].Code)"
                               style="border: none;"><span class="glyphicon">&#xe065;</span></button>
-                            <button ejs-button id="delete" cssClass="e-flat" (click)="delete(123)"
+                            <button ejs-button id="delete" cssClass="e-flat" (click)="delete(variable[0].Code)"
                               style="border: none;"><span class="glyphicon">&#xe020;</span></button>
                           </div>
                       </div>

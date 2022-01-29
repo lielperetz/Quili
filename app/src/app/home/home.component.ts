@@ -34,6 +34,15 @@ export class HomeComponent implements OnInit {
   public currentDay: Date;
 
   constructor(private recipeService: RecipesService, private schedulesService: SchedulesService) {
+    this.getOriginalData();
+  }
+
+  public ngOnInit(): void {
+    
+  }
+
+ async   getOriginalData() {
+    console.log("getOriginalData")
     this.schedulesService.GetRecipesByUser(new Date(2021, 11, 1, 0, 0, 0), new Date(2022, 2, 1, 0, 0, 0)).subscribe(
       (response: any) => {
         if (response.Status) {
@@ -42,9 +51,6 @@ export class HomeComponent implements OnInit {
         else
           alert(response.Error)
       })
-  }
-
-  public ngOnInit(): void {
   }
 
   public getDateHeaderText(value: Date): string {
@@ -155,7 +161,9 @@ export class HomeComponent implements OnInit {
       this.recipeService.AddRecipe(this.newRecipe).subscribe(
         (response: any) => {
           if (response.Status) {
-            alert(response.Data + "adding recipe is success")
+           // alert(response.Data + "adding recipe is success")
+            this.getOriginalData();
+            this.scheduleObj.refreshTemplates();
           }
           else
             alert(response.Error)
