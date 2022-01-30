@@ -39,7 +39,7 @@ namespace finalProject.Controllers
 
         public static List<ProductsEntities> GetRecipeProducts(short id)
         {
-            return ProductsEntities.ConvertToListEntities(ProductsBl.GetRecipeProducts(id));
+            return ProductsBl.GetRecipeProducts(id);
         }
     }
 }

@@ -10,20 +10,19 @@ namespace BL
 {
     public class RecipesBl
     {
-        //שליפה
-        //public static GetSavedRecipeById()
-        //{
-
-        //}
-        //הוספה
+        public static List<RecipesEntities> GetSavedRecipe(string mail)
+        {
+            return RecipesEntities.ConvertToListEntities(DalCode.GetRecipes()).FindAll(x => x.Mail == mail);
+        }
+        public static RecipesEntities GetRecipeByLocalId(short id)
+        {
+            return RecipesEntities.ConvertToListEntities(DalCode.GetRecipes()).FirstOrDefault(x => x.Code == id);
+        }
         public static void AddRecipe(RecipesEntities r)
         {
             RECIPES r2 = RecipesEntities.ConvertToDB(r);
             DalCode.AddRecipe(r2);
             r.Code = r2.CODE;
-
-            //שליפת הקוד של המתכון האחרון שנוסף על מנת להציבו בתזמונים של המתכון
-            //return DalCode.GetRecipes().OrderByDescending(x => x.CODE).FirstOrDefault().CODE;
         }
     }
 }

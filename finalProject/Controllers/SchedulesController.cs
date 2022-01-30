@@ -51,8 +51,7 @@ namespace finalProject.Controllers
             }
             else
             {
-                //return Json(new ReturnObject() { Status = false, Error = "Email is required!" });
-                mail = "hr1020ilove@gmail.com";
+                return Json(new ReturnObject() { Status = false, Error = "Email is required!" });
             }
             try
             {

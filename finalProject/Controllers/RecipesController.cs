@@ -59,7 +59,7 @@ namespace finalProject.Controllers
                         for (int i = 0; i < 12; i++)
                         {
                             s.Date = r.Date.AddMonths(i);
-                            SchedulesBl.AddSchedules(s); 
+                            SchedulesBl.AddSchedules(s);
                             //DateTime d = r.Date;
                             //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddMonths(i), Amount = 1 });
                         }
@@ -102,6 +102,44 @@ namespace finalProject.Controllers
             catch (Exception ex)
             {
                 return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
+        }
+        [HttpGet]
+        [Route("GetSavedRecipe")]
+        public JsonResult<ReturnObject> GetSavedRecipe()
+        {
+            string mail = "";
+            System.Net.Http.Headers.HttpRequestHeaders headers = this.Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                mail = headers.GetValues("Authorization").First();
+            }
+            else
+            {
+                return Json(new ReturnObject() { Status = false, Error = "Email is required" });
+            }
+            try
+            {
+                return Json(new ReturnObject() { Status = true, Data = RecipesBl.GetSavedRecipe(mail) });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
+        }
+        [HttpGet]
+        [Route("GetRecipeByLocalId/{id}")]
+        public JsonResult<ReturnObject> GetRecipeByLocalId(short id)
+        {
+            try
+            {
+                var d = RecipesBl.GetRecipeByLocalId(id);
+                return Json(new ReturnObject() { Status = true, Data = d });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+
             }
         }
     }

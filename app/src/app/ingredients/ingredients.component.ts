@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../classes/product';
+import { RecipesService } from '../services/recipes.service';
 import { SchedulesService } from '../services/schedules.service';
 
 @Component({
@@ -10,19 +11,15 @@ import { SchedulesService } from '../services/schedules.service';
 })
 export class IngredientsComponent implements OnInit {
 
-  listPro: Array<Product> = new Array<Product>()
-  // מערך מקבלי לרשימת מוצרים המייצג האם המוצר ברשימה מופיע קודם שוב
-  lp: Array<boolean> = new Array<boolean>()
+  savedRecipes = []
 
-  Recipes: Array<number> = new Array<number>()
+  listPro: Array<Product> = new Array<Product>()
+  viewData = []
 
   startDate: Date = new Date(Date.now())
   endDate: Date = new Date(Date.now())
 
-  nxtName: string = ""
-
-  constructor(public schedulesService: SchedulesService, public activatedRoute: ActivatedRoute) { }
-
+  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(x => {
       if (x["startDate"])
@@ -36,22 +33,36 @@ export class IngredientsComponent implements OnInit {
     this.schedulesService.GetProductsByRange(this.startDate, this.endDate).subscribe(
       (data: any) => {
         if (data.Status) this.listPro = data.Data
-        for (var i = this.listPro.length - 1; i > 0; i--) {
-          if (this.listPro[i].ProductName == this.nxtName)
-            this.lp[i] = false
-          else
-            this.lp[i] = true
-          this.nxtName = this.listPro[i].ProductName
-        }
+        this.groupedBy()
+      })
+    this.recipesService.GetSavedRecipe().subscribe(
+      (data: any) => {
+        this.savedRecipes = data.Data
+        // console.log(this.savedRecipes)
       })
   }
-
-  addR(i: number) {
-    this.Recipes.push(this.listPro[i].RecipeCode)
+  groupedBy() {
+    var groupedByProductName = this.listPro.reduce(function (rv, x) {
+      (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
+      return rv;
+    }, {});
+    (Object.keys(groupedByProductName)).forEach(x => {
+      this.viewData.push(
+        {
+          name: x,
+          amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
+          unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
+          recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
+        })
+        console.log(this.viewData);
+    })
   }
-  deleteR(i: number) {
-    if (this.lp[i])
-      this.Recipes = []
+  RecipeIdToRecipeName(id) {
+    console.log(id)
+    var res
+    this.savedRecipes.map(r => {
+      if (r.Code == id) { res = r.RecipeTitle }
+    })
+    return res
   }
-
 }
