@@ -54,19 +54,16 @@
     <Compile Include="CLIENTS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="DalCode.cs" />
     <Compile Include="PRODUCTS.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="RECIPES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="ProductsDal.cs" />
     <Compile Include="SCHEDULES.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="SchedulesDal.cs" />
-    <Compile Include="RecipesDal.cs" />
-    <Compile Include="ClientsDal.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

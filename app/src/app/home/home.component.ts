@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
     
   }
 
- async   getOriginalData() {
+ async getOriginalData() {
     console.log("getOriginalData")
     this.schedulesService.GetRecipesByUser(new Date(2021, 11, 1, 0, 0, 0), new Date(2022, 2, 1, 0, 0, 0)).subscribe(
       (response: any) => {
@@ -104,9 +104,6 @@ export class HomeComponent implements OnInit {
     this.newRecipe.RecipeId = chosenRecipe.id;
     this.newRecipe.RecipeTitle = chosenRecipe.title;
     this.newRecipe.RecipeImage = chosenRecipe.image;
-    // this.newRecipe.RecipeId = '654429';
-    // this.newRecipe.RecipeTitle = 'Pan Seared Apple Almond Cake';
-    // this.newRecipe.RecipeImage = 'https://spoonacular.com/recipeImages/654429-312x231.jpg';
     this.searchWord = "";
     this.listRecipesBySearch = null;
   }
@@ -152,7 +149,6 @@ export class HomeComponent implements OnInit {
     //   // addObj.CalendarId = ((quickPopup.querySelector('#eventType') as EJ2Instance).ej2_instances[0] as DropDownListComponent).value;
     //   return addObj;
     // };
-    console.log(e + " " + id)
 
     if ((e.target as HTMLElement).id === 'save') {
       // const addObj: Record<string, any> = getSlotData();
@@ -189,11 +185,12 @@ export class HomeComponent implements OnInit {
     this.scheduleObj.closeQuickInfoPopup();
   }
 
-  public edit(id?:number){
-    console.log(id + " edit")
-  }
+  // public edit(id?:number){
+  //   console.log(id + " edit")
+  // }
 
   public delete(id?:number){
     alert(id + " delete")
+    this.scheduleObj.closeQuickInfoPopup();
   }
 }
