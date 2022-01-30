@@ -8,9 +8,11 @@
         <li class="list-group-item list-group-item-action list-group-item-light row">
           <div class="col-sm-4 cl">{{item.name}} </div>
           <div class="col-sm-4 cl">{{item.amount}} {{item.unit}}</div>
-          <button type="button">recipes</button>
-          <div class="col-sm-4 cl" *ngFor="let r of item.recipes;">
-            <p> {{r}}</p>
+          <div class="col-sm-4 cl">
+            <div *ngFor="let r of item.recipes; index as i" (click)="OpenClose(item.code)" type="button">
+              <u *ngIf="i==0" style="margin: 5px;"> recipes </u>
+              <p style="margin: 0px;" *ngIf="item.show"> {{r}}</p>
+            </div>
           </div>
         </li>
       </ul>

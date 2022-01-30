@@ -12,6 +12,7 @@ import { SchedulesService } from '../services/schedules.service';
 export class IngredientsComponent implements OnInit {
 
   savedRecipes = []
+  schedulesRecipes = []
 
   listPro: Array<Product> = new Array<Product>()
   viewData = []
@@ -38,8 +39,12 @@ export class IngredientsComponent implements OnInit {
     this.recipesService.GetSavedRecipe().subscribe(
       (data: any) => {
         this.savedRecipes = data.Data
-        // console.log(this.savedRecipes)
       })
+    this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
+      (data: any) => {
+        if (data.Status) this.schedulesRecipes = data.Data
+      }
+    )
   }
   groupedBy() {
     var groupedByProductName = this.listPro.reduce(function (rv, x) {
@@ -50,11 +55,12 @@ export class IngredientsComponent implements OnInit {
       this.viewData.push(
         {
           name: x,
+          code: (groupedByProductName[x].map(x => x.Code)),
           amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
           unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
           recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
+          show: false
         })
-        console.log(this.viewData);
     })
   }
   RecipeIdToRecipeName(id) {
@@ -64,5 +70,8 @@ export class IngredientsComponent implements OnInit {
       if (r.Code == id) { res = r.RecipeTitle }
     })
     return res
+  }
+  OpenClose(i) {
+    this.viewData.map(x => { if (x.code == i) x.show = !x.show })
   }
 }

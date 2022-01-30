@@ -43,7 +43,7 @@ namespace finalProject.Controllers
         [Route("GetProductsByRange/{d1}/{d2}")]
         public JsonResult<ReturnObject> GetProductsByRange(DateTime d1, DateTime d2)
         {
-            string mail = "";
+           string mail = "";
             System.Net.Http.Headers.HttpRequestHeaders headers = this.Request.Headers;
             if (headers.Contains("Authorization"))
             {

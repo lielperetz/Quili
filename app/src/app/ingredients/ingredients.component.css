@@ -4,3 +4,10 @@
 .cr{
   float: right;
 }
+.list-group-flush{
+  width: 100%;
+}
+input{
+  padding: 8px;
+  margin: 8px;
+}
