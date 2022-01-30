@@ -19,7 +19,7 @@ namespace BL
         //שליפת רשומות לפי טווח תאריכים
         public static List<SchedulesEntities> GetSchedulesByRange(DateTime d1,DateTime d2, string mail)
         {
-            List<SCHEDULES> listS = DalCode.GetSchedules().Where(x => x.RECIPES!=null && x.RECIPES.MAIL == mail && x.RECIPES.DATE >= d1 && x.RECIPES.DATE <= d2).ToList();
+            List<SCHEDULES> listS = DalCode.GetSchedules().Where(x => x.RECIPES!=null && x.RECIPES.MAIL == mail && x.DATE >= d1 && x.DATE <= d2).ToList();
             var l = SchedulesEntities.ConvertToListEntities(listS);
             return l;
         }

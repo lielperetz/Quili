@@ -7,7 +7,8 @@
           <div class="sidebar-wrapper">
             <div class="control-section">
               <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
-                height='650px' (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)">
+                height='650px' (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
+                (actionComplete)="onActionComplete($event)">
                 <ng-template #dateHeaderTemplate let-data>
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
@@ -21,14 +22,15 @@
                             style="width: 40px; height: 40px; float: left; margin: 2px 0px;">
                           <p style="font-weight: bold; width: 113px; float: left;
                           white-space: nowrap;
-                          overflow: hidden;text-overflow: ellipsis;">{{recipesForDay[0].Code}}
-                            {{recipesForDay[0].RecipeTitle}}</p></button>
-                          <div style="position: absolute; right: 0; bottom: 5px; color: inherit;">
-                            <!-- <button ejs-button id="edit" cssClass="e-flat" (click)="edit(variable[0].Code)"
+                          overflow: hidden;text-overflow: ellipsis;">
+                            {{recipesForDay[0].RecipeTitle}}</p>
+                        </button>
+                        <div style="position: absolute; right: 0; bottom: 5px; color: inherit;">
+                          <!-- <button ejs-button id="edit" cssClass="e-flat" (click)="edit(variable[0].Code)"
                               style="border: none;"><span class="glyphicon">&#xe065;</span></button> -->
-                            <button ejs-button id="delete" cssClass="e-flat" (click)="delete(variable[0].Code)"
-                              style="border: none;"><span class="glyphicon">&#xe020;</span></button>
-                          </div>
+                          <button ejs-button id="delete" cssClass="e-flat" (click)="delete(variable[0].Code)"
+                            style="border: none;"><span class="glyphicon">&#xe020;</span></button>
+                        </div>
                       </div>
                       <button *ngIf="numberRecipesForDay>1" id="more" (click)="showRecipesPopup(data.date)"
                         style="border: none; background-color: inherit; position: absolute;  bottom: 0px;">+
@@ -44,6 +46,9 @@
                     <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
                       <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
                     </div>
+                    <!-- <div title="Close">
+                      <button (click)="onCloseClick($event)" style="border-radius: ;"></button>
+                    </div> -->
                   </div>
                 </ng-template>
                 <ng-template #quickInfoTemplatesContent let-data>
@@ -53,24 +58,21 @@
                   <div class="quick-info-content">
                     <div class="e-cell-content">
                       <div class="content-area">
-                        <!-- <div class="e-input-group"> -->
                         <input class="e-input" type="search" placeholder="Search" (ngModelChange)="searchRecipe($event)"
                           [(ngModel)]="searchWord" />
                         <!-- <span class="e-icons e-search" style="margin-bottom: 0px;"></span> -->
                         <!-- </div> -->
                       </div>
                       <div class="row" *ngIf="listRecipesBySearch"
-                        style="height: 300px; width: inherit; overflow-x: auto;">
+                        style="height: 300px; width: 100%; overflow-x: hidden;">
                         <div class="col-md-12" *ngFor="let item of listRecipesBySearch"
-                          style="width: 200px; margin: 5px; border: black 0.5px;">
-                          <button (click)="chooseRecipe(item.id)" style="border: none;">
+                          style="margin: 5px; border: black 0.5px;">
+                          <button (click)="chooseRecipe(item.id)" style="border: none; width: 100%;">
                             <button routerLink="/site/showDetails/{{item.id}}"
-                              style="float: left; margin-left: 0px; border: hidden;">
-                              <img src="{{item.image}}" class="img-responsive"
-                                style="height:80px; width: 80px;"></button>
-                            <div style="display: inline;">
-                              <h5>{{item.title}}</h5>
-                            </div>
+                              style="border: hidden; float: left; margin: 0px;">
+                              <img src="{{item.image}}" class="img-responsive" style="height:80px; width: 80px;">
+                            </button>
+                            <h4 style="display: inline; margin: 2px;">{{item.title}}</h4>
                           </button>
                         </div>
                       </div>
@@ -78,7 +80,8 @@
                         <label>Title</label>
                         <input id="title" class="e-input" type="text" placeholder="Title" style="font-weight: bold;"
                           [(ngModel)]="newRecipe.RecipeTitle" />
-                        <img src="{{newRecipe.RecipeImage}}" />
+                        <button routerLink="/site/showDetails/{{newRecipe.RecipeId}}" style="border: none;"><img
+                            src="{{newRecipe.RecipeImage}}" /></button>
                       </div>
                       <div class="content-area">
                         <label>Start Date</label>
@@ -134,14 +137,15 @@
           style="width: 40px; height: 40px; float: left; margin: 2px 0px;">
         <p style="font-weight: bold; color: black; width: 155px; float: left;
             white-space: nowrap;
-            overflow: hidden;text-overflow: ellipsis;">{{item.RecipeTitle}}</p></button>
-        <div style="position: absolute; right: 15px; bottom: 3px; font: inherit;">
-          <button ejs-button id="edit" cssClass="e-flat" (click)="edit(item.Code)"
-            style="border: none;"><span class="glyphicon">&#xe065;</span></button>
-          <button ejs-button id="delete" cssClass="e-flat" (click)="delete(item.Code)"
-            style="border: none;"><span class="glyphicon">&#xe020;</span></button>
-        </div>
-      
+            overflow: hidden;text-overflow: ellipsis;">{{item.RecipeTitle}}</p>
+      </button>
+      <div style="position: absolute; right: 15px; bottom: 3px; font: inherit;">
+        <button ejs-button id="edit" cssClass="e-flat" (click)="edit(item.Code)" style="border: none;"><span
+            class="glyphicon">&#xe065;</span></button>
+        <button ejs-button id="delete" cssClass="e-flat" (click)="delete(item.Code)" style="border: none;"><span
+            class="glyphicon">&#xe020;</span></button>
+      </div>
+
     </div>
   </div>
 </div>

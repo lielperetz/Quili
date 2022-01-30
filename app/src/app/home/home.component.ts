@@ -1,7 +1,7 @@
 
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import {
-  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs, PopupCloseEventArgs
+  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs, PopupCloseEventArgs, addYears, Schedule, ActionEventArgs
 } from '@syncfusion/ej2-angular-schedule';
 import { closest, isNullOrUndefined, Internationalization } from '@syncfusion/ej2-base';
 import { RecipesService } from '../services/recipes.service';
@@ -38,19 +38,31 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
   }
 
-  async getOriginalData() {
-    this.schedulesService.GetRecipesByUser(new Date(2021, 11, 1, 0, 0, 0), new Date(2022, 2, 1, 0, 0, 0)).subscribe(
+  async getOriginalData(d1?: Date, d2?: Date) {
+    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2021, 0, 1, 0, 0, 0), d2 ? d2 : addYears(new Date(), 1)).subscribe(
       (response: any) => {
         if (response.Status) {
           this.listRecipes = response.Data as Record<string, any>[];
+          if (this.scheduleObj)
+            this.scheduleObj.refreshLayout();
         }
         else
-          alert(response.Error)
+          alert(response.Error);
       })
-      // this.scheduleObj.closeQuickInfoPopup()
+    if (this.scheduleObj) {
+      this.scheduleObj.closeQuickInfoPopup();
+    }
+  }
+
+  public onActionComplete(args: ActionEventArgs) {
+    if (args.requestType === 'dateNavigate') {
+      var datesView = this.scheduleObj.getCurrentViewDates();
+      let d1: Date = datesView[0];
+      let d2: Date = datesView[datesView.length - 1];
+      this.getOriginalData(d1, d2);
+    }
   }
 
   public getDateHeaderText(value: Date): string {
@@ -122,6 +134,10 @@ export class HomeComponent implements OnInit {
     this.searchWord = "";
   }
 
+  public onCloseClick(): void {
+    this.scheduleObj.quickPopup.quickPopupHide();
+  }
+
   public showRecipesPopup(date?: Date) {
     if (date)
       this.currentDay = date;
@@ -191,16 +207,14 @@ export class HomeComponent implements OnInit {
   //   console.log(id + " edit")
   // }
 
-  async delete(id?: number) {
+  public delete(id?: number) {
     this.schedulesService.RemoveSchedules(id).subscribe(
       (response: any) => {
         if (response.Status) {
           this.getOriginalData();
-          this.scheduleObj.refreshTemplates();
         }
         else
           alert(response.Error)
       })
-    this.scheduleObj.closeQuickInfoPopup();
   }
 }
