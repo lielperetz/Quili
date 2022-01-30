@@ -73,7 +73,6 @@ namespace finalProject.Controllers
             }
             catch (Exception ex)
             {
-
                 return Json(new ReturnObject() { Status = false, Error = ex.ToString() });
             }
         }

@@ -1,7 +1,7 @@
 
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import {
-  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs
+  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs, PopupCloseEventArgs
 } from '@syncfusion/ej2-angular-schedule';
 import { closest, isNullOrUndefined, Internationalization } from '@syncfusion/ej2-base';
 import { RecipesService } from '../services/recipes.service';
@@ -38,11 +38,10 @@ export class HomeComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    
+
   }
 
- async getOriginalData() {
-    console.log("getOriginalData")
+  async getOriginalData() {
     this.schedulesService.GetRecipesByUser(new Date(2021, 11, 1, 0, 0, 0), new Date(2022, 2, 1, 0, 0, 0)).subscribe(
       (response: any) => {
         if (response.Status) {
@@ -51,6 +50,7 @@ export class HomeComponent implements OnInit {
         else
           alert(response.Error)
       })
+      // this.scheduleObj.closeQuickInfoPopup()
   }
 
   public getDateHeaderText(value: Date): string {
@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
     this.newRecipe.RecipeId = chosenRecipe.id;
     this.newRecipe.RecipeTitle = chosenRecipe.title;
     this.newRecipe.RecipeImage = chosenRecipe.image;
-    this.searchWord = "";
+    // this.searchWord = "";
     this.listRecipesBySearch = null;
   }
 
@@ -116,6 +116,10 @@ export class HomeComponent implements OnInit {
     this.newRecipe = new Recipe()
     this.newRecipe.SchedulingStatuse = 1;
     this.newRecipe.Date = new Date(args.data.startTime);
+  }
+
+  public onPopupClose(args: PopupCloseEventArgs): void {
+    this.searchWord = "";
   }
 
   public showRecipesPopup(date?: Date) {
@@ -130,7 +134,7 @@ export class HomeComponent implements OnInit {
     this.showOrHidePopup = false;
   }
 
-  public buttonClickActions(e: Event, id?:number): void {
+  public buttonClickActions(e: Event, id?: number): void {
     const quickPopup: HTMLElement = closest(e.target as HTMLElement, '.e-quick-popup-wrapper') as HTMLElement;
     // const getSlotData: CallbackFunction = (): Record<string, any> => {
     //   let cellDetails: CellClickEventArgs = this.scheduleObj.getCellDetails(this.scheduleObj.getSelectedElements());
@@ -151,13 +155,11 @@ export class HomeComponent implements OnInit {
     // };
 
     if ((e.target as HTMLElement).id === 'save') {
-      // const addObj: Record<string, any> = getSlotData();
-      this.newRecipe.Date = this.newRecipe.Date ? addDays(this.newRecipe.Date, 1) : new Date();
+      this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
       this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
       this.recipeService.AddRecipe(this.newRecipe).subscribe(
         (response: any) => {
           if (response.Status) {
-           // alert(response.Data + "adding recipe is success")
             this.getOriginalData();
             this.scheduleObj.refreshTemplates();
           }
@@ -189,8 +191,16 @@ export class HomeComponent implements OnInit {
   //   console.log(id + " edit")
   // }
 
-  public delete(id?:number){
-    alert(id + " delete")
+  async delete(id?: number) {
+    this.schedulesService.RemoveSchedules(id).subscribe(
+      (response: any) => {
+        if (response.Status) {
+          this.getOriginalData();
+          this.scheduleObj.refreshTemplates();
+        }
+        else
+          alert(response.Error)
+      })
     this.scheduleObj.closeQuickInfoPopup();
   }
 }

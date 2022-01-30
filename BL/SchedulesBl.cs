@@ -23,5 +23,10 @@ namespace BL
             var l = SchedulesEntities.ConvertToListEntities(listS);
             return l;
         }
+        //הסרת רשומה
+        public static void RemoveSchedule(short id)
+        {
+            DalCode.RemoveSchedules(id);
+        }
     }
 }

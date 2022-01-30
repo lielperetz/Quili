@@ -80,9 +80,9 @@ namespace Dal
             db.SaveChanges();
         }
         //מחיקה
-        public static void RemoveSchedules()
+        public static void RemoveSchedules(short id)
         {
-            //db.RECIPES.Remove(db.RECIPES.FirstOrDefault(x => x. == ));
+            db.SCHEDULES.Remove(db.SCHEDULES.FirstOrDefault(x => x.CODE == id));
             db.SaveChanges();
         }
     }
