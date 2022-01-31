@@ -2,11 +2,11 @@
 <div class="app-content content ">
     <div class="content-wrapper">
         <div class="content-body">
-            <button (click)="goBack()"><i class="glyphicon glyphicon-arrow-right">back</i></button>
+            <button (click)="goBack()"><i class="glyphicon glyphicon-arrow-right"></i></button>
             <div>
-                <h3 style="font-weight: bold;">{{showRecipe?.title}}</h3>
+                <h2 style="font-weight: bold;">{{showRecipe?.title}}</h2>
                 <img src="{{showRecipe?.image}}">
-                <p>{{showRecipe?.summary}}</p>
+                <div [innerHTML]="showRecipe?.summary" style="float: right;"></div>
             </div>
         </div>
     </div>

@@ -17,8 +17,10 @@ export class ShowRecipeDetailsComponent implements OnInit {
       if (x["idRecipe"])
         this.recipes.GetRecipeById(x["idRecipe"]).subscribe(
           (response: any) => {
-            if (response.Status)
+            if (response.Status) {
               this.showRecipe = response.Data as Record<string, any>;
+              console.log(this.showRecipe)
+            }
             else
               alert(response.Error);
           })

@@ -8,6 +8,7 @@ import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../classes/Recipe';
 import { SchedulesService } from '../services/schedules.service';
 import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 /**
  * Sample for overview
@@ -33,7 +34,7 @@ export class HomeComponent implements OnInit {
   public showOrHidePopup: boolean = false;
   public currentDay: Date;
 
-  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService) {
+  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService, public router:Router) {
     this.getOriginalData();
   }
 
@@ -49,7 +50,7 @@ export class HomeComponent implements OnInit {
             this.scheduleObj.refreshLayout();
         }
         else
-          alert(response.Error);
+          this.router.navigate(['/'])
       })
     if (this.scheduleObj) {
       this.scheduleObj.closeQuickInfoPopup();
