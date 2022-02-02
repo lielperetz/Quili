@@ -1,7 +1,7 @@
 
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import {
-  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs, PopupCloseEventArgs, addYears, Schedule, ActionEventArgs
+  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs, PopupCloseEventArgs, addYears, Schedule, ActionEventArgs, SelectEventArgs
 } from '@syncfusion/ej2-angular-schedule';
 import { closest, isNullOrUndefined, Internationalization } from '@syncfusion/ej2-base';
 import { RecipesService } from '../services/recipes.service';
@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   public showOrHidePopup: boolean = false;
   public currentDay: Date;
 
-  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService, public router:Router) {
+  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService, public router: Router) {
     this.getOriginalData();
   }
 
@@ -204,6 +204,18 @@ export class HomeComponent implements OnInit {
     this.scheduleObj.closeQuickInfoPopup();
   }
 
+  public onSelect(args: SelectEventArgs) {
+    if (args.requestType === 'cellSelect') {
+      let date1: Date = (args.data as Record<string, any>).StartTime as Date;
+      let date2: Date = (args.data as Record<string, any>).EndTime as Date;
+      if (addDays(date1, 1) != date2)
+        this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
+    }
+  }
+
+  public dragRecipe(event: any) {
+    console.log(event);
+  }
   // public edit(id?:number){
   //   console.log(id + " edit")
   // }

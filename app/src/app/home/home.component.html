@@ -8,13 +8,13 @@
             <div class="control-section">
               <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
                 height='650px' (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
-                (actionComplete)="onActionComplete($event)">
+                (actionComplete)="onActionComplete($event)" (select)="onSelect($event)">
                 <ng-template #dateHeaderTemplate let-data>
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
                 <ng-template #cellTemplate let-data>
                   <div class="templatewrap" style="position: absolute; height: 70px;">
-                    <div *ngIf="getRecipesForDay(data.date) as variable">
+                    <div *ngIf="getRecipesForDay(data.date) as variable" (drag)="dragRecipe($event)" draggable="true">
                       <div style="position: relative; height: 100%; margin: 2px;">
                         <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}"
                           style="border: none; height: 100%;">
@@ -46,9 +46,9 @@
                     <div class="quick-info-header-content" [ngStyle]="getHeaderStyles(data)">
                       <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
                     </div>
-                    <!-- <div title="Close">
-                      <button (click)="onCloseClick($event)" style="border-radius: ;"></button>
-                    </div> -->
+                    <div class="e-header-icon-wrapper">
+                      <button class="e-close" title="CLOSE"></button>
+                  </div>
                   </div>
                 </ng-template>
                 <ng-template #quickInfoTemplatesContent let-data>
@@ -95,7 +95,7 @@
                           <option value="1">Never</option>
                           <option value="2">Weekly</option>
                           <option value="3">Monthly</option>
-                          <option value="4">Yearly</option>
+                          <!-- <option value="4">Yearly</option> -->
                         </select>
                       </div>
                     </div>
