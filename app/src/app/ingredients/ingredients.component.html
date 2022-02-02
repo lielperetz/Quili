@@ -6,9 +6,15 @@
 
       <ul class="list-group" *ngFor="let item of viewData;">
         <li class="list-group-item list-group-item-action list-group-item-light row">
-          <div class="col-sm-4 cl">{{item.name}} </div>
-          <div class="col-sm-4 cl">{{item.amount}} {{item.unit}}</div>
-          <div class="col-sm-4 cl">
+          <input class="cl" type="checkbox" [value]="item.code" (change)="onCheckboxChange($event)" />
+
+          <div *ngIf="item.checkbox" style="text-decoration-line:line-through" class="col-sm-4 cl">{{item.name}} </div>
+          <div *ngIf="item.checkbox" style="text-decoration-line:line-through" class="col-sm-4 cl">{{item.amount}}
+            {{item.unit}}</div>
+          <div *ngIf="item.checkbox==false" class="col-sm-4 cl">{{item.name}} </div>
+          <div *ngIf="item.checkbox==false" class="col-sm-4 cl">{{item.amount}} {{item.unit}}</div>
+
+          <div class="col-sm-3 cl">
             <div *ngFor="let r of item.recipes; index as i" (click)="OpenClose(item.code)" type="button">
               <u *ngIf="i==0" style="margin: 5px;"> recipes </u>
               <p style="margin: 0px;" *ngIf="item.show"> {{r}}</p>

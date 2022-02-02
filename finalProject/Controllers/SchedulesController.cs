@@ -57,27 +57,11 @@ namespace finalProject.Controllers
             {
                 List<SchedulesEntities> Schedules = SchedulesBl.GetSchedulesByRange(d1, d2, mail);
                 List<ProductsEntities> list = new List<ProductsEntities>();
-                //bool flag = false;
+
                 foreach (var s in Schedules)
                 {
                     foreach (var p in ProductsController.GetRecipeProducts(s.RecipeCode))
                     {
-                        //flag = false;
-                        //for(int i = 0; i < data.Count; i++) {
-                        //    if (data[i].ProductName == p.ProductName)
-                        //    {
-                        //        if (data[i].Unit == p.Unit)
-                        //        {
-                        //            data[i].Amount += p.Amount;
-                        //            data[i].Category = 1;
-                        //            flag = true;
-                        //            break;
-                        //        }
-                        //        else {//המרה של נתונים
-                        //              }
-                        //    }
-                        //}
-                        //if(!flag)
                         list.Add(p);
                     }
                 }

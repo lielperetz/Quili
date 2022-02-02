@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { addDays } from '@syncfusion/ej2-angular-schedule';
 import { Product } from '../classes/product';
 import { RecipesService } from '../services/recipes.service';
 import { SchedulesService } from '../services/schedules.service';
@@ -18,7 +19,7 @@ export class IngredientsComponent implements OnInit {
   viewData = []
 
   startDate: Date = new Date(Date.now())
-  endDate: Date = new Date(Date.now())
+  endDate: Date = new Date(addDays(this.startDate, 7))
 
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute) { }
   ngOnInit(): void {
@@ -59,7 +60,8 @@ export class IngredientsComponent implements OnInit {
           amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
           unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
           recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
-          show: false
+          show: false,
+          checkbox: false
         })
     })
   }
@@ -73,5 +75,12 @@ export class IngredientsComponent implements OnInit {
   }
   OpenClose(i) {
     this.viewData.map(x => { if (x.code == i) x.show = !x.show })
+  }
+  onCheckboxChange(e) {
+    var c
+    this.viewData.map(x => {
+      if (x.code == e.target.value) { x.checkbox = !x.checkbox; c = x.checkbox; }
+    })
+    console.log(c)
   }
 }
