@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
     this.listRecipesBySearch = null;
   }
 
-  public onPopupOpen(args: PopupOpenEventArgs): void {
+  public onPopupOpen(args: any): void {
     if (args.type === 'Editor' || this.showOrHidePopup)
       args.cancel = true;
     this.listRecipesBySearch = null;
@@ -208,7 +208,7 @@ export class HomeComponent implements OnInit {
     if (args.requestType === 'cellSelect') {
       let date1: Date = (args.data as Record<string, any>).StartTime as Date;
       let date2: Date = (args.data as Record<string, any>).EndTime as Date;
-      if (addDays(date1, 1) != date2)
+      if (date1.getDate() + 1 != date2.getDate())
         this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
     }
   }
@@ -216,6 +216,11 @@ export class HomeComponent implements OnInit {
   public dragRecipe(event: any) {
     console.log(event);
   }
+
+  public dropRecipe(event: any) {
+    console.log(event + " drop");
+  }
+
   // public edit(id?:number){
   //   console.log(id + " edit")
   // }

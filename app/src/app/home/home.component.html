@@ -13,7 +13,7 @@
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
                 <ng-template #cellTemplate let-data>
-                  <div class="templatewrap" style="position: absolute; height: 70px;">
+                  <div class="templatewrap" style="position: absolute; height: 70px;" (drop)="dropRecipe($event)">
                     <div *ngIf="getRecipesForDay(data.date) as variable" (drag)="dragRecipe($event)" draggable="true">
                       <div style="position: relative; height: 100%; margin: 2px;">
                         <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}"
