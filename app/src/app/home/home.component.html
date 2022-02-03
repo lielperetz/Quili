@@ -13,7 +13,7 @@
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
                 <ng-template #cellTemplate let-data>
-                  <div class="templatewrap" style="position: absolute; height: 70px;" (drop)="dropRecipe($event)">
+                  <div class="templatewrap" style="position: absolute; height: 80px;" (drop)="dropRecipe($event)">
                     <div *ngIf="getRecipesForDay(data.date) as variable" (drag)="dragRecipe($event)" draggable="true">
                       <div style="position: relative; height: 100%; margin: 2px;">
                         <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}"
@@ -32,10 +32,12 @@
                             style="border: none;"><span class="glyphicon">&#xe020;</span></button>
                         </div>
                       </div>
-                      <button *ngIf="numberRecipesForDay>1" id="more" (click)="showRecipesPopup(data.date)"
+                      <button *ngIf="numberRecipesForDay>1" id="more" (click)="showRecipesPopup(data.date, $event)"
                         style="border: none; background-color: inherit; position: absolute;  bottom: 0px;">+
                         {{numberRecipesForDay - 1}} more</button>
                     </div>
+                    <button id="addButton" style="border: none; background-color: inherit; position: absolute; bottom: 0px; left: 145px;">+
+                      </button>
                   </div>
                 </ng-template>
                 <e-views>
@@ -120,7 +122,7 @@
   </div>
 </div>
 <div *ngIf="showOrHidePopup" class="e-more-popup-wrapper e-lib e-popup e-control e-popup-open"
-  style="z-index: 2; left: 600px; top: 269px;">
+  [ngStyle]="styleMorePopup">
   <div class="e-more-event-popup">
     <div class="e-more-event-header">
       <div class="e-more-event-close e-control e-btn e-lib e-round e-icon-btn" title="Close" tabindex="0"
@@ -140,8 +142,6 @@
             overflow: hidden;text-overflow: ellipsis;">{{item.RecipeTitle}}</p>
       </button>
       <div style="position: absolute; right: 15px; bottom: 3px; font: inherit;">
-        <!-- <button ejs-button id="edit" cssClass="e-flat" (click)="edit(item.Code)" style="border: none;"><span
-            class="glyphicon">&#xe065;</span></button> -->
         <button ejs-button id="delete" cssClass="e-flat" (click)="delete(item.Code)" style="border: none;"><span
             class="glyphicon">&#xe020;</span></button>
       </div>

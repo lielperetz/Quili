@@ -28,7 +28,7 @@
     white-space: nowrap;
     overflow: hidden;
   } */
-  
+
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {
   content: "\e846";

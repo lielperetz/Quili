@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
     this.listRecipesBySearch = null;
   }
 
-  public onPopupOpen(args: any): void {
+  public onPopupOpen(args: PopupOpenEventArgs): void {
     if (args.type === 'Editor' || this.showOrHidePopup)
       args.cancel = true;
     this.listRecipesBySearch = null;
@@ -139,12 +139,26 @@ export class HomeComponent implements OnInit {
     this.scheduleObj.quickPopup.quickPopupHide();
   }
 
-  public showRecipesPopup(date?: Date) {
+  public styleMorePopup = {
+    left: '',
+    top: '',
+    position: 'absolute',
+    zIndex: 2
+  }
+  public x: number;
+  public y: number;
+  public showRecipesPopup(date?: Date, e?: any) {
+    console.log(e)
+    this.x = e.x
+    this.y = e.y
+    console.log(this.x + " " + this.y)
+    this.styleMorePopup.left = this.x.toString() + 'px';
+    this.styleMorePopup.top = this.y.toString() + 'px';
+    console.log((document.querySelector('.e-more-popup-wrapper') as HTMLElement).style);
     if (date)
       this.currentDay = date;
     this.showOrHidePopup = true;
     this.scheduleObj.closeQuickInfoPopup()
-
   }
 
   public hideRecipesPopup() {
@@ -208,8 +222,7 @@ export class HomeComponent implements OnInit {
     if (args.requestType === 'cellSelect') {
       let date1: Date = (args.data as Record<string, any>).StartTime as Date;
       let date2: Date = (args.data as Record<string, any>).EndTime as Date;
-      if (date1.getDate() + 1 != date2.getDate())
-        this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
+      this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
     }
   }
 
