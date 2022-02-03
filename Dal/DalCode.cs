@@ -45,9 +45,9 @@ namespace Dal
             db.SaveChanges();
         }
         //מחיקה
-        public static void RemoveProduct()
+        public static void RemoveProducts(short code)
         {
-            //db.RECIPES.Remove(db.PRODUCTS.FirstOrDefault(x => x. == ));
+            db.PRODUCTS.Remove(db.PRODUCTS.FirstOrDefault(x => x.CODE == code));
             db.SaveChanges();
         }
 
@@ -62,9 +62,9 @@ namespace Dal
             db.SaveChanges();
         }
         //מחיקה
-        public static void RemoveRecipe()
+        public static void RemoveRecipe(short id)
         {
-            //db.RECIPES.Remove(db.RECIPES.FirstOrDefault(x => x. == ));
+            db.RECIPES.Remove(db.RECIPES.FirstOrDefault(x => x.CODE == id));
             db.SaveChanges();
         }
 

@@ -26,7 +26,20 @@ namespace BL
         //הסרת רשומה
         public static void RemoveSchedule(short id)
         {
-            DalCode.RemoveSchedules(id);
+            short idR = DalCode.GetSchedules().FirstOrDefault(x => x.CODE == id).RECIPE_CODE;
+            bool hasS = DalCode.GetSchedules().Any(x => x.RECIPE_CODE == idR && x.CODE != id);
+            if (!hasS)
+            {
+                var listP = DalCode.GetProduct().Where(x => x.RECIPE_CODE == idR);
+                foreach(var item in listP)
+                {
+                    DalCode.RemoveProducts(item.CODE);
+                }
+                DalCode.RemoveSchedules(id);
+                DalCode.RemoveRecipe(idR);
+            }
+            else
+                DalCode.RemoveSchedules(id);
         }
     }
 }
