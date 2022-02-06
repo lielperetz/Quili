@@ -1,33 +1,3 @@
-/* .e-schedule .e-month-view .e-work-cells {
-    position: relative;
-  }
-  
-  .e-schedule .templatewrap {
-    text-align: center;
-    position: absolute;
-    width: 100%;
-  }
-  
-  .e-schedule .templatewrap img {
-    width: 20px;
-    height: 20px;
-  }
-  
-  .e-schedule .caption {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-  } */
-  /* popup add recipe */
-  /* <div class="e-quick-popup-wrapper e-lib e-popup e-control e-popup-close" style="z-index: 3; left: 0px; top: 0px;"></div> */
-  /* p {
-    width: 100px;
-    border: 1px solid;
-    padding: 2px 5px;
-  
-    white-space: nowrap;
-    overflow: hidden;
-  } */
 
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {
@@ -38,6 +8,10 @@
 .tailwind.e-bigger .e-settings,
 .tailwind-dark.e-bigger .e-settings {
   font-size: 16px !important;
+}
+
+.schedule-overview {
+  overflow: hidden;
 }
 
 .material .schedule-overview .overview-toolbar .e-toolbar {

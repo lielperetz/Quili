@@ -33,6 +33,7 @@ namespace finalProject.Controllers
             }
             try
             {
+                r.Date = r.Date.ToLocalTime();
                 RecipesBl.AddRecipe(r);
                 var rCode = r.Code;
                 SchedulesEntities s = new SchedulesEntities() { RecipeCode = rCode, Mail = r.Mail, RecipeTitle = r.RecipeTitle, RecipeImage = r.RecipeImage, RecipeDate = r.Date, SchedulingStatuse = r.SchedulingStatuse, Amount = 1, RecipeId = r.RecipeId };

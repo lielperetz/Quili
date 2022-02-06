@@ -145,15 +145,9 @@ export class HomeComponent implements OnInit {
     position: 'absolute',
     zIndex: 2
   }
-  public x: number;
-  public y: number;
   public showRecipesPopup(date?: Date, e?: any) {
-    console.log(e)
-    this.x = e.x
-    this.y = e.y
-    console.log(this.x + " " + this.y)
-    this.styleMorePopup.left = this.x.toString() + 'px';
-    this.styleMorePopup.top = this.y.toString() + 'px';
+    this.styleMorePopup.left = e.x.toString() + 'px';
+    this.styleMorePopup.top = e.y.toString() + 'px';
     console.log((document.querySelector('.e-more-popup-wrapper') as HTMLElement).style);
     if (date)
       this.currentDay = date;
@@ -184,7 +178,8 @@ export class HomeComponent implements OnInit {
     //   // addObj.CalendarId = ((quickPopup.querySelector('#eventType') as EJ2Instance).ej2_instances[0] as DropDownListComponent).value;
     //   return addObj;
     // };
-
+    if ((e.target as HTMLElement).id === 'addButton')
+      this.scheduleObj.showQuickInfo = true;
     if ((e.target as HTMLElement).id === 'save') {
       this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
       this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
@@ -198,23 +193,33 @@ export class HomeComponent implements OnInit {
             alert(response.Error)
         })
       this.newRecipe = new Recipe();
-      // } else if ((e.target as HTMLElement).id === 'delete') {
-      //   const eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
-      //   let currentAction: CurrentAction;
-      //   if (eventDetails.RecurrenceRule) {
-      //     currentAction = 'DeleteOccurrence';
-      //   }
-      //   this.scheduleObj.deleteEvent(eventDetails, currentAction);
-      // } else {
-      //   const isCellPopup: boolean = quickPopup.firstElementChild.classList.contains('e-cell-popup');
-      //   const eventDetails: Record<string, any> = isCellPopup ? getSlotData() :
-      //     this.scheduleObj.activeEventData.event as Record<string, any>;
-      //   let currentAction: CurrentAction = isCellPopup ? 'Add' : 'Save';
-      //   if (eventDetails.RecurrenceRule) {
-      //     currentAction = 'EditOccurrence';
-      //   }
-      //   this.scheduleObj.openEditor(eventDetails, currentAction, true);
+    } else if ((e.target as HTMLElement).id === 'delete') {
+      console.log(e)
+      // this.schedulesService.RemoveSchedules(id).subscribe(
+      //   (response: any) => {
+      //     if (response.Status) {
+      //       this.getOriginalData();
+      //     }
+      //     else
+      //       alert(response.Error)
+      //   })
     }
+
+    //   const eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
+    //   let currentAction: CurrentAction;
+    //   if (eventDetails.RecurrenceRule) {
+    //     currentAction = 'DeleteOccurrence';
+    //   }
+    //   this.scheduleObj.deleteEvent(eventDetails, currentAction);
+    // } else {
+    //   const isCellPopup: boolean = quickPopup.firstElementChild.classList.contains('e-cell-popup');
+    //   const eventDetails: Record<string, any> = isCellPopup ? getSlotData() :
+    //     this.scheduleObj.activeEventData.event as Record<string, any>;
+    //   let currentAction: CurrentAction = isCellPopup ? 'Add' : 'Save';
+    //   if (eventDetails.RecurrenceRule) {
+    //     currentAction = 'EditOccurrence';
+    //   }
+    //   this.scheduleObj.openEditor(eventDetails, currentAction, true);
     this.scheduleObj.closeQuickInfoPopup();
   }
 
@@ -238,7 +243,10 @@ export class HomeComponent implements OnInit {
   //   console.log(id + " edit")
   // }
 
+  public deletePopup: boolean = false;
   public delete(id?: number) {
+    // this.deletePopup = true;
+    this.scheduleObj.showQuickInfo = false;
     this.schedulesService.RemoveSchedules(id).subscribe(
       (response: any) => {
         if (response.Status) {
