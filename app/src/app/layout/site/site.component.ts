@@ -12,11 +12,12 @@ export class SiteComponent implements OnInit {
 
   public user: string;
 
-  constructor(private cookies: CookieService, public router: Router) { }
+  constructor(private cookies: CookieService, public router: Router) { 
+    this.user = this.cookies.get('Token');
+  }
 
   ngOnInit(): void {
     feather.replace();
-    this.user = this.cookies.get('Token');
   }
 
   public logOut(){
