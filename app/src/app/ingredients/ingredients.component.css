@@ -11,3 +11,11 @@ input{
   padding: 8px;
   margin: 8px;
 }
+.recipesB{
+  border: none;
+  border-bottom: 1px;
+  background-color: whitesmoke;
+}
+li{
+  background-color: whitesmoke;
+}
