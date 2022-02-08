@@ -13,7 +13,7 @@ import { SchedulesService } from '../services/schedules.service';
 })
 export class IngredientsComponent implements OnInit {
 
-  savedRecipes = []
+  // savedRecipes = []
   schedulesRecipes = []
   viewRecipes = []
 
@@ -34,29 +34,23 @@ export class IngredientsComponent implements OnInit {
     this.logPage()
   }
   logPage() {
+    //שליפת מוצרים לפי תאריכים
     this.schedulesService.GetProductsByRange(this.startDate, this.endDate).subscribe(
       (data: any) => {
         if (data.Status) this.listPro = data.Data
         this.groupedBy()
       });
-    this.recipesService.GetSavedRecipe().subscribe(
-      (data: any) => {
-        this.savedRecipes = data.Data
-      });
+    //שליפת מתכונים לפי טווח תאריכים
+    // this.recipesService.GetSavedRecipe().subscribe(
+    //   (data: any) => {
+    //     this.savedRecipes = data.Data
+    //   });
     this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
       (data: any) => {
         if (data.Status) this.schedulesRecipes = data.Data
       });
     this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
   }
-  vr() {
-    this.viewRecipes = [];
-    this.schedulesRecipes.map(x => {
-      if (this.isE(this.viewRecipes, x.RecipeTitle) == false)
-        this.viewRecipes.push(x)
-    });
-  }
-
   groupedBy() {
     var groupedByProductName = this.listPro.reduce(function (rv, x) {
       (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
@@ -67,6 +61,7 @@ export class IngredientsComponent implements OnInit {
         {
           name: x,
           code: (groupedByProductName[x].map(x => x.Code)),
+          img: "https://spoonacular.com/cdn/ingredients_500x500/" + (groupedByProductName[x].map(x => x.ProductImage)),
           amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
           unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
           recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
@@ -78,16 +73,16 @@ export class IngredientsComponent implements OnInit {
   RecipeIdToRecipeName(id) {
     console.log(id)
     var res
-    this.savedRecipes.map(r => {
+    this.schedulesRecipes.map(r => {
       if (r.Code == id) { res = r.RecipeTitle }
     })
     return res
   }
-  OpenClose(e) {
+  OpenCloseRecipes(e) {
     console.log(e)
-    this.viewData.map(x => { if (x.code == e.target.value) x.show = !x.show })
+    this.viewData.map(x => { if (x.code == e.target.value) x.showRecipes = !x.showRecipes })
   }
-  onCheckboxChange(e) {
+  ProductCheckbox(e) {
     this.viewData.map(x => {
       if (x.code == e.target.value) { x.checkbox = !x.checkbox; }
     })
@@ -95,5 +90,41 @@ export class IngredientsComponent implements OnInit {
   isE(listRecipes, recipeTitle): boolean {
     listRecipes.map(x => { if (x.RecipeTitle == recipeTitle) return true })
     return false
+  }
+  vr() {
+    this.viewRecipes = []
+    this.schedulesRecipes.map(x => {
+      if (this.isE(this.viewRecipes, x.RecipeTitle) == false)
+        this.viewRecipes.push(
+          {
+            code: x.RecipeId,
+            name: x.RecipeTitle,
+            checkbox: false
+          })
+    })
+
+    // this.listPro.map(x => {
+    //   this.viewRecipes.map(y => { if (y.code == x.RecipeCode) { this.listPro } })
+    // })
+  }
+  RecipesCheckbox(e) {
+    this.viewRecipes.map(x => {
+      if (x.code == e.target.value) {
+        x.checkbox = !x.checkbox;
+        console.log(x.checkbox)
+      }
+    })
+    for (var i = 0; i < this.listPro.length; i++) {
+      this.viewRecipes.map(x => {
+        if ((x.code == this.listPro[i].RecipeCode) && (!x.checkbox))
+          this.listPro.splice(i, 1)
+      })
+      this.logPage()
+      // for (var j = 0; i < this.viewRecipes.length; j++) {
+      //   if((this.listPro[i].RecipeCode==this.viewRecipes[j].code)&&(!this.viewRecipes[j].checkbox)){
+      //     this.listPro.splice(i,1)
+      //   }
+      // }
+    }
   }
 }

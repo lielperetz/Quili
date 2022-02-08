@@ -1,12 +1,12 @@
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-body">
+      <button (click)="vr()"> more </button>
       <div style="background-color: pink;">
         <ul class="list-group" *ngFor="let item of viewRecipes;">
           <li class="list-group-item list-group-item-action list-group-item-light">
-            <input class="cl" type="checkbox" [value]="item.code"  />
-            <!-- (change)="onCheckboxChange($event)"
-            {{item.RecipeTitle}} -->
+            <input class="cl" type="checkbox" [value]="item.code" (change)="RecipesCheckbox($event)" />
+            {{item.name}}
           </li>
         </ul>
       </div>
@@ -15,14 +15,16 @@
 
       <ul class="list-group" *ngFor="let item of viewData;">
         <li *ngIf="item.checkbox==false" class="list-group-item list-group-item-action list-group-item-light row">
-          <input class="cl" type="checkbox" [value]="item.code" (change)="onCheckboxChange($event)" />
+          <input class="cl" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
+
+          <img class="cl" src="{{item.img}}" />
 
           <div class="col-sm-4 cl">{{item.name}} </div>
           <div class="col-sm-4 cl">{{item.amount}} {{item.unit}}</div>
 
           <table class="col-sm-2 cl">
             <tr>
-              <button class="recipesB" [value]="item.code" (click)="OpenClose($event)">recipes</button>
+              <button class="recipesB" [value]="item.code" (click)="OpenCloseRecipes($event)">recipes</button>
             </tr>
             <tr>
               <div *ngFor="let r of item.recipes; index as i">
@@ -33,7 +35,9 @@
         </li>
         <li *ngIf="item.checkbox" style="background-color: lightgrey;"
           class="list-group-item list-group-item-action list-group-item-light row">
-          <input class="cl" type="checkbox" [value]="item.code" (change)="onCheckboxChange($event)" checked />
+          <input class="cl" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" checked />
+
+          <img class="cl" src="{{item.img}}" />
 
           <div style="text-decoration-line:line-through" class="col-sm-4 cl">{{item.name}} </div>
           <div style="text-decoration-line:line-through" class="col-sm-4 cl">{{item.amount}}
@@ -41,7 +45,8 @@
 
           <table class="col-sm-2 cl">
             <tr>
-              <button class="recipesB" [value]="item.code" (click)="OpenClose($event)" style="background-color: lightgrey;">recipes</button>
+              <button class="recipesB" [value]="item.code" (click)="OpenCloseRecipes($event)"
+                style="background-color: lightgrey;">recipes</button>
             </tr>
             <tr>
               <div *ngFor="let r of item.recipes; index as i">
