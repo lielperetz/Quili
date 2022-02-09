@@ -34,15 +34,19 @@ export class HomeComponent implements OnInit {
   public showOrHidePopup: boolean = false;
   public currentDay: Date;
 
-  constructor(private recipeService: RecipesService, private schedulesService: SchedulesService, public router: Router) {
+  constructor(
+    private recipeService: RecipesService,
+    private schedulesService: SchedulesService, 
+    public router: Router
+    ) {
     this.getOriginalData();
   }
 
   public ngOnInit(): void {
   }
 
-  async getOriginalData(d1?: Date, d2?: Date) {
-    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2021, 0, 1, 0, 0, 0), d2 ? d2 : addYears(new Date(), 1)).subscribe(
+  async getOriginalData(d1?: Date, d2?: Date) :Promise<void> {
+    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2021, 0, 1), d2 ? d2 : addYears(new Date(), 1)).subscribe(
       (response: any) => {
         if (response.Status) {
           this.listRecipes = response.Data as Record<string, any>[];
@@ -53,11 +57,12 @@ export class HomeComponent implements OnInit {
           this.router.navigate(['/'])
       })
     if (this.scheduleObj) {
+      this.scheduleObj.showQuickInfo = true;
       this.scheduleObj.closeQuickInfoPopup();
     }
   }
 
-  public onActionComplete(args: ActionEventArgs) {
+  public onActionComplete(args: ActionEventArgs) :void {
     if (args.requestType === 'dateNavigate') {
       var datesView = this.scheduleObj.getCurrentViewDates();
       let d1: Date = datesView[0];
@@ -98,7 +103,7 @@ export class HomeComponent implements OnInit {
     return null;
   }
 
-  public searchRecipe(e) {
+  public searchRecipe(e) :void {
     this.recipeService.SearchRecipe(e).subscribe(
       (response: any) => {
         if (response.Status) {
@@ -112,12 +117,11 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  public chooseRecipe(id: string) {
+  public chooseRecipe(id: string) :void {
     let chosenRecipe = this.listRecipesBySearch?.find((x: any) => x.id === id) as Record<string, any>;
     this.newRecipe.RecipeId = chosenRecipe.id;
     this.newRecipe.RecipeTitle = chosenRecipe.title;
     this.newRecipe.RecipeImage = chosenRecipe.image;
-    // this.searchWord = "";
     this.listRecipesBySearch = null;
   }
 
@@ -178,8 +182,6 @@ export class HomeComponent implements OnInit {
     //   // addObj.CalendarId = ((quickPopup.querySelector('#eventType') as EJ2Instance).ej2_instances[0] as DropDownListComponent).value;
     //   return addObj;
     // };
-    if ((e.target as HTMLElement).id === 'addButton')
-      this.scheduleObj.showQuickInfo = true;
     if ((e.target as HTMLElement).id === 'save') {
       this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
       this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
@@ -256,4 +258,14 @@ export class HomeComponent implements OnInit {
           alert(response.Error)
       })
   }
+
+  modalService: any;
+
+    // modal Open Backdrop Disabled
+    modalOpenBD(modalBD) {
+      this.modalService.open(modalBD, {
+        backdrop: false,
+        centered: true
+      });
+    }
 }

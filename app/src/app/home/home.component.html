@@ -13,56 +13,46 @@
                   <div class="date-text">{{getDateHeaderText(data.date)}}</div>
                 </ng-template>
                 <ng-template #cellTemplate let-data>
-                  <!-- <div class="templatewrap" style="position: absolute; height: 80px;" (drop)="dropRecipe($event)">
-                    <div *ngIf="getRecipesForDay(data.date) as variable" (drag)="dragRecipe($event)" draggable="true">
-                      <div style="position: relative; height: 100%; margin: 2px;">
-                        <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}"
-                          style="border: none; height: 100%;">
-                          <img src="{{recipesForDay[0].RecipeImage}}" class="img-responsive" alt="image"
-                            style="width: 40px; height: 40px; float: left; margin: 2px 0px;">
-                          <p style="font-weight: bold; width: 113px; float: left;
-                          white-space: nowrap;
-                          overflow: hidden;text-overflow: ellipsis;">
-                            {{recipesForDay[0].RecipeTitle}}</p>
-                        </button>
-                        <div style="position: absolute; right: 0; bottom: 5px; color: inherit;">
-                          <button ejs-button id="delete" cssClass="e-flat" (click)="delete(variable[0].Code)"
-                            style="border: none;"><span class="glyphicon">&#xe020;</span></button>
-                        </div>
-                      </div>
-                      <button *ngIf="numberRecipesForDay>1" id="more" (click)="showRecipesPopup(data.date, $event)"
-                        style="border: none; background-color: inherit; position: absolute;  bottom: 0px;">+
-                        {{numberRecipesForDay - 1}} more</button>
-                    </div>
-                    <button ejs-button id="addButton" (click)="buttonClickActions($event)"
-                      style="border: none; background-color: inherit; position: absolute; bottom: 0px; margin-left: 132px;">+
-                    </button>
-                  </div> -->
-                  <div class="templatewrap">
-                    <div *ngIf="getRecipesForDay(data.date) as variable" style="margin: 3px;">
-                      <button routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}" style="border: none;">
-                        <img class="col-sm-4 col-12" src="{{recipesForDay[0].RecipeImage}}" alt="image"
-                          style="float: left; padding: 0px;">
-                        <div class="col-sm-8" style="float: left; padding: 1px;">
-                          <p style="font-weight: bold; 
-                          white-space: nowrap; overflow: hidden;
-                          text-overflow: ellipsis;">
-                            {{recipesForDay[0].RecipeTitle}}</p>
-                        </div>
-                      </button>
-                      <button class="col-sm-3 col-6" ejs-button id="delete" cssClass="e-flat"
-                        (click)="delete(variable[0].Code)"
-                        style="border: none; float: right; color: inherit; z-index: 2;"><span
+                  <div class="e-work-cells" style="background-color: inherit; width: auto; border: none;">
+                    <div class="div-recipe" *ngIf="getRecipesForDay(data.date) as variable">
+                      <a routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}" style="border: none;">
+                        <img class="img" src="{{recipesForDay[0].RecipeImage}}" alt="image">
+                        <p class="p-title">{{recipesForDay[0].RecipeTitle}}</p>
+                      </a>
+                      <button class="bd" id="delete" (click)="delete(variable[0].Code)"><span
                           class="glyphicon">&#xe020;</span></button>
-                      <button *ngIf="numberRecipesForDay>1" id="more" (click)="showRecipesPopup(data.date, $event)"
-                        style="border: none; background-color: inherit; position: absolute;  bottom: 0px;">+
-                        {{numberRecipesForDay - 1}} more</button>
+                      <!-- Button trigger modal -->
+                      <!-- <button type="button" class="btn btn-outline-primary bd" id="delete"
+                        (click)="modalOpenBD(modalBD)" rippleEffect>
+                        <span class="glyphicon">&#xe020;</span></button> -->
+                      <button *ngIf="numberRecipesForDay>1" id="more"
+                        (click)="showRecipesPopup(data.date, $event)">+{{numberRecipesForDay - 1}} <span
+                          id="span-more">more</span></button>
                     </div>
-                    <button ejs-button id="addButton" (click)="buttonClickActions($event)"
-                      style="border: none; background-color: inherit; position: absolute; margin-left: 132px;">+
+                  </div>
+                  <button ejs-button id="addButton">+</button>
+                </ng-template>
+                <!-- Modal -->
+                <!-- <ng-template #modalBD let-modal>
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel4">Backdrop Disabled</h4>
+                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                </ng-template>
+                  <div class="modal-body" tabindex="0" ngbAutofocus>
+                    <p>
+                      Candy oat cake topping topping chocolate cake. Icing pudding jelly beans I love chocolate carrot
+                      cake wafer candy canes. Biscuit croissant fruitcake bonbon soufflé.
+                    </p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
+                      Accept
+                    </button>
+                  </div>
+                </ng-template> -->
+                <!-- / Modal -->
                 <e-views>
                   <e-view option="Month"></e-view>
                 </e-views>
@@ -170,7 +160,6 @@
         <button ejs-button id="delete" cssClass="e-flat" (click)="delete(item.Code)" style="border: none;"><span
             class="glyphicon">&#xe020;</span></button>
       </div>
-
     </div>
   </div>
 </div>

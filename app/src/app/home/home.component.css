@@ -1,3 +1,98 @@
+* {
+  box-sizing: border-box;
+}
+
+.div-recipe {
+  margin: 3px;
+  background-color: 1px solid blue;
+}
+
+.img {
+  float: left;
+  width: 25%;
+  padding: 1px;
+  display: flex;
+}
+
+.p-title {
+  width: 55%;
+  padding: 1px; 
+  margin-top: 5px; 
+  color: black; 
+  float: left; 
+  overflow-wrap: break-word; 
+  font-weight: bold;
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  overflow: hidden;
+}
+
+.bd {
+  width: 20%;
+  border: none; 
+  float: left;
+  background-color: inherit;
+  padding: 8px 0px;
+}
+
+#more {
+  background-color: inherit;
+  border: none;
+  float: left;
+}
+
+#more:hover {
+  text-decoration: underline;
+}
+
+#addButton {
+   display: none;
+}
+
+.e-work-cells:hover #addButton {
+  display: flex;
+  float: right;
+  width: 100%;
+  margin-bottom: 0px;
+}
+
+/* On screens that are 992px wide or less */
+@media screen and (max-width: 992px) {
+  .img {
+    display: none;
+  }
+  .p-title {
+    width: 80%;
+    margin: 0px; 
+  }
+  .bd {
+    width: 20%;
+  }
+  #span-more {
+    display: none;
+  }
+}
+
+/* On screens that are 600px wide or less */
+@media screen and (max-width: 600px) {
+  .img {
+    display: none;
+  }
+  .p-title {
+    width: 100%;
+    padding: 1px;
+  }
+  .bd {
+    width: 25%;
+    float: right;
+    padding: 0px;
+  }
+  #more {
+    width: 25%;
+    float: left;
+    font-size: small;
+  }
+}
 
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {
