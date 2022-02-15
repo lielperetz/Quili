@@ -48,10 +48,8 @@
               <button class="recipesB" [value]="item.code" (click)="OpenCloseRecipes($event)"
                 style="background-color: lightgrey;">recipes</button>
             </tr>
-            <tr>
-              <div *ngFor="let r of item.recipes; index as i">
+            <tr *ngFor="let r of item.recipes; index as i">
                 <p *ngIf="item.showRecipes"> {{r}}</p>
-              </div>
             </tr>
           </table>
         </li>

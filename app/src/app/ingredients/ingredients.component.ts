@@ -23,7 +23,9 @@ export class IngredientsComponent implements OnInit {
   startDate: Date = new Date(Date.now())
   endDate: Date = new Date(addDays(this.startDate, 7))
 
-  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) { }
+  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) {
+    this.logPage()
+  }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(x => {
       if (x["startDate"])
@@ -33,25 +35,14 @@ export class IngredientsComponent implements OnInit {
     })
     this.logPage()
   }
-  logPage() {
+  async logPage(): Promise<void> {
     //שליפת מוצרים לפי תאריכים
     this.schedulesService.GetProductsByRange(this.startDate, this.endDate).subscribe(
       (data: any) => {
         if (data.Status) this.listPro = data.Data
-        this.groupedBy()
+        // this.groupedBy()
       });
-    //שליפת מתכונים לפי טווח תאריכים
-    // this.recipesService.GetSavedRecipe().subscribe(
-    //   (data: any) => {
-    //     this.savedRecipes = data.Data
-    //   });
-    this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
-      (data: any) => {
-        if (data.Status) this.schedulesRecipes = data.Data
-      });
-    this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
-  }
-  groupedBy() {
+    // הכנסת נתונים לרשימת מוצרים ואיחוד מוצרים זהים
     var groupedByProductName = this.listPro.reduce(function (rv, x) {
       (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
       return rv;
@@ -69,7 +60,18 @@ export class IngredientsComponent implements OnInit {
           checkbox: false
         })
     })
+    //שליפת מתכונים לפי טווח תאריכים
+    // this.recipesService.GetSavedRecipe().subscribe(
+    //   (data: any) => {
+    //     this.savedRecipes = data.Data
+    //   });
+    this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
+      (data: any) => {
+        if (data.Status) this.schedulesRecipes = data.Data
+      });
+    this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
   }
+
   RecipeIdToRecipeName(id) {
     console.log(id)
     var res
@@ -128,3 +130,22 @@ export class IngredientsComponent implements OnInit {
     }
   }
 }
+// groupedBy() {
+//   var groupedByProductName = this.listPro.reduce(function (rv, x) {
+//     (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
+//     return rv;
+//   }, {});
+//   (Object.keys(groupedByProductName)).forEach(x => {
+//     this.viewData.push(
+//       {
+//         name: x,
+//         code: (groupedByProductName[x].map(x => x.Code)),
+//         img: "https://spoonacular.com/cdn/ingredients_500x500/" + (groupedByProductName[x].map(x => x.ProductImage)),
+//         amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
+//         unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
+//         recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
+//         showRecipes: false,
+//         checkbox: false
+//       })
+//   })
+// }
