@@ -1,5 +1,32 @@
+* {
+    box-sizing: border-box;
+}
+
 .bb { 
     border: none;
     margin: 5px;
-    font-size: medium;
+    font-size: large;
+}
+
+.headers {
+    width: 100%;
+    text-align: center;
+}
+
+.img {
+    width: 100%;
+    height: 300px;
+    padding: 10px 50px;
+}
+
+.ul {
+    margin: 50px 10px;
+    display: block;
+    height: 100%;
+}
+
+.credit {
+    color:lightseagreen;
+    width: 100%;
+    text-align: right;
 }

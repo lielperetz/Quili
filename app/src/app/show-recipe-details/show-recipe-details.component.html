@@ -1,13 +1,29 @@
-
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
             <button class="bb" (click)="goBack()"><i class="glyphicon glyphicon-arrow-right"></i></button>
             <div>
-                <img src="{{cardRecipe}}">
-                <!-- <h2 style="font-weight: bold;">{{showRecipe?.title}}</h2>
-                <img src="{{showRecipe?.image}}">
-                <div [innerHTML]="showRecipe?.summary" style="float: right;"></div> -->
+                <img class="img" src="{{showRecipe?.image}}">
+                <!-- <img src="{{cardRecipe}}" style="width: 300px; height: 500px;"> -->
+                <h1 class="headers">{{showRecipe?.title}}</h1>
+                <h5 class="headers">for {{showRecipe?.servings}} servings ~ ready in {{showRecipe?.readyInMinutes}}
+                    minutes</h5>
+                <!-- <div class="summary" [innerHTML]="showRecipe?.summary"></div> -->
+                <div class="ul">
+                    <div class="col-sm-4">
+                        <h3>ingredints:</h3>
+                        <ul>
+                            <li *ngFor="let item of showRecipe?.extendedIngredients">{{item.original}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-8">
+                        <h3>instructions:</h3>
+                        <ol>
+                            <li *ngFor="let item of showRecipe?.analyzedInstructions[0].steps">{{item.step}}</li>
+                        </ol>
+                    </div>
+                </div>
+                <p class="col-sm-12 credit">&#169; {{showRecipe?.creditsText}}</p>
             </div>
         </div>
     </div>
