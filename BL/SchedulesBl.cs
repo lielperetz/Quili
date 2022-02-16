@@ -24,10 +24,30 @@ namespace BL
             return l;
         }
         //הסרת רשומה
-        public static void RemoveSchedule(short id)
+        public static void RemoveSchedule(short id, int rec)
         {
             short idR = DalCode.GetSchedules().FirstOrDefault(x => x.CODE == id).RECIPE_CODE;
-            bool hasS = DalCode.GetSchedules().Any(x => x.RECIPE_CODE == idR && x.CODE != id);
+            switch (rec)
+            {
+                case 1:
+                    DalCode.RemoveSchedules(id);
+                    break;
+                case 2:
+                    var l = DalCode.GetSchedules().FindAll(x => x.RECIPE_CODE == idR);
+                    foreach (var item in l)
+                    {
+                        DalCode.RemoveSchedules(item.CODE);
+                    }
+                    break;
+                case 3:
+                    var l2 = DalCode.GetSchedules().FindAll(x => x.RECIPE_CODE == idR && x.CODE >= id);
+                    foreach (var item in l2)
+                    {
+                        DalCode.RemoveSchedules(item.CODE);
+                    }
+                    break;
+            }
+            bool hasS = DalCode.GetSchedules().Any(x => x.RECIPE_CODE == idR);
             if (!hasS)
             {
                 var listP = DalCode.GetProduct().Where(x => x.RECIPE_CODE == idR);
@@ -35,11 +55,8 @@ namespace BL
                 {
                     DalCode.RemoveProducts(item.CODE);
                 }
-                DalCode.RemoveSchedules(id);
                 DalCode.RemoveRecipe(idR);
             }
-            else
-                DalCode.RemoveSchedules(id);
         }
     }
 }

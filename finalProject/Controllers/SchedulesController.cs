@@ -78,12 +78,12 @@ namespace finalProject.Controllers
         }
 
         [HttpDelete]
-        [Route("RemoveSchedules/{id}")]
-        public JsonResult<ReturnObject> RemoveSchedules(short id)
+        [Route("RemoveSchedules/{id}/{rec}")]
+        public JsonResult<ReturnObject> RemoveSchedules(short id, int rec)
         {
             try
             {
-                SchedulesBl.RemoveSchedule(id);
+                SchedulesBl.RemoveSchedule(id, rec);
                 return Json(new ReturnObject() { Status = true, Data = id });
             }
             catch (Exception ex)

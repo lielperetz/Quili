@@ -19,8 +19,8 @@ export class SchedulesService {
     const header = new HttpHeaders().set('Authorization', this.cookies.get('Token'))
     return this.httpClient.get<any>(this.url + "GetProductsByRange/" + formatDate(d1, 'yyyy-MM-dd', 'en-US') + "/" + formatDate(d2, 'yyyy-MM-dd', 'en-US'), { headers: header }).pipe(catchError(this.handleError))
   }
-  RemoveSchedules(id: number): Observable<any> {
-    return this.httpClient.delete<any>(this.url + "RemoveSchedules/" + id).pipe(catchError(this.handleError))
+  RemoveSchedules(id: number, rec: number): Observable<any> {
+    return this.httpClient.delete<any>(this.url + "RemoveSchedules/" + id + "/" + rec).pipe(catchError(this.handleError))
   }
   handleError(errorResponse: HttpErrorResponse) {
     console.log(errorResponse);

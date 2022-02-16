@@ -1,20 +1,15 @@
-
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import {
-  ScheduleComponent, MonthService, View, CurrentAction, CellClickEventArgs, CallbackFunction, PopupOpenEventArgs, addDays, MoreEventsClickArgs, PopupCloseEventArgs, addYears, Schedule, ActionEventArgs, SelectEventArgs
+  ScheduleComponent, MonthService, View, PopupOpenEventArgs, PopupCloseEventArgs, addYears, ActionEventArgs, SelectEventArgs
 } from '@syncfusion/ej2-angular-schedule';
-import { closest, isNullOrUndefined, Internationalization } from '@syncfusion/ej2-base';
+import { closest, Internationalization } from '@syncfusion/ej2-base';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../classes/Recipe';
 import { SchedulesService } from '../services/schedules.service';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 
-/**
- * Sample for overview
- */
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'app-root',
   templateUrl: 'home.component.html',
   styleUrls: ['home.component.css'],
@@ -30,22 +25,25 @@ export class HomeComponent implements OnInit {
   public searchWord: string = "";
   public listRecipesBySearch: Record<string, any>;
   public newRecipe: Recipe;
-  public intl: Internationalization = new Internationalization();
   public showOrHidePopup: boolean = false;
   public currentDay: Date;
+  public rowAutoHeight: boolean = true;
+  public deletePopup: boolean = false;
+  public deleteOptions: number;
+  public idDeleteRecipe: number;
 
   constructor(
     private recipeService: RecipesService,
-    private schedulesService: SchedulesService, 
+    private schedulesService: SchedulesService,
     public router: Router
-    ) {
+  ) {
     this.getOriginalData();
   }
 
   public ngOnInit(): void {
   }
 
-  async getOriginalData(d1?: Date, d2?: Date) :Promise<void> {
+  async getOriginalData(d1?: Date, d2?: Date): Promise<void> {
     this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2021, 0, 1), d2 ? d2 : addYears(new Date(), 1)).subscribe(
       (response: any) => {
         if (response.Status) {
@@ -62,17 +60,13 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public onActionComplete(args: ActionEventArgs) :void {
+  public onActionComplete(args: ActionEventArgs): void {
     if (args.requestType === 'dateNavigate') {
       var datesView = this.scheduleObj.getCurrentViewDates();
       let d1: Date = datesView[0];
       let d2: Date = datesView[datesView.length - 1];
       this.getOriginalData(d1, d2);
     }
-  }
-
-  public getDateHeaderText(value: Date): string {
-    return this.intl.formatDate(value, { skeleton: 'Ed' });
   }
 
   public getHeaderStyles(data: Record<string, any>): Record<string, any> {
@@ -103,7 +97,7 @@ export class HomeComponent implements OnInit {
     return null;
   }
 
-  public searchRecipe(e) :void {
+  public searchRecipe(e): void {
     this.recipeService.SearchRecipe(e).subscribe(
       (response: any) => {
         if (response.Status) {
@@ -117,7 +111,7 @@ export class HomeComponent implements OnInit {
       })
   }
 
-  public chooseRecipe(id: string) :void {
+  public chooseRecipe(id: string): void {
     let chosenRecipe = this.listRecipesBySearch?.find((x: any) => x.id === id) as Record<string, any>;
     this.newRecipe.RecipeId = chosenRecipe.id;
     this.newRecipe.RecipeTitle = chosenRecipe.title;
@@ -164,24 +158,7 @@ export class HomeComponent implements OnInit {
   }
 
   public buttonClickActions(e: Event, id?: number): void {
-    const quickPopup: HTMLElement = closest(e.target as HTMLElement, '.e-quick-popup-wrapper') as HTMLElement;
-    // const getSlotData: CallbackFunction = (): Record<string, any> => {
-    //   let cellDetails: CellClickEventArgs = this.scheduleObj.getCellDetails(this.scheduleObj.getSelectedElements());
-    //   if (isNullOrUndefined(cellDetails)) {
-    //     cellDetails = this.scheduleObj.getCellDetails(this.scheduleObj.activeCellsData.element);
-    //   }
-    //   // const subject = ((quickPopup.querySelector('#title') as EJ2Instance).ej2_instances[0] as TextBoxComponent).value;
-    //   // const notes = ((quickPopup.querySelector('#notes') as EJ2Instance).ej2_instances[0] as TextBoxComponent).value;
-    //   const addObj: Record<string, any> = {};
-    //   addObj.Id = this.scheduleObj.getEventMaxID();
-    //   addObj.Subject = isNullOrUndefined(this.newRecipe.RecipeTitle) ? 'Add title' : this.newRecipe.RecipeTitle;
-    //   addObj.StartTime = new Date(+cellDetails.startTime);
-    //   addObj.EndTime = new Date(+cellDetails.endTime);
-    //   addObj.IsAllDay = cellDetails.isAllDay;
-    //   addObj.Description = isNullOrUndefined(this.newRecipe.RecipeImage) ? 'Add notes' : this.newRecipe.RecipeImage;
-    //   // addObj.CalendarId = ((quickPopup.querySelector('#eventType') as EJ2Instance).ej2_instances[0] as DropDownListComponent).value;
-    //   return addObj;
-    // };
+    // const quickPopup: HTMLElement = closest(e.target as HTMLElement, '.e-quick-popup-wrapper') as HTMLElement;
     if ((e.target as HTMLElement).id === 'save') {
       this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
       this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
@@ -196,15 +173,21 @@ export class HomeComponent implements OnInit {
         })
       this.newRecipe = new Recipe();
     } else if ((e.target as HTMLElement).id === 'delete') {
-      console.log(e)
-      // this.schedulesService.RemoveSchedules(id).subscribe(
-      //   (response: any) => {
-      //     if (response.Status) {
-      //       this.getOriginalData();
-      //     }
-      //     else
-      //       alert(response.Error)
-      //   })
+      let rec: number = 1; //delete recipe
+      if ((e.target as HTMLElement).innerHTML === 'Entire Series')
+        rec = 2; //delete series
+      else if ((e.target as HTMLElement).innerHTML === 'Following Recipes')
+        rec = 3; //delete following recipes
+
+    this.schedulesService.RemoveSchedules(this.idDeleteRecipe, rec).subscribe(
+      (response: any) => {
+        if (response.Status) {
+          this.getOriginalData();
+        }
+        else
+          alert(response.Error)
+      })
+      this.deletePopup = false;
     }
 
     //   const eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
@@ -233,39 +216,27 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public dragRecipe(event: any) {
-    console.log(event);
-  }
+  // public dragRecipe(event: any) {
+  //   console.log(event);
+  // }
 
-  public dropRecipe(event: any) {
-    console.log(event + " drop");
-  }
+  // public dropRecipe(event: any) {
+  //   console.log(event + " drop");
+  // }
 
   // public edit(id?:number){
   //   console.log(id + " edit")
   // }
 
-  public deletePopup: boolean = false;
   public delete(id?: number) {
-    // this.deletePopup = true;
-    this.scheduleObj.showQuickInfo = false;
-    this.schedulesService.RemoveSchedules(id).subscribe(
-      (response: any) => {
-        if (response.Status) {
-          this.getOriginalData();
-        }
-        else
-          alert(response.Error)
-      })
+    var l = this.listRecipes.filter(x => x.Code == id)[0] as Record<string, any>;
+    this.deleteOptions = 1; //delete recipe
+    if (l.SchedulingStatuse != 1)
+      if (l.RecipeDate === l.Date)
+        this.deleteOptions = 2; //delete this recipe or entire series
+      else
+        this.deleteOptions = 3; //delete this recipe, following recipes or entire series
+    this.deletePopup = true;
+    this.idDeleteRecipe = id;
   }
-
-  modalService: any;
-
-    // modal Open Backdrop Disabled
-    modalOpenBD(modalBD) {
-      this.modalService.open(modalBD, {
-        backdrop: false,
-        centered: true
-      });
-    }
 }

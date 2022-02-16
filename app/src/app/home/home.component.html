@@ -8,23 +8,16 @@
             <div class="control-section">
               <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
                 height='650px' (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
-                (actionComplete)="onActionComplete($event)" (select)="onSelect($event)">
-                <ng-template #dateHeaderTemplate let-data>
-                  <div class="date-text">{{getDateHeaderText(data.date)}}</div>
-                </ng-template>
+                (actionComplete)="onActionComplete($event)" (select)="onSelect($event)" [rowAutoHeight]="rowAutoHeight">
                 <ng-template #cellTemplate let-data>
-                  <div class="e-work-cells" style="background-color: inherit; width: auto; border: none;">
+                  <div class="e-work-cells" style="background-color: inherit; width: auto; height: auto; border: none;">
                     <div class="div-recipe" *ngIf="getRecipesForDay(data.date) as variable">
                       <a routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}" style="border: none;">
                         <img class="img" src="{{recipesForDay[0].RecipeImage}}" alt="image">
                         <p class="p-title">{{recipesForDay[0].RecipeTitle}}</p>
                       </a>
-                      <button class="bd" id="delete" (click)="delete(variable[0].Code)"><span
+                      <button class="bd" (click)="delete(variable[0].Code)"><span
                           class="glyphicon">&#xe020;</span></button>
-                      <!-- Button trigger modal -->
-                      <!-- <button type="button" class="btn btn-outline-primary bd" id="delete"
-                        (click)="modalOpenBD(modalBD)" rippleEffect>
-                        <span class="glyphicon">&#xe020;</span></button> -->
                       <button *ngIf="numberRecipesForDay>1" id="more"
                         (click)="showRecipesPopup(data.date, $event)">+{{numberRecipesForDay - 1}} <span
                           id="span-more">more</span></button>
@@ -32,27 +25,6 @@
                   </div>
                   <button ejs-button id="addButton">+</button>
                 </ng-template>
-                <!-- Modal -->
-                <!-- <ng-template #modalBD let-modal>
-                  <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel4">Backdrop Disabled</h4>
-                    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                  <div class="modal-body" tabindex="0" ngbAutofocus>
-                    <p>
-                      Candy oat cake topping topping chocolate cake. Icing pudding jelly beans I love chocolate carrot
-                      cake wafer candy canes. Biscuit croissant fruitcake bonbon soufflé.
-                    </p>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" (click)="modal.close('Accept click')" rippleEffect>
-                      Accept
-                    </button>
-                  </div>
-                </ng-template> -->
-                <!-- / Modal -->
                 <e-views>
                   <e-view option="Month"></e-view>
                 </e-views>
@@ -62,7 +34,7 @@
                       <div class="quick-info-title">{{getHeaderTitle(data)}}</div>
                     </div>
                     <div class="e-header-icon-wrapper">
-                      <button class="e-close" title="CLOSE"></button>
+                      <button class="e-close" title="Close"></button>
                     </div>
                   </div>
                 </ng-template>
@@ -123,7 +95,7 @@
                 </ng-template>
                 <ng-template #cellFooter let-data="data">
                   <div class="e-cell-footer">
-                    <button ejs-button id="save" cssClass="e-flat" [isPrimary]="true"
+                    <button ejs-button id="save" cssClass="e-flat buttons" [isPrimary]="true"
                       (click)="buttonClickActions($event)">Save</button>
                   </div>
                 </ng-template>
@@ -162,4 +134,25 @@
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="deletePopup" class="e-dlg-container e-dlg-center-center"
+  style="z-index: 1004; display: flex; position: fixed;">
+  <div id="QuickDialog" class="e-control e-dialog e-lib e-quick-dialog e-dlg-modal e-popup e-popup-open" role="dialog"
+    style="max-height: 422px; z-index: 1004; left: 0px; top: 0px; position: relative; width: auto;"
+    aria-describedby="QuickDialog_dialog-content" aria-modal="true" aria-labelledby="QuickDialog" tabindex="-1">
+    <div class="e-dlg-header-content" id="QuickDialog_dialog-header">
+      <div class="e-dlg-closeicon-btn e-control e-btn e-lib e-flat e-icon-btn" title="Close"
+        (click)="deletePopup=!deletePopup"><span class="e-btn-icon e-icon-dlg-close e-icons"></span></div>
+      <div class="e-dlg-header" id="QuickDialog_title">Delete Recipe</div>
+    </div>
+    <div *ngIf="deleteOptions==1" class="e-dlg-content">Are you sure you want to delete this event?</div>
+    <div *ngIf="deleteOptions!=1"  class="e-dlg-content">How would you like to change the recipe in the series?</div>
+    <div class="e-footer-content">
+      <button ejs-button id="delete" cssClass="e-flat buttons" [isPrimary]="true" (click)="buttonClickActions($event)">Delete Recipe</button>
+      <button *ngIf="deleteOptions==3" ejs-button id="delete" cssClass="e-flat buttons" (click)="buttonClickActions($event)">Following Recipes</button>
+      <button *ngIf="deleteOptions!=1" ejs-button id="delete" cssClass="e-flat buttons" (click)="buttonClickActions($event)">Entire Series</button>
+    </div>
+  </div>
+  <div class="e-dlg-overlay" style="z-index: 1003; display: block; position: absolute;"></div>
 </div>
