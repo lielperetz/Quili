@@ -17,9 +17,11 @@ namespace BL
             p.Code = p2.CODE;
         }
 
-        public static List<ProductsEntities> GetRecipeProducts(short id)
+        public static List<ProductsEntities> GetRecipeProducts(short id, int recipeCode= 0)
         {
-            return ProductsEntities.ConvertToListEntities(DalCode.GetProduct()).FindAll(x => x.RecipeCode == id);
+            var products = DalCode.GetProduct().Where(x => x.RECIPE_CODE == id).ToList();
+            //return ProductsEntities.ConvertToListEntities(DalCode.GetProduct()).FindAll(x => x.RecipeCode == id);
+            return ProductsEntities.ConvertToListEntities(products, recipeCode);
         }
     }
 }

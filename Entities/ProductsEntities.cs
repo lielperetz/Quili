@@ -16,10 +16,12 @@ namespace Entities
         public string Unit { get; set; }
         public short? Category { get; set; }
 
+        public int? RecipeUniqeCode { get; set; }
+
         //המרה מאובייקט מסוג מסד התונים לאובייקט מסוג אנטיטיז
-        public static ProductsEntities ConvertToEntities(PRODUCTS p)
+        public static ProductsEntities ConvertToEntities(PRODUCTS p,  int recipeCode = 0)
         {
-            ProductsEntities p2= new ProductsEntities() {Code=p.CODE, RecipeCode = p.RECIPE_CODE, ProductName = p.PRODUCT_NAME, ProductImage = p.PRODUCT_IMAGE,Unit=p.UNIT, Amount = p.AMOUNT, Category = p.CATEGORY };
+            ProductsEntities p2= new ProductsEntities() {Code=p.CODE, RecipeCode = p.RECIPE_CODE, ProductName = p.PRODUCT_NAME, ProductImage = p.PRODUCT_IMAGE,Unit=p.UNIT, Amount = p.AMOUNT, Category = p.CATEGORY, RecipeUniqeCode = recipeCode };
             return p2;
         }
         //המרה מסוג אנטיטיז לסוג מסד נתונים
@@ -28,12 +30,12 @@ namespace Entities
             return new PRODUCTS() { CODE = p.Code, RECIPE_CODE = p.RecipeCode, PRODUCT_NAME = p.ProductName, PRODUCT_IMAGE = p.ProductImage,UNIT=p.Unit, AMOUNT = p.Amount, CATEGORY = p.Category };
         }
         //המרה מסוג רשימת מסד נתונים לרשימת אנטיטיז
-        public static List<ProductsEntities> ConvertToListEntities(List<PRODUCTS> listP)
+        public static List<ProductsEntities> ConvertToListEntities(List<PRODUCTS> listP, int recipeCode=0)
         {
             List<ProductsEntities> lp = new List<ProductsEntities>();
             foreach (var item in listP)
             {
-                lp.Add(ConvertToEntities(item));
+                lp.Add(ConvertToEntities(item, recipeCode));
             }
             return lp;
         }

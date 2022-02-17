@@ -1,58 +1,49 @@
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-body">
-      <button (click)="vr()"> more </button>
-      <div style="background-color: pink;">
+     
+      <input id="startDate" (change)="changeDate()" type="date" placeholder="start" [(ngModel)]="startDate">
+      <input id="endDate" (change)="changeDate()" type="date" placeholder="end" [(ngModel)]="endDate">
+      <button (click)="showRecipeSelect = !showRecipeSelect"> Select Recipes </button>
+      <div  *ngIf="showRecipeSelect">
         <ul class="list-group" *ngFor="let item of viewRecipes;">
           <li class="list-group-item list-group-item-action list-group-item-light">
-            <input class="cl" type="checkbox" [value]="item.code" (change)="RecipesCheckbox($event)" />
-            {{item.name}}
+            <div class="custom-control custom-checkbox">
+              <input id="as{{item.Code}}"  class="custom-control-input" type="checkbox" [(ngModel)]="item.isChecked"  (change)="createList()" />
+              <label class="custom-control-label" for="as{{item.Code}}">  ({{item.Code}}) {{item.RecipeTitle}} - {{item.Date}}</label>
+          </div>
           </li>
         </ul>
       </div>
-      <input id="startDate" (change)="changeDate()" type="date" placeholder="start" [(ngModel)]="startDate">
-      <input id="endDate" (change)="changeDate()" type="date" placeholder="end" [(ngModel)]="endDate">
-
       <ul class="list-group" *ngFor="let item of viewData;">
-        <li *ngIf="item.checkbox==false" class="list-group-item list-group-item-action list-group-item-light row">
+        <li  class="list-group-item list-group-item-action list-group-item-light row">
           <input class="cl" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
 
-          <img class="cl" src="{{item.img}}" />
+          <img class="cl" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
 
-          <div class="col-sm-4 cl">{{item.name}} </div>
-          <div class="col-sm-4 cl">{{item.amount}} {{item.unit}}</div>
-
-          <table class="col-sm-2 cl">
-            <tr>
-              <button class="recipesB" [value]="item.code" (click)="OpenCloseRecipes($event)">recipes</button>
-            </tr>
-            <tr>
-              <div *ngFor="let r of item.recipes; index as i">
-                <p *ngIf="item.showRecipes"> {{r}}</p>
-              </div>
-            </tr>
-          </table>
+          <div class="col-sm-4 cl"><h4>{{item.ProductName}}</h4> </div>
+          <div class="col-sm-3 cl">
+            <table class="table">
+              <tr *ngFor="let unit of item.Units">
+                <td>{{unit.Amount}}</td>
+                <td>{{unit.Unit}}</td>
+              
+              </tr>
+            </table>
+          </div>
+          <div class="col-sm-3 cl">
+            <button class="recipesB" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">recipes <span class="badge badge-pill badge-primary"> {{item.Recipes.length}} </span></button>
+            <table *ngIf="item.showRecipes">
+              <tr *ngFor="let r of item.Recipes; index as i">
+                <td >
+                  <p > ({{r.Code}}). {{r.RecipeTitle}}</p>
+                </td>
+              </tr>
+            </table>
+          </div>
+         
         </li>
-        <li *ngIf="item.checkbox" style="background-color: lightgrey;"
-          class="list-group-item list-group-item-action list-group-item-light row">
-          <input class="cl" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" checked />
 
-          <img class="cl" src="{{item.img}}" />
-
-          <div style="text-decoration-line:line-through" class="col-sm-4 cl">{{item.name}} </div>
-          <div style="text-decoration-line:line-through" class="col-sm-4 cl">{{item.amount}}
-            {{item.unit}}</div>
-
-          <table class="col-sm-2 cl">
-            <tr>
-              <button class="recipesB" [value]="item.code" (click)="OpenCloseRecipes($event)"
-                style="background-color: lightgrey;">recipes</button>
-            </tr>
-            <tr *ngFor="let r of item.recipes; index as i">
-                <p *ngIf="item.showRecipes"> {{r}}</p>
-            </tr>
-          </table>
-        </li>
       </ul>
     </div>
   </div>

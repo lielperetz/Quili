@@ -37,9 +37,9 @@ namespace finalProject.Controllers
             }
         }
 
-        public static List<ProductsEntities> GetRecipeProducts(short id)
+        public static List<ProductsEntities> GetRecipeProducts(short id, int recipeCode = 0 )
         {
-            return ProductsBl.GetRecipeProducts(id);
+            return ProductsBl.GetRecipeProducts(id, recipeCode);
         }
     }
 }

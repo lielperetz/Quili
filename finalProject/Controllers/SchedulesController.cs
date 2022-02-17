@@ -60,16 +60,17 @@ namespace finalProject.Controllers
 
                 foreach (var s in Schedules)
                 {
-                    foreach (var p in ProductsController.GetRecipeProducts(s.RecipeCode))
+                    var list1 = ProductsController.GetRecipeProducts(s.RecipeCode, s.Code);
+                    foreach (var p in list1)
                     {
                         list.Add(p);
                     }
                 }
-                var data =
-                from info in list
-                orderby info.ProductName ascending, info.ProductName ascending
-                select info;
-                return Json(new ReturnObject() { Status = true, Data = data });
+                //var data =
+                //from info in list
+                //orderby info.ProductName ascending, info.ProductName ascending
+                //select info;
+                return Json(new ReturnObject() { Status = true, Data = list });
             }
             catch (Exception ex)
             {
