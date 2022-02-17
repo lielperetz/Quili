@@ -28,6 +28,7 @@ export class IngredientsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(x => {
+
       if (x["startDate"] && x["endDate"]) {
         if (x["startDate"])
           this.startDate = x["startDate"]
@@ -44,6 +45,7 @@ export class IngredientsComponent implements OnInit {
 
   }
   async logPage(): Promise<void> {
+    this.viewRecipes=[];
     //קבלת המתכונים לפי התאריכים
     this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
       (recipeItem: any) => {
