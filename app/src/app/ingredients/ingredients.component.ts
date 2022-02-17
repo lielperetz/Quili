@@ -24,52 +24,67 @@ export class IngredientsComponent implements OnInit {
   endDate: Date = new Date(addDays(this.startDate, 7))
 
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) {
-    this.logPage()
+    //this.logPage()
   }
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(x => {
+      if(x["startDate"] && x["endDate"]){
       if (x["startDate"])
         this.startDate = x["startDate"]
       if (x["endDate"])
         this.endDate = x["endDate"]
+      this.logPage()
+      }else{
+        this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
+       
+      }
+     
+    
     })
-    this.logPage()
+
   }
   async logPage(): Promise<void> {
+    console.log("logpage")
+
     //שליפת מוצרים לפי תאריכים
     this.schedulesService.GetProductsByRange(this.startDate, this.endDate).subscribe(
       (data: any) => {
+        console.log(data)
         if (data.Status) this.listPro = data.Data
-        // this.groupedBy()
+         this.groupedBy()
+
+         this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
+          (data: any) => {
+            if (data.Status) this.schedulesRecipes = data.Data
+          });
+
+
       });
     // הכנסת נתונים לרשימת מוצרים ואיחוד מוצרים זהים
-    var groupedByProductName = this.listPro.reduce(function (rv, x) {
-      (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
-      return rv;
-    }, {});
-    (Object.keys(groupedByProductName)).forEach(x => {
-      this.viewData.push(
-        {
-          name: x,
-          code: (groupedByProductName[x].map(x => x.Code)),
-          img: "https://spoonacular.com/cdn/ingredients_500x500/" + (groupedByProductName[x].map(x => x.ProductImage)),
-          amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
-          unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
-          recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
-          showRecipes: false,
-          checkbox: false
-        })
-    })
+    // var groupedByProductName = this.listPro.reduce(function (rv, x) {
+    //   (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
+    //   return rv;
+    // }, {});
+    // (Object.keys(groupedByProductName)).forEach(x => {
+    //   this.viewData.push(
+    //     {
+    //       name: x,
+    //       code: (groupedByProductName[x].map(x => x.Code)),
+    //       img: "https://spoonacular.com/cdn/ingredients_500x500/" + (groupedByProductName[x].map(x => x.ProductImage)),
+    //       amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
+    //       unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
+    //       recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
+    //       showRecipes: false,
+    //       checkbox: false
+    //     })
+    // })
     //שליפת מתכונים לפי טווח תאריכים
     // this.recipesService.GetSavedRecipe().subscribe(
     //   (data: any) => {
     //     this.savedRecipes = data.Data
     //   });
-    this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
-      (data: any) => {
-        if (data.Status) this.schedulesRecipes = data.Data
-      });
-    this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
+    
+    
   }
 
   RecipeIdToRecipeName(id) {
@@ -109,6 +124,15 @@ export class IngredientsComponent implements OnInit {
     //   this.viewRecipes.map(y => { if (y.code == x.RecipeCode) { this.listPro } })
     // })
   }
+  changeDate(){
+    this.navigateToDates();
+  }
+
+  navigateToDates(){
+    this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
+
+  }
+
   RecipesCheckbox(e) {
     this.viewRecipes.map(x => {
       if (x.code == e.target.value) {
@@ -121,7 +145,7 @@ export class IngredientsComponent implements OnInit {
         if ((x.code == this.listPro[i].RecipeCode) && (!x.checkbox))
           this.listPro.splice(i, 1)
       })
-      this.logPage()
+      //this.logPage()
       // for (var j = 0; i < this.viewRecipes.length; j++) {
       //   if((this.listPro[i].RecipeCode==this.viewRecipes[j].code)&&(!this.viewRecipes[j].checkbox)){
       //     this.listPro.splice(i,1)
@@ -129,23 +153,24 @@ export class IngredientsComponent implements OnInit {
       // }
     }
   }
+
+  groupedBy() {
+    var groupedByProductName = this.listPro.reduce(function (rv, x) {
+      (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
+      return rv;
+    }, {});
+    (Object.keys(groupedByProductName)).forEach(x => {
+      this.viewData.push(
+        {
+          name: x,
+          code: (groupedByProductName[x].map(x => x.Code)),
+          img: "https://spoonacular.com/cdn/ingredients_500x500/" + (groupedByProductName[x].map(x => x.ProductImage)),
+          amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
+          unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
+          recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
+          showRecipes: false,
+          checkbox: false
+        })
+    })
+  }
 }
-// groupedBy() {
-//   var groupedByProductName = this.listPro.reduce(function (rv, x) {
-//     (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
-//     return rv;
-//   }, {});
-//   (Object.keys(groupedByProductName)).forEach(x => {
-//     this.viewData.push(
-//       {
-//         name: x,
-//         code: (groupedByProductName[x].map(x => x.Code)),
-//         img: "https://spoonacular.com/cdn/ingredients_500x500/" + (groupedByProductName[x].map(x => x.ProductImage)),
-//         amount: (groupedByProductName[x].map(x => x.Amount).reduce(function (a, b) { return a + b; })),
-//         unit: (groupedByProductName[x].map(x => x.Unit)).reduce(function (a, b) { if (a == b) return b; }),
-//         recipes: groupedByProductName[x].map(x => this.RecipeIdToRecipeName(x.RecipeCode)),
-//         showRecipes: false,
-//         checkbox: false
-//       })
-//   })
-// }

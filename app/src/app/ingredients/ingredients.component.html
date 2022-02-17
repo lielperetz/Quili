@@ -10,8 +10,8 @@
           </li>
         </ul>
       </div>
-      <input id="startDate" (change)="logPage()" type="date" placeholder="start" [(ngModel)]="startDate">
-      <input id="endDate" (change)="logPage()" type="date" placeholder="end" [(ngModel)]="endDate">
+      <input id="startDate" (change)="changeDate()" type="date" placeholder="start" [(ngModel)]="startDate">
+      <input id="endDate" (change)="changeDate()" type="date" placeholder="end" [(ngModel)]="endDate">
 
       <ul class="list-group" *ngFor="let item of viewData;">
         <li *ngIf="item.checkbox==false" class="list-group-item list-group-item-action list-group-item-light row">
