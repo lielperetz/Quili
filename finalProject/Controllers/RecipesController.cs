@@ -43,7 +43,6 @@ namespace finalProject.Controllers
                     case 1:
                         s.Date = r.Date;
                         SchedulesBl.AddSchedules(s);
-                        //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = r.Date, Amount = 1 ,});
                         break;
                     //weekly
                     case 2:
@@ -51,8 +50,6 @@ namespace finalProject.Controllers
                         {
                             s.Date = r.Date.AddDays(i * 7);
                             SchedulesBl.AddSchedules(s);
-                            //DateTime d = r.Date;
-                            //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddDays(i * 7), Amount = 1 });
                         }
                         break;
                     //monthly
@@ -61,8 +58,6 @@ namespace finalProject.Controllers
                         {
                             s.Date = r.Date.AddMonths(i);
                             SchedulesBl.AddSchedules(s);
-                            //DateTime d = r.Date;
-                            //SchedulesBl.AddSchedules(new SchedulesEntities() { RecipeCode = r.Code, Date = d.AddMonths(i), Amount = 1 });
                         }
                         break;
                     default:

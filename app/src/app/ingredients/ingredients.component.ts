@@ -45,13 +45,13 @@ export class IngredientsComponent implements OnInit {
 
   }
   async logPage(): Promise<void> {
-    this.viewRecipes=[];
+    this.viewRecipes = [];
     //קבלת המתכונים לפי התאריכים
     this.schedulesService.GetRecipesByUser(this.startDate, this.endDate).subscribe(
       (recipeItem: any) => {
         if (recipeItem.Status) {
           this.schedulesRecipes = recipeItem.Data;
-          this.schedulesRecipes.forEach(si=>{
+          this.schedulesRecipes.forEach(si => {
             let dup = Object.assign({}, si);
             dup.isChecked = true;
             this.viewRecipes.push(dup);
@@ -63,7 +63,6 @@ export class IngredientsComponent implements OnInit {
             if (productItem.Status) this.listPro = productItem.Data
             this.createList()
           });
-
       });
 
 
@@ -128,9 +127,9 @@ export class IngredientsComponent implements OnInit {
   //         })
   //   })
 
-    // this.listPro.map(x => {
-    //   this.viewRecipes.map(y => { if (y.code == x.RecipeCode) { this.listPro } })
-    // })
+  // this.listPro.map(x => {
+  //   this.viewRecipes.map(y => { if (y.code == x.RecipeCode) { this.listPro } })
+  // })
   //}
   changeDate() {
     this.navigateToDates();
@@ -167,30 +166,28 @@ export class IngredientsComponent implements OnInit {
     let groupedByProductName: Product[] = [];
     this.listPro.forEach(item => {
       var productItem = Object.assign({}, item)
-      const recipe =   this.viewRecipes.find( x=> x.isChecked && x.Code == productItem.RecipeUniqeCode);
-      if(recipe){
-      const existProduct = groupedByProductName.find(x => x.ProductName == productItem.ProductName);
-      const unitText = (productItem.Unit? productItem.Unit: "--");
+      const recipe = this.viewRecipes.find(x => x.isChecked && x.Code == productItem.RecipeUniqeCode);
+      if (recipe) {
+        const existProduct = groupedByProductName.find(x => x.ProductName == productItem.ProductName);
+        const unitText = (productItem.Unit ? productItem.Unit : "--");
 
-      if (!existProduct) {
-        productItem.Recipes = Array(recipe);
-        productItem.Units = Array({Amount: productItem.Amount, Unit:unitText});
-        groupedByProductName.push(productItem);
-      } else {
-        //check for recipe
-
-        const currExistsRecipe = existProduct.Recipes.find(x=>x["Code"] == productItem.RecipeUniqeCode );
-        if(!currExistsRecipe) existProduct.Recipes.push(recipe);
-        //check for unit
-        const currSameUnit = existProduct.Units.find(x=>x.Unit == unitText );
-        if(currSameUnit){
-          currSameUnit.Amount = currSameUnit.Amount + item.Amount;
-        }else{
-          existProduct.Units.push({Amount: item.Amount, Unit:unitText});
+        if (!existProduct) {
+          productItem.Recipes = Array(recipe);
+          productItem.Units = Array({ Amount: productItem.Amount, Unit: unitText });
+          groupedByProductName.push(productItem);
+        } else {
+          //check for recipe
+          const currExistsRecipe = existProduct.Recipes.find(x => x["Code"] == productItem.RecipeUniqeCode);
+          if (!currExistsRecipe) existProduct.Recipes.push(recipe);
+          //check for unit
+          const currSameUnit = existProduct.Units.find(x => x.Unit == unitText);
+          if (currSameUnit) {
+            currSameUnit.Amount = currSameUnit.Amount + item.Amount;
+          } else {
+            existProduct.Units.push({ Amount: item.Amount, Unit: unitText });
+          }
         }
       }
-    }
-
     })
     this.viewData = groupedByProductName;
 
