@@ -48,5 +48,18 @@ namespace finalProject
 
             return response.Content.ReadAsAsync<Object>().Result;
         }
+
+        public static object GetRandom()
+        {
+            HttpClient client = new HttpClient();
+            client.BaseAddress = new Uri(URL + "/random");
+
+            client.DefaultRequestHeaders.Accept.Add(
+            new MediaTypeWithQualityHeaderValue("application/json"));
+
+            HttpResponseMessage response = client.GetAsync(urlParameters).Result;
+
+            return response.Content.ReadAsAsync<Object>().Result;
+        }
     }
 }

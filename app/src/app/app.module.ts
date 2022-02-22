@@ -20,6 +20,7 @@ import { SplitButtonModule } from '@syncfusion/ej2-angular-splitbuttons';
 import { ContextMenuModule, SidebarModule } from '@syncfusion/ej2-angular-navigations';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-de
     AuthComponent,
     SiteComponent,
     IngredientsComponent,
-    ShowRecipeDetailsComponent
+    ShowRecipeDetailsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

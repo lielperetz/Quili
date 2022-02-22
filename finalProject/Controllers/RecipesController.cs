@@ -135,7 +135,19 @@ namespace finalProject.Controllers
             catch (Exception ex)
             {
                 return Json(new ReturnObject() { Status = false, Error = ex.Message });
-
+            }
+        }
+        [HttpGet]
+        [Route("GetRandom")]
+        public JsonResult<ReturnObject> GetRandom()
+        {
+            try
+            {
+                return Json(new ReturnObject() { Status = true, Data = ApiRecipes.GetRandom() });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
             }
         }
     }

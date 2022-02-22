@@ -28,6 +28,9 @@ export class RecipesService {
   GetRecipeByLocalId(id: number): Observable<any> {
     return this.httpClient.get<any>(this.url + "GetRecipeByLocalId/" + id).pipe(catchError(this.handleError))
   }
+  GetRandom(): Observable<any>{
+    return this.httpClient.get<any>(this.url + "GetRandom").pipe(catchError(this.handleError))
+  }
   handleError(errorResponse: HttpErrorResponse) {
     console.log(errorResponse);
     return throwError(() => new Error('test'));
