@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ import { RecipesService } from '../services/recipes.service';
 export class ShowRecipeDetailsComponent implements OnInit {
   showRecipe: Record<string, any>;
   cardRecipe: string = "";
+  dataHtml: any;
   constructor(public httpclient: HttpClient, public recipes: RecipesService, public activeRoute: ActivatedRoute, public location: Location) { }
 
   ngOnInit(): void {
@@ -29,12 +30,19 @@ export class ShowRecipeDetailsComponent implements OnInit {
               //     else
               //       console.log(res.message)
               //   })
-              console.log(this.showRecipe)
+              // console.log(this.showRecipe)
             }
             else
               alert(response.Error);
           })
     })
+    // let url: string = "https://api.spoonacular.com/recipes/1082038/ingredientWidget?apiKey=52b9142911034ec3b82f8d31cb7410ca";
+    // this.httpclient.get<any>(url, { headers: new HttpHeaders({'Accept': 'text/html', 'Content-Type': 'text/html', responseType: 'text'})} )
+    // .subscribe(data => {
+    //   this.dataHtml = data;
+    //   console.log(this.dataHtml)
+    // },
+    // error => console.log('Error from backend API', +error));
   }
 
   goBack() {
@@ -43,6 +51,10 @@ export class ShowRecipeDetailsComponent implements OnInit {
 
   // getRecipeCard(url: string): Observable<object> {
   //   return this.httpclient.get<object>(url);
+  // }
+
+  // getResults(): Observable<any> {
+  //   return this.httpclient.get<any>("https://api.spoonacular.com/recipes/1082038/ingredientWidget?apiKey=52b9142911034ec3b82f8d31cb7410ca", { headers: new HttpHeaders({'Accept': 'text/html'})});
   // }
 }
 

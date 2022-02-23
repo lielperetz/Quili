@@ -21,6 +21,7 @@ import { ContextMenuModule, SidebarModule } from '@syncfusion/ej2-angular-naviga
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     SiteComponent,
     IngredientsComponent,
     ShowRecipeDetailsComponent,
-    DashboardComponent
+    DashboardComponent,
+    SavedRecipesComponent
   ],
   imports: [
     BrowserModule,
