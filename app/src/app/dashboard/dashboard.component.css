@@ -1,0 +1,21 @@
+.popularrecipes{
+    margin: 0;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 0;
+}
+.rndImg{
+    margin: 0;
+    padding: 0;
+    float: left;
+}
+.rndRecipe{
+    background-color: gray;
+    margin: 0;
+    padding: 0;
+}
+.bg-ghostwhite{
+    background-color: ghostwhite;
+}
+
+

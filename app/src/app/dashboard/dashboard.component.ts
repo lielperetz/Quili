@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RecipesService } from '../services/recipes.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  randomList = []
+  constructor(public recipesService: RecipesService) { }
 
   ngOnInit(): void {
+    this.randomList = []
+    this.recipesService.GetRandom(10).subscribe(data => {
+      if (data.Status) {
+        data.Data.recipes.forEach(element => {
+          this.randomList.push(element)
+        });
+      }
+    })
+
+    console.log(this.randomList)
   }
 
 }

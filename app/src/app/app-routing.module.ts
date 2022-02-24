@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
 import { AuthComponent } from './layout/auth/auth.component';
@@ -24,7 +25,7 @@ const routes: Routes = [
         { path: "home", component: HomeComponent },
         { path: "ingredients/:startDate/:endDate", component: IngredientsComponent },
         { path: "ingredients", component: IngredientsComponent },
-        { path: '', component: HomeComponent },
+        { path: '', component: DashboardComponent },
         { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent }
       ]
   }

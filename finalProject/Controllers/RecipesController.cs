@@ -138,12 +138,12 @@ namespace finalProject.Controllers
             }
         }
         [HttpGet]
-        [Route("GetRandom")]
-        public JsonResult<ReturnObject> GetRandom()
+        [Route("GetRandom/{num}")]
+        public JsonResult<ReturnObject> GetRandom(int num)
         {
             try
             {
-                return Json(new ReturnObject() { Status = true, Data = ApiRecipes.GetRandom() });
+                return Json(new ReturnObject() { Status = true, Data = ApiRecipes.GetRandom(num) });
             }
             catch (Exception ex)
             {
