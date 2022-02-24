@@ -7,12 +7,10 @@ import { SavedRecipesService } from '../services/saved-recipes.service';
   styleUrls: ['./saved-recipes.component.css']
 })
 export class SavedRecipesComponent implements OnInit {
-listSave: any;
+  listSave: any;
   constructor(
     public savedRecipes: SavedRecipesService
-  ) { }
-
-  ngOnInit(): void {
+  ) {
     this.savedRecipes.GetSavedRecipes().subscribe(
       (response: any) => {
         if (response.Status) {
@@ -21,5 +19,8 @@ listSave: any;
         else
           alert(response.Error);
       })
+  }
+
+  ngOnInit(): void {
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -20,9 +20,9 @@ export class SavedRecipesService {
   RemoveSavedRecipe(id: number): Observable<any> {
     return this.httpClient.delete<any>(this.url + "RemoveSavedRecipe/" + id).pipe(catchError(this.handleError))
   }
-  IsSaved(id: string): Observable<any> {
+  IsSaved(idR: string): Observable<any> {
     const header = new HttpHeaders().set('Authorization', this.cookies.get('Token'))
-    return this.httpClient.post<any>(this.url + "IsSaved/" + id, { headers: header }).pipe(catchError(this.handleError))
+    return this.httpClient.put<any>(this.url + "IsSaved", '', { headers: header, params: new HttpParams().append('id', idR) }).pipe(catchError(this.handleError))
   }
   handleError(errorResponse: HttpErrorResponse) {
     console.log(errorResponse);

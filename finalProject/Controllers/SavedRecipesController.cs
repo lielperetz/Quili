@@ -75,8 +75,8 @@ namespace finalProject.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("IsSaved/{id}")]
+        [HttpPut]
+        [Route("IsSaved")]
         public JsonResult<ReturnObject> IsSaved(string id)
         {
             string mail = "";

@@ -14,21 +14,23 @@ import { SavedRecipesService } from '../services/saved-recipes.service';
 export class ShowRecipeDetailsComponent implements OnInit {
   showRecipe: any;
   addedToSavedList: boolean;
-
+  idr: string;
   constructor(
     public httpclient: HttpClient,
     public recipes: RecipesService,
     public activeRoute: ActivatedRoute,
     public location: Location,
-    public savedRecipes: SavedRecipesService) { }
+    public savedRecipes: SavedRecipesService) {
+
+  }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(x => {
       if (x["idRecipe"]) {
+        this.idr = x["idRecipe"];
         this.savedRecipes.IsSaved(x["idRecipe"]).subscribe(
           (res: any) => {
             if (res.Status)
-            console.log(res.Status)
               this.addedToSavedList = res.Data;
           }
         )
@@ -49,9 +51,15 @@ export class ShowRecipeDetailsComponent implements OnInit {
   }
 
   handleAdd() {
-    this.savedRecipes.AddToSavedRecipes(this.showRecipe).subscribe(() => {
-      this.addedToSavedList = true;
-    })
+    this.savedRecipes.AddToSavedRecipes(this.showRecipe).subscribe(
+      (res: any) => {
+        if (res.Status) {
+          this.addedToSavedList = true;
+          console.log(res.Data)
+        }
+        else
+          alert(res.Error)
+      })
   }
 
   handleRemove() {
