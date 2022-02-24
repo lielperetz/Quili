@@ -7,6 +7,7 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
 import { AuthComponent } from './layout/auth/auth.component';
 import { SiteComponent } from './layout/site/site.component';
 import { LogInComponent } from './log-in/log-in.component';
+import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
@@ -26,7 +27,8 @@ const routes: Routes = [
         { path: "ingredients/:startDate/:endDate", component: IngredientsComponent },
         { path: "ingredients", component: IngredientsComponent },
         { path: '', component: DashboardComponent },
-        { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent }
+        { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent },
+        { path: "savedRecipes", component: SavedRecipesComponent }
       ]
   }
 ];

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="ProductsEntities.cs" />
+    <Compile Include="SavedRecipesEntities.cs" />
     <Compile Include="SchedulesEntities.cs" />
     <Compile Include="RecipesEntities.cs" />
     <Compile Include="ClientEntities.cs" />

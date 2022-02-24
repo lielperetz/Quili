@@ -10,12 +10,10 @@ namespace BL
 {
     public class ClientsBl
     {
-        //הוספה
         public static void AddClient(ClientsEntities c)
         {
             DalCode.AddClient(ClientsEntities.ConvertToDB(c));
         }
-        //בדיקה האם קיים לקוח לפי מייל
         public static bool IsExist(string mail)
         {
             return DalCode.GetClients().Any(x => x.MAIL.CompareTo(mail) == 0);

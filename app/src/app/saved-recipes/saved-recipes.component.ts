@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SavedRecipesService } from '../services/saved-recipes.service';
 
 @Component({
   selector: 'app-saved-recipes',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./saved-recipes.component.css']
 })
 export class SavedRecipesComponent implements OnInit {
-
-  constructor() { }
+listSave: any;
+  constructor(
+    public savedRecipes: SavedRecipesService
+  ) { }
 
   ngOnInit(): void {
+    this.savedRecipes.GetSavedRecipes().subscribe(
+      (response: any) => {
+        if (response.Status) {
+          this.listSave = response.Data;
+        }
+        else
+          alert(response.Error);
+      })
   }
-
 }

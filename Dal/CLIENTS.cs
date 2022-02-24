@@ -18,6 +18,7 @@ namespace Dal
         public CLIENTS()
         {
             this.RECIPES = new HashSet<RECIPES>();
+            this.SAVED_RECIPES = new HashSet<SAVED_RECIPES>();
         }
     
         public string MAIL { get; set; }
@@ -25,5 +26,7 @@ namespace Dal
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<RECIPES> RECIPES { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SAVED_RECIPES> SAVED_RECIPES { get; set; }
     }
 }

@@ -20,7 +20,6 @@ namespace BL
         public static List<ProductsEntities> GetRecipeProducts(short id, int recipeCode= 0)
         {
             var products = DalCode.GetProduct().Where(x => x.RECIPE_CODE == id).ToList();
-            //return ProductsEntities.ConvertToListEntities(DalCode.GetProduct()).FindAll(x => x.RecipeCode == id);
             return ProductsEntities.ConvertToListEntities(products, recipeCode);
         }
     }

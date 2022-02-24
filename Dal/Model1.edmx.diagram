@@ -12,6 +12,9 @@
         <AssociationConnector Association="FINAL_PROJECTModel.FK__RECIPES__MAIL__72C60C4A" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__787EE5A0" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__75A278F5" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.SAVED_RECIPES" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.sysdiagrams" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="FINAL_PROJECTModel.FK_SAVED_RECIPES_CLIENTS" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

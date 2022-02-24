@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { RecipesService } from '../services/recipes.service';
+import { SavedRecipesService } from '../services/saved-recipes.service';
 
 @Component({
   selector: 'app-show-recipe-details',
@@ -11,51 +12,53 @@ import { RecipesService } from '../services/recipes.service';
   styleUrls: ['./show-recipe-details.component.css']
 })
 export class ShowRecipeDetailsComponent implements OnInit {
-  showRecipe: Record<string, any>;
-  cardRecipe: string = "";
-  dataHtml: any;
-  constructor(public httpclient: HttpClient, public recipes: RecipesService, public activeRoute: ActivatedRoute, public location: Location) { }
+  showRecipe: any;
+  addedToSavedList: boolean;
+
+  constructor(
+    public httpclient: HttpClient,
+    public recipes: RecipesService,
+    public activeRoute: ActivatedRoute,
+    public location: Location,
+    public savedRecipes: SavedRecipesService) { }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe(x => {
-      if (x["idRecipe"])
+      if (x["idRecipe"]) {
+        this.savedRecipes.IsSaved(x["idRecipe"]).subscribe(
+          (res: any) => {
+            if (res.Status)
+            console.log(res.Status)
+              this.addedToSavedList = res.Data;
+          }
+        )
         this.recipes.GetRecipeById(x["idRecipe"]).subscribe(
           (response: any) => {
             if (response.Status) {
-              this.showRecipe = response.Data as Record<string, any>;
-              // this.getRecipeCard("https://api.spoonacular.com/recipes/" + this.showRecipe?.id + "/card?apiKey=52b9142911034ec3b82f8d31cb7410ca").subscribe(
-              //   (res: any) => {
-              //     if (res.status)
-              //       this.cardRecipe = res.url;
-              //     else
-              //       console.log(res.message)
-              //   })
-              // console.log(this.showRecipe)
+              this.showRecipe = response.Data;
             }
             else
               alert(response.Error);
           })
+      }
     })
-    // let url: string = "https://api.spoonacular.com/recipes/1082038/ingredientWidget?apiKey=52b9142911034ec3b82f8d31cb7410ca";
-    // this.httpclient.get<any>(url, { headers: new HttpHeaders({'Accept': 'text/html', 'Content-Type': 'text/html', responseType: 'text'})} )
-    // .subscribe(data => {
-    //   this.dataHtml = data;
-    //   console.log(this.dataHtml)
-    // },
-    // error => console.log('Error from backend API', +error));
   }
 
   goBack() {
     this.location.back();
   }
 
-  // getRecipeCard(url: string): Observable<object> {
-  //   return this.httpclient.get<object>(url);
-  // }
+  handleAdd() {
+    this.savedRecipes.AddToSavedRecipes(this.showRecipe).subscribe(() => {
+      this.addedToSavedList = true;
+    })
+  }
 
-  // getResults(): Observable<any> {
-  //   return this.httpclient.get<any>("https://api.spoonacular.com/recipes/1082038/ingredientWidget?apiKey=52b9142911034ec3b82f8d31cb7410ca", { headers: new HttpHeaders({'Accept': 'text/html'})});
-  // }
+  handleRemove() {
+    this.savedRecipes.RemoveSavedRecipe(this.showRecipe.id).subscribe(() => {
+      this.addedToSavedList = false;
+    })
+  }
 }
 
 

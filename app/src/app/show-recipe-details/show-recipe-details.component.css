@@ -6,6 +6,8 @@
     border: none;
     margin: 5px;
     font-size: large;
+    cursor: pointer;
+    color: orange;
 }
 
 .headers {
@@ -36,4 +38,11 @@
     color:lightseagreen;
     width: 100%;
     text-align: right;
+}
+
+.fa-heart {
+    color: orange;
+    cursor: pointer;
+    font-size: large;
+    margin: 10px;
 }

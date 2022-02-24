@@ -1,10 +1,11 @@
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
-            <button class="bb" (click)="goBack()"><i class="glyphicon glyphicon-arrow-right"></i></button>
+            <i class="glyphicon glyphicon-arrow-right bb" (click)="goBack()"></i>
+            <i *ngIf="!addedToSavedList" class="far fa-heart float-right" (click)="handleAdd()"></i>
+            <i *ngIf="addedToSavedList" class="fas fa-heart float-right"  (click)="handleRemove()"></i>
             <div>
                 <img class="img" src="{{showRecipe?.image}}">
-                <!-- <img src="{{cardRecipe}}" style="width: 300px; height: 500px;"> -->
                 <h1 class="headers">{{showRecipe?.title}}</h1>
                 <h5 class="headers">for {{showRecipe?.servings}} servings ~ ready in {{showRecipe?.readyInMinutes}}
                     minutes</h5>
