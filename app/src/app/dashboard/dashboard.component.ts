@@ -20,8 +20,9 @@ export class DashboardComponent implements OnInit {
         });
       }
     })
-
     console.log(this.randomList)
   }
-
+  about(): void {
+    // document.getElementById("myImg").src = "hackanm.gif";
+  }
 }

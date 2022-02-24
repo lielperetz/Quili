@@ -1,3 +1,9 @@
+a:hover {
+    background-color: yellow;
+}
+.bg-ghostwhite{
+    background-color: ghostwhite;
+}
 .popularrecipes{
     margin: 0;
     margin-bottom: 20px;
@@ -10,12 +16,16 @@
     float: left;
 }
 .rndRecipe{
-    background-color: gray;
+    background-color: white;
     margin: 0;
     padding: 0;
 }
-.bg-ghostwhite{
-    background-color: ghostwhite;
+.rndTxt{
+    height: 180px;
+    font-size: 16px;
+    line-break: loose;
+    text-align: center;
 }
+
 
 
