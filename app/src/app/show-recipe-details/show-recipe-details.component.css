@@ -46,3 +46,7 @@
     font-size: large;
     margin: 10px;
 }
+
+.fa-heart:hover {
+    font-size: xx-large;
+}

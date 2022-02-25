@@ -52,12 +52,16 @@ export class HomeComponent implements OnInit {
             this.scheduleObj.refreshLayout();
         }
         else
-          this.router.navigate(['/'])
+          console.log(response.Error)
       })
     if (this.scheduleObj) {
       this.scheduleObj.showQuickInfo = true;
       this.scheduleObj.closeQuickInfoPopup();
     }
+  }
+
+  getUrl(id: any) {
+    return "url('https://spoonacular.com/recipeImages/'" + id + "'-240x150.jpg')";
   }
 
   public onActionComplete(args: ActionEventArgs): void {

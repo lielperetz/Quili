@@ -22,6 +22,7 @@ import { IngredientsComponent } from './ingredients/ingredients.component';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
     ContextMenuModule,
     MultiSelectModule
   ],
-  providers: [CookieService],
+  providers: [CookieService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

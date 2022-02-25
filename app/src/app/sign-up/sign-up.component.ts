@@ -12,20 +12,20 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  user:User=new User()
-  constructor(public UserService:UserService, public router:Router) { }
+  user: User = new User()
+  constructor(public UserService: UserService, public router: Router) { }
 
   ngOnInit(): void {
     feather.replace();
   }
 
-  newUser(){
+  newUser() {
     this.UserService.Add(this.user).subscribe(
-      (response:any)=>{
-        if(response.Status) {
-          this.router.navigate(['/'])
+      (response: any) => {
+        if (response.Status) {
+          this.router.navigate(['/auth/login'])
         }
-        else alert(response.Error)})
+        else alert(response.Error)
+      })
   }
-
 }

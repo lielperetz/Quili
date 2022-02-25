@@ -1,0 +1,26 @@
+.ic {
+    font-size: large;
+}
+
+.icon {
+    color: orange;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+.icon:hover {
+    font-size: xx-large;
+}
+
+.mail {
+    font-weight: bold;
+    display: block;
+    padding: 0.65rem 1.28rem;
+}
+
+.mn:active {
+    background-color: orange; color: orange;
+}
+/* .nav-item {
+    margin: 0px;
+} */

@@ -8,11 +8,12 @@ import { AuthComponent } from './layout/auth/auth.component';
 import { SiteComponent } from './layout/site/site.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
+import { AuthGuard } from './services/auth.guard';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  { path: '', redirectTo: '/site', pathMatch: 'full' },
   {
     path: "auth", component: AuthComponent, children:
       [{ path: "login", component: LogInComponent },
@@ -23,12 +24,12 @@ const routes: Routes = [
   {
     path: "site", component: SiteComponent, children:
       [
-        { path: "home", component: HomeComponent },
-        { path: "ingredients/:startDate/:endDate", component: IngredientsComponent },
-        { path: "ingredients", component: IngredientsComponent },
+        { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
+        { path: "ingredients/:startDate/:endDate", component: IngredientsComponent, canActivate: [AuthGuard] },
+        { path: "ingredients", component: IngredientsComponent, canActivate: [AuthGuard]  },
         { path: '', component: DashboardComponent },
-        { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent },
-        { path: "savedRecipes", component: SavedRecipesComponent }
+        { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent, canActivate: [AuthGuard]  },
+        { path: "savedRecipes", component: SavedRecipesComponent, canActivate: [AuthGuard]  }
       ]
   }
 ];

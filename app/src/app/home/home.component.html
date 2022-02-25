@@ -11,10 +11,11 @@
                 (actionComplete)="onActionComplete($event)" (select)="onSelect($event)" [rowAutoHeight]="rowAutoHeight">
                 <ng-template #cellTemplate let-data>
                   <div class="e-work-cells" style="background-color: inherit; width: auto; height: auto; border: none;">
-                    <div class="div-recipe" *ngIf="getRecipesForDay(data.date) as variable">
+                    <div class="div-recipe" *ngIf="getRecipesForDay(data.date) as variable"
+                    >
                       <a routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}" style="border: none;">
-                        <img class="img" src="{{recipesForDay[0].RecipeImage}}" alt="image">
-                        <p class="p-title">{{recipesForDay[0].RecipeTitle}}</p>
+                        <!-- <img class="img" src="{{recipesForDay[0].RecipeImage}}" alt="image"> -->
+                        <p class="p-title" [ngStyle]="{'background-image': getUrl(recipesForDay[0].RecipeId)}">{{recipesForDay[0].RecipeTitle}}</p>
                       </a>
                       <button class="bd" (click)="delete(variable[0].Code)"><span
                           class="glyphicon">&#xe020;</span></button>
@@ -48,20 +49,17 @@
                       <div class="content-area">
                         <input class="e-input" type="search" placeholder="Search" (ngModelChange)="searchRecipe($event)"
                           [(ngModel)]="searchWord" />
-                        <!-- <span class="e-icons e-search" style="margin-bottom: 0px;"></span> -->
-                        <!-- </div> -->
                       </div>
                       <div class="row" *ngIf="listRecipesBySearch"
                         style="height: 300px; width: 100%; overflow-x: hidden;">
                         <div class="col-md-12" *ngFor="let item of listRecipesBySearch"
-                          style="margin: 5px; border: black 0.5px;">
-                          <button (click)="chooseRecipe(item.id)" style="border: none; width: 100%;">
-                            <button routerLink="/site/showDetails/{{item.id}}"
-                              style="border: hidden; float: left; margin: 0px;">
-                              <img src="{{item.image}}" class="img-responsive" style="height:80px; width: 80px;">
-                            </button>
-                            <h4 style="display: inline; margin: 2px;">{{item.title}}</h4>
-                          </button>
+                          style="margin: 5px; border: black 0.5px;" (click)="chooseRecipe(item.id)">
+                          <!-- <button style="border: none; width: 100%;"> -->
+                          <img src="{{item.image}}" class="img-responsive" style="height:80px; width: 80px;">
+                          <h4 style="display: inline; margin: 2px;">{{item.title}}</h4>
+                          <button routerLink="/site/showDetails/{{item.id}}"
+                            style="border: hidden; float: left; margin: 0px;">view details</button>
+                          <!-- </button> -->
                         </div>
                       </div>
                       <div *ngIf="newRecipe.RecipeTitle" class="content-area">
@@ -147,11 +145,14 @@
       <div class="e-dlg-header" id="QuickDialog_title">Delete Recipe</div>
     </div>
     <div *ngIf="deleteOptions==1" class="e-dlg-content">Are you sure you want to delete this event?</div>
-    <div *ngIf="deleteOptions!=1"  class="e-dlg-content">How would you like to change the recipe in the series?</div>
+    <div *ngIf="deleteOptions!=1" class="e-dlg-content">How would you like to change the recipe in the series?</div>
     <div class="e-footer-content">
-      <button ejs-button id="delete" cssClass="e-flat buttons" [isPrimary]="true" (click)="buttonClickActions($event)">Delete Recipe</button>
-      <button *ngIf="deleteOptions==3" ejs-button id="delete" cssClass="e-flat buttons" (click)="buttonClickActions($event)">Following Recipes</button>
-      <button *ngIf="deleteOptions!=1" ejs-button id="delete" cssClass="e-flat buttons" (click)="buttonClickActions($event)">Entire Series</button>
+      <button ejs-button id="delete" cssClass="e-flat buttons" [isPrimary]="true"
+        (click)="buttonClickActions($event)">Delete Recipe</button>
+      <button *ngIf="deleteOptions==3" ejs-button id="delete" cssClass="e-flat buttons"
+        (click)="buttonClickActions($event)">Following Recipes</button>
+      <button *ngIf="deleteOptions!=1" ejs-button id="delete" cssClass="e-flat buttons"
+        (click)="buttonClickActions($event)">Entire Series</button>
     </div>
   </div>
   <div class="e-dlg-overlay" style="z-index: 1003; display: block; position: absolute;"></div>
