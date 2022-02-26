@@ -30,11 +30,7 @@
                     <i class="fa-duotone fa-timer"></i><br>
                     Ready in {{showRecipe?.readyInMinutes}} minutes</div>
                 <div class="divP">{{showRecipe?.aggregateLikes}} likes</div>
-                <div class="divP">Score: {{showRecipe?.spoonacularScore}}%
-                    <img src="/application/frontend/images/question.svg" style="position:relative;bottom:2px"
-                        onmouseover="QQ.Tooltip.show('<p>The <b>spoonacular score compares your recipe with all the other recipes on the site</b>. Score 100% and you\'ve achieved total recipe domination. Score 0% and you\'ve managed to upload one of the worst recipes on the site (we still love you).</p><p>Our <b>top-secret formula</b> takes into consideration price (the cheaper the better!), difficulty (the easier the better!), popularity (# of Facebook likes, Pinterest pins, spoonacular saves...), and the health score.</p><p>If you want to <b>improve your score</b>, use affordable ingredients, avoid long and exotic ingredient lists, get your friends to like/share/save your recipes, and pump up the vitamins while cutting down on sodium. See? Easy as pie.</p>',event);"
-                        onmouseout="QQ.Tooltip.hide();" width="15" height="15">
-                </div>
+                <div class="divP">Score: {{showRecipe?.spoonacularScore}}%</div>
                 <div class="divP empty">&nbsp;</div>
             </div>
         </div>

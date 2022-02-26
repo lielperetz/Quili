@@ -10,7 +10,7 @@
 }
 
 .headers {
-    font: "Copper Pot";
+    font-family: "Copper Pot";
     text-align: center;
     font-weight: bold;
     text-transform: capitalize;
