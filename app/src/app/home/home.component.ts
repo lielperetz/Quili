@@ -173,7 +173,7 @@ export class HomeComponent implements OnInit {
             this.scheduleObj.refreshTemplates();
           }
           else
-            alert(response.Error)
+            alert(response.Error + "        home save recipe         ")
         })
       this.newRecipe = new Recipe();
     } else if ((e.target as HTMLElement).id === 'delete') {

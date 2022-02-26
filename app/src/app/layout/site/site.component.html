@@ -8,11 +8,19 @@
                             data-feather="menu"></i></a></li>
             </ul> -->
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item d-none d-lg-block mn"><a routerLink="/site/home" class="nav-link"><i class="fa-regular fa-calendar ic"></i> Meal Planner</a></li>
-                <li class="nav-item d-none d-lg-block mn"><a routerLink="/site/ingredients" class="nav-link"><i class="fa-regular fa-square-list"></i> Shopping List</a></li>
+                <li class="nav-item d-none d-lg-block mn">
+                    <!-- <div class="small-2 medium-2 large-2 column navElement hide-for-small-down">
+                        <a class="nav-link" routerLink="/site/home"><img src="https://spoonacular.com/application/frontend/images/meal-planner-black.svg"
+                                width="40" height="40"><br>Meal Planner</a>
+                    </div> -->
+                    <a routerLink="/site/home" class="nav-link"><i class="fa-regular fa-calendar ic"></i> Meal
+                        Planner</a>
+                </li>
+                <li class="nav-item d-none d-lg-block mn"><a routerLink="/site/ingredients" class="nav-link"><i
+                            class="fa-regular fa-square-list"></i> Shopping List</a></li>
                 <!-- <li class="nav-item d-none d-lg-block"><a routerLink="/site/savedRecipes" class="w3-bar-item w3-button">My Recipes</a></li> -->
             </ul>
-           <!-- <ul class="nav navbar-nav bookmark-icons">
+            <!-- <ul class="nav navbar-nav bookmark-icons">
                  <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-email.html" data-toggle="tooltip"
                         data-placement="top" title="Email"><i class="ficon" data-feather="mail"></i></a></li>
                 <li class="nav-item d-none d-lg-block"><a class="nav-link" href="app-chat.html" data-toggle="tooltip"
@@ -257,8 +265,8 @@
             </li> -->
             <li class="nav-item mr-25">
                 <a class="nav-link" routerLink="/site/savedRecipes">
-                    <i class="far fa-heart float-right icon"></i><span *ngIf="numSaved"
-                        class="badge badge-pill badge-danger badge-up">{{numSaved}}</span></a>
+                    <i class="far fa-heart float-right icon"></i><span *ngIf="saved.numSaved!=0"
+                        class="badge badge-pill badge-danger badge-up">{{saved.numSaved}}</span></a>
             </li>
 
             <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
@@ -394,7 +402,7 @@
             <li><a routerLink="/site/ingredients" class="w3-bar-item w3-button">Ingredients</a></li>
             <li><a routerLink="/site/savedRecipes" class="w3-bar-item w3-button">My Recipes</a></li>
         </ul> -->
-        <!-- <li class="nav-item mr-auto"><a class="navbar-brand"
+<!-- <li class="nav-item mr-auto"><a class="navbar-brand"
                     href="../../../html/ltr/vertical-menu-template/index.html"><span class="brand-logo">
                         <svg viewbox="0 0 139 95" version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" height="24">
@@ -435,11 +443,11 @@
                 </a></li>
              <li class="nav-item nav-toggle"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="d-block d-xl-none text-primary toggle-icon font-medium-4" data-feather="x"></i><i class="d-none d-xl-block collapse-toggle-icon font-medium-4  text-primary" data-feather="disc" data-ticon="disc"></i></a></li> 
         </ul> -->
-        <!-- </div>
+<!-- </div>
     <div class="shadow-bottom"></div>
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation"> -->
-        <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i
+<!-- <li class=" nav-item"><a class="d-flex align-items-center" href="index.html"><i
                         data-feather="home"></i><span class="menu-title text-truncate"
                         data-i18n="Dashboards">Dashboards</span><span
                         class="badge badge-light-warning badge-pill ml-auto mr-1">2</span></a>
@@ -454,14 +462,14 @@
                     </li>
                 </ul>
             </li> -->
-        <!-- <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
+<!-- <li class=" navigation-header"><span data-i18n="Apps &amp; Pages">Apps &amp; Pages</span><i
                     data-feather="more-horizontal"></i>
             </li> -->
-        <!-- <li class=" nav-item"><a class="d-flex align-items-center" routerLink="/site/home"><i class="ficon"
+<!-- <li class=" nav-item"><a class="d-flex align-items-center" routerLink="/site/home"><i class="ficon"
                         data-feather="calendar"></i><span class="menu-title text-truncate"
                         data-i18n="Email">Home</span></a>
             </li> -->
-        <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i
+<!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-chat.html"><i
                         data-feather="message-square"></i><span class="menu-title text-truncate"
                         data-i18n="Chat">Chat</span></a>
             </li>
@@ -469,11 +477,11 @@
                         data-feather="check-square"></i><span class="menu-title text-truncate"
                         data-i18n="Todo">Todo</span></a>
             </li> -->
-        <!-- <li class=" nav-item"><a class="d-flex align-items-center" routerLink="/site/home"><i
+<!-- <li class=" nav-item"><a class="d-flex align-items-center" routerLink="/site/home"><i
                         data-feather="calendar"></i><span class="menu-title text-truncate"
                         data-i18n="Calendar">Calendar</span></a>
             </li> -->
-        <!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-kanban.html"><i
+<!-- <li class=" nav-item"><a class="d-flex align-items-center" href="app-kanban.html"><i
                         data-feather="grid"></i><span class="menu-title text-truncate"
                         data-i18n="Kanban">Kanban</span></a>
             </li>
@@ -1026,9 +1034,9 @@
                         data-feather="life-buoy"></i><span class="menu-title text-truncate"
                         data-i18n="Raise Support">Raise Support</span></a>
             </li> -->
-        <!-- </ul> -->
-    <!-- </div> -->
-    <!-- <div class="w3-sidebar w3-bar-block" style="width:100%">
+<!-- </ul> -->
+<!-- </div> -->
+<!-- <div class="w3-sidebar w3-bar-block" style="width:100%">
     
       </div> -->
 <!-- </div> -->

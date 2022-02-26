@@ -1,15 +1,60 @@
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
-            <i class="glyphicon glyphicon-arrow-right bb" (click)="goBack()"></i>
-            <i *ngIf="!addedToSavedList" class="far fa-heart float-right" (click)="handleAdd()"></i>
-            <i *ngIf="addedToSavedList" class="fas fa-heart float-right"  (click)="handleRemove()"></i>
-            <div>
-                <img class="img" src="{{showRecipe?.image}}">
-                <h1 class="headers">{{showRecipe?.title}}</h1>
+            <div class="col-sm-12 heart">
+                <i *ngIf="!addedToSavedList" class="far fa-heart float-left" (click)="handleAdd()"
+                    title="Add to Your Favorites"></i>
+                <i *ngIf="addedToSavedList" class="fas fa-heart float-left" (click)="handleRemove()"
+                    title="Remove from Your Favorites"></i>
+            </div><br>
+            <h1 class="col-sm-12 headers">{{showRecipe?.title}}</h1>
+            <div class="row">
+                <div class="col-sm-2 empty">&nbsp;</div>
+                <div class="col-sm-8 col-m-12" style="margin: auto;">
+                    <div class="creditImage">
+                        <img class="imgR" src="https://spoonacular.com/recipeImages/{{showRecipe?.id}}-636x393.jpg"
+                            title="{{showRecipe?.title}}">
+                        <span class="credit">Image © <a href="{{showRecipe?.sourceUrl}}" target="_blank"
+                                itemprop="author">{{showRecipe?.creditsText}}</a>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-sm-2 col-m-hide">&nbsp;</div>
+            </div>
+            <div class="col-sm-12 row">
+                <div class="divP empty">&nbsp;</div>
+                <div class="divP">
+                    <br>
+                    for {{showRecipe?.servings}} servings</div>
+                <div class="divP">
+                    <i class="fa-duotone fa-timer"></i><br>
+                    Ready in {{showRecipe?.readyInMinutes}} minutes</div>
+                <div class="divP">{{showRecipe?.aggregateLikes}} likes</div>
+                <div class="divP">Score: {{showRecipe?.spoonacularScore}}%
+                    <img src="/application/frontend/images/question.svg" style="position:relative;bottom:2px"
+                        onmouseover="QQ.Tooltip.show('<p>The <b>spoonacular score compares your recipe with all the other recipes on the site</b>. Score 100% and you\'ve achieved total recipe domination. Score 0% and you\'ve managed to upload one of the worst recipes on the site (we still love you).</p><p>Our <b>top-secret formula</b> takes into consideration price (the cheaper the better!), difficulty (the easier the better!), popularity (# of Facebook likes, Pinterest pins, spoonacular saves...), and the health score.</p><p>If you want to <b>improve your score</b>, use affordable ingredients, avoid long and exotic ingredient lists, get your friends to like/share/save your recipes, and pump up the vitamins while cutting down on sodium. See? Easy as pie.</p>',event);"
+                        onmouseout="QQ.Tooltip.hide();" width="15" height="15">
+                </div>
+                <div class="divP empty">&nbsp;</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="app-content content">
+    <div class="content-wrapper">
+        <div class="content-body">
+            <i *ngIf="!addedToSavedList" class="far fa-heart" (click)="handleAdd()" title="Add to Your Favorites"></i>
+            <i *ngIf="addedToSavedList" class="fas fa-heart"  (click)="handleRemove()" title="Remove from Your Favorites"></i> 
+            <div class="col-12">
+                <h1 class="col-12 headers">{{showRecipe?.title}}</h1>
+                <div class="col-12 divimg">
+                    <img src="https://spoonacular.com/recipeImages/{{showRecipe?.id}}-636x393.jpg">
+                    <span class="credit">Image © <a href="http://www.foodista.com/recipe/LKK4YVLR/kadaifi" target="_blank" itemprop="author">{{showRecipe?.creditsText}}</a></span>
+                </div>
+                
                 <h5 class="headers">for {{showRecipe?.servings}} servings ~ ready in {{showRecipe?.readyInMinutes}}
                     minutes</h5>
-                <!-- <div class="summary" [innerHTML]="showRecipe?.summary"></div> -->
+                <div class="summary" [innerHTML]="showRecipe?.summary"></div>
                 <div class="ul">
                     <div class="col-sm-4">
                         <h3>ingredients:</h3>
@@ -28,4 +73,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

@@ -2,6 +2,79 @@
     box-sizing: border-box;
 }
 
+.row {
+    width: auto;
+    display: table;
+    border: 1px black solid;
+    margin: auto;
+}
+
+.headers {
+    font: "Copper Pot";
+    text-align: center;
+    font-weight: bold;
+    text-transform: capitalize;
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+}
+
+.heart {
+    height: 30px;
+    padding: auto;
+}
+
+.fa-heart {
+    color: orange;
+    cursor: pointer;
+    font-size: x-large;
+}
+
+.fa-heart:hover {
+    font-size: xx-large;
+} 
+
+.creditImage {
+    display: inline-block;
+}
+
+.imgR {
+    margin: auto;
+    border: 6px solid #f1f1f1;
+    width: 100%;
+}
+
+.credit {
+    float: right;
+    font-size: x-small;
+}
+
+.credit a:hover {
+    text-decoration: underline;
+}
+
+.divP {
+    width: 16.66%;
+    float: left;
+    border: 1px red solid;
+}
+
+.empty {
+    display: 16.66%;;
+}
+
+/* On screens that are 992px wide or less */
+@media screen and (max-width: 992px) {
+    .empty {
+        display: none;
+    }
+    .divP {
+        width: 25%;
+    }
+}
+/* * {
+    box-sizing: border-box;
+}
+
 .bb { 
     border: none;
     margin: 5px;
@@ -10,18 +83,13 @@
     color: orange;
 }
 
-.headers {
-    width: 100%;
-    text-align: center;
-}
+.divimg {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
 
-.img {
-    width: 100%;
-    height: 370px;
-    padding: 10px 50px;
-}
-
-/* On screens that are 700px wide or less */
 @media screen and (max-width: 700px) {
     .img {
       height: 200px;
@@ -34,19 +102,6 @@
     height: 100%;
 }
 
-.credit {
-    color:lightseagreen;
-    width: 100%;
-    text-align: right;
-}
 
-.fa-heart {
-    color: orange;
-    cursor: pointer;
-    font-size: large;
-    margin: 10px;
-}
 
-.fa-heart:hover {
-    font-size: xx-large;
-}
+*/

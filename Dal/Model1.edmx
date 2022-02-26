@@ -93,18 +93,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SAVED_RECI__MAIL__2A164134">
-          <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
-          <End Role="SAVED_RECIPES" Type="Self.SAVED_RECIPES" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CLIENTS">
-              <PropertyRef Name="MAIL" />
-            </Principal>
-            <Dependent Role="SAVED_RECIPES">
-              <PropertyRef Name="MAIL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__SCHEDULES__RECIP__5FB337D6">
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="1" />
           <End Role="SCHEDULES" Type="Self.SCHEDULES" Multiplicity="*" />
@@ -117,7 +105,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SAVED_RECIPES_CLIENTS">
+        <Association Name="MC">
           <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
           <End Role="SAVED_RECIPES" Type="Self.SAVED_RECIPES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -144,15 +132,11 @@
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="RECIPES" EntitySet="RECIPES" />
           </AssociationSet>
-          <AssociationSet Name="FK__SAVED_RECI__MAIL__2A164134" Association="Self.FK__SAVED_RECI__MAIL__2A164134">
-            <End Role="CLIENTS" EntitySet="CLIENTS" />
-            <End Role="SAVED_RECIPES" EntitySet="SAVED_RECIPES" />
-          </AssociationSet>
           <AssociationSet Name="FK__SCHEDULES__RECIP__5FB337D6" Association="Self.FK__SCHEDULES__RECIP__5FB337D6">
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="SCHEDULES" EntitySet="SCHEDULES" />
           </AssociationSet>
-          <AssociationSet Name="FK_SAVED_RECIPES_CLIENTS" Association="Self.FK_SAVED_RECIPES_CLIENTS">
+          <AssociationSet Name="MC" Association="Self.MC">
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="SAVED_RECIPES" EntitySet="SAVED_RECIPES" />
           </AssociationSet>
@@ -178,13 +162,13 @@
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="SCHEDULES" EntitySet="SCHEDULES" />
           </AssociationSet>
-          <EntitySet Name="SAVED_RECIPES" EntityType="FINAL_PROJECTModel.SAVED_RECIPES" />
           <EntitySet Name="sysdiagrams" EntityType="FINAL_PROJECTModel.sysdiagrams" />
-          <AssociationSet Name="FK_SAVED_RECIPES_CLIENTS" Association="FINAL_PROJECTModel.FK_SAVED_RECIPES_CLIENTS">
+          <EntitySet Name="SAVED_RECIPES" EntityType="FINAL_PROJECTModel.SAVED_RECIPES" />
+          <AssociationSet Name="MC" Association="FINAL_PROJECTModel.MC">
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="SAVED_RECIPES" EntitySet="SAVED_RECIPES" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="CLIENTS">
           <Key>
             <PropertyRef Name="MAIL" />
@@ -192,8 +176,8 @@
           <Property Name="MAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PASSWORD" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="RECIPES" Relationship="FINAL_PROJECTModel.FK__RECIPES__MAIL__72C60C4A" FromRole="CLIENTS" ToRole="RECIPES" />
-          <NavigationProperty Name="SAVED_RECIPES" Relationship="FINAL_PROJECTModel.FK_SAVED_RECIPES_CLIENTS" FromRole="CLIENTS" ToRole="SAVED_RECIPES" />
-        </EntityType>
+          <NavigationProperty Name="SAVED_RECIPES" Relationship="FINAL_PROJECTModel.MC" FromRole="CLIENTS" ToRole="SAVED_RECIPES" />
+          </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
             <PropertyRef Name="CODE" />
@@ -268,6 +252,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
         <EntityType Name="SAVED_RECIPES">
           <Key>
             <PropertyRef Name="RECIPE_ID" />
@@ -281,19 +275,9 @@
           <Property Name="SERVINGS" Type="Int32" />
           <Property Name="NUM_LIKES" Type="Int32" />
           <Property Name="RATING" Type="Double" />
-          <NavigationProperty Name="CLIENTS" Relationship="FINAL_PROJECTModel.FK_SAVED_RECIPES_CLIENTS" FromRole="SAVED_RECIPES" ToRole="CLIENTS" />
+          <NavigationProperty Name="CLIENTS" Relationship="FINAL_PROJECTModel.MC" FromRole="SAVED_RECIPES" ToRole="CLIENTS" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <Association Name="FK_SAVED_RECIPES_CLIENTS">
+        <Association Name="MC">
           <End Type="FINAL_PROJECTModel.CLIENTS" Role="CLIENTS" Multiplicity="0..1" />
           <End Type="FINAL_PROJECTModel.SAVED_RECIPES" Role="SAVED_RECIPES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -355,6 +339,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FINAL_PROJECTModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SAVED_RECIPES">
             <EntityTypeMapping TypeName="FINAL_PROJECTModel.SAVED_RECIPES">
               <MappingFragment StoreEntitySet="SAVED_RECIPES">
@@ -367,17 +362,6 @@
                 <ScalarProperty Name="RECIPE_TITLE" ColumnName="RECIPE_TITLE" />
                 <ScalarProperty Name="RECIPE_ID" ColumnName="RECIPE_ID" />
                 <ScalarProperty Name="MAIL" ColumnName="MAIL" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="FINAL_PROJECTModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

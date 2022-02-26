@@ -12,7 +12,6 @@ import { SavedRecipesService } from 'src/app/services/saved-recipes.service';
 export class SiteComponent implements OnInit {
 
   public user: string;
-  public numSaved: number; 
 
   constructor(
     private cookies: CookieService, 
@@ -22,7 +21,7 @@ export class SiteComponent implements OnInit {
     saved.GetSavedRecipes().subscribe(
       (res: any) => {
         if(res.Status)
-          this.numSaved = (res.Data as []).length;
+          this.saved.numSaved = (res.Data as []).length;
       })
   }
 

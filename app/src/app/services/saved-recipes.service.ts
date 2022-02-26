@@ -7,9 +7,11 @@ import { catchError, Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class SavedRecipesService {
-  url: string = "http://localhost:44376/Api/SavedRecipes/"
+  url: string = "http://localhost:44376/Api/SavedRecipes/";
+  numSaved: number = 0;
   constructor(private httpClient: HttpClient, private cookies: CookieService) { }
   AddToSavedRecipes(rec: any): Observable<any> {
+    console.log(rec.toString() + "   service saved add")
     const header = new HttpHeaders({ 'Content-Type': 'application/json' }).set('Authorization', this.cookies.get('Token'))
     return this.httpClient.put<any>(this.url + "AddToSavedRecipes", JSON.stringify(rec), { headers: header }).pipe(catchError(this.handleError))
   }
@@ -21,6 +23,7 @@ export class SavedRecipesService {
     return this.httpClient.delete<any>(this.url + "RemoveSavedRecipe/" + id).pipe(catchError(this.handleError))
   }
   IsSaved(idR: string): Observable<any> {
+    console.log(idR + "   service saved is saved")
     const header = new HttpHeaders().set('Authorization', this.cookies.get('Token'))
     return this.httpClient.put<any>(this.url + "IsSaved", '', { headers: header, params: new HttpParams().append('id', idR) }).pipe(catchError(this.handleError))
   }

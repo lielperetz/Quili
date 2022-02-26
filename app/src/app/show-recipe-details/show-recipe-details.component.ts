@@ -1,8 +1,8 @@
 import { Location } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import Swal from 'sweetalert2';
 import { RecipesService } from '../services/recipes.service';
 import { SavedRecipesService } from '../services/saved-recipes.service';
 
@@ -25,6 +25,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.showRecipe = null;
     this.activeRoute.params.subscribe(x => {
       if (x["idRecipe"]) {
         this.idr = x["idRecipe"];
@@ -32,6 +33,8 @@ export class ShowRecipeDetailsComponent implements OnInit {
           (res: any) => {
             if (res.Status)
               this.addedToSavedList = res.Data;
+            else
+              alert(res.Error + "     is saved show    ")
           }
         )
         this.recipes.GetRecipeById(x["idRecipe"]).subscribe(
@@ -40,31 +43,65 @@ export class ShowRecipeDetailsComponent implements OnInit {
               this.showRecipe = response.Data;
             }
             else
-              alert(response.Error);
+              alert(response.Error + "        show recipe oninit     ");
           })
       }
     })
   }
 
-  goBack() {
-    this.location.back();
-  }
-
   handleAdd() {
     this.savedRecipes.AddToSavedRecipes(this.showRecipe).subscribe(
       (res: any) => {
+        console.log(this.showRecipe)
         if (res.Status) {
           this.addedToSavedList = true;
-          console.log(res.Data)
+          this.savedRecipes.numSaved++;
+          Swal.fire({
+            title: 'Success!',
+            text: this.showRecipe.title + " was successfully added.",
+            icon: 'success',
+            iconColor: 'orange',
+            timer: 3000,
+            showConfirmButton: false
+          })
         }
         else
           alert(res.Error)
+        // Swal.fire(
+        //   'Added!',
+        //    'המתכון  ktנוסף בהצלחה',
+        //    'error',
+        //  )
       })
   }
 
   handleRemove() {
-    this.savedRecipes.RemoveSavedRecipe(this.showRecipe.id).subscribe(() => {
-      this.addedToSavedList = false;
+    Swal.fire({
+      title: 'Are you sure you want to delete this recipe?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'Cancal'
+    }).then((result) => {
+      if (result.value) {
+        this.savedRecipes.RemoveSavedRecipe(this.showRecipe.id).subscribe(
+          (res: any) => {
+            if (res.Status) {
+              this.addedToSavedList = false;
+              Swal.fire({
+                title: 'Deleted!',
+                text: this.showRecipe.title + ' was successfully deleted.',
+                icon: 'success',
+                iconColor: 'orange',
+                timer: 3000,
+                showConfirmButton: false
+              })
+              this.savedRecipes.numSaved--;
+            }
+            else
+              console.log(res.Error);
+          })
+      }
     })
   }
 }
