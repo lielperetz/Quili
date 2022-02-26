@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.randomList = []
-    this.recipesService.GetRandom(10).subscribe(data => {
+    this.recipesService.GetRandom(9).subscribe(data => {
       if (data.Status) {
         data.Data.recipes.forEach(element => {
           this.randomList.push(element)

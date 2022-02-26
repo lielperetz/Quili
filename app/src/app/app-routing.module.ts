@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
@@ -11,6 +12,8 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { AuthGuard } from './services/auth.guard';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+//import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/site', pathMatch: 'full' },
@@ -26,16 +29,16 @@ const routes: Routes = [
       [
         { path: "home", component: HomeComponent, canActivate: [AuthGuard] },
         { path: "ingredients/:startDate/:endDate", component: IngredientsComponent, canActivate: [AuthGuard] },
-        { path: "ingredients", component: IngredientsComponent, canActivate: [AuthGuard]  },
+        { path: "ingredients", component: IngredientsComponent, canActivate: [AuthGuard] },
         { path: '', component: DashboardComponent },
-        { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent, canActivate: [AuthGuard]  },
-        { path: "savedRecipes", component: SavedRecipesComponent, canActivate: [AuthGuard]  }
+        { path: "showDetails/:idRecipe", component: ShowRecipeDetailsComponent, canActivate: [AuthGuard] },
+        { path: "savedRecipes", component: SavedRecipesComponent, canActivate: [AuthGuard] }
       ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), HttpClientModule],
+  imports: [RouterModule.forRoot(routes), HttpClientModule, NgbModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

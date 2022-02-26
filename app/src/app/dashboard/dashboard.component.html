@@ -1,23 +1,43 @@
+<!-- <ngb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
+    <p>working</p>
+    <div *ngFor="let item of randomList;">
+        <mdb-carousel-item>
+            <div class="view w-100">
+                <img class="d-block w-100" src="https://spoonacular.com/recipeImages/{{item.id}}-556x370.jpg">
+                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
+                <div class="carousel-caption">
+                    <h3 class="h3-responsive">Light mask</h3>
+                    <p>First text</p>
+                </div>
+            </div>
+        </mdb-carousel-item>
+    </div>
+</ngb-carousel> -->
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
             <div class="row">
-                <div class="col-sm-6">
-
-                    <img id="myImg" class="col-sm-12" src="../assets/textImg/About1.png" />
-                </div>
-
-                <div class="col-sm-6 bg-ghostwhite">
-                    <img class="col-sm-12 popularrecipes" src="../assets/textImg/hot&popularrecipes.png" />
-                    <div class="col-sm-6" *ngFor="let item of randomList;">
-                        <div class="rndRecipe">
-                            <img class="col-sm-12 rndImg"
-                                src="https://spoonacular.com/recipeImages/{{item.id}}-556x370.jpg" />
-                            <p class="rndTxt">{{item.title}}</p>
-                        </div>
-                    </div>
-                </div>
+                
             </div>
+            
+
         </div>
     </div>
 </div>
+
+<!-- <div class="row">
+                <div class="col-sm-4">
+                    <img class="col-sm-12 about" src="../assets/textImg/About1.png" />
+                </div>
+
+                <div class="col-sm-7 bg-ghostwhite">
+                    <img class="col-sm-12 popularrecipes" src="../assets/textImg/hot&popularrecipes.png" />
+                    <div class="col-sm-4" *ngFor="let item of randomList;">
+                        <div class="rndRecipe">
+                            <img class="col-sm-12 rndImg"
+                                src="https://spoonacular.com/recipeImages/{{item.id}}-556x370.jpg" />
+                            <div class="rndTxt">{{item.title}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->

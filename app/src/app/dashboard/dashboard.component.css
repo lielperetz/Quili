@@ -1,5 +1,9 @@
-a:hover {
-    background-color: yellow;
+
+
+/* .about{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 150;
 }
 .bg-ghostwhite{
     background-color: ghostwhite;
@@ -19,13 +23,17 @@ a:hover {
     background-color: white;
     margin: 0;
     padding: 0;
+    margin-top: 10px;
 }
 .rndTxt{
-    height: 180px;
-    font-size: 16px;
+    height: 140px;
+    font-size: 14px;
     line-break: loose;
     text-align: center;
-}
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} */
 
 
 
