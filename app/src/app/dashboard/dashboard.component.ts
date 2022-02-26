@@ -19,6 +19,8 @@ export class DashboardComponent implements OnInit {
           this.randomList.push(element)
         });
       }
+      else
+        console.log(data.Error)
     })
     console.log(this.randomList)
   }

@@ -23,6 +23,8 @@ import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-de
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { AuthGuard } from './services/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AuthGuard } from './services/auth.guard';
     SplitButtonModule,
     SidebarModule,
     ContextMenuModule,
-    MultiSelectModule
+    MultiSelectModule,
+    BrowserAnimationsModule,
+    MatCarouselModule.forRoot()
   ],
   providers: [CookieService, AuthGuard],
   bootstrap: [AppComponent]
