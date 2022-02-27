@@ -3,105 +3,91 @@
 }
 
 .row {
-    width: auto;
+    background-color: rgb(255, 255, 247);
+    padding: 10px;
+    margin: 20px;
     display: table;
-    border: 1px black solid;
-    margin: auto;
 }
 
 .headers {
-    font-family: "Copper Pot";
-    text-align: center;
+    font-family: "cursive";
     font-weight: bold;
+    font-size: 40px;
     text-transform: capitalize;
-    text-decoration-line: underline;
-    text-decoration-thickness: 2px;
+    padding: 10px 20px;
 }
 
-.heart {
-    height: 30px;
-    padding: auto;
+.sum {
+    padding: 20px;
+    word-spacing: 2px;
+    line-height: 25px;
+    background-color: white;
+    font-size: medium;
 }
 
-.fa-heart {
-    color: orange;
+.savePrint {
+    float: right;
+}
+
+.sp {
+    border: 2px solid orange;
+    border-radius: 3px;
+    margin: 5px;
+    padding: 5px; 
+    text-align: center;
     cursor: pointer;
-    font-size: x-large;
+    color: black;
+    float: right;
 }
 
-.fa-heart:hover {
-    font-size: xx-large;
+.icon {
+    margin: 2px auto;
+    color: orange;
+    font-size: large;
+}
+
+.sp:hover {
+    background-color: rgb(248, 228, 191);
 } 
 
-.creditImage {
-    display: inline-block;
-}
-
 .imgR {
+    padding: 30px 0px 0px;
+}
+
+.infoR {
+    border: 2px solid rgba(0,0,0,.15);
+    border-radius: 4px;
+    display: inline-block;
+    flex-wrap: wrap;
+    padding: 20px;
+    position: relative;
+    text-align: left;
+    margin: 30px 20px;
+}
+
+.prop {
     margin: auto;
-    border: 6px solid #f1f1f1;
-    width: 100%;
 }
 
-.credit {
-    float: right;
-    font-size: x-small;
-}
-
-.credit a:hover {
-    text-decoration: underline;
-}
-
-.divP {
-    width: 16.66%;
-    float: left;
-    border: 1px red solid;
-}
-
-.empty {
-    display: 16.66%;;
-}
-
-/* On screens that are 992px wide or less */
-@media screen and (max-width: 992px) {
-    .empty {
-        display: none;
-    }
-    .divP {
-        width: 25%;
-    }
-}
-/* * {
-    box-sizing: border-box;
-}
-
-.bb { 
-    border: none;
+.prop .icon {
+    font-size: x-large;
     margin: 5px;
-    font-size: large;
-    cursor: pointer;
-    color: orange;
 }
 
-.divimg {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-  }
-
-@media screen and (max-width: 700px) {
-    .img {
-      height: 200px;
-    }
+.subT {
+    font-weight: bold;
+    padding: 0px 3px;
 }
 
-.ul {
-    margin: 50px 10px;
-    display: block;
-    height: 100%;
+.ingr {
+    text-align: center;
+    color: black;
+    float: left;
+    margin: 5px auto;
 }
 
-
-
-*/
+.iImg {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+}

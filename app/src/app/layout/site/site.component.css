@@ -1,15 +1,14 @@
-.ic {
-    font-size: large;
+@media screen and (max-width: 600px) {
+    .d-s-none {
+        display: none;
+    }
 }
 
 .icon {
     color: orange;
     cursor: pointer;
     font-size: x-large;
-}
-
-.icon:hover {
-    font-size: xx-large;
+    margin: 3px;
 }
 
 .mail {

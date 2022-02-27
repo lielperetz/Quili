@@ -8,16 +8,15 @@
                             data-feather="menu"></i></a></li>
             </ul> -->
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item d-none d-lg-block mn">
+                <li class="nav-item d-lg-block mn">
                     <!-- <div class="small-2 medium-2 large-2 column navElement hide-for-small-down">
                         <a class="nav-link" routerLink="/site/home"><img src="https://spoonacular.com/application/frontend/images/meal-planner-black.svg"
                                 width="40" height="40"><br>Meal Planner</a>
                     </div> -->
-                    <a routerLink="/site/home" class="nav-link"><i class="fa-regular fa-calendar ic"></i> Meal
-                        Planner</a>
+                    <a routerLink="/site/home" class="nav-link" title="Meal planner"><i class="fa fa-calendar-o icon"></i><span class="d-s-none"> Meal
+                        Planner</span></a>
                 </li>
-                <li class="nav-item d-none d-lg-block mn"><a routerLink="/site/ingredients" class="nav-link"><i
-                            class="fa-regular fa-square-list"></i> Shopping List</a></li>
+                <li class="nav-item d-lg-block mn"><a routerLink="/site/ingredients" class="nav-link" title="Your ingredients list"><i class="fa fa-list icon"></i><span class="d-s-none"> Shopping List</span></a></li>
                 <!-- <li class="nav-item d-none d-lg-block"><a routerLink="/site/savedRecipes" class="w3-bar-item w3-button">My Recipes</a></li> -->
             </ul>
             <!-- <ul class="nav navbar-nav bookmark-icons">
@@ -264,7 +263,7 @@
                 </ul>
             </li> -->
             <li class="nav-item mr-25">
-                <a class="nav-link" routerLink="/site/savedRecipes">
+                <a class="nav-link" routerLink="/site/savedRecipes" title="Your favorites recipes">
                     <i class="far fa-heart float-right icon"></i><span *ngIf="saved.numSaved!=0"
                         class="badge badge-pill badge-danger badge-up">{{saved.numSaved}}</span></a>
             </li>
@@ -295,7 +294,7 @@
         </ul>
     </div>
 </nav>
-<ul class="main-search-list-defaultlist d-none">
+<!-- <ul class="main-search-list-defaultlist d-none">
     <li class="d-flex align-items-center"><a href="javascript:void(0);">
             <h6 class="section-label mt-75 mb-0">Files</h6>
         </a></li>
@@ -390,7 +389,7 @@
             <div class="d-flex justify-content-start"><span class="mr-75" data-feather="alert-circle"></span><span>No
                     results found.</span></div>
         </a></li>
-</ul>
+</ul> -->
 <!-- END: Header-->
 
 <!-- BEGIN: Main Menu-->
@@ -1091,8 +1090,8 @@
 
 <!-- END: Content-->
 
-<div class="sidenav-overlay"></div>
-<div class="drag-target"></div>
+<!-- <div class="sidenav-overlay"></div> -->
+<!-- <div class="drag-target"></div> -->
 
 <!-- BEGIN: Footer-->
 <!-- <footer class="footer footer-static footer-light">

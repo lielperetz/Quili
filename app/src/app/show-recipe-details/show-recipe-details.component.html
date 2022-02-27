@@ -1,37 +1,70 @@
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
-            <div class="col-sm-12 heart">
-                <i *ngIf="!addedToSavedList" class="far fa-heart float-left" (click)="handleAdd()"
-                    title="Add to Your Favorites"></i>
-                <i *ngIf="addedToSavedList" class="fas fa-heart float-left" (click)="handleRemove()"
-                    title="Remove from Your Favorites"></i>
-            </div><br>
-            <h1 class="col-sm-12 headers">{{showRecipe?.title}}</h1>
             <div class="row">
-                <div class="col-sm-2 empty">&nbsp;</div>
-                <div class="col-sm-8 col-m-12" style="margin: auto;">
-                    <div class="creditImage">
-                        <img class="imgR" src="https://spoonacular.com/recipeImages/{{showRecipe?.id}}-636x393.jpg"
-                            title="{{showRecipe?.title}}">
-                        <span class="credit">Image © <a href="{{showRecipe?.sourceUrl}}" target="_blank"
-                                itemprop="author">{{showRecipe?.creditsText}}</a>
-                        </span>
+                <h1 class="col-sm-9 headers">{{showRecipe?.title}}</h1>
+                <div class="col-sm-3 savePrint">
+                    <div class="sp"><i class="fa fa-print icon"></i><br>Print</div>
+                    <div class="sp">
+                        <i *ngIf="!addedToSavedList" class="fa fa-heart-o icon" (click)="handleAdd()"
+                            title="Add to Your Favorites"></i>
+                        <i *ngIf="addedToSavedList" class="fa fa-heart icon" (click)="handleRemove()"
+                            title="Remove from Your Favorites"></i><br>Save
                     </div>
                 </div>
-                <div class="col-sm-2 col-m-hide">&nbsp;</div>
-            </div>
-            <div class="col-sm-12 row">
-                <div class="divP empty">&nbsp;</div>
-                <div class="divP">
-                    <br>
-                    for {{showRecipe?.servings}} servings</div>
-                <div class="divP">
-                    <i class="fa-duotone fa-timer"></i><br>
-                    Ready in {{showRecipe?.readyInMinutes}} minutes</div>
-                <div class="divP">{{showRecipe?.aggregateLikes}} likes</div>
-                <div class="divP">Score: {{showRecipe?.spoonacularScore}}%</div>
-                <div class="divP empty">&nbsp;</div>
+                <div class="col-sm-8">
+                    <img class="col-sm-12 imgR"
+                        src="https://spoonacular.com/recipeImages/{{showRecipe?.id}}-636x393.jpg"
+                        title="{{showRecipe?.title}}">
+                </div>
+                <div class="col-sm-3 infoR">
+                    <section>
+                        <div class="prop">
+                            <span class="time-stats" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" role="img"
+                                    viewBox="0 0 24 24" aria-hidden="true">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <path fill="#e7ab46"
+                                            d="m 11.938,19.758 a 7.817,7.817 0 0 1 -7.815,-7.82 7.818,7.818 0 1 1 15.634,0 7.819,7.819 0 0 1 -7.818,7.82 M 11.939,2 c 5.486,0 9.937,4.447 9.937,9.938 0,5.488 -4.45,9.938 -9.937,9.938 C 6.454,21.876 2,17.426 2,11.938 2,6.448 6.454,2 11.939,2 Z m -0.554,5.624 a 0.554,0.554 0 0 0 1.108,0 V 5.64 a 0.554,0.554 0 0 0 -1.108,0 z m 0,10.688 a 0.555,0.555 0 0 0 1.108,0 v -1.984 a 0.551,0.551 0 0 0 -0.551,-0.55 0.553,0.553 0 0 0 -0.557,0.55 z m 7.181,-6.16 c 0.31,0 0.55,-0.247 0.55,-0.55 a 0.547,0.547 0 0 0 -0.55,-0.554 h -1.984 a 0.556,0.556 0 0 0 -0.557,0.555 c 0,0.302 0.251,0.55 0.557,0.55 h 1.984 z m -11.14,0 a 0.552,0.552 0 1 0 0,-1.104 H 5.442 a 0.555,0.555 0 0 0 -0.556,0.555 c 0,0.302 0.25,0.55 0.556,0.55 h 1.982 z m 0.88,-3.5 c 0.082,0.08 0.188,0.12 0.294,0.12 a 0.41,0.41 0 0 0 0.291,-0.12 0.418,0.418 0 0 0 0,-0.588 L 7.899,7.073 a 0.415,0.415 0 0 0 -0.586,0 0.421,0.421 0 0 0 0,0.587 z m 8.13,8.065 c 0.083,0.08 0.19,0.12 0.294,0.12 a 0.413,0.413 0 0 0 0.29,-0.706 l -0.992,-0.993 a 0.418,0.418 0 0 0 -0.585,0 0.42,0.42 0 0 0 0,0.585 z M 15.966,8.652 16.957,7.66 A 0.41471948,0.41471948 0 1 0 16.372,7.072 l -0.989,0.992 a 0.412,0.412 0 0 0 0,0.588 0.412,0.412 0 0 0 0.582,0 z m -8.131,8.066 0.99,-0.994 A 0.41295097,0.41295097 0 1 0 8.242,15.139 L 7.25,16.132 a 0.426,0.426 0 0 0 0,0.586 c 0.08,0.08 0.186,0.12 0.292,0.12 0.106,0 0.215,-0.04 0.293,-0.12 z m 3.628,-2.737 c 0.916,-1.107 4.562,-5.576 2.932,-4.566 -1.859,1.152 -4.516,3.113 -4.516,3.113 a 1.097,1.097 0 0 0 -0.414,0.855 1.085,1.085 0 0 0 1.788,0.83 l 0.004,0.01 c 0,0 0.02,-0.02 0.052,-0.057 0.058,-0.057 0.11,-0.117 0.154,-0.185 z">
+                                        </path>
+                                    </g>
+                                </svg> </span>
+                            <span class="subT">Prep: </span><span class="con"> {{showRecipe?.readyInMinutes}}
+                                minutes</span>
+                        </div>
+                        <div class="prop">
+                            <span class="section-icon" aria-hidden="true"><svg width="32" height="32"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" role="img" aria-hidden="true"
+                                    tabindex="-1">
+                                    <path
+                                        d="M12.0064715,2.00579868 C14.4463454,2.02579867 16.6134694,2.80767331 18.4712185,4.39429758 C20.3767177,6.02242184 21.5375921,8.09579588 21.888467,10.5790447 C22.3002168,13.5172934 21.5735921,16.1677922 19.680718,18.4600411 C18.0502187,20.4302902 16.5072194,21.5886647 13.9774706,21.9786645 C13.6759707,22.0310395 13.6595957,22.0060395 13.6369708,21.6834147 C13.5658458,20.7627901 13.4807208,19.8430405 13.4110959,18.9216659 C13.3634709,18.3159162 13.3177209,17.7235415 13.2737209,17.1209167 C13.2345959,16.539792 13.192346,15.9650423 13.168096,15.3800425 C13.148596,14.8885428 13.2463459,14.425418 13.5689708,14.0314182 C13.9579706,13.5776684 14.3415954,13.1077936 14.6807203,12.6167938 C15.220595,11.8151692 15.4822199,10.9161696 15.5790949,9.97404502 C15.6689698,9.09304543 15.5900949,8.24417082 15.28772,7.4092962 C15.1212201,6.92067142 14.8759702,6.45467164 14.5595953,6.03892183 C14.1865955,5.55729705 13.4127209,5.27617218 12.8165961,5.16967223 C12.0134715,5.02779729 10.971222,5.13629724 10.3064723,5.64729701 C9.88847247,5.96054686 9.33934773,6.41167166 9.12434782,6.88142144 C8.33459819,8.60479565 8.41034815,10.3272949 9.1774728,12.0411691 C9.46747267,12.6770438 9.92522246,13.2115435 10.3752223,13.7370433 C10.6790971,14.0866681 10.6588471,14.447293 10.7174721,14.9257928 C10.7454721,15.1944176 10.7400971,15.4617925 10.7252221,15.7316674 C10.6392221,16.9532918 10.5502222,18.1746663 10.4529722,19.3919157 C10.4025972,20.1289154 10.3362223,20.861165 10.2849723,21.5956647 C10.2485973,22.0157895 10.5345972,22.0170395 10.1290974,21.9551645 C8.26509822,21.6430397 6.89709885,20.876415 5.4705995,19.6284156 C3.85135024,18.2172912 2.75135075,16.476417 2.28072596,14.379543 C1.5549763,11.1104195 2.22997599,8.14079586 4.380725,5.56117205 C6.05734923,3.54967297 8.23622323,2.40679849 10.828347,2.06454865 C11.2228469,2.01754867 11.6142217,1.98654869 12.0064715,2.00579868">
+                                    </path>
+                                </svg> </span>
+                            <span class="subT">Servings:</span><span class="con">{{showRecipe?.servings}}
+                                servings</span>
+                        </div>
+                        <div class="prop">
+                            <i class="fa fa-thumbs-o-up icon"></i><span class="subT">Likes:</span><span
+                                class="con">{{showRecipe?.aggregateLikes}}</span>
+                        </div>
+                        <div class="prop">
+                            <i class="fa fa-star icon"></i>
+                            <span class="subT">Rating:</span><span class="con">{{showRecipe?.spoonacularScore}}%</span>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-12 sum" [innerHTML]="showRecipe?.summary"></div>
+                <div class="col-sm-12">
+                    <h3 class="headers">Ingredients:</h3>
+                    <div class="col-sm-2 ingr" *ngFor="let item of showRecipe?.extendedIngredients">
+                        <div class="col-sm-12">
+                            <h4>{{item.measures.us.amount}} {{item.measures.us.unitShort}}</h4>
+                            <img class="iImg" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
+                            <h5>{{item.name}}</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
