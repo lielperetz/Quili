@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+.men {
+  padding: 0px;
+}
+
 .div-recipe {
   margin: 3px;
   background-color: 1px solid blue;

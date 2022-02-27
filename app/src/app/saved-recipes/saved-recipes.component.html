@@ -1,9 +1,35 @@
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
-            <p class="">My Favorites</p>
-            <div *ngFor="let item of listSave">
-                {{item.Title}}
+            <div class="row">
+                <h1 class="col-sm-12 header">My Favorites</h1>
+                <div class="col-sm-12 notFound" *ngIf="savedRecipes.numSaved==0">
+                    <p>It is empty here.<br>
+                        Personalize your cooking experience with your Favorites.</p><br><br>
+                    <h3>Already have items saved?</h3>
+                    <a class="login" routerLink="/auth/login">Log In</a>
+                    <hr>
+                    <div>
+                        <h2>Heart It.</h2>
+                        Store everything you love on one page.
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="col-sm-4" *ngFor="let item of listSave;">
+                        <div class="col-sm-12 saveItem">
+                            <a routerLink="/site/showDetails/{{item.Id}}" style="border: none;">
+                                <div class="numLikes" title="{{item.AggregateLikes}} peaple like the recipe">{{item.AggregateLikes}} <span><i class="fa fa-heart"></i></span></div>
+                                <!-- <div class="S-product-item__like-ctn"><div class="S-popover guOAVM"><span><span class="S-product-item__like"><span>21.5k</span> <i class="iconfont icon-like"></i></span></span></div></div> -->
+                                <img class="col-sm-12 saveImg" src="{{item.Image}}">
+                                <div class="col-sm-12 saveTxt">
+                                    {{item.Title}}
+                                </div>
+                            </a>
+                            <span class="col-sm-2 tr"><i class="fa fa-trash-o"
+                                    (click)="handleRemove(item.Id)"></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

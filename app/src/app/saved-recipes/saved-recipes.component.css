@@ -1,0 +1,85 @@
+* {
+    color: black;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+.row {
+    background-color: rgb(255, 255, 247);
+    margin: 10px 20px;
+    padding: 20px;
+}
+.header {
+    margin: 30px auto;
+    font-family: "cursive";
+    font-weight: bold;
+    font-size: 44px;
+    text-transform: capitalize;
+}
+
+h3 h2 {
+    font-weight: 800;
+    margin: 10px auto;
+}
+
+.login {
+    background-color: orange;
+    color: white;
+    margin: 10px auto;
+    padding: 5px 10px;
+}
+
+.saveItem{
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+    height: 300px;
+}
+
+.saveTxt{
+    /* z-index: 0; */
+    position: relative;
+    float: left;
+    font-size: 16px;
+    text-align: left;
+    margin: 5px 0px;
+    font-weight: bold;
+} 
+
+.saveTxt:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+}
+
+.saveImg{
+    margin: 0;
+    margin-bottom: 5px;
+    padding: 0;
+    float: left;
+}
+
+.tr {
+    display: none;
+}
+
+.saveItem:hover .tr {
+    float: right;
+    font-size: 18px;
+    display: block;
+    cursor: pointer;
+}
+
+.numLikes {
+    z-index: 1;
+    position: absolute;
+    background-color: hsla(0,0%,100%,.4);
+    float: right;
+    padding: 3px 5px;
+    top: 5px;
+    right: 5px; 
+}
+
+.fa-heart {
+    color: red;
+}
