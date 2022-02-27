@@ -56,63 +56,36 @@
                 </div>
                 <div class="col-sm-12 sum" [innerHTML]="showRecipe?.summary"></div>
                 <div class="col-sm-12">
-                    <h3 class="headers">Ingredients:</h3>
+                    <h3 class="headers sub">Ingredients:</h3>
                     <div class="col-sm-2 ingr" *ngFor="let item of showRecipe?.extendedIngredients">
                         <div class="col-sm-12">
-                            <h4>{{item.measures.us.amount}} {{item.measures.us.unitShort}}</h4>
+                            <h3>{{item.measures.us.amount}} {{item.measures.us.unitShort}}</h3>
                             <img class="iImg" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
-                            <h5>{{item.name}}</h5>
+                            <h4>{{item.name}}</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <h3 class="headers">Equipment:</h3>
-                    <div [innerHTML]="getEquipment">
-
-                    </div>
-                    <!-- <div class="col-sm-2" *ngFor="let item of showRecipe?.extendedIngredients">
+                    <h3 class="headers sub">Equipment:</h3>
+                    <div class="col-sm-2" *ngFor="let item of equipment">
                         <div class="col-sm-12">
-                            <h4>{{item.measures.us.amount}} {{item.measures.us.unitShort}}</h4>
-                            <img class="iImg" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
-                            <h5>{{item.name}}</h5>
+                            <img class="iImg" src="https://spoonacular.com/cdn/equipment_500x500/{{item.image}}">
+                            <h4>{{item.name}}</h4>
                         </div>
-                    </div> -->
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <h3 class="headers sub">Instructions:</h3>
+                    <ol class="col-sm-12 ol">
+                        <li *ngFor="let item of showRecipe?.analyzedInstructions[0].steps; let i=index">
+                            <label>
+                                <span>Step <span class="badge badge-pill badge-primary is"> {{i + 1}} </span></span>
+                            </label>
+                            <p>{{item.step}}</p>
+                        </li>
+                    </ol>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- <div class="app-content content">
-    <div class="content-wrapper">
-        <div class="content-body">
-            <i *ngIf="!addedToSavedList" class="far fa-heart" (click)="handleAdd()" title="Add to Your Favorites"></i>
-            <i *ngIf="addedToSavedList" class="fas fa-heart"  (click)="handleRemove()" title="Remove from Your Favorites"></i> 
-            <div class="col-12">
-                <h1 class="col-12 headers">{{showRecipe?.title}}</h1>
-                <div class="col-12 divimg">
-                    <img src="https://spoonacular.com/recipeImages/{{showRecipe?.id}}-636x393.jpg">
-                    <span class="credit">Image © <a href="http://www.foodista.com/recipe/LKK4YVLR/kadaifi" target="_blank" itemprop="author">{{showRecipe?.creditsText}}</a></span>
-                </div>
-                
-                <h5 class="headers">for {{showRecipe?.servings}} servings ~ ready in {{showRecipe?.readyInMinutes}}
-                    minutes</h5>
-                <div class="summary" [innerHTML]="showRecipe?.summary"></div>
-                <div class="ul">
-                    <div class="col-sm-4">
-                        <h3>ingredients:</h3>
-                        <ul>
-                            <li *ngFor="let item of showRecipe?.extendedIngredients">{{item.original}}</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-8">
-                        <h3>instructions:</h3>
-                        <ol>
-                            <li *ngFor="let item of showRecipe?.analyzedInstructions[0].steps">{{item.step}}</li>
-                        </ol>
-                    </div>
-                </div>
-                <p class="col-sm-12 credit">&#169; {{showRecipe?.creditsText}}</p>
-            </div>
-        </div>
-    </div>
-</div> -->

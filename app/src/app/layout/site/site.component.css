@@ -8,7 +8,6 @@
     color: orange;
     cursor: pointer;
     font-size: x-large;
-    margin: 3px;
 }
 
 .mail {
@@ -17,6 +16,14 @@
     padding: 0.65rem 1.28rem;
 }
 
-.mn:active {
-    background-color: orange; color: orange;
+.mn {
+    margin: auto 2px;
+}
+
+a:hover {
+    background-color: white;
+}
+
+a:focus {
+    background-color: white;
 }

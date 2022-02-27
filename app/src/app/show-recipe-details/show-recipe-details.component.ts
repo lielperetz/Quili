@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -15,6 +15,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
   showRecipe: any;
   addedToSavedList: boolean;
   idr: string;
+  equipment = [];
   constructor(
     public httpclient: HttpClient,
     public recipes: RecipesService,
@@ -34,25 +35,25 @@ export class ShowRecipeDetailsComponent implements OnInit {
             if (res.Status)
               this.addedToSavedList = res.Data;
             else
-              alert(res.Error + "     is saved show    ")
+              alert(res.Error)
           }
         )
         this.recipes.GetRecipeById(x["idRecipe"]).subscribe(
           (response: any) => {
             if (response.Status) {
               this.showRecipe = response.Data;
+              this.setE();
             }
             else
-              alert(response.Error + "        show recipe oninit     ");
+              alert(response.Error);
           })
       }
-    })
+    });
   }
 
   handleAdd() {
     this.savedRecipes.AddToSavedRecipes(this.showRecipe).subscribe(
       (res: any) => {
-        console.log(this.showRecipe)
         if (res.Status) {
           this.addedToSavedList = true;
           this.savedRecipes.numSaved++;
@@ -67,11 +68,6 @@ export class ShowRecipeDetailsComponent implements OnInit {
         }
         else
           alert(res.Error)
-        // Swal.fire(
-        //   'Added!',
-        //    'המתכון  ktנוסף בהצלחה',
-        //    'error',
-        //  )
       })
   }
 
@@ -104,14 +100,17 @@ export class ShowRecipeDetailsComponent implements OnInit {
       }
     })
   }
-  
-  // getEquipment() {
-  //   return this.httpclient.get<any>('https://api.spoonacular.com/recipes/44860/equipmentWidget?apiKey=52b9142911034ec3b82f8d31cb7410ca').subscribe(
-  //     data => {console.log(data) 
-  //       return data as HTMLElement}
-  //       , err => console.log(err)
-  //   ) 
-  // }
+
+  setE() {
+    this.equipment = [];
+    this.showRecipe?.analyzedInstructions[0].steps.forEach(element => {
+      if ((element.equipment as Array<any>).length > 0)
+        element.equipment?.forEach(item => {
+          if (this.equipment.filter(x => x.id == item.id)[0] == null)
+            this.equipment?.push(item);
+        })
+    });
+  }
 }
 
 

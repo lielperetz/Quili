@@ -31,6 +31,7 @@ export class HomeComponent implements OnInit {
   public deletePopup: boolean = false;
   public deleteOptions: number;
   public idDeleteRecipe: number;
+  public selectedDate: Date = new Date();
 
   constructor(
     private recipeService: RecipesService,
@@ -62,6 +63,11 @@ export class HomeComponent implements OnInit {
 
   getUrl(id: any) {
     return "url('https://spoonacular.com/recipeImages/'" + id + "'-240x150.jpg')";
+  }
+
+  public onCellClick(args: any): void{
+    this.scheduleObj.closeQuickInfoPopup();
+    this.selectedDate = args.startTime as Date;
   }
 
   public onActionComplete(args: ActionEventArgs): void {
@@ -162,7 +168,6 @@ export class HomeComponent implements OnInit {
   }
 
   public buttonClickActions(e: Event, id?: number): void {
-    // const quickPopup: HTMLElement = closest(e.target as HTMLElement, '.e-quick-popup-wrapper') as HTMLElement;
     if ((e.target as HTMLElement).id === 'save') {
       this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
       this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
@@ -193,22 +198,6 @@ export class HomeComponent implements OnInit {
       })
       this.deletePopup = false;
     }
-
-    //   const eventDetails: Record<string, any> = this.scheduleObj.activeEventData.event as Record<string, any>;
-    //   let currentAction: CurrentAction;
-    //   if (eventDetails.RecurrenceRule) {
-    //     currentAction = 'DeleteOccurrence';
-    //   }
-    //   this.scheduleObj.deleteEvent(eventDetails, currentAction);
-    // } else {
-    //   const isCellPopup: boolean = quickPopup.firstElementChild.classList.contains('e-cell-popup');
-    //   const eventDetails: Record<string, any> = isCellPopup ? getSlotData() :
-    //     this.scheduleObj.activeEventData.event as Record<string, any>;
-    //   let currentAction: CurrentAction = isCellPopup ? 'Add' : 'Save';
-    //   if (eventDetails.RecurrenceRule) {
-    //     currentAction = 'EditOccurrence';
-    //   }
-    //   this.scheduleObj.openEditor(eventDetails, currentAction, true);
     this.scheduleObj.closeQuickInfoPopup();
   }
 
@@ -216,21 +205,9 @@ export class HomeComponent implements OnInit {
     if (args.requestType === 'cellSelect') {
       let date1: Date = (args.data as Record<string, any>).StartTime as Date;
       let date2: Date = (args.data as Record<string, any>).EndTime as Date;
-      this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
+      // this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
     }
   }
-
-  // public dragRecipe(event: any) {
-  //   console.log(event);
-  // }
-
-  // public dropRecipe(event: any) {
-  //   console.log(event + " drop");
-  // }
-
-  // public edit(id?:number){
-  //   console.log(id + " edit")
-  // }
 
   public delete(id?: number) {
     var l = this.listRecipes.filter(x => x.Code == id)[0] as Record<string, any>;

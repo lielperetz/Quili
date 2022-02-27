@@ -12,9 +12,14 @@
 .headers {
     font-family: "cursive";
     font-weight: bold;
-    font-size: 40px;
+    font-size: 44px;
     text-transform: capitalize;
-    padding: 10px 20px;
+    padding: 20px 20px;
+    margin-top: 10px;
+}
+
+.sub {
+    font-size: 32px;
 }
 
 .sum {
@@ -66,7 +71,7 @@
 }
 
 .prop {
-    margin: auto;
+    margin: 10px auto;
 }
 
 .prop .icon {
@@ -83,11 +88,39 @@
     text-align: center;
     color: black;
     float: left;
-    margin: 5px auto;
+    margin: 10px auto;
+}
+
+.ingr h3 {
+    font-weight: bold;
 }
 
 .iImg {
     width: 80px;
     height: 80px;
     margin: 5px;
+}
+
+.ol {
+    letter-spacing: .5px;
+    list-style: none;
+    line-height: 250%; 
+}
+
+li {
+    margin-bottom: 20px;
+}
+label:first-child {
+    margin: 0px auto 10px;
+}
+
+label {
+    margin: 20px auto;
+    font-size: large;
+    font-weight: bold;
+}
+
+.is {
+    background-color: orange;
+    color: white;
 }
