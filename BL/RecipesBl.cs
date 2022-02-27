@@ -10,7 +10,11 @@ namespace BL
 {
     public class RecipesBl
     {
-        public static List<RecipesEntities> GetSavedRecipe(string mail)
+        public static List<RecipesEntities> GetRecipes()
+        {
+            return RecipesEntities.ConvertToListEntities(DalCode.GetRecipes());
+        }
+        public static List<RecipesEntities> GetSavedRecipes(string mail)
         {
             return RecipesEntities.ConvertToListEntities(DalCode.GetRecipes()).FindAll(x => x.Mail == mail);
         }

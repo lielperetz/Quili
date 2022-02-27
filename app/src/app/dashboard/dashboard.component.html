@@ -1,51 +1,15 @@
-<mat-carousel
-  timings="250ms ease-in"
-  [autoplay]="true"
-  interval="5000"
-  color="accent"
-  maxWidth="auto"
-  proportion="25"
-  slides="5"
-  [loop]="true"
-  [hideArrows]="false"
-  [hideIndicators]="false"
-  [useKeyboard]="true"
-  [useMouseWheel]="false"
-  orientation="ltr"
->
-  <mat-carousel-slide
-    #matCarouselSlide
-    *ngFor="let slide of randomList; let i = index"
-    [image]="slide.image"
-    overlayColor="#00000040"
-    [hideOverlay]="false"
-  ></mat-carousel-slide>
-</mat-carousel>
-    <!-- [image]="https://spoonacular.com/recipeImages/{{item.id}}-636x393.jpg" -->
+<!-- [image]="https://spoonacular.com/recipeImages/{{item.id}}-636x393.jpg" -->
 
-<!-- <ngb-carousel class="carousel slide carousel-fade" [animation]="'fade'">
-    <p>working</p>
-    <div *ngFor="let item of randomList;">
-        <mdb-carousel-item>
-            <div class="view w-100">
-                <img class="d-block w-100" src="https://spoonacular.com/recipeImages/{{item.id}}-556x370.jpg">
-                <div class="mask rgba-black-light waves-light" mdbWavesEffect></div>
-                <div class="carousel-caption">
-                    <h3 class="h3-responsive">Light mask</h3>
-                    <p>First text</p>
-                </div>
-            </div>
-        </mdb-carousel-item>
-    </div>
-</ngb-carousel> -->
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
-            <div class="row">
+            <mat-carousel timings="250ms ease-in" [autoplay]="true" interval="5000" color="#00000040" maxWidth="auto"
+                proportion="35" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="true"
+                [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+                <mat-carousel-slide #matCarouselSlide *ngFor="let slide of randomList; let i = index"
+                    [image]="slide" overlayColor="#00000040" [hideOverlay]="true"></mat-carousel-slide>
                 
-            </div>
-            
-
+            </mat-carousel>
         </div>
     </div>
 </div>

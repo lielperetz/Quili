@@ -16,15 +16,12 @@ export class DashboardComponent implements OnInit {
     this.recipesService.GetRandom(9).subscribe(data => {
       if (data.Status) {
         data.Data.recipes.forEach(element => {
-          this.randomList.push(element)
+          this.randomList.push("https://spoonacular.com/recipeImages/"+element.id+"-636x393.jpg")
         });
       }
       else
         console.log(data.Error)
     })
     console.log(this.randomList)
-  }
-  about(): void {
-    // document.getElementById("myImg").src = "hackanm.gif";
   }
 }
