@@ -116,7 +116,7 @@ namespace finalProject.Controllers
             }
             try
             {
-                return Json(new ReturnObject() { Status = true, Data = RecipesBl.GetSavedRecipe(mail) });
+                return Json(new ReturnObject() { Status = true, Data = RecipesBl.GetSavedRecipes(mail) });
             }
             catch (Exception ex)
             {

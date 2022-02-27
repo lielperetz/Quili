@@ -104,6 +104,14 @@ export class ShowRecipeDetailsComponent implements OnInit {
       }
     })
   }
+  
+  // getEquipment() {
+  //   return this.httpclient.get<any>('https://api.spoonacular.com/recipes/44860/equipmentWidget?apiKey=52b9142911034ec3b82f8d31cb7410ca').subscribe(
+  //     data => {console.log(data) 
+  //       return data as HTMLElement}
+  //       , err => console.log(err)
+  //   ) 
+  // }
 }
 
 
