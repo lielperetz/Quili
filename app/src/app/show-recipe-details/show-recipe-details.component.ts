@@ -111,6 +111,10 @@ export class ShowRecipeDetailsComponent implements OnInit {
         })
     });
   }
+
+  print() {
+    window.print();
+  }
 }
 
 

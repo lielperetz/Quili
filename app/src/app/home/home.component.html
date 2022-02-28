@@ -1,7 +1,8 @@
 <!-- BEGIN: Main Menu-->
 <div class="main-menu men" data-scroll-to-active="true">
   <div class="navbar-header" style="margin: 20px 50px; color: #6258CC;">
-    <a routerLink="/site"><span class="brand-logo"><img src="../../assets/images/logo/logo.png" style="height: 100px; width:200px; margin-left: 0px;"></span></a>
+    <a routerLink="/site"><span class="brand-logo"><img src="../../assets/images/logo/logo.png"
+          style="height: 100px; width:200px; margin-left: 0px;"></span></a>
     <h3>{{selectedDate | date:'EEEE, MMMM d, y'}}</h3><br>
     <div *ngIf="getRecipesForDay(selectedDate)">
       <div *ngFor="let item of recipesForDay">{{item.Title}}</div>
@@ -17,26 +18,31 @@
           <!-- Main: Content -->
           <div class="sidebar-wrapper">
             <div class="control-section">
-              <ejs-schedule #scheduleObj [(currentView)]="currentView" (cellClick) = "onCellClick($event)" cssClass='schedule-overview' width='100%'
-                height='650px' (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)"
-                (actionComplete)="onActionComplete($event)" (select)="onSelect($event)" [rowAutoHeight]="rowAutoHeight">
+              <ejs-schedule #scheduleObj [(currentView)]="currentView" (cellClick)="onCellClick($event)"
+                cssClass='schedule-overview' width='100%' height='650px' (popupOpen)="onPopupOpen($event)"
+                (popupClose)="onPopupClose($event)" (actionComplete)="onActionComplete($event)"
+                (select)="onSelect($event)" [rowAutoHeight]="rowAutoHeight">
                 <ng-template #cellTemplate let-data>
-                  <div class="e-work-cells" style="background-color: inherit; width: auto; height: auto; border: none;">
-                    <div class="div-recipe" *ngIf="getRecipesForDay(data.date) as variable">
+                  <div class="e-work-cells row" style="background-color: inherit; width: auto; height: auto; border: none;">
+                    <div class="col-sm-12 div-recipe" *ngIf="getRecipesForDay(data.date) as variable"
+                      style="background-image: url(recipesForDay[0].RecipeImage);">
                       <a routerLink="/site/showDetails/{{recipesForDay[0].RecipeId}}" style="border: none;">
-                        <img class="img" src="{{recipesForDay[0].RecipeImage}}" alt="image">
-                        <p class="p-title">
-                          <!-- <p class="p-title" [ngStyle]="{'background-image': getUrl(recipesForDay[0].RecipeId)}"> -->
-                          {{recipesForDay[0].RecipeTitle}}</p>
+                        <div>
+                          <p class="col-sm-12 p-title">{{recipesForDay[0].RecipeTitle}}</p>
+                          <img class="col-sm-12 img" src="{{recipesForDay[0].RecipeImage}}" alt="image">
+                        </div>
                       </a>
-                      <button class="bd" (click)="delete(variable[0].Code)"><span
-                          class="glyphicon">&#xe020;</span></button>
-                      <button *ngIf="numberRecipesForDay>1" id="more"
-                        (click)="showRecipesPopup(data.date, $event)">+{{numberRecipesForDay - 1}} <span
-                          id="span-more">more</span></button>
+                      <div class="col-sm-12">
+                        <button class="col-sm-3" *ngIf="numberRecipesForDay>1" id="more"
+                          (click)="showRecipesPopup(data.date, $event)">+{{numberRecipesForDay - 1}} <span
+                            id="span-more">more</span></button>
+                        <div class="col-sm-6"> </div>
+                        <button class="col-sm-3 bd" (click)="delete(variable[0].Code)"><span
+                            class="glyphicon">&#xe020;</span></button>
+                      </div>
                     </div>
                   </div>
-                  <button ejs-button id="addButton">+</button>
+                  <!-- <button ejs-button id="addButton">+</button> -->
                 </ng-template>
                 <e-views>
                   <e-view option="Month"></e-view>

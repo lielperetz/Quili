@@ -27,3 +27,15 @@ a:hover {
 a:focus {
     background-color: white;
 }
+
+.to {
+    background-color: orange;
+    border-color: orange;
+    color: white;
+}
+
+@media print {
+    #bst {
+      display: none;
+    }
+}

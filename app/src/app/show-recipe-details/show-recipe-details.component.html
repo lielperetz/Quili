@@ -4,7 +4,8 @@
             <div class="row">
                 <h1 class="col-sm-9 headers">{{showRecipe?.title}}</h1>
                 <div class="col-sm-3 savePrint">
-                    <div class="sp"><i class="fa fa-print icon"></i><br>Print</div>
+                    <div class="sp" (click)="print()" title="Print">
+                        <i class="fa fa-print icon"></i><br>Print</div>
                     <div class="sp">
                         <i *ngIf="!addedToSavedList" class="fa fa-heart-o icon" (click)="handleAdd()"
                             title="Add to Your Favorites"></i>
@@ -54,14 +55,14 @@
                         </div>
                     </section>
                 </div>
-                <i class="fa fa-quote-left fa-3x fa-pull-left" aria-hidden="true"></i>
                 <div class="col-sm-12 sum" [innerHTML]="showRecipe?.summary"></div>
                 <div class="col-sm-12">
                     <h3 class="headers sub">Ingredients:</h3>
                     <div class="col-sm-2 ingr" *ngFor="let item of showRecipe?.extendedIngredients">
                         <div class="col-sm-12">
                             <h3>{{item.measures.us.amount}} {{item.measures.us.unitShort}}</h3>
-                            <img class="iImg" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
+                            <img *ngIf="item.image" class="iImg" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
+                            <img *ngIf="!item.image" class="iImg" src="../../assets/images/dish.jpg">
                             <h4>{{item.name}}</h4>
                         </div>
                     </div>

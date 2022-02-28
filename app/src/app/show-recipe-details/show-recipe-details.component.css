@@ -16,6 +16,7 @@
     text-transform: capitalize;
     padding: 20px 20px;
     margin-top: 10px;
+    line-height: 1.5;
 }
 
 .sub {
@@ -89,6 +90,7 @@
     color: black;
     float: left;
     margin: 10px auto;
+    height: 180px;
 }
 
 .ingr h3 {
@@ -124,3 +126,15 @@ label {
     background-color: orange;
     color: white;
 }
+
+@media print {
+    .savePrint {
+      display: none;
+    }
+    .a[href]:after {
+        content: none !important;
+    }
+    /* #bst {
+        display: none;
+    } */
+  }

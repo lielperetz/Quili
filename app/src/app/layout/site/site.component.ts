@@ -14,13 +14,13 @@ export class SiteComponent implements OnInit {
   public user: string;
 
   constructor(
-    private cookies: CookieService, 
+    private cookies: CookieService,
     public router: Router,
-    public saved: SavedRecipesService) { 
+    public saved: SavedRecipesService) {
     this.user = this.cookies.get('Token');
     saved.GetSavedRecipes().subscribe(
       (res: any) => {
-        if(res.Status)
+        if (res.Status)
           this.saved.numSaved = (res.Data as []).length;
       })
   }
@@ -29,8 +29,13 @@ export class SiteComponent implements OnInit {
     feather.replace();
   }
 
-  public logOut(){
+  public logOut() {
     this.cookies.delete('Token');
     this.router.navigate(['/'])
+    // document.body.scrollTop = 0;
+  }
+
+  scrollTop() {
+    window.scrollTo(0, 0);
   }
 }
