@@ -22,13 +22,13 @@ export class IngredientsComponent implements OnInit {
 
   startDate: Date = new Date(Date.now())
   endDate: Date = new Date(addDays(this.startDate, 7))
-  showRecipeSelect: Boolean = false;
+  showRecipeSelect: Boolean = true;
+
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) {
-    //this.logPage()
   }
+
   ngOnInit(): void {
     this.activatedRoute.params.subscribe(x => {
-
       if (x["startDate"] && x["endDate"]) {
         if (x["startDate"])
           this.startDate = x["startDate"]
@@ -37,13 +37,10 @@ export class IngredientsComponent implements OnInit {
         this.logPage()
       } else {
         this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
-
       }
-
-
     })
-
   }
+
   async logPage(): Promise<void> {
     this.viewRecipes = [];
     //קבלת המתכונים לפי התאריכים
@@ -64,8 +61,6 @@ export class IngredientsComponent implements OnInit {
             this.createList()
           });
       });
-
-
 
     // הכנסת נתונים לרשימת מוצרים ואיחוד מוצרים זהים
     // var groupedByProductName = this.listPro.reduce(function (rv, x) {
@@ -90,8 +85,6 @@ export class IngredientsComponent implements OnInit {
     //   (data: any) => {
     //     this.savedRecipes = data.Data
     //   });
-
-
   }
 
   // RecipeIdToRecipeName(id) {
@@ -106,11 +99,13 @@ export class IngredientsComponent implements OnInit {
   //   console.log(e)
   //   this.viewData.map(x => { if (x.code == e.target.value) x.showRecipes = !x.showRecipes })
   // }
+
   ProductCheckbox(e) {
     this.viewData.map(x => {
       if (x.code == e.target.value) { x.checkbox = !x.checkbox; }
     })
   }
+  
   // isE(listRecipes, recipeTitle): boolean {
   //   listRecipes.map(x => { if (x.RecipeTitle == recipeTitle) return true })
   //   return false
@@ -131,13 +126,13 @@ export class IngredientsComponent implements OnInit {
   //   this.viewRecipes.map(y => { if (y.code == x.RecipeCode) { this.listPro } })
   // })
   //}
+
   changeDate() {
     this.navigateToDates();
   }
 
   navigateToDates() {
     this.router.navigate(['site/ingredients/' + formatDate(this.startDate, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(this.endDate, 'yyyy-MM-dd', 'en-US')])
-
   }
 
   // RecipesCheckbox(e) {
@@ -162,7 +157,7 @@ export class IngredientsComponent implements OnInit {
   // }
 
   createList() {
-    console.log("listPro", this.listPro)
+    // console.log("listPro", this.listPro)
     let groupedByProductName: Product[] = [];
     this.listPro.forEach(item => {
       var productItem = Object.assign({}, item)
@@ -210,4 +205,27 @@ export class IngredientsComponent implements OnInit {
     //     })
     // })
   }
+
+//   var elements = document.getElementsByClassName("column");
+
+// // Declare a loop variable
+// var i;
+
+// List View
+listView() {
+  var elements = document.getElementsByClassName("listGrid")
+  for (let index = 0; index < elements.length; index++) {
+    (elements[index] as HTMLElement).style.width = "100%";
+  }
+}
+
+// Grid View
+gridView() {
+  var elements = document.getElementsByClassName("listGrid");
+  console.log(document.getElementsByClassName("listGrid"));
+  for (let index = 0; index < elements.length; index++) {
+    (elements[index] as HTMLElement).style.width = "25%";
+  }
+  console.log(document.getElementsByClassName("listGrid"));
+}
 }

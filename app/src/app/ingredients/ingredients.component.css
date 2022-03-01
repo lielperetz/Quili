@@ -1,5 +1,27 @@
+.men {
+  padding: 20px 0px 50px;
+  /* padding-bottom: 100px; */
+  height: 120%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.listGrid {
+  float: left;
+  margin: auto;
+}
+label {
+  font-size: 14px;
+}
+.is {
+  background-color: orange;
+  color: white;
+}
+.recipeDiv {
+  margin: 5px 10px 0px;
+  padding: 10px;
+}
 .cl{
-    float: left;
+  float: left;
 }
 .cr{
   float: right;
@@ -12,9 +34,13 @@
   border-bottom: 1px;
   background-color: whitesmoke;
 }
-img{
-  width: 30px;
-  height: 30px;
+.recipesB:hover {
+  text-decoration: underline;
+  border: none;
+}
+.imgP {
+  width: 50px;
+  height: 50px;
   margin-left: 20px;
 }
 input{
@@ -23,4 +49,41 @@ input{
 }
 li{
   background-color: whitesmoke;
+}
+.tdR {
+  margin: 2px 0px;
+}
+.tdR:hover p {
+  text-decoration: underline;
+} 
+a:hover label {
+  text-decoration: underline;
+}
+p {
+  color: #5e5873;
+}
+.btns {
+  padding: 10px;
+  padding-right: 30px;
+}
+.btnlg {
+  border: none;
+  outline: none;
+  padding: 12px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  float: right;
+}
+.btnlg:hover {
+  background-color: #ddd;
+}
+
+.btnlg.active {
+  background-color: #666;
+  color: white;
+}
+@media print {
+  #selectButton, .recipesB, .tdR {
+    display: none;
+  }
 }

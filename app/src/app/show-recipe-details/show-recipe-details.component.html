@@ -5,7 +5,8 @@
                 <h1 class="col-sm-9 headers">{{showRecipe?.title}}</h1>
                 <div class="col-sm-3 savePrint">
                     <div class="sp" (click)="print()" title="Print">
-                        <i class="fa fa-print icon"></i><br>Print</div>
+                        <i class="fa fa-print icon"></i><br>Print
+                    </div>
                     <div class="sp">
                         <i *ngIf="!addedToSavedList" class="fa fa-heart-o icon" (click)="handleAdd()"
                             title="Add to Your Favorites"></i>
@@ -61,14 +62,15 @@
                     <div class="col-sm-2 ingr" *ngFor="let item of showRecipe?.extendedIngredients">
                         <div class="col-sm-12">
                             <h3>{{item.measures.us.amount}} {{item.measures.us.unitShort}}</h3>
-                            <img *ngIf="item.image" class="iImg" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
+                            <img *ngIf="item.image" class="iImg"
+                                src="https://spoonacular.com/cdn/ingredients_500x500/{{item.image}}">
                             <img *ngIf="!item.image" class="iImg" src="../../assets/images/dish.jpg">
                             <h4>{{item.name}}</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-12">
-                    <h3 class="headers sub">Equipment:</h3>
+                    <h3 *ngIf="equipment.length>0" class="headers sub">Equipment:</h3>
                     <div class="col-sm-2" *ngFor="let item of equipment">
                         <div class="col-sm-12">
                             <img class="iImg" src="https://spoonacular.com/cdn/equipment_500x500/{{item.image}}">
