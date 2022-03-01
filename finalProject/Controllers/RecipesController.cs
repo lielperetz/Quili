@@ -150,5 +150,40 @@ namespace finalProject.Controllers
                 return Json(new ReturnObject() { Status = false, Error = ex.Message });
             }
         }
+        [HttpGet]
+        [Route("GetPopular/{num}")]
+        public JsonResult<ReturnObject> GetPopular(int num)
+        {
+            try
+            {
+                List<RecipesEntities> rList = RecipesBl.GetRecipes();
+
+                var groupBy =
+                    from recipe in rList
+                    group recipe by recipe.RecipeTitle into g
+                    select new { recipe = g, count = g.Count() };
+
+                int[] popular = new int[num];
+                var popularRecipe = new RecipesEntities[num];
+
+                foreach (var item in groupBy)
+                {
+                    for (var p = 0; p < popular.Length; p++)
+                    {
+                        if (popular[p] < item.count)
+                        {
+                            popular[p] = item.count;
+                            //popularRecipe = item.recipe;
+                            break;
+                        }
+                    }
+                }
+                return Json(new ReturnObject() { Status = true, Data = "" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
+            }
+        }
     }
 }

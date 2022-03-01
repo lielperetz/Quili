@@ -25,6 +25,7 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { AuthGuard } from './services/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
+import { ChartModule, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
 
 @NgModule({
   declarations: [
@@ -54,9 +55,10 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
     ContextMenuModule,
     MultiSelectModule,
     BrowserAnimationsModule,
-    MatCarouselModule.forRoot()
+    MatCarouselModule.forRoot(),
+    ChartModule
   ],
-  providers: [CookieService, AuthGuard],
+  providers: [CookieService, AuthGuard, ColumnSeriesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

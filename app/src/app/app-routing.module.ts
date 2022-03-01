@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { IngredientsComponent } from './ingredients/ingredients.component';
@@ -12,7 +12,6 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { AuthGuard } from './services/auth.guard';
 import { ShowRecipeDetailsComponent } from './show-recipe-details/show-recipe-details.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-//import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 const routes: Routes = [
@@ -38,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), HttpClientModule, NgbModule],
+  imports: [RouterModule.forRoot(routes), HttpClientModule, BrowserAnimationsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

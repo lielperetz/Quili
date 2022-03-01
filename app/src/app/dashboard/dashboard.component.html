@@ -1,18 +1,28 @@
-<!-- [image]="https://spoonacular.com/recipeImages/{{item.id}}-636x393.jpg" -->
-
 <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
-            <mat-carousel timings="250ms ease-in" [autoplay]="true" interval="5000" color="#00000040" maxWidth="auto"
-                proportion="35" slides="5" [loop]="true" [hideArrows]="false" [hideIndicators]="true"
+            <mat-carousel class="col-sm-12" timings="250ms ease-in" [autoplay]="true" interval="7000" color="#00000040"
+                maxWidth="auto" proportion="35" slides="9" [loop]="true" [hideArrows]="false" [hideIndicators]="true"
                 [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+                <!-- @carouselAnimation -->
                 <mat-carousel-slide #matCarouselSlide *ngFor="let slide of randomList; let i = index"
-                    [image]="slide" overlayColor="#00000040" [hideOverlay]="true"></mat-carousel-slide>
-                
+                    [image]="slide.img" overlayColor="#00000040" [hideOverlay]="true">
+                    <h1 class="SlideText" (change)="mymove">{{slide.title}}</h1>
+                </mat-carousel-slide>
             </mat-carousel>
         </div>
     </div>
 </div>
+
+<ejs-chart #roundcol style='display:block;' [chartArea]='chartArea' [width]='width' align='center' id='column-container'
+    [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title' [tooltip]='tooltip'
+    (load)='load($event)' (loaded)='loaded($event)' [legendSettings]='legend' (pointRender)='pointRender($event)'>
+    <e-series-collection>
+        <e-series [dataSource]='data' type='Column' xName='x' yName='y' name='Tiger' width=2 [marker]='marker'
+            [cornerRadius]='radius'>
+        </e-series>
+    </e-series-collection>
+</ejs-chart>
 
 <!-- <div class="row">
                 <div class="col-sm-4">
