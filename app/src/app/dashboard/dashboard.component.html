@@ -7,22 +7,26 @@
                 <!-- @carouselAnimation -->
                 <mat-carousel-slide #matCarouselSlide *ngFor="let slide of randomList; let i = index"
                     [image]="slide.img" overlayColor="#00000040" [hideOverlay]="true">
-                    <h1 class="SlideText" (change)="mymove">{{slide.title}}</h1>
+                    <h1 class="SlideText">{{slide.title}}</h1>
                 </mat-carousel-slide>
             </mat-carousel>
+
+            <app-grafico-barras [List]='grafList'></app-grafico-barras>
+
         </div>
     </div>
 </div>
 
-<ejs-chart #roundcol style='display:block;' [chartArea]='chartArea' [width]='width' align='center' id='column-container'
+<!-- <ejs-chart #roundcol style='display:block;' [chartArea]='chartArea' [width]='width' align='center' id='column-container'
     [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [title]='title' [tooltip]='tooltip'
-    (load)='load($event)' (loaded)='loaded($event)' [legendSettings]='legend' (pointRender)='pointRender($event)'>
+    (load)='load($event)' (loaded)='loaded($event)' [legendSettings]='legend' >
+    (pointRender)='pointRender($event)'
     <e-series-collection>
         <e-series [dataSource]='data' type='Column' xName='x' yName='y' name='Tiger' width=2 [marker]='marker'
             [cornerRadius]='radius'>
         </e-series>
     </e-series-collection>
-</ejs-chart>
+</ejs-chart> -->
 
 <!-- <div class="row">
                 <div class="col-sm-4">

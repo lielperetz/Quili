@@ -25,7 +25,7 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { AuthGuard } from './services/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
-import { ChartModule, ColumnSeriesService } from '@syncfusion/ej2-angular-charts';
+import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import { ChartModule, ColumnSeriesService } from '@syncfusion/ej2-angular-charts
     IngredientsComponent,
     ShowRecipeDetailsComponent,
     DashboardComponent,
-    SavedRecipesComponent
+    SavedRecipesComponent,
+    GraficoBarrasComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +57,8 @@ import { ChartModule, ColumnSeriesService } from '@syncfusion/ej2-angular-charts
     MultiSelectModule,
     BrowserAnimationsModule,
     MatCarouselModule.forRoot(),
-    ChartModule
   ],
-  providers: [CookieService, AuthGuard, ColumnSeriesService],
+  providers: [CookieService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

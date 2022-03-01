@@ -37,7 +37,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), HttpClientModule, BrowserAnimationsModule],
+  imports: [RouterModule.forRoot(routes), HttpClientModule, NgModule, BrowserAnimationsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
