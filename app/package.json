@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^11.0.0",
     "@ngmodule/material-carousel": "^0.6.0",
     "@syncfusion/ej2-angular-buttons": "^19.4.38",
+    "@syncfusion/ej2-angular-charts": "^19.4.53",
     "@syncfusion/ej2-angular-dropdowns": "^19.4.41",
     "@syncfusion/ej2-angular-inputs": "^19.4.41",
     "@syncfusion/ej2-angular-navigations": "^19.4.41",

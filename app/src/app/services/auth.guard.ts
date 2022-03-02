@@ -3,7 +3,9 @@ import { CanActivate, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+  })
 export class AuthGuard implements CanActivate {
 
     constructor(
