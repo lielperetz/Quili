@@ -62,6 +62,12 @@
   text-transform: none;
 }
 
+.e-schedule .e-month-view .e-current-date .e-date-header {
+  background-color: orange;
+}
+.e-schedule .e-month-view .e-date-header-wrap table td.e-current-day {
+  color: orange;
+}
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {
   content: "\e846";
