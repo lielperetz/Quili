@@ -26,6 +26,7 @@ import { AuthGuard } from './services/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.componen
     ShowRecipeDetailsComponent,
     DashboardComponent,
     SavedRecipesComponent,
-    GraficoBarrasComponent
+    GraficoBarrasComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
