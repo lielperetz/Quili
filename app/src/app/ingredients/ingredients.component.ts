@@ -61,7 +61,6 @@ export class IngredientsComponent implements OnInit {
             this.createList()
           });
       });
-
     // הכנסת נתונים לרשימת מוצרים ואיחוד מוצרים זהים
     // var groupedByProductName = this.listPro.reduce(function (rv, x) {
     //   (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
@@ -185,7 +184,7 @@ export class IngredientsComponent implements OnInit {
       }
     })
     this.viewData = groupedByProductName;
-console.log(this.viewRecipes)
+    console.log(this.viewData)
     // var groupedByProductName = this.listPro.reduce(function (rv, x) {
     //   (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
     //   return rv;

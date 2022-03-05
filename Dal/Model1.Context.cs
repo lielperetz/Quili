@@ -15,15 +15,6 @@ namespace Dal
     
     public partial class FINAL_PROJECTEntities : DbContext
     {
-        //public FINAL_PROJECTEntities()
-        //    : base("name=FINAL_PROJECTEntities")
-        //{
-        //}
-    
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    throw new UnintentionalCodeFirstException();
-        //}
     
         public virtual DbSet<CLIENTS> CLIENTS { get; set; }
         public virtual DbSet<PRODUCTS> PRODUCTS { get; set; }
