@@ -9,17 +9,17 @@ import { User } from '../classes/uesr';
 })
 export class UserService {
 
-  url:string="http://localhost:44376/Api/Clients/"
+  url: string = "http://localhost:44376/Api/Clients/"
+  redirectUrl: string;
+  constructor(public httpClient: HttpClient) { }
 
-  constructor(public httpClient:HttpClient) { }
-
-  Add(user:User):Observable<any>{
-    return this.httpClient.put<any>(this.url+"AddClient",user).pipe(catchError(this.handleError))
+  Add(user: User): Observable<any> {
+    return this.httpClient.put<any>(this.url + "AddClient", user).pipe(catchError(this.handleError))
   }
-  LogIn(user:User):Observable<any>{
-    return this.httpClient.post<any>(this.url+"Login",user).pipe(catchError(this.handleError))
+  LogIn(user: User): Observable<any> {
+    return this.httpClient.post<any>(this.url + "Login", user).pipe(catchError(this.handleError))
   }
-  handleError(errorResponse: HttpErrorResponse){
+  handleError(errorResponse: HttpErrorResponse) {
     console.log(errorResponse);
     return throwError(errorResponse);
   }

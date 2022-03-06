@@ -32,7 +32,6 @@ export class SiteComponent implements OnInit {
   public logOut() {
     this.cookies.delete('Token');
     this.router.navigate(['/'])
-    // document.body.scrollTop = 0;
   }
 
   scrollTop() {
