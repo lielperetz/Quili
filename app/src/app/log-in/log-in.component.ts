@@ -15,20 +15,27 @@ export class LogInComponent implements OnInit {
 
   user: User = new User()
 
-  constructor(public cookies: CookieService, public router: Router, public UserService: UserService) { }
+  constructor(
+    public cookies: CookieService,
+    public router: Router,
+    public userService: UserService) { }
 
   ngOnInit(): void {
     feather.replace();
   }
 
   LogIn() {
-    this.UserService.LogIn(this.user).subscribe(
+    this.userService.LogIn(this.user).subscribe(
       (response: any) => {
         if (response.Status) {
           this.cookies.set('Token', response.Data)
-          this.router.navigate(['site/home'])
+          if (this.userService.redirectUrl) {
+            this.router.navigate([this.userService.redirectUrl]);
+            this.userService.redirectUrl = null;
+            // this.router.navigate(['site/home'])
+          }
+          else alert(response.Error)
         }
-        else alert(response.Error)
       })
   }
 }
