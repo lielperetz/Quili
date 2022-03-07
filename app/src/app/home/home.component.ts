@@ -1,14 +1,12 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import {
-  ScheduleComponent, MonthService, View, PopupOpenEventArgs, PopupCloseEventArgs, addYears, ActionEventArgs, SelectEventArgs, addDays, addMonths
+  ScheduleComponent, MonthService, View, PopupOpenEventArgs, ActionEventArgs, SelectEventArgs, addDays, addMonths
 } from '@syncfusion/ej2-angular-schedule';
-import { closest, Internationalization } from '@syncfusion/ej2-base';
 import { RecipesService } from '../services/recipes.service';
 import { Recipe } from '../classes/Recipe';
 import { SchedulesService } from '../services/schedules.service';
-import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SavedRecipesService } from '../services/saved-recipes.service';
 
 @Component({
@@ -30,12 +28,7 @@ export class HomeComponent implements OnInit {
   public selectedDate1: Date = new Date();
   public selectedDate2: Date = new Date();
   public listSelectedRecipes = [];
-
-  public showOrHidePopup: boolean = false;
-  public currentDay: Date;
-  public deletePopup: boolean = false;
   public deleteOptions: number;
-  public idDeleteRecipe: number;
 
   constructor(
     private recipeService: RecipesService,
@@ -126,7 +119,7 @@ export class HomeComponent implements OnInit {
   }
 
   public onPopupOpen(args: PopupOpenEventArgs): void {
-    if (args.type === 'Editor' || this.showOrHidePopup)
+    if (args.type === 'Editor')
       args.cancel = true;
     this.listRecipesBySearch = null;
     this.searchWord = "";
@@ -135,11 +128,7 @@ export class HomeComponent implements OnInit {
     this.newRecipe.Date = new Date(args.data.startTime);
   }
 
-  // public onPopupClose(args: PopupCloseEventArgs): void {
-  //   this.searchWord = "";
-  // }
-
-  public buttonClickActions(e: Event, id?: number): void {
+  public buttonClickActions(e: Event): void {
     if ((e.target as HTMLElement).id === 'save') {
       this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
       this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
@@ -153,22 +142,6 @@ export class HomeComponent implements OnInit {
             alert(response.Error)
         })
       this.newRecipe = new Recipe();
-    } else if ((e.target as HTMLElement).id === 'delete') {
-      let rec: number = 1; //delete recipe
-      if ((e.target as HTMLElement).innerHTML === 'Entire Series')
-        rec = 2; //delete series
-      else if ((e.target as HTMLElement).innerHTML === 'Following Recipes')
-        rec = 3; //delete following recipes
-
-      this.schedulesService.RemoveSchedules(this.idDeleteRecipe, rec).subscribe(
-        (response: any) => {
-          if (response.Status) {
-            this.getOriginalData();
-          }
-          else
-            alert(response.Error)
-        })
-      this.deletePopup = false;
     }
     this.scheduleObj.closeQuickInfoPopup();
   }
@@ -287,12 +260,70 @@ export class HomeComponent implements OnInit {
 
   public delete(id?: number) {
     var l = this.listRecipes.filter(x => x.Code == id)[0] as Record<string, any>;
+    let deleteStatus;
     this.deleteOptions = 1; //delete recipe
     if (l.SchedulingStatuse != 1)
       if (l.RecipeDate === l.Date)
         this.deleteOptions = 2; //delete this recipe or entire series
       else
         this.deleteOptions = 3; //delete this recipe, following recipes or entire series
-    this.deletePopup = true;
+    let optionsInDelete: SweetAlertOptions = {
+      icon: 'warning',
+      iconColor: 'orange',
+      showCancelButton: true,
+      confirmButtonColor: 'orange',
+      denyButtonColor: '#6e7881',
+      confirmButtonText: 'Delete Recipe',
+      showCloseButton: true,
+    };
+    switch (this.deleteOptions) {
+      case 1:
+        optionsInDelete.title = 'Are you sure you want to delete this event?'
+        optionsInDelete.showCancelButton = false
+        break;
+      case 2:
+        optionsInDelete.title = 'How would you like to change the recipe in the series?'
+        optionsInDelete.cancelButtonText = 'Entire Series'
+        break;
+      case 3:
+        optionsInDelete.title = 'How would you like to change the recipe in the series?'
+        optionsInDelete.cancelButtonText = 'Entire Series'
+        optionsInDelete.showDenyButton = true
+        optionsInDelete.denyButtonText = 'Following Recipes'
+        break;
+    }
+    Swal.fire(optionsInDelete).then((result) => {
+      if (result.isConfirmed) {
+        deleteStatus = 1;
+      }
+      else if (result.dismiss === Swal.DismissReason.cancel)
+        deleteStatus = 2
+      else if (result.isDenied)
+        deleteStatus = 3;
+      if (deleteStatus) {
+        this.schedulesService.RemoveSchedules(id, deleteStatus).subscribe(
+          (response: any) => {
+            if (response.Status) {
+              this.getOriginalData();
+              Swal.fire({
+                title: 'Deleted!',
+                text: l.RecipeTitle + ' was successfully deleted.',
+                icon: 'success',
+                iconColor: 'orange',
+                timer: 3000,
+                showConfirmButton: false
+              })
+            }
+            else {
+              Swal.fire({
+                icon: 'error',
+                iconColor: 'orange',
+                title: 'Oops...',
+                text: 'Something went wrong!',
+              })
+            }
+          })
+      }
+    })
   }
 }

@@ -9,16 +9,20 @@
                     <h3>Already have items saved?</h3>
                     <a class="login" routerLink="/auth/login">Log In</a>
                     <hr>
-                    <div>
-                        <h2>Heart It.</h2>
-                        Store everything you love on one page.
+                    <div class="col-sm-12 gif">
+                        <div class="col-sm-5">
+                            <h2>Heart It.</h2>
+                            Store everything you love on one page.
+                        </div>
+                        <img class="col-sm-3" src="../../assets/images/gif/2834b3bbf14da02901ff68fb76395da8.gif">
                     </div>
                 </div>
                 <div class="col-sm-12">
                     <div class="col-sm-4" *ngFor="let item of listSave;">
                         <div class="col-sm-12 saveItem">
                             <a routerLink="/site/showDetails/{{item.Id}}" style="border: none;">
-                                <div class="numLikes" title="{{item.AggregateLikes}} peaple like the recipe">{{item.AggregateLikes}} <span><i class="fa fa-heart"></i></span></div>
+                                <div class="numLikes" title="{{item.AggregateLikes}} peaple like the recipe">
+                                    {{item.AggregateLikes}} <span><i class="fa fa-heart"></i></span></div>
                                 <!-- <div class="S-product-item__like-ctn"><div class="S-popover guOAVM"><span><span class="S-product-item__like"><span>21.5k</span> <i class="iconfont icon-like"></i></span></span></div></div> -->
                                 <img class="col-sm-12 saveImg" src="{{item.Image}}">
                                 <div class="col-sm-12 saveTxt">
