@@ -1,6 +1,5 @@
 <!-- BEGIN: Recipes Menu-->
-<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow" data-scroll-to-active="true">
-  <div class="navbar-header men">
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow men" data-scroll-to-active="true">
     <!-- <a routerLink="/site"><span class="brand-logo"><img src="../../assets/images/logo/logo.png"
           style="height: 100px; width:200px; margin-left: 0px;"></span></a> -->
     <div class="row">
@@ -22,7 +21,6 @@
         </a>
       </li></ul>
     </div>
-  </div>
 </div>
 <!-- END: Recipes Menu-->
 <div class="app-content content">
@@ -30,8 +28,8 @@
     <div class="content-body">
       <div class="row">
         <div class="col-sm-6">
-          <input id="startDate" (change)="changeDate()" type="date" placeholder="start" [(ngModel)]="startDate">
-          <input id="endDate" (change)="changeDate()" type="date" placeholder="end" [(ngModel)]="endDate">
+          <input id="startDate" (input)="startDate=parseDate($event.target.value)" (change)="changeDate()" type="date" placeholder="start" [value]="startDate | date:'yyyy-MM-dd'">
+          <input id="endDate" (input)="endDate=($event.target.value)" (change)="changeDate()" type="date" placeholder="end" [value]="endDate | date:'yyyy-MM-dd'">
         </div>
         <div class="btns col-sm-6">
           <button class="btnlg active list" (click)="listView()"><i class="fa fa-bars"></i> List</button>

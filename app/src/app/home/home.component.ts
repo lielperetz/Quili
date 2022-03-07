@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
 import {
-  ScheduleComponent, MonthService, View, PopupOpenEventArgs, PopupCloseEventArgs, addYears, ActionEventArgs, SelectEventArgs
+  ScheduleComponent, MonthService, View, PopupOpenEventArgs, PopupCloseEventArgs, addYears, ActionEventArgs, SelectEventArgs, addDays, addMonths
 } from '@syncfusion/ej2-angular-schedule';
 import { closest, Internationalization } from '@syncfusion/ej2-base';
 import { RecipesService } from '../services/recipes.service';
@@ -8,6 +8,8 @@ import { Recipe } from '../classes/Recipe';
 import { SchedulesService } from '../services/schedules.service';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { SavedRecipesService } from '../services/saved-recipes.service';
 
 @Component({
   selector: 'app-root',
@@ -21,22 +23,25 @@ export class HomeComponent implements OnInit {
   public currentView: View = 'Month';
   public listRecipes: Record<string, any>[];
   public recipesForDay: Record<string, any>[];
-  public numberRecipesForDay: number;
   public searchWord: string = "";
   public listRecipesBySearch: Record<string, any>;
   public newRecipe: Recipe;
+  public rowAutoHeight: boolean = true;
+  public selectedDate1: Date = new Date();
+  public selectedDate2: Date = new Date();
+  public listSelectedRecipes = [];
+
   public showOrHidePopup: boolean = false;
   public currentDay: Date;
-  public rowAutoHeight: boolean = true;
   public deletePopup: boolean = false;
   public deleteOptions: number;
   public idDeleteRecipe: number;
-  public selectedDate: Date = new Date();
 
   constructor(
     private recipeService: RecipesService,
     private schedulesService: SchedulesService,
-    public router: Router
+    public router: Router,
+    public savedRecipes: SavedRecipesService
   ) {
     this.getOriginalData();
   }
@@ -45,10 +50,11 @@ export class HomeComponent implements OnInit {
   }
 
   async getOriginalData(d1?: Date, d2?: Date): Promise<void> {
-    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2021, 0, 1), d2 ? d2 : addYears(new Date(), 1)).subscribe(
+    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2022, 2, 1), d2 ? d2 : addMonths(new Date(), 1)).subscribe(
       (response: any) => {
         if (response.Status) {
           this.listRecipes = response.Data as Record<string, any>[];
+          this.fillListSelect();
           if (this.scheduleObj)
             this.scheduleObj.refreshLayout();
         }
@@ -59,15 +65,6 @@ export class HomeComponent implements OnInit {
       this.scheduleObj.showQuickInfo = true;
       this.scheduleObj.closeQuickInfoPopup();
     }
-  }
-
-  getUrl(id: any) {
-    return "url('https://spoonacular.com/recipeImages/'" + id + "'-240x150.jpg')";
-  }
-
-  public onCellClick(args: any): void{
-    this.scheduleObj.closeQuickInfoPopup();
-    this.selectedDate = args.startTime as Date;
   }
 
   public onActionComplete(args: ActionEventArgs): void {
@@ -87,18 +84,18 @@ export class HomeComponent implements OnInit {
     return 'Add Recipe';
   }
 
-  public getRecipesForDay(date: Date): Record<string, any>[] {
+  public getRecipesForDay(date1: Date): Record<string, any>[] {
     this.recipesForDay = [];
-    this.numberRecipesForDay = 0;
     this.listRecipes?.forEach((x: any) => {
-      if (new Date(x.Date).getFullYear() === date.getFullYear() && new Date(x.Date).getMonth() === date.getMonth() && new Date(x.Date).getDate() === date.getDate()) {
-        this.numberRecipesForDay++;
+      date1 = new Date(date1.getFullYear(), date1.getMonth(), date1.getDate());
+      let xDate: Date = new Date(x.Date);
+      xDate = new Date(xDate.getFullYear(), xDate.getMonth(), xDate.getDate())
+      if (date1.toString() == xDate.toString()) {
         this.recipesForDay.push(x as Record<string, any>);
+        x.isSaved = this.isSaved(x.RecipeId);
       }
     })
-    if (this.numberRecipesForDay != 0)
-      return this.recipesForDay;
-    return null;
+    return this.recipesForDay;
   }
 
   public parseDate(dateString: string): Date {
@@ -111,7 +108,6 @@ export class HomeComponent implements OnInit {
     this.recipeService.SearchRecipe(e).subscribe(
       (response: any) => {
         if (response.Status) {
-          // if (response.Status && response.Data.results.length != 0) {
           this.listRecipesBySearch = response.Data.results as Record<string, any>[];
           if (this.listRecipesBySearch.length === 0)
             this.listRecipesBySearch = null
@@ -139,33 +135,9 @@ export class HomeComponent implements OnInit {
     this.newRecipe.Date = new Date(args.data.startTime);
   }
 
-  public onPopupClose(args: PopupCloseEventArgs): void {
-    this.searchWord = "";
-  }
-
-  public onCloseClick(): void {
-    this.scheduleObj.quickPopup.quickPopupHide();
-  }
-
-  public styleMorePopup = {
-    left: '',
-    top: '',
-    position: 'absolute',
-    zIndex: 2
-  }
-  public showRecipesPopup(date?: Date, e?: any) {
-    this.styleMorePopup.left = e.x.toString() + 'px';
-    this.styleMorePopup.top = e.y.toString() + 'px';
-    console.log((document.querySelector('.e-more-popup-wrapper') as HTMLElement).style);
-    if (date)
-      this.currentDay = date;
-    this.showOrHidePopup = true;
-    this.scheduleObj.closeQuickInfoPopup()
-  }
-
-  public hideRecipesPopup() {
-    this.showOrHidePopup = false;
-  }
+  // public onPopupClose(args: PopupCloseEventArgs): void {
+  //   this.searchWord = "";
+  // }
 
   public buttonClickActions(e: Event, id?: number): void {
     if ((e.target as HTMLElement).id === 'save') {
@@ -178,7 +150,7 @@ export class HomeComponent implements OnInit {
             this.scheduleObj.refreshTemplates();
           }
           else
-            alert(response.Error + "        home save recipe         ")
+            alert(response.Error)
         })
       this.newRecipe = new Recipe();
     } else if ((e.target as HTMLElement).id === 'delete') {
@@ -188,14 +160,14 @@ export class HomeComponent implements OnInit {
       else if ((e.target as HTMLElement).innerHTML === 'Following Recipes')
         rec = 3; //delete following recipes
 
-    this.schedulesService.RemoveSchedules(this.idDeleteRecipe, rec).subscribe(
-      (response: any) => {
-        if (response.Status) {
-          this.getOriginalData();
-        }
-        else
-          alert(response.Error)
-      })
+      this.schedulesService.RemoveSchedules(this.idDeleteRecipe, rec).subscribe(
+        (response: any) => {
+          if (response.Status) {
+            this.getOriginalData();
+          }
+          else
+            alert(response.Error)
+        })
       this.deletePopup = false;
     }
     this.scheduleObj.closeQuickInfoPopup();
@@ -203,11 +175,115 @@ export class HomeComponent implements OnInit {
 
   public onSelect(args: SelectEventArgs) {
     if (args.requestType === 'cellSelect') {
-      let date1: Date = (args.data as Record<string, any>).StartTime as Date;
-      let date2: Date = (args.data as Record<string, any>).EndTime as Date;
-      // this.router.navigate(['site/ingredients/' + formatDate(date1, 'yyyy-MM-dd', 'en-US') + '/' + formatDate(date2, 'yyyy-MM-dd', 'en-US')])
+      this.selectedDate1 = (args.data as Record<string, any>).StartTime as Date;
+      this.selectedDate2 = (args.data as Record<string, any>).EndTime as Date;
+      this.selectedDate2.setDate(this.selectedDate2.getDate() - 1);
+      this.fillListSelect();
     }
   }
+
+  public fillListSelect() {
+    this.selectedDate1 = new Date(this.selectedDate1.getFullYear(), this.selectedDate1.getMonth(), this.selectedDate1.getDate());
+    this.selectedDate2 = new Date(this.selectedDate2.getFullYear(), this.selectedDate2.getMonth(), this.selectedDate2.getDate());
+    this.listSelectedRecipes = [];
+    for (let index = this.selectedDate1; index <= this.selectedDate2; index = addDays(index, 1)) {
+      if (this.getRecipesForDay(index).length > 0) {
+        this.listSelectedRecipes.push(this.getRecipesForDay(index))
+      }
+    }
+  }
+
+  public getRepeatStatus(n: number) {
+    switch (n) {
+      case 1:
+        return 'Never'
+      case 2:
+        return 'Weekly'
+      case 3:
+        return 'Monthly'
+    }
+  }
+
+  public noRecipes(): boolean {
+    if ((this.listSelectedRecipes as []).length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  public isSaved(id: string) {
+    if (this.savedRecipes.savedRecipes?.filter(x => x.Id === id)[0])
+      return true;
+    return false;
+  }
+
+  // async getRecipe(id: string) {
+  //   let recipe = null;
+  //   this.recipeService.GetRecipeById(id).subscribe(
+  //     (response: any) => {
+  //       if (response.Status) {
+  //         recipe = response.Data;
+  //       }
+  //       else
+  //         alert(response.Error);
+  //     })
+  //   return recipe;
+  // }
+
+  // public handleAdd(id) {
+  //   let recipe = this.getRecipe(id);
+  //   console.log(recipe)
+  // if (recipe) {
+  //   this.savedRecipes.AddToSavedRecipes(recipe).subscribe(
+  //     (res: any) => {
+  //       if (res.Status) {
+  //         // recipe.isSaved = true;
+  //         this.savedRecipes.numSaved++;
+  //         Swal.fire({
+  //           title: 'Success!',
+  //           text: "was successfully added.",
+  //           // text: recipe.Title + " was successfully added.",
+  //           icon: 'success',
+  //           iconColor: 'orange',
+  //           timer: 3000,
+  //           showConfirmButton: false
+  //         })
+  //       }
+  //       else
+  //         alert(res.Error)
+  //     })
+  // }
+  // }
+
+  // public handleRemove(id) {
+  //   let recipe = this.listRecipes.filter(x => x.RecipeId === id)[0];
+  //   Swal.fire({
+  //     title: 'Are you sure you want to delete this recipe?',
+  //     icon: 'warning',
+  //     showCancelButton: true,
+  //     confirmButtonText: 'Ok',
+  //     cancelButtonText: 'Cancal'
+  //   }).then((result) => {
+  //     if (result.value) {
+  //       this.savedRecipes.RemoveSavedRecipe(id).subscribe(
+  //         (res: any) => {
+  //           if (res.Status) {
+  //             Swal.fire({
+  //               title: 'Deleted!',
+  //               text: recipe.RecipeTitle + ' was successfully deleted.',
+  //               icon: 'success',
+  //               iconColor: 'orange',
+  //               timer: 3000,
+  //               showConfirmButton: false
+  //             })
+  //             this.savedRecipes.numSaved--;
+  //           }
+  //           else
+  //             console.log(res.Error);
+  //         })
+  //     }
+  //   })
+  // }
 
   public delete(id?: number) {
     var l = this.listRecipes.filter(x => x.Code == id)[0] as Record<string, any>;
@@ -218,6 +294,5 @@ export class HomeComponent implements OnInit {
       else
         this.deleteOptions = 3; //delete this recipe, following recipes or entire series
     this.deletePopup = true;
-    this.idDeleteRecipe = id;
   }
 }

@@ -1,9 +1,117 @@
 * {
   box-sizing: border-box;
 }
+button {
+  border: 0;
+}
 
 .men {
-  padding: 0px;
+  padding: 20px 0px;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+}
+
+.addButton, .creatList {
+  background-color: orange;
+  margin: 0px auto 20px;
+  color: white;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+  cursor: pointer;
+  font-family: "Google Sans",Roboto,Arial,sans-serif;
+  text-align: center;
+  letter-spacing: .25px;
+  font-weight: 500;
+  padding: 10px;
+  opacity: 0.6;
+}
+
+.addButton:hover, .creatList:hover {
+  opacity: 1;
+  color: white;
+}
+
+.creatList a{
+  color: white;
+}
+
+button[disabled] {
+  cursor: default;
+  background-color: #969696;
+}
+
+.notFound {
+  text-align: center;
+  margin: 15px auto;
+  color: #000000;
+  font-size: 18px;
+  line-height: 40px;
+  padding: 30px;
+}
+
+.fa-arrow-up, .fa-arrow-right {
+  margin: auto 5px;
+  color: orange;
+}
+
+.seperate {
+  height: 8px;
+  background-color: #f5f5f5;
+}
+
+.dateTitle {
+  text-align: center;
+  font-size: small;
+  color: rgb(252, 186, 65);
+  margin-top: 20px;
+}
+
+.recipeTitle {
+  font-weight: bold;
+  text-decoration: underline;
+  padding-top: 10px;
+}
+
+.main-menu label {
+  margin: 10px auto;
+}
+
+.divRecipe {
+  margin: 15px auto;
+}
+
+.viewSave {
+  float: right;
+}
+
+.bur {
+  text-align: center;
+  border: none;
+  background-color: orange;
+  opacity: 0.6;
+  color: white;
+  font-size: medium;
+  padding: 8px 5px;
+  margin: 5px auto;
+}
+
+.bur a{
+  color: white;
+}
+
+.bur:hover, .bur a:hover {
+  opacity: 1;
+}
+
+.saved {
+  border: 1px solid orange;
+  background-color: white;
+}
+
+.saved .fa-heart {
+  color: orange;
 }
 
 .divS {
@@ -62,12 +170,62 @@
   text-transform: none;
 }
 
-.e-schedule .e-month-view .e-current-date .e-date-header {
+.searchList {
+  height: 300px;
+  overflow-x: hidden;
+  width: 100%;
+  padding: 10px;
+}
+
+.imgR {
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin: auto;
+}
+
+.divDe {
+  float: left;
+  margin: 15px;
+  margin-right: 0px;
+}
+
+.divDe h3 {
+  overflow: hidden;
+  white-space: nowrap;  
+  text-overflow: clip;
+  font-weight: bold;
+}
+
+.divDe a {
+  color: black;
+  color: orange;
+  font-size: medium;
+}
+
+.divDe a:hover {
+  text-decoration: underline;
+  opacity: 0.6;
+}
+
+.e-schedule .e-month-view .e-current-date .e-date-header, .e-calendar .e-content.e-year td.e-selected span.e-day {
   background-color: orange;
 }
-.e-schedule .e-month-view .e-date-header-wrap table td.e-current-day {
+
+.e-calendar .e-content.e-year td.e-selected:hover span.e-day {
+  background-color: orange;
+  opacity: 0.6;
+}
+
+.e-schedule .e-month-view .e-date-header-wrap table td.e-current-day, .e-btn.e-flat.e-primary, .e-css.e-btn.e-flat.e-primary {
   color: orange;
 }
+
+.e-btn.e-flat.e-primary:hover, .e-css.e-btn.e-flat.e-primary:hover {
+  color: orange;
+  opacity: 0.6;
+}
+/* end */
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {
   content: "\e846";

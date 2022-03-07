@@ -59,7 +59,7 @@
           <Property Name="DATE" Type="datetime" />
           <Property Name="AMOUNT" Type="int" />
         </EntityType>
-        <Association Name="FK__PRODUCTS__RECIPE__787EE5A0">
+        <Association Name="FK__PRODUCTS__RECIPE__02FC7413">
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="1" />
           <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -71,7 +71,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RECIPES__MAIL__72C60C4A">
+        <Association Name="FK__RECIPES__MAIL__5CD6CB2B">
           <End Role="CLIENTS" Type="Self.CLIENTS" Multiplicity="0..1" />
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -83,7 +83,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SCHEDULES__RECIP__75A278F5">
+        <Association Name="FK__SCHEDULES__RECIP__5FB337D6">
           <End Role="RECIPES" Type="Self.RECIPES" Multiplicity="1" />
           <End Role="SCHEDULES" Type="Self.SCHEDULES" Multiplicity="*" />
           <ReferentialConstraint>
@@ -113,15 +113,15 @@
           <EntitySet Name="RECIPES" EntityType="Self.RECIPES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SAVED_RECIPES" EntityType="Self.SAVED_RECIPES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SCHEDULES" EntityType="Self.SCHEDULES" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__PRODUCTS__RECIPE__787EE5A0" Association="Self.FK__PRODUCTS__RECIPE__787EE5A0">
+          <AssociationSet Name="FK__PRODUCTS__RECIPE__02FC7413" Association="Self.FK__PRODUCTS__RECIPE__02FC7413">
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
-          <AssociationSet Name="FK__RECIPES__MAIL__72C60C4A" Association="Self.FK__RECIPES__MAIL__72C60C4A">
+          <AssociationSet Name="FK__RECIPES__MAIL__5CD6CB2B" Association="Self.FK__RECIPES__MAIL__5CD6CB2B">
             <End Role="CLIENTS" EntitySet="CLIENTS" />
             <End Role="RECIPES" EntitySet="RECIPES" />
           </AssociationSet>
-          <AssociationSet Name="FK__SCHEDULES__RECIP__75A278F5" Association="Self.FK__SCHEDULES__RECIP__75A278F5">
+          <AssociationSet Name="FK__SCHEDULES__RECIP__5FB337D6" Association="Self.FK__SCHEDULES__RECIP__5FB337D6">
             <End Role="RECIPES" EntitySet="RECIPES" />
             <End Role="SCHEDULES" EntitySet="SCHEDULES" />
           </AssociationSet>

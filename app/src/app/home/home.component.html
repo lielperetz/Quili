@@ -1,18 +1,45 @@
 <!-- BEGIN: Main Menu-->
-<!-- <div class="main-menu men" data-scroll-to-active="true">
-  <div class="navbar-header">
-    <a routerLink="/site"><span class="brand-logo"><img src="../../assets/images/logo/logo.png"
-          style="height: 100px; width:200px; margin-left: 0px;"></span></a>
-    <div class="row">
-      <div class="Gw6Zhc"><svg width="36" height="36" viewBox="0 0 36 36"><path fill="#34A853" d="M16 16v14h4V20z"></path><path fill="#4285F4" d="M30 16H20l-4 4h14z"></path><path fill="#FBBC05" d="M6 16v4h10l4-4z"></path><path fill="#EA4335" d="M20 16V6h-4v14z"></path><path fill="none" d="M0 0h36v36H0z"></path></svg></div>
-      <button class="col-sm-12">New Recipe</button>
-      <h3 class="col-sm-12">{{selectedDate | date:'EEEE, MMMM d, y'}}</h3>
-      <div class="col-sm-12">
-        <div class="col-sm-12" *ngFor="let item of getRecipesForDay(selectedDate)">{{item.Title}}</div>
-      </div>
+<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow men" data-scroll-to-active="true">
+  <div class="row">
+    <div class="col-sm-8 addButton" title="Add new recipe to your Meal Planner">New Recipe</div>
+    <button class="col-sm-8 creatList" [disabled]="noRecipes()" title="Create shopping list"><a
+        routerLink="/site/ingredients/{{selectedDate1 | date: 'yyyy-MM-dd'}}/{{selectedDate2 | date: 'yyyy-MM-dd'}}"
+        target="_blank">Create shopping list</a></button>
+    <div *ngIf="noRecipes()">
+      <div class="col-sm-12 seperate"></div>
+      <div class="col-sm-12 notFound">There is no recipes in the menu. <br>
+        To add a new recipe - press the button above <i class="fa fa-arrow-up"></i>or press the required day in the Meal
+        Planner<i class="fa fa-arrow-right"></i></div>
     </div>
+    <ul class="col-sm-12">
+      <li class="col-sm-12" *ngFor="let items of listSelectedRecipes">
+        <div class="col-sm-12 seperate"></div>
+        <label class="col-sm-12 dateTitle">{{items[0].Date | date:'yyyy-MM-dd'}}</label>
+        <ul class="col-sm-12">
+          <li class="divRecipe" *ngFor="let recipe of items">
+            <p class="col-sm-12 recipeTitle">{{recipe.RecipeTitle}}</p>
+            <img class="col-sm-8" src="{{recipe.RecipeImage}}">
+            <div class="col-sm-3 viewSave">
+              <div class="col-sm-12 bur" title="Recipe view"><a routerLink="/site/showDetails/{{recipe.RecipeId}}"
+                  target="_blank"><i class="fa fa-eye"></i></a></div>
+              <div *ngIf="recipe.isSaved" class="col-sm-12 bur saved" title="Remove from your Favorites"><i
+                  class="fa fa-heart"></i></div>
+              <!-- <div *ngIf="recipe.isSaved" class="col-sm-12 bur saved" title="Remove from your Favorites" (click)="handleRemove(recipe.RecipeId)"><i class="fa fa-heart"></i></div> -->
+              <div *ngIf="!recipe.isSaved" class="col-sm-12 bur" title="Save to your Favorites"><i
+                  class="fa fa-heart"></i></div>
+              <!-- <div *ngIf="!recipe.isSaved" class="col-sm-12 bur" title="Save to your Favorites" (click)="handleAdd(recipe.RecipeId)"><i class="fa fa-heart"></i></div> -->
+            </div>
+            <div class="col-sm-12">
+              <div class="col-sm-7"><label>Repeat: </label><span> {{getRepeatStatus(recipe.SchedulingStatuse)}}</span>
+              </div>
+              <div class="col-sm-5"><label>Amount: </label><span> {{recipe.Amount}}</span></div>
+            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
   </div>
-</div> -->
+</div>
 <!-- END: Main Menu-->
 <div class="app-content content ">
   <div class="content-wrapper">
@@ -22,18 +49,15 @@
           <!-- Main: Content -->
           <div class="sidebar-wrapper">
             <div class="control-section">
-              <!-- <ejs-schedule #scheduleObj [(currentView)]="currentView" (cellClick)="onCellClick($event)"
-                cssClass='schedule-overview' width='100%' height='650px' (popupOpen)="onPopupOpen($event)"
-                (popupClose)="onPopupClose($event)" (actionComplete)="onActionComplete($event)"
-                (select)="onSelect($event)"> -->
-              <ejs-schedule #scheduleObj [(currentView)]="currentView" width='100%' height='650px'
-                [rowAutoHeight]="rowAutoHeight">
+              <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
+                height='650px' [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
+                (actionComplete)="onActionComplete($event)" (popupOpen)="onPopupOpen($event)">
                 <ng-template #cellTemplate let-data>
                   <div class="e-work-cells row"
-                    style=" background-color: inherit; width: auto; height: auto; border: none; ">
-                    <div class="col-sm-12 div-recipe" *ngIf="getRecipesForDay(data.date) as variable">
+                    style="background-color: inherit; width: auto; height: auto; border: none; padding-top: 0px;">
+                    <div class="col-sm-12 div-recipe" *ngIf="getRecipesForDay(data.date).length>0 as variable">
                       <mat-carousel timings="200ms ease-in" [autoplay]="true" interval="3000" color="#00000040"
-                        maxWidth="auto" proportion="44" slides="numberRecipesForDay" [loop]="true" [hideArrows]="true"
+                        maxWidth="auto" proportion="44" slides="recipesForDay.length" [loop]="true" [hideArrows]="true"
                         [hideIndicators]="true" [useKeyboard]="true" [useMouseWheel]="true" orientation="ltr"
                         slideHeight="200px">
                         <mat-carousel-slide #matCarouselSlide *ngFor="let slide of recipesForDay; let i = index"
@@ -47,9 +71,6 @@
                           </div>
                         </mat-carousel-slide>
                       </mat-carousel>
-                      <!-- <button class="col-sm-3" *ngIf="numberRecipesForDay>1" id="more"
-                          (click)="showRecipesPopup(data.date, $event)">+{{numberRecipesForDay - 1}} <span
-                            id="span-more">more</span></button> -->
                     </div>
                   </div>
                 </ng-template>
@@ -74,26 +95,27 @@
                   <div class="quick-info-content">
                     <div class="e-cell-content">
                       <div class="content-area">
-                        <input class="e-input" type="search" placeholder="Search" (ngModelChange)="searchRecipe($event)"
-                          [(ngModel)]="searchWord" />
+                        <input class="e-input searchInput" type="search" placeholder="Search"
+                          (ngModelChange)="searchRecipe($event)" [(ngModel)]="searchWord" />
+                        <p class="noResults" *ngIf="!listRecipesBySearch && searchWord!=''">Your search <span
+                            style="color: orange;">{{searchWord}}</span> did not match any recipes.</p>
                       </div>
-                      <div class="row" *ngIf="listRecipesBySearch"
-                        style="height: 300px; width: 100%; overflow-x: hidden;">
-                        <div class="col-md-12" *ngFor="let item of listRecipesBySearch"
-                          style="margin: 5px; border: black 0.5px;" (click)="chooseRecipe(item.id)">
-                          <!-- <button style="border: none; width: 100%;"> -->
-                          <img src="{{item.image}}" class="img-responsive" style="height:80px; width: 80px;">
-                          <h4 style="display: inline; margin: 2px;">{{item.title}}</h4>
-                          <a routerLink="/site/showDetails/{{item.id}}" target="_blank">view details</a>
-                          <!-- </button> -->
+                      <div class="row searchList" *ngIf="listRecipesBySearch">
+                        <div *ngFor="let item of listRecipesBySearch" (click)="chooseRecipe(item.id)"
+                          style="margin: 5px;">
+                          <img class="imgR" src="{{item.image}}">
+                          <div class="divDe">
+                            <h3>{{item.title}}</h3>
+                            <a routerLink="/site/showDetails/{{item.id}}" target="_blank">view details</a>
+                          </div>
                         </div>
                       </div>
                       <div *ngIf="newRecipe.RecipeTitle" class="content-area">
                         <label>Title</label>
                         <input id="title" class="e-input" type="text" placeholder="Title" style="font-weight: bold;"
                           [(ngModel)]="newRecipe.RecipeTitle" />
-                        <button routerLink="/site/showDetails/{{newRecipe.RecipeId}}" style="border: none;"><img
-                            src="{{newRecipe.RecipeImage}}" /></button>
+                        <a routerLink="/site/showDetails/{{newRecipe.RecipeId}}" target="_blank"
+                          style="border: none;"><img src="{{newRecipe.RecipeImage}}" /></a>
                       </div>
                       <div class="content-area">
                         <label>Start Date</label>
@@ -107,7 +129,6 @@
                           <option value="1">Never</option>
                           <option value="2">Weekly</option>
                           <option value="3">Monthly</option>
-                          <!-- <option value="4">Yearly</option> -->
                         </select>
                       </div>
                     </div>
@@ -132,35 +153,8 @@
     </div>
   </div>
 </div>
-<!-- <div *ngIf="showOrHidePopup" class="e-more-popup-wrapper e-lib e-popup e-control e-popup-open"
-  [ngStyle]="styleMorePopup">
-  <div class="e-more-event-popup">
-    <div class="e-more-event-header">
-      <div class="e-more-event-close e-control e-btn e-lib e-round e-icon-btn" title="Close" tabindex="0"
-        (click)="hideRecipesPopup()">
-        <span class="e-btn-icon e-icons e-close-icon" style="font-weight: bold;">&#x2716;</span>
-      </div>
-      <div class="e-more-event-date-header" style="text-align: center;">
-        <div class="e-header-day">{{currentDay | date:'EEEE, MMMM d, y'}}</div>
-      </div>
-    </div>
-    <div *ngFor="let item of getRecipesForDay(currentDay)" style="position: relative; width: 100%; margin: 2px;">
-      <button routerLink="/site/showDetails/{{item.RecipeId}}" style="border: none;">
-        <img src="{{item.RecipeImage}}" class="img-responsive" alt="image"
-          style="width: 40px; height: 40px; float: left; margin: 2px 0px;">
-        <p style="font-weight: bold; color: black; width: 155px; float: left;
-            white-space: nowrap;
-            overflow: hidden;text-overflow: ellipsis;">{{item.RecipeTitle}}</p>
-      </button>
-      <div style="position: absolute; right: 15px; bottom: 3px; font: inherit;">
-        <button ejs-button id="delete" cssClass="e-flat" (click)="delete(item.Code)" style="border: none;"><span
-            class="glyphicon">&#xe020;</span></button>
-      </div>
-    </div>
-  </div>
-</div> -->
 
-<div *ngIf="deletePopup" class="e-dlg-container e-dlg-center-center"
+<!-- <div *ngIf="deletePopup" class="e-dlg-container e-dlg-center-center"
   style="z-index: 1004; display: flex; position: fixed;">
   <div id="QuickDialog" class="e-control e-dialog e-lib e-quick-dialog e-dlg-modal e-popup e-popup-open" role="dialog"
     style="max-height: 422px; z-index: 1004; left: 0px; top: 0px; position: relative; width: auto;"
@@ -182,4 +176,4 @@
     </div>
   </div>
   <div class="e-dlg-overlay" style="z-index: 1003; display: block; position: absolute;"></div>
-</div>
+</div> -->

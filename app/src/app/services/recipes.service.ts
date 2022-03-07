@@ -18,7 +18,7 @@ export class RecipesService {
   SearchRecipe(searchWord: string): Observable<any> {
     return this.httpClient.get<any>(this.url + "SearchRecipe/" + searchWord).pipe(catchError(this.handleError));
   }
-  GetRecipeById(id: number): Observable<any> {
+  GetRecipeById(id: string): Observable<any> {
     return this.httpClient.get<any>(this.url + "GetRecipeById/" + id).pipe(catchError(this.handleError))
   }
   GetSavedRecipe(): Observable<any> {

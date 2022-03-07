@@ -21,6 +21,7 @@ export class SiteComponent implements OnInit {
     saved.GetSavedRecipes().subscribe(
       (res: any) => {
         if (res.Status)
+          saved.savedRecipes = res.Data;
           this.saved.numSaved = (res.Data as []).length;
       })
   }

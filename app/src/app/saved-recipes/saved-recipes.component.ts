@@ -26,8 +26,7 @@ export class SavedRecipesComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  handleRemove(id: number) {
-    console.log(id)
+  handleRemove(id: string) {
     Swal.fire({
       title: 'Are you sure you want to delete this recipe?',
       icon: 'warning',

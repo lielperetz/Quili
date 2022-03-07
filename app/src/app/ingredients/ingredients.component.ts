@@ -104,7 +104,7 @@ export class IngredientsComponent implements OnInit {
       if (x.code == e.target.value) { x.checkbox = !x.checkbox; }
     })
   }
-  
+
   // isE(listRecipes, recipeTitle): boolean {
   //   listRecipes.map(x => { if (x.RecipeTitle == recipeTitle) return true })
   //   return false
@@ -128,6 +128,12 @@ export class IngredientsComponent implements OnInit {
 
   changeDate() {
     this.navigateToDates();
+  }
+
+  parseDate(dateString: string): Date {
+    if (dateString)
+      return new Date(new Date(dateString).setHours(0));
+    return null;
   }
 
   navigateToDates() {
@@ -205,26 +211,26 @@ export class IngredientsComponent implements OnInit {
     // })
   }
 
-//   var elements = document.getElementsByClassName("column");
+  //   var elements = document.getElementsByClassName("column");
 
-// // Declare a loop variable
-// var i;
+  // // Declare a loop variable
+  // var i;
 
-// List View
-listView() {
-  var elements = document.getElementsByClassName("listGrid")
-  for (let index = 0; index < elements.length; index++) {
-    (elements[index] as HTMLElement).style.width = "100%";
+  // List View
+  listView() {
+    var elements = document.getElementsByClassName("listGrid")
+    for (let index = 0; index < elements.length; index++) {
+      (elements[index] as HTMLElement).style.width = "100%";
+    }
   }
-}
 
-// Grid View
-gridView() {
-  var elements = document.getElementsByClassName("listGrid");
-  console.log(document.getElementsByClassName("listGrid"));
-  for (let index = 0; index < elements.length; index++) {
-    (elements[index] as HTMLElement).style.width = "25%";
+  // Grid View
+  gridView() {
+    var elements = document.getElementsByClassName("listGrid");
+    console.log(document.getElementsByClassName("listGrid"));
+    for (let index = 0; index < elements.length; index++) {
+      (elements[index] as HTMLElement).style.width = "25%";
+    }
+    console.log(document.getElementsByClassName("listGrid"));
   }
-  console.log(document.getElementsByClassName("listGrid"));
-}
 }
