@@ -151,34 +151,24 @@ namespace finalProject.Controllers
             }
         }
         [HttpGet]
-        [Route("GetPopular/{num}")]
-        public JsonResult<ReturnObject> GetPopular(int num)
+        [Route("GetPopular")]
+        public JsonResult<ReturnObject> GetPopular()
         {
             try
             {
                 List<RecipesEntities> rList = RecipesBl.GetRecipes();
 
                 var groupBy =
-                    from recipe in rList
-                    group recipe by recipe.RecipeTitle into g
+                    from rec in rList
+                    group rec by rec.RecipeTitle into g
                     select new { recipe = g, count = g.Count() };
 
-                int[] popular = new int[num];
-                var popularRecipe = new RecipesEntities[num];
+                var orderBy =
+                    from gro in groupBy 
+                    orderby gro.count descending
+                    select new { recipes = gro.recipe, count = gro.count };
 
-                foreach (var item in groupBy)
-                {
-                    for (var p = 0; p < popular.Length; p++)
-                    {
-                        if (popular[p] < item.count)
-                        {
-                            popular[p] = item.count;
-                            //popularRecipe = item.recipe;
-                            break;
-                        }
-                    }
-                }
-                return Json(new ReturnObject() { Status = true, Data = "" });
+                return Json(new ReturnObject() { Status = true, Data = orderBy });
             }
             catch (Exception ex)
             {

@@ -31,6 +31,9 @@ export class RecipesService {
   GetRandom(num: number): Observable<any> {
     return this.httpClient.get<any>(this.url + "GetRandom/" + num).pipe(catchError(this.handleError))
   }
+  GetPopular(): Observable<any> {
+    return this.httpClient.get<any>(this.url + "GetPopular").pipe(catchError(this.handleError))
+  }
   handleError(errorResponse: HttpErrorResponse) {
     console.log(errorResponse);
     return throwError(() => new Error('test'));
