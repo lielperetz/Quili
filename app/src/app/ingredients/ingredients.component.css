@@ -67,6 +67,19 @@ input {
 	margin: 10px auto;
   position: relative;
 }
+.view_main.grid-mode .list-view{
+  display: none;
+}
+.view_main.grid-mode .grid-view{
+  display: block;
+}
+.view_main.list-mode .list-view{
+  display: block;
+}
+.view_main.list-mode .grid-view{
+  display: none;
+}
+
 .view_item img{
 	width: 65px;
   max-height: 75px;
