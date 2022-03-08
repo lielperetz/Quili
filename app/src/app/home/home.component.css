@@ -14,7 +14,7 @@ button {
   font-family: "Google Sans",Roboto,Arial,sans-serif;
 }
 
-.addButton, .creatList {
+.creatList {
   background-color: orange;
   margin: 0px auto 20px;
   color: white;
@@ -28,7 +28,7 @@ button {
   opacity: 0.6;
 }
 
-.addButton:hover, .creatList:hover {
+.creatList:hover {
   opacity: 1;
   color: white;
 }
@@ -211,7 +211,7 @@ button[disabled] {
   text-decoration: underline;
   opacity: 0.6;
 }
-/* ---- */
+
 .select-status {
   border: 0;
   padding: 3px;

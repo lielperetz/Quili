@@ -33,9 +33,3 @@ a:focus {
     border-color: orange;
     color: white;
 }
-
-@media print {
-    #bst {
-      display: none;
-    }
-}

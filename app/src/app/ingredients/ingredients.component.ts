@@ -211,26 +211,34 @@ export class IngredientsComponent implements OnInit {
     // })
   }
 
-  //   var elements = document.getElementsByClassName("column");
-
-  // // Declare a loop variable
-  // var i;
-
-  // List View
   listView() {
-    var elements = document.getElementsByClassName("listGrid")
-    for (let index = 0; index < elements.length; index++) {
-      (elements[index] as HTMLElement).style.width = "100%";
-    }
+    this.replaceActive("list", "grid");
+    this.replaceView(".list-view", ".grid-view");
   }
 
-  // Grid View
   gridView() {
-    var elements = document.getElementsByClassName("listGrid");
-    console.log(document.getElementsByClassName("listGrid"));
-    for (let index = 0; index < elements.length; index++) {
-      (elements[index] as HTMLElement).style.width = "25%";
-    }
-    console.log(document.getElementsByClassName("listGrid"));
+    this.replaceActive("grid", "list");
+    this.replaceView(".grid-view", ".list-view");
+  }
+
+  replaceActive(current: string, other: string) {
+    const otherB = document.getElementById(other);
+    otherB.classList.remove("active");
+    const currentB = document.getElementById(current);
+    currentB.className += " active";
+  }
+
+  replaceView(current, other) {
+    var currentView = document.querySelectorAll(current)
+    currentView.forEach((view) =>
+      view.style.display = "block")
+    var otherView = document.querySelectorAll(other)
+    otherView.forEach(view => {
+      view.style.display = "none";
+    });
+  }
+
+  print() {
+    window.print()
   }
 }

@@ -1,74 +1,121 @@
 <!-- BEGIN: Recipes Menu-->
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow men" data-scroll-to-active="true">
-    <!-- <a routerLink="/site"><span class="brand-logo"><img src="../../assets/images/logo/logo.png"
-          style="height: 100px; width:200px; margin-left: 0px;"></span></a> -->
-    <div class="row">
-      <ul class="col-sm-12">
-      <li class="col-sm-12 recipeDiv" *ngFor="let item of viewRecipes;">
+  <div class="row">
+    <ul class="col-sm-12">
+      <li class="col-sm-12" *ngFor="let item of viewRecipes;">
+        <div class="col-sm-12 seperate"></div>
         <a class="col-sm-12" routerLink="/site/showDetails/{{item.RecipeId}}" target="_blank">
-          <hr>
           <input class="col-sm-1" id="as{{item.Code}}" type="checkbox" [(ngModel)]="item.isChecked"
             (change)="createList()" />
-          <label class="col-sm-10 l" for="as{{item.Code}}">
-            <div class="row">
-              <img class="col-sm-3 img_thumbnail" src="{{item.RecipeImage}}">
-              <div class="col-sm-8 labelR"><label>{{item.RecipeTitle}}</label></div>
-            </div>
-          </label>
-          <!-- <input class="col-sm-1" id="as{{item.Code}}" type="checkbox" [(ngModel)]="item.isChecked"
-            (change)="createList()" /> -->
-          <label for="as{{item.Code}}">{{item.Date | date:'yyyy-MM-dd'}}</label>
+          <div class="recipeDiv">
+            <label class="col-sm-12 l" for="as{{item.Code}}">{{item.RecipeTitle}}</label>
+            <label class="col-sm-12 d">{{item.Date | date:'yyyy-MM-dd'}}</label>
+            <img class="col-sm-6" src="{{item.RecipeImage}}">
+          </div>
         </a>
-      </li></ul>
-    </div>
+      </li>
+    </ul>
+  </div>
 </div>
 <!-- END: Recipes Menu-->
 <div class="app-content content">
   <div class="content-wrapper">
     <div class="content-body">
       <div class="row">
-        <div class="col-sm-6">
-          <input id="startDate" (input)="startDate=parseDate($event.target.value)" (change)="changeDate()" type="date" placeholder="start" [value]="startDate | date:'yyyy-MM-dd'">
-          <input id="endDate" (input)="endDate=($event.target.value)" (change)="changeDate()" type="date" placeholder="end" [value]="endDate | date:'yyyy-MM-dd'">
+        <h1 class="col-sm-9 header">Ingredients List</h1>
+        <div class="col-sm-3 export">
+          <div class="e" title="Print" (click)="print()"><i class="fa fa-print icon"></i></div>
+          <!-- <div class="e" title="Excel"><i class="fa fa-file-excel-o icon"></i></div> -->
+          <!-- <div class="e es" title="Share"><i class="fa fa-mobile-phone icon s"></i></div> -->
         </div>
-        <div class="btns col-sm-6">
-          <button class="btnlg active list" (click)="listView()"><i class="fa fa-bars"></i> List</button>
-          <button class="btnlg grid" (click)="gridView()"><i class="fa fa-th-large"></i> Grid</button>
+        <div class="col-sm-6">
+          <input type="date" [value]="startDate | date:'yyyy-MM-dd'" (input)="startDate=parseDate($event.target.value)"
+            (change)="changeDate()">
+          <input type="date" [value]="endDate | date:'yyyy-MM-dd'" (input)="endDate=parseDate($event.target.value)"
+            (change)="changeDate()">
+        </div>
+        <div class="col-sm-6 grid-list-buttons">
+          <button id="list" data-view="list-view" class="g-l-b" (click)="listView()"><i class="fa fa-bars"></i>
+            List</button>
+          <button id="grid" data-view="list-view" (click)="gridView()" class="g-l-b active"><i
+              class="fa fa-th-large"></i>
+            Grid</button>
+        </div>
+        <div class="wrapper">
+          <div class="view_main">
+            <div class="view_wrap list-view" *ngFor="let item of viewData" style="display: none;">
+              <div class="view_item">
+                <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
+                <div class="vi_left">
+                  <img *ngIf="item.ProductImage"
+                    src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
+                  <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
+                </div>
+                <div class="vi_right">
+                  <p class="title">{{item.ProductName}}</p>
+                </div>
+                <div class="vi_right">
+                  <p class="content">2 Tbsp</p>
+                </div>
+                <!-- <div class="content">
+                  <table class="table">
+                    <tr *ngFor="let unit of item.Units">
+                      <td>{{unit.Amount}}</td>
+                      <td>{{unit.Unit}}</td>
+                    </tr>
+                  </table>
+                </div> -->
+                <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes <span
+                    class="badge badge-pill badge-primary is">
+                    {{item.Recipes.length}} </span>
+                  <div class="recipes-content" *ngIf="item.showRecipes">
+                    <a class="row" *ngFor="let r of item.Recipes; index as i"
+                      routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
+                      <img class="col-sm-2" src="{{r.RecipeImage}}">
+                      <p class="col-sm-10"> {{r.RecipeTitle}} - {{r.Date | date:'yyyy-MM-dd'}}</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="view_wrap grid-view" *ngFor="let item of viewData" style="display: block;">
+              <div class="view_item">
+                <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
+                <div class="vi_left">
+                  <img *ngIf="item.ProductImage"
+                    src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
+                  <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
+                </div>
+                <div class="vi_right">
+                  <p class="title">{{item.ProductName}}</p>
+                </div>
+                <div class="vi_right">
+                  <p class="content">2 Tbsp</p>
+                </div>
+                <!-- <div class="content">
+                  <table class="table">
+                    <tr *ngFor="let unit of item.Units">
+                      <td>{{unit.Amount}}</td>
+                      <td>{{unit.Unit}}</td>
+                    </tr>
+                  </table>
+                </div> -->
+                <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes <span
+                    class="badge badge-pill badge-primary is">
+                    {{item.Recipes.length}} </span>
+                  <div class="recipes-content" *ngIf="item.showRecipes">
+                    <a class="row" *ngFor="let r of item.Recipes; index as i"
+                      routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
+                      <img class="col-sm-2" src="{{r.RecipeImage}}">
+                      <p class="col-sm-10"> {{r.RecipeTitle}} - {{r.Date | date:'yyyy-MM-dd'}}</p>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <ul class="list-group" *ngFor="let item of viewData;">
-        <li class="list-group-item list-group-item-action list-group-item-light listGrid row">
-          <input class="cl" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
-          <img *ngIf="item.ProductImage" class="cl imgP"
-            src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
-          <img *ngIf="!item.ProductImage" class="cl imgP" src="../../assets/images/dish.jpg">
-          <div class="col-sm-3 cl">
-            <label>{{item.ProductName}}</label>
-          </div>
-          <div class="col-sm-3 cl">
-            <table class="table">
-              <tr *ngFor="let unit of item.Units">
-                <td>{{unit.Amount}}</td>
-                <td>{{unit.Unit}}</td>
-              </tr>
-            </table>
-          </div>
-          <div class="col-sm-4 cl">
-            <button class="recipesB" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">recipes <span
-                class="badge badge-pill badge-primary is"> {{item.Recipes.length}} </span></button>
-            <table *ngIf="item.showRecipes">
-              <tr *ngFor="let r of item.Recipes; index as i">
-                <td class="row tdR">
-                  <a class="col-sm-12" routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
-                    <img class="col-sm-2" src="{{r.RecipeImage}}">
-                    <p class="col-sm-10"> {{r.RecipeTitle}} - {{r.Date | date:'yyyy-MM-dd'}}</p>
-                  </a>
-                </td>
-              </tr>
-            </table>
-          </div>
-        </li>
-      </ul>
     </div>
   </div>
 </div>

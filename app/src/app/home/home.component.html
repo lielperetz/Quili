@@ -1,7 +1,6 @@
 <!-- BEGIN: Main Menu-->
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow men" data-scroll-to-active="true">
   <div class="row">
-    <div class="col-sm-8 addButton" title="Add new recipe to your Meal Planner">New Recipe</div>
     <button class="col-sm-8 creatList" [disabled]="noRecipes()" title="Create shopping list"><a
         routerLink="/site/ingredients/{{selectedDate1 | date: 'yyyy-MM-dd'}}/{{selectedDate2 | date: 'yyyy-MM-dd'}}"
         target="_blank">Create shopping list</a></button>
@@ -50,7 +49,7 @@
           <div class="sidebar-wrapper">
             <div class="control-section">
               <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
-                height='650px' [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
+                height='700px' [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
                 (actionComplete)="onActionComplete($event)" (popupOpen)="onPopupOpen($event)">
                 <ng-template #cellTemplate let-data>
                   <div class="e-work-cells row"

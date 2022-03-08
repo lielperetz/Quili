@@ -22,15 +22,6 @@ h3 h2 {
     margin: 10px auto;
 }
 
-.gif {
-    margin: auto;
-    padding: 20px 10%;
-}
-
-.gif img {
-    float: right;
-}
-
 .login {
     background-color: orange;
     color: white;
