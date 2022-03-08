@@ -1,19 +1,55 @@
-.SlideText{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: right;
+.slick-slider{
+        max-height: 500px;
+        height: 500px;
+}
+.carousel .slick-list{
+    min-height: 100%;
+    height: 100% !important;
+}
+
+.carousel .slick-track{
+    min-height: 100%;
+    height: 100% !important;
+}
+
+
+
+.slick-slide, .slide {
+    background: no-repeat center 0;
+    background-size: cover;
+    max-height: 500px;
+    height: 500px;
+}
+
+.slick-slide img{
+    max-height: 500px;
+}
+
+.slick-slide .SlideText{
+    position:absolute;
+    top: 40px;
+    max-width: 50pc;
     margin: 40px;
-    background-color: whitesmoke;
-    position: relative;
-    animation: mymove 1s;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 25px;
+    max-height: none;
+    height: auto;
+    text-transform: uppercase;
+    color: black;
+   
+}
+
+.slick-current .SlideText{
+    animation: mymove 0.5s;
     animation-iteration-count: unset;
     /* animation-delay: 250ms; */
     animation-timing-function: linear;
 }
+
 @keyframes mymove {
-    from {bottom: -150px;}
-    to {bottom: 0px;}
+    from {top: 400px;}
+    to {top: 40px;}
   }
 /* .about{
     position: -webkit-sticky;

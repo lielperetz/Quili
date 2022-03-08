@@ -29,12 +29,21 @@ export class DashboardComponent implements OnInit {
 
     //carousel
     randomList = []
-
+    slideConfig = {
+        "slidesToShow": 1,
+        "slidesToScroll": 1,
+        infinite: true,
+        dots: true,
+        speed: 400,
+        autoplay: true,
+        autoplaySpeed: 2000
+    };
     constructor(public recipesService: RecipesService) { }
 
     ngOnInit(): void {
         this.randomList = []
         this.recipesService.GetRandom(9).subscribe(data => {
+            console.log(data)
             if (data.Status) {
                 data.Data.recipes.forEach(element => {
                     this.randomList.push({
@@ -47,5 +56,21 @@ export class DashboardComponent implements OnInit {
                 console.log(data.Error)
         })
         console.log(this.randomList)
+    }
+
+    slickInit(e) {
+        console.log('slick initialized');
+    }
+
+    breakpoint(e) {
+        console.log('breakpoint');
+    }
+
+    afterChange(e) {
+        console.log('afterChange');
+    }
+
+    beforeChange(e) {
+        console.log('beforeChange');
     }
 }

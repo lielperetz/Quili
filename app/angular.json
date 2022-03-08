@@ -39,12 +39,16 @@
 
               "src/assets/css/core/menu/menu-types/vertical-menu.css",
               "src/assets/css/style.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss"
             ],
             "scripts": [
               "src/assets/vendors/js/vendors.min.js",
               "src/assets/js/core/app-menu.js",
-              "src/assets/js/core/app.js"
+              "src/assets/js/core/app.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
+
             ]
           },
           "configurations": {

@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
 import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
 import { FooterComponent } from './footer/footer.component';
+import { SlickCarouselModule } from 'ngx-slick-carousel';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { FooterComponent } from './footer/footer.component';
     MultiSelectModule,
     BrowserAnimationsModule,
     MatCarouselModule.forRoot(),
+    SlickCarouselModule,
   ],
   providers: [CookieService, AuthGuard],
   bootstrap: [AppComponent]
