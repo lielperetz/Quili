@@ -16,9 +16,10 @@ export class IngredientsComponent implements OnInit {
   // savedRecipes = []
   schedulesRecipes = []
   viewRecipes = []
-
+  
   listPro: Array<Product> = new Array<Product>()
   viewData = []
+  gridMode = true;
 
   startDate: Date = new Date(Date.now())
   endDate: Date = new Date(addDays(this.startDate, 7))
@@ -211,32 +212,32 @@ export class IngredientsComponent implements OnInit {
     // })
   }
 
-  listView() {
-    this.replaceActive("list", "grid");
-    this.replaceView(".list-view", ".grid-view");
-  }
+  // listView() {
+  //   this.replaceActive("list", "grid");
+  //   this.replaceView(".list-view", ".grid-view");
+  // }
 
-  gridView() {
-    this.replaceActive("grid", "list");
-    this.replaceView(".grid-view", ".list-view");
-  }
+  // gridView() {
+  //   this.replaceActive("grid", "list");
+  //   this.replaceView(".grid-view", ".list-view");
+  // }
 
-  replaceActive(current: string, other: string) {
-    const otherB = document.getElementById(other);
-    otherB.classList.remove("active");
-    const currentB = document.getElementById(current);
-    currentB.className += " active";
-  }
+  // replaceActive(current: string, other: string) {
+  //   const otherB = document.getElementById(other);
+  //   otherB.classList.remove("active");
+  //   const currentB = document.getElementById(current);
+  //   currentB.className += " active";
+  // }
 
-  replaceView(current, other) {
-    var currentView = document.querySelectorAll(current)
-    currentView.forEach((view) =>
-      view.style.display = "block")
-    var otherView = document.querySelectorAll(other)
-    otherView.forEach(view => {
-      view.style.display = "none";
-    });
-  }
+  // replaceView(current, other) {
+  //   var currentView = document.querySelectorAll(current)
+  //   currentView.forEach((view) =>
+  //     view.style.display = "block")
+  //   var otherView = document.querySelectorAll(other)
+  //   otherView.forEach(view => {
+  //     view.style.display = "none";
+  //   });
+  // }
 
   print() {
     window.print()
