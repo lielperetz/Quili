@@ -108,11 +108,12 @@ button[disabled] {
 .saved {
   border: 1px solid orange;
   background-color: white;
-}
-
-.saved .fa-heart {
   color: orange;
 }
+
+/* .saved .fa-heart {
+  color: orange;
+} */
 
 .divS {
   width: 100%; 

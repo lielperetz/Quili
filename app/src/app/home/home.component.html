@@ -21,12 +21,10 @@
             <div class="col-sm-3 viewSave">
               <div class="col-sm-12 bur" title="Recipe view"><a routerLink="/site/showDetails/{{recipe.RecipeId}}"
                   target="_blank"><i class="fa fa-eye"></i></a></div>
-              <div *ngIf="recipe.isSaved" class="col-sm-12 bur saved" title="Remove from your Favorites"><i
-                  class="fa fa-heart"></i></div>
-              <!-- <div *ngIf="recipe.isSaved" class="col-sm-12 bur saved" title="Remove from your Favorites" (click)="handleRemove(recipe.RecipeId)"><i class="fa fa-heart"></i></div> -->
-              <div *ngIf="!recipe.isSaved" class="col-sm-12 bur" title="Save to your Favorites"><i
-                  class="fa fa-heart"></i></div>
-              <!-- <div *ngIf="!recipe.isSaved" class="col-sm-12 bur" title="Save to your Favorites" (click)="handleAdd(recipe.RecipeId)"><i class="fa fa-heart"></i></div> -->
+              <div *ngIf="recipe.isSaved" class="col-sm-12 bur saved" title="Remove from your Favorites"
+                (click)="recipe.isSaved=!recipe.isSaved;handleRemove(recipe.RecipeId)"><i class="fa fa-heart"></i></div>
+              <div *ngIf="!recipe.isSaved" class="col-sm-12 bur saved" title="Save to your Favorites"
+                (click)="recipe.isSaved=!recipe.isSaved;handleAdd(recipe.RecipeId)"><i class="fa fa-heart-o"></i></div>
             </div>
             <div class="col-sm-12">
               <div class="col-sm-7"><label>Repeat: </label><span> {{getRepeatStatus(recipe.SchedulingStatuse)}}</span>

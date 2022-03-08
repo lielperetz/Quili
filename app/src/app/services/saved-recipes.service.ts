@@ -9,7 +9,7 @@ import { catchError, Observable, throwError } from 'rxjs';
 export class SavedRecipesService {
   url: string = "http://localhost:44376/Api/SavedRecipes/";
   numSaved: number = 0;
-  savedRecipes;
+  savedRecipes: any[];
   constructor(private httpClient: HttpClient, private cookies: CookieService) { }
   AddToSavedRecipes(rec: any): Observable<any> {
     const header = new HttpHeaders({ 'Content-Type': 'application/json' }).set('Authorization', this.cookies.get('Token'))

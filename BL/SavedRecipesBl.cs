@@ -20,9 +20,10 @@ namespace BL
             return DalCode.GetSavedRecipes().Any(x => x.MAIL == mail && x.RECIPE_ID == id);
         }
 
-        public static void AddToSavedRecipes(SavedRecipesEntities r)
+        public static SavedRecipesEntities AddToSavedRecipes(SavedRecipesEntities r)
         {
             DalCode.AddSavedRecipe(SavedRecipesEntities.ConvertToDB(r));
+            return r;
         }
 
         public static void RemoveSavedRecipe(string id)

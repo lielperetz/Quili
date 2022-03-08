@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
     private recipeService: RecipesService,
     private schedulesService: SchedulesService,
     public router: Router,
-    public savedRecipes: SavedRecipesService
+    public savedRecipesService: SavedRecipesService
   ) {
     this.getOriginalData();
   }
@@ -185,78 +185,70 @@ export class HomeComponent implements OnInit {
   }
 
   public isSaved(id: string) {
-    if (this.savedRecipes.savedRecipes?.filter(x => x.Id === id)[0])
+    if (this.savedRecipesService.savedRecipes?.filter(x => x.Id === id)[0])
       return true;
     return false;
   }
 
-  // async getRecipe(id: string) {
-  //   let recipe = null;
-  //   this.recipeService.GetRecipeById(id).subscribe(
-  //     (response: any) => {
-  //       if (response.Status) {
-  //         recipe = response.Data;
-  //       }
-  //       else
-  //         alert(response.Error);
-  //     })
-  //   return recipe;
-  // }
+  public handleRemove(id: string) {
+    console.log(this.listSelectedRecipes)
+    Swal.fire({
+      title: 'Are you sure you want to delete this recipe?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Ok',
+      cancelButtonText: 'Cancal'
+    }).then((result) => {
+      if (result.value) {
+        this.savedRecipesService.RemoveSavedRecipe(id).subscribe(
+          (res: any) => {
+            if (res.Status) {
+              Swal.fire({
+                title: 'Deleted!',
+                text: 'Delete successfully.',
+                icon: 'success',
+                iconColor: 'orange',
+                timer: 3000,
+                showConfirmButton: false
+              })
+              this.savedRecipesService.numSaved--;
+              this.savedRecipesService.savedRecipes.splice(this.savedRecipesService.savedRecipes.findIndex(x => x.Id === id), 1)
+              // window.location.reload();
+            }
+            else
+              console.log(res.Error);
+          })
+      }
+    })
+  }
 
-  // public handleAdd(id) {
-  //   let recipe = this.getRecipe(id);
-  //   console.log(recipe)
-  // if (recipe) {
-  //   this.savedRecipes.AddToSavedRecipes(recipe).subscribe(
-  //     (res: any) => {
-  //       if (res.Status) {
-  //         // recipe.isSaved = true;
-  //         this.savedRecipes.numSaved++;
-  //         Swal.fire({
-  //           title: 'Success!',
-  //           text: "was successfully added.",
-  //           // text: recipe.Title + " was successfully added.",
-  //           icon: 'success',
-  //           iconColor: 'orange',
-  //           timer: 3000,
-  //           showConfirmButton: false
-  //         })
-  //       }
-  //       else
-  //         alert(res.Error)
-  //     })
-  // }
-  // }
+  public handleAdd(id: string) {
+    this.recipeService.GetRecipeById(id).subscribe(
+      (response: any) => {
+        if (response.Status) {
+          this.savedRecipesService.AddToSavedRecipes(response.Data).subscribe(
+            (res: any) => {
+              if (res.Status) {
+                this.savedRecipesService.numSaved++;
+                this.savedRecipesService.savedRecipes.push(res.Data);
+                Swal.fire({
+                  title: 'Success!',
+                  text: res.Data.Title + " was successfully added.",
+                  icon: 'success',
+                  iconColor: 'orange',
+                  timer: 3000,
+                  showConfirmButton: false
+                })
+              }
+              else
+                alert(res.Error)
+            })
+        }
+        else
+          alert(response.Error);
+      })
 
-  // public handleRemove(id) {
-  //   let recipe = this.listRecipes.filter(x => x.RecipeId === id)[0];
-  //   Swal.fire({
-  //     title: 'Are you sure you want to delete this recipe?',
-  //     icon: 'warning',
-  //     showCancelButton: true,
-  //     confirmButtonText: 'Ok',
-  //     cancelButtonText: 'Cancal'
-  //   }).then((result) => {
-  //     if (result.value) {
-  //       this.savedRecipes.RemoveSavedRecipe(id).subscribe(
-  //         (res: any) => {
-  //           if (res.Status) {
-  //             Swal.fire({
-  //               title: 'Deleted!',
-  //               text: recipe.RecipeTitle + ' was successfully deleted.',
-  //               icon: 'success',
-  //               iconColor: 'orange',
-  //               timer: 3000,
-  //               showConfirmButton: false
-  //             })
-  //             this.savedRecipes.numSaved--;
-  //           }
-  //           else
-  //             console.log(res.Error);
-  //         })
-  //     }
-  //   })
-  // }
+  }
 
   public delete(id?: number) {
     var l = this.listRecipes.filter(x => x.Code == id)[0] as Record<string, any>;

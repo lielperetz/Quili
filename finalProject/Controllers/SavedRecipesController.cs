@@ -27,8 +27,8 @@ namespace finalProject.Controllers
             }
             try
             {
-                SavedRecipesBl.AddToSavedRecipes(r);
-                return Json(new ReturnObject() { Status = true, Data = r.Mail });
+                SavedRecipesEntities newRecipe = SavedRecipesBl.AddToSavedRecipes(r);
+                return Json(new ReturnObject() { Status = true, Data = newRecipe });
             }
             catch (Exception ex)
             {

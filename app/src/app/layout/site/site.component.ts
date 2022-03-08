@@ -62,7 +62,8 @@ export class SiteComponent implements OnInit {
                 showConfirmButton: false
               })
               this.saved.numSaved--;
-              window.location.reload();
+              this.saved.savedRecipes.splice(this.saved.savedRecipes.findIndex(x => x.Id === id),1)
+              // window.location.reload();
             }
             else
               console.log(res.Error);

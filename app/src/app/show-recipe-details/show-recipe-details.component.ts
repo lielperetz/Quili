@@ -57,6 +57,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
         if (res.Status) {
           this.addedToSavedList = true;
           this.savedRecipes.numSaved++;
+          this.savedRecipes.savedRecipes.push(res.Data);
           Swal.fire({
             title: 'Success!',
             text: this.showRecipe.title + " was successfully added.",
@@ -92,6 +93,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
                 timer: 3000,
                 showConfirmButton: false
               })
+              this.savedRecipes.savedRecipes.splice(this.savedRecipes.savedRecipes.findIndex(x => x.Id === this.showRecipe.id), 1)
               this.savedRecipes.numSaved--;
             }
             else
