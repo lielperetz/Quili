@@ -23,7 +23,6 @@ export class IngredientsComponent implements OnInit {
 
   startDate: Date = new Date(Date.now())
   endDate: Date = new Date(addDays(this.startDate, 7))
-  showRecipeSelect: Boolean = true;
 
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) {
   }

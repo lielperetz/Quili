@@ -9,7 +9,9 @@
     cursor: pointer;
     font-size: x-large;
 }
-
+.home {
+    font-size: xx-large;
+}
 .mail {
     font-weight: bold;
     display: block;
@@ -17,7 +19,7 @@
 }
 
 .mn {
-    margin: auto 2px;
+    margin: auto 2px 0px;
 }
 
 a:hover {
@@ -32,4 +34,38 @@ a:focus {
     background-color: orange;
     border-color: orange;
     color: white;
+}
+.nums {
+    background-color: inherit;
+    color: orange;
+}
+/* .saved-menu {
+    display: none;
+}
+#saved:hover .saved-menu {
+    display: block;
+} */
+.ap {
+    margin: auto;
+    background-color: inherit;
+}
+.ap:hover {
+    background-color: inherit;
+}
+.cart-item-title:hover {
+    color: orange;
+}
+.dropdown-menu-footer .to:hover {
+    background-color: orange;
+    opacity: 0.5;
+}
+.cart-item-price {
+    float: right;
+}
+.empty {
+    padding: 20px;
+    text-align: center;
+}
+.img-h {
+    margin: auto;
 }

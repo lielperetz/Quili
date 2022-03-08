@@ -42,7 +42,7 @@
             Grid</button>
         </div>
         <div class="wrapper">
-          <div class="view_main"  [ngClass]="(gridMode)?'grid-mode':'list-mode'"  >
+          <div class="view_main" [ngClass]="(gridMode)?'grid-mode':'list-mode'"  >
             <div class="view_wrap list-view" *ngFor="let item of viewData" >
               <div class="view_item">
                 <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
