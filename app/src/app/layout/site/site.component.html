@@ -8,13 +8,18 @@
                             data-feather="menu"></i></a></li>
             </ul>
             <ul class="nav navbar-nav flex-row">
+                <li class="nav-item d-lg-block mn logo-li" style="opacity: 0.8; padding: 0;">
+                    <a routerLink="/site" class="nav-link" title="Dashboard">
+                        <img src="../../../assets/images/logo/logo1.png" width="80px">
+                    </a>
+                </li>
                 <li class="nav-item d-lg-block mn">
-                    <a routerLink="/site" class="nav-link" title="Dashboard"><i class="fa fa-home icon home"></i><span
-                            class="d-s-none">Home</span></a>
+                    <a routerLink="/site" class="nav-link" title="Dashboard">
+                        <i class="fa fa-home icon home"></i><span class="d-s-none">Home</span></a>
                 </li>
                 <li class="nav-item d-lg-block mn">
                     <a routerLink="/site/home" class="nav-link" title="Meal planner"><i
-                            class="fa fa-calendar-o icon"></i><span class="d-s-none"> Meal
+                            class="fa fa-calendar icon"></i><span class="d-s-none"> Meal
                             Planner</span></a>
                 </li>
                 <li class="nav-item d-lg-block mn"><a routerLink="/site/ingredients" class="nav-link"
@@ -23,19 +28,6 @@
             </ul>
         </div>
         <ul class="nav navbar-nav align-items-center ml-auto">
-            <!--<li class="nav-item dropdown dropdown-language"> <a class="nav-link dropdown-toggle" id="dropdown-flag"
-                    href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                        class="flag-icon flag-icon-us"></i><span class="selected-language">English</span></a>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag"><a class="dropdown-item"
-                        href="javascript:void(0);" data-language="en"><i class="flag-icon flag-icon-us"></i>
-                        English</a><a class="dropdown-item" href="javascript:void(0);" data-language="fr"><i
-                            class="flag-icon flag-icon-fr"></i> French</a><a class="dropdown-item"
-                        href="javascript:void(0);" data-language="de"><i class="flag-icon flag-icon-de"></i>
-                        German</a><a class="dropdown-item" href="javascript:void(0);" data-language="pt"><i
-                            class="flag-icon flag-icon-pt"></i> Portuguese</a></div> 
-            </li>-->
-
-
             <li id="saved" class="nav-item dropdown dropdown-cart mr-25"><a class="nav-link" href="javascript:void(0)"
                     data-toggle="dropdown"><i class="fa fa-heart-o icon"></i><span *ngIf="saved.numSaved!=0"
                         class="badge badge-pill badge-danger badge-up">{{saved.numSaved}}</span></a>
@@ -67,11 +59,6 @@
                     </li>
                 </ul>
             </li>
-            <!-- <li class="nav-item mr-25">
-                <a class="nav-link" routerLink="/site/savedRecipes" title="Your favorites recipes">
-                    <i class="fa fa-heart-o icon"></i><span *ngIf="saved.numSaved!=0"
-                        class="badge badge-pill badge-danger badge-up">{{saved.numSaved}}</span></a>
-            </li> -->
             <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link"
                     id="dropdown-user" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
                         class="fa-solid fa-user-large icon"></i>
@@ -79,9 +66,12 @@
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
                     <div class="mail" style="width: 100%;">{{user ? user : 'Log In/Register'}}</div>
                     <div class="dropdown-divider"></div>
-                    <a *ngIf="user" class="dropdown-item log" (click)="logOut()"><i class="fa fa-sign-out mr-50" data-feather="log-out"></i> Logout</a>
-                    <a *ngIf="!user" class="dropdown-item log" routerLink="/auth/login"><i class="mr-50 fa fa-sign-in" data-feather="log-in"></i> Login</a>
-                    <a *ngIf="!user" class="dropdown-item log" routerLink="/auth/signup"><i class="mr-50 fa fa-user-plus" data-feather="log-in"></i> Register</a>
+                    <a *ngIf="user" class="dropdown-item log" (click)="logOut()"><i class="fa fa-sign-out mr-50"
+                            data-feather="log-out"></i> Logout</a>
+                    <a *ngIf="!user" class="dropdown-item log" routerLink="/auth/login"><i class="mr-50 fa fa-sign-in"
+                            data-feather="log-in"></i> Login</a>
+                    <a *ngIf="!user" class="dropdown-item log" routerLink="/auth/signup"><i
+                            class="mr-50 fa fa-user-plus" data-feather="log-in"></i> Register</a>
                 </div>
             </li>
         </ul>

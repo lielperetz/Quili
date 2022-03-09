@@ -123,8 +123,8 @@ input {
 	border-radius: 3px;
   position: relative;
   text-align: left;
-  display: inline-block;
   text-decoration: underline;
+  z-index: 1;
 }
 .view_item .btn:hover{
   color: orange;

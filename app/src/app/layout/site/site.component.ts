@@ -31,10 +31,10 @@ export class SiteComponent implements OnInit {
     feather.replace();
   }
 
-  public logOut() {
-    console.log(this.cookies.getAll())
+  logOut() {
     this.cookies.deleteAll()
     this.user = null;
+    this.router.navigate(['/'])
   }
 
   scrollTop() {
