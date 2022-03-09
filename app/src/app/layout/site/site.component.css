@@ -3,7 +3,10 @@
         display: none;
     }
 }
-
+.log:hover {
+    color: orange;
+    background-color: gainsboro;
+}
 .icon {
     color: orange;
     cursor: pointer;

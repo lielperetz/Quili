@@ -162,7 +162,6 @@ export class IngredientsComponent implements OnInit {
   // }
 
   createList() {
-    // console.log("listPro", this.listPro)
     let groupedByProductName: Product[] = [];
     this.listPro.forEach(item => {
       var productItem = Object.assign({}, item)
@@ -190,7 +189,6 @@ export class IngredientsComponent implements OnInit {
       }
     })
     this.viewData = groupedByProductName;
-    console.log(this.viewData)
     // var groupedByProductName = this.listPro.reduce(function (rv, x) {
     //   (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
     //   return rv;
@@ -210,33 +208,6 @@ export class IngredientsComponent implements OnInit {
     //     })
     // })
   }
-
-  // listView() {
-  //   this.replaceActive("list", "grid");
-  //   this.replaceView(".list-view", ".grid-view");
-  // }
-
-  // gridView() {
-  //   this.replaceActive("grid", "list");
-  //   this.replaceView(".grid-view", ".list-view");
-  // }
-
-  // replaceActive(current: string, other: string) {
-  //   const otherB = document.getElementById(other);
-  //   otherB.classList.remove("active");
-  //   const currentB = document.getElementById(current);
-  //   currentB.className += " active";
-  // }
-
-  // replaceView(current, other) {
-  //   var currentView = document.querySelectorAll(current)
-  //   currentView.forEach((view) =>
-  //     view.style.display = "block")
-  //   var otherView = document.querySelectorAll(other)
-  //   otherView.forEach(view => {
-  //     view.style.display = "none";
-  //   });
-  // }
 
   print() {
     window.print()

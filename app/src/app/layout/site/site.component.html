@@ -77,9 +77,11 @@
                         class="fa-solid fa-user-large icon"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-user">
-                    <div class="mail" style="width: 100%;">{{user}}</div>
+                    <div class="mail" style="width: 100%;">{{user ? user : 'Log In/Register'}}</div>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" (click)="logOut()"><i class="mr-50" data-feather="log-out"></i> Logout</a>
+                    <a *ngIf="user" class="dropdown-item log" (click)="logOut()"><i class="fa fa-sign-out mr-50" data-feather="log-out"></i> Logout</a>
+                    <a *ngIf="!user" class="dropdown-item log" routerLink="/auth/login"><i class="mr-50 fa fa-sign-in" data-feather="log-in"></i> Login</a>
+                    <a *ngIf="!user" class="dropdown-item log" routerLink="/auth/signup"><i class="mr-50 fa fa-user-plus" data-feather="log-in"></i> Register</a>
                 </div>
             </li>
         </ul>
@@ -90,6 +92,9 @@
 <!-- BEGIN: Content-->
 <router-outlet></router-outlet>
 <!-- END: Content-->
+
+<!-- BEGIN: Footer-->
+<app-footer></app-footer>
 <button id="bst" class="btn btn-icon scroll-top to" type="button" (click)="scrollTop()"><i
         data-feather="arrow-up"></i></button>
 <!-- END: Footer-->

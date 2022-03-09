@@ -4,6 +4,7 @@ import { User } from '../classes/uesr';
 import { UserService } from '../services/user.service';
 import * as feather from 'feather-icons';
 import { CookieService } from 'ngx-cookie-service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-log-in',
@@ -12,7 +13,6 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./log-in.component.css', '../../assets/css/pages/page-auth.css']
 })
 export class LogInComponent implements OnInit {
-
   user: User = new User()
 
   constructor(
@@ -22,6 +22,22 @@ export class LogInComponent implements OnInit {
 
   ngOnInit(): void {
     feather.replace();
+    // const Toast = Swal.mixin({
+    //   toast: true,
+    //   position: 'top-end',
+    //   showConfirmButton: false,
+    //   timer: 2000,
+    //   timerProgressBar: true,
+    //   didOpen: (toast) => {
+    //     toast.addEventListener('mouseenter', Swal.stopTimer)
+    //     toast.addEventListener('mouseleave', Swal.resumeTimer)
+    //   }
+    // })
+    // Toast.fire({
+    //   icon: 'error',
+    //   iconColor: 'orange',
+    //   title: 'Oops...Something went wrong!',
+    // })
   }
 
   LogIn() {
@@ -32,10 +48,12 @@ export class LogInComponent implements OnInit {
           if (this.userService.redirectUrl) {
             this.router.navigate([this.userService.redirectUrl]);
             this.userService.redirectUrl = null;
-            // this.router.navigate(['site/home'])
           }
-          else alert(response.Error)
+          else
+            this.router.navigate(['/'])
         }
+        else
+          alert(response.Error)
       })
   }
 }

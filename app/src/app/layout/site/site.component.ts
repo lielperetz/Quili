@@ -23,8 +23,7 @@ export class SiteComponent implements OnInit {
       (res: any) => {
         if (res.Status)
           saved.savedRecipes = res.Data;
-          this.saved.numSaved = (res.Data as []).length;
-          console.log(saved.savedRecipes)
+        this.saved.numSaved = (res.Data as []).length;
       })
   }
 
@@ -33,8 +32,9 @@ export class SiteComponent implements OnInit {
   }
 
   public logOut() {
-    this.cookies.delete('Token');
-    this.router.navigate(['/'])
+    console.log(this.cookies.getAll())
+    this.cookies.deleteAll()
+    this.user = null;
   }
 
   scrollTop() {
@@ -62,8 +62,7 @@ export class SiteComponent implements OnInit {
                 showConfirmButton: false
               })
               this.saved.numSaved--;
-              this.saved.savedRecipes.splice(this.saved.savedRecipes.findIndex(x => x.Id === id),1)
-              // window.location.reload();
+              this.saved.savedRecipes.splice(this.saved.savedRecipes.findIndex(x => x.Id === id), 1)
             }
             else
               console.log(res.Error);
