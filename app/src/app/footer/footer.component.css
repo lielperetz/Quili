@@ -8,7 +8,7 @@ form{
 }
 
 div.stars {
-     display: inline-block
+    display: inline-block
 }
 
 input.star {
@@ -16,7 +16,7 @@ input.star {
 }
 
 label.star {
-    float: left;
+    float: right;
     padding: 5px;
     font-size: 20px;
     color: #4A148C;
@@ -46,7 +46,34 @@ label.star:before {
     content: '\f006';
     font-family: FontAwesome
 }
-
-.input{
-    background-blend-mode: unset;
+input[type=text]:focus ,textarea:focus {
+    border: 0px;
+}
+input[type=text], textarea{
+    color: gray;
+    background-color: whitesmoke;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 20px;
+}
+input[type=submit]{
+    background-color: black;
+    border: none;
+    color: white;
+    text-decoration: none;
+    padding: 7px 12px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.float-right{
+    float: right;
+}
+.line{
+    border-right: 1px solid black;
+}
+.align-center{
+    align-content: center;
+}
+.margin-top-100{
+    margin-top: 100px;
 }

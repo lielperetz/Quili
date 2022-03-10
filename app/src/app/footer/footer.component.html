@@ -1,13 +1,5 @@
-<div class="row">
-    <div class="col-sm-6"></div>
-    <div class="col-sm-6">
-        <form>
-            <div class="form-group">
-                <input placeholder="Name" type="text" class="form-control input" id="usr">
-                <input placeholder="Mail" type="text" class="form-control" id="usr">
-                <textarea placeholder="Message" class="form-control" rows="1" id="comment"></textarea>
-            </div>
-        </form>
+<div class="row margin-top-100">
+    <div class="line col-sm-6">
         <div class="container d-flex justify-content-center">
             <div class="row">
                 <div>
@@ -17,8 +9,8 @@
                                 class="star star-5" for="star-5"></label>
                             <input class="star star-4" id="star-4" type="radio" name="star" /> <label
                                 class="star star-4" for="star-4"></label>
-                            <input class="star star-3" id="star-3" type="radio" name="star" /><label class="star star-3"
-                                for="star-3"></label>
+                            <input class="star star-3" id="star-3" type="radio" name="star" /> <label
+                                class="star star-3" for="star-3"></label>
                             <input class="star star-2" id="star-2" type="radio" name="star" /> <label
                                 class="star star-2" for="star-2"></label>
                             <input class="star star-1" id="star-1" type="radio" name="star" /> <label
@@ -28,5 +20,13 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-sm-6 align-center">
+        <form class="col-sm-10">
+            <input placeholder="Name" type="text" class="col-sm-4">
+            <input placeholder="Mail" type="text" class="col-sm-7 float-right">
+            <textarea placeholder="Message" class="col-sm-12" rows="2"></textarea>
+            <input class="float-right" type="submit" value="SEND" />
+        </form>
     </div>
 </div>
