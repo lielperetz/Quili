@@ -32,6 +32,7 @@ export class RecipesService {
     return this.httpClient.get<any>(this.url + "GetRandom/" + num).pipe(catchError(this.handleError))
   }
   GetPopular(): Observable<any> {
+    console.log("pop")
     return this.httpClient.get<any>(this.url + "GetPopular").pipe(catchError(this.handleError))
   }
   handleError(errorResponse: HttpErrorResponse) {

@@ -5,18 +5,7 @@ import { RecipesService } from '../services/recipes.service';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
-    styleUrls: ['./dashboard.component.css'],
-    // animations: [
-    //   trigger('carouselAnimation', [
-    //     transition('void => *', [
-    //       style({ opacity: 0 }),
-    //       animate('300ms', style({ opacity: 1 }))
-    //     ]),
-    //     transition('* => void', [
-    //       animate('300ms', style({ opacity: 0 }))
-    //     ])
-    //   ])
-    // ]
+    styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
 
@@ -42,18 +31,19 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit(): void {
         this.randomList = []
-        this.recipesService.GetRandom(9).subscribe(data => {
+        this.recipesService.GetPopular().subscribe(data => {
             console.log(data)
             if (data.Status) {
-                data.Data.recipes.forEach(element => {
+                data.Data.forEach(element => {
                     this.randomList.push({
-                        img: "https://spoonacular.com/recipeImages/" + element.id + "-636x393.jpg",
-                        title: element.title
+                        img: element.recipes[1].RecipeImage,
+                        title: element.recipes[1].RecipeTitle
                     })
+                    this.grafList.push({Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
                 });
             }
             else
-                console.log(data.Error)
+                console.log("Error" + data.Error)
         })
         console.log(this.randomList)
     }

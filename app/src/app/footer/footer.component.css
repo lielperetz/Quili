@@ -46,3 +46,7 @@ label.star:before {
     content: '\f006';
     font-family: FontAwesome
 }
+
+.input{
+    background-blend-mode: unset;
+}

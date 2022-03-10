@@ -43,7 +43,7 @@
 .slick-current .SlideText{
     animation: mymove 0.5s;
     animation-iteration-count: unset;
-    /* animation-delay: 250ms; */
+    animation-delay: 250ms;
     animation-timing-function: linear;
 }
 
