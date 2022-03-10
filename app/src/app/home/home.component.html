@@ -96,7 +96,7 @@
                         <input class="e-input searchInput" type="search" placeholder="Search"
                           (ngModelChange)="searchRecipe($event)" [(ngModel)]="searchWord" />
                         <p class="noResults"
-                          *ngIf="!listRecipesBySearch && searchWord!='' && newRecipe.RecipeTitle==''">Your search <span
+                          *ngIf="!listRecipesBySearch && searchWord!=''">Your search <span
                             style="color: orange;">{{searchWord}}</span> did not match any recipes.</p>
                       </div>
                       <div class="row searchList" *ngIf="listRecipesBySearch">

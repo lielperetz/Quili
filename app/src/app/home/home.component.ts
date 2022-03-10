@@ -116,6 +116,7 @@ export class HomeComponent implements OnInit {
     this.newRecipe.RecipeTitle = chosenRecipe.title;
     this.newRecipe.RecipeImage = chosenRecipe.image;
     this.listRecipesBySearch = null;
+    this.searchWord = "";
   }
 
   public onPopupOpen(args: PopupOpenEventArgs): void {
@@ -213,7 +214,6 @@ export class HomeComponent implements OnInit {
               })
               this.savedRecipesService.numSaved--;
               this.savedRecipesService.savedRecipes.splice(this.savedRecipesService.savedRecipes.findIndex(x => x.Id === id), 1)
-              // window.location.reload();
             }
             else
               console.log(res.Error);
