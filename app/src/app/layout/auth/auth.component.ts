@@ -15,7 +15,6 @@ export class AuthComponent implements OnInit {
     let i = 1;
     setInterval(() => {
       this.imgSrc = images[i]
-      console.log(this.imgSrc)
       i == 0 ? i = 1 : i = 0;
     }, 5000)
   }

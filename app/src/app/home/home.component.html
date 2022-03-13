@@ -140,7 +140,7 @@
                 <ng-template #cellFooter let-data="data">
                   <div class="e-cell-footer">
                     <button ejs-button id="save" cssClass="e-flat buttons" [isPrimary]="true"
-                      (click)="buttonClickActions($event)">Save</button>
+                      (click)="buttonClickActions($event)" [disabled]="!newRecipe.RecipeTitle">Save</button>
                   </div>
                 </ng-template>
               </ejs-schedule>

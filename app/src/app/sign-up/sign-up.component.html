@@ -7,11 +7,19 @@
     <h4 class="card-title mb-1 t">Adventure starts here</h4>
     <p class="card-text mb-2 t">Make your app management easy and fun!</p>
 
-    <form class="auth-login-form mt-2" method="POST">
+    <form class="auth-login-form mt-2" method="POST" #myForm="ngForm">
         <div class="form-group">
             <label for="login-email" class="form-label">Email</label>
             <input [(ngModel)]="user.Mail" type="email" class="form-control" id="login-email"
-                placeholder="john@example.com" name="email">
+                placeholder="john@example.com" name="email" [email]="true" required #email="ngModel">
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert">
+                <label class="valid" *ngIf="email.errors?.email">
+                    Email not valid.
+                </label>
+                <label class="valid" *ngIf="email.errors?.['required']">
+                    Email is required.
+                </label>
+            </div>
         </div>
 
         <div class="form-group">
@@ -20,7 +28,7 @@
             </div>
             <div class="input-group input-group-merge form-password-toggle div-p">
                 <input #x [(ngModel)]="user.Password" type="password" class="form-control form-control-merge"
-                    id="login-password" placeholder="Enter password" name="pswd">
+                    id="login-password" placeholder="Enter password" name="pswd" required #password="ngModel">
 
                 <div class="input-group-append" (click)="x.type=x.type=='password'?'text':'password'">
                     <span class="input-group-text cursor-pointer">
@@ -28,15 +36,20 @@
                     </span>
                 </div>
             </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert">
+                <label class="valid" *ngIf="password.errors?.['required']">
+                    Password is required.
+                </label>
+            </div>
             <div class="form-group">
                 <div class="custom-control custom-checkbox">
-                    <input class="custom-control-input" type="checkbox" id="register-privacy-policy" tabindex="4" />
+                    <input class="custom-control-input" type="checkbox" id="register-privacy-policy" tabindex="4"/>
                     <label class="custom-control-label" for="register-privacy-policy">
                         I agree to <a href="javascript:void(0);">privacy policy & terms</a>
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-block button-q" (click)="newUser()">Sign in</button>
+            <button type="submit" class="btn btn-block button-q" (click)="newUser()" [disabled]="!myForm.valid">Sign in</button>
         </div>
     </form>
 

@@ -3,11 +3,11 @@
     background-color: white;
 }
 .card-body {
-    padding: 40px 40px 50px;
+    padding: 40px 40px 0px;
     box-shadow: none;
 }
 .card h1 {
-    margin: 20px auto;
+    margin: 10px auto;
     font-weight: bold;
 }
 .quili {
@@ -26,7 +26,7 @@
     background-color: orange;
     color: white;
     opacity: 0.6;
-    margin: 40px auto;
+    margin: 20px auto;
     width: 80%;
     border-radius: 30px;
 }
@@ -37,7 +37,10 @@
     text-align: center;
 }
 .form-group {
-    margin: 20px auto;
+    margin: 10px auto;
+}
+.valid {
+    color: orange;
 }
 @media screen and (max-width:800px) {
     .card-text {

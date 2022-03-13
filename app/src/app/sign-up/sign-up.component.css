@@ -4,10 +4,11 @@
 }
 .card-body {
     padding: 38px;
+    padding-bottom: 0px;
     box-shadow: none;
 }
 .card h1 {
-    margin: 20px auto;
+    margin: 10px auto;
     font-weight: bold;
 }
 .quili, a {
@@ -20,12 +21,12 @@
     background-color: orange;
     color: white;
     opacity: 0.6;
-    margin: 40px auto;
+    margin: 20px auto;
     width: 80%;
     border-radius: 30px;
 }
 .form-group {
-    margin: 20px auto;
+    margin: 10px auto;
 }
 .form-control, .input-group .input-group-merge .form-password-toggle {
     background-color: rgb(248, 247, 247);
@@ -37,6 +38,9 @@
 }
 .div-p, .div-p:focus-within {
     border-radius: 60px;
+}
+.valid {
+    color: orange;
 }
 @media screen and (max-width:800px) {
     .card-text {
