@@ -239,6 +239,9 @@ button[disabled] {
   color: orange;
   opacity: 0.6;
 }
+.e-schedule .e-month-view .e-other-month {
+  opacity: 0.6;
+}
 /* end */
   .tailwind .e-settings::before,
 .tailwind-dark .e-settings::before {

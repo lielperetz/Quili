@@ -41,6 +41,14 @@ input {
   border-radius: 2px;
   border: 0;
 }
+.notes-a {
+  color: #5e5873;
+  font-size: 20px;
+  padding: 12px;
+  background-color: #f1f1f1;
+  margin: auto 15px;
+  float: right;
+}
 .grid-list-buttons {
   padding: 10px;
   padding-right: 30px;
@@ -118,13 +126,14 @@ input {
 .view_item .btn{
   font-size: 14px;
 	font-weight: 300;
-	width: 40%;
+	width: 30%;
 	padding: 8px 5px;
 	border-radius: 3px;
   position: relative;
-  text-align: left;
+  text-align: center;
   text-decoration: underline;
   z-index: 1;
+  margin-right: 0px;
 }
 .view_item .btn:hover{
   color: orange;
@@ -132,7 +141,7 @@ input {
 .is {
   background-color: orange;
   color: white;
-  padding: 4px 5px;
+  padding: 4px 6px;
 }
 .recipes-content {
   background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
@@ -233,8 +242,27 @@ input {
   font-size: 12px;
   font-weight: 200;
 }
+menu li {
+  display: inline;
+  border-right: 1px solid #6e6b7b;
+  padding: 0px 10px;
+}
+menu li:last-child {
+  border: 0;
+}
+.add-p {
+  border: 1px solid #e2efe1;
+  margin: auto;
+  padding: 10px;
+}
+.notes {
+  padding: 20px 10px;
+}
+.notes label {
+  font-size: medium;
+}
 @media print {
-  .export, .grid-list-buttons, .recipes-content {
+  .export, .grid-list-buttons, .recipes-content, .notes-a {
     display: none;
   }
   .view_item .btn {

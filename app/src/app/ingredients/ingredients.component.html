@@ -30,20 +30,22 @@
         </div>
         <div class="col-sm-6">
           <input type="date" [value]="startDate | date:'yyyy-MM-dd'" (input)="startDate=parseDate($event.target.value)"
-            (change)="changeDate()">
+            (change)="changeDate()" [min]="minDate | date: 'yyyy-MM-dd'">
           <input type="date" [value]="endDate | date:'yyyy-MM-dd'" (input)="endDate=parseDate($event.target.value)"
-            (change)="changeDate()">
-        </div>
+            (change)="changeDate()" [min]="minDate | date: 'yyyy-MM-dd'">
+          </div>
         <div class="col-sm-6 grid-list-buttons">
-          <button id="list" data-view="list-view" class="g-l-b" [ngClass]="(!gridMode)?'active':''" (click)="gridMode = !gridMode"><i class="fa fa-bars"></i>
+          <button id="list" data-view="list-view" class="g-l-b" [ngClass]="(!gridMode)?'active':''"
+            (click)="gridMode = !gridMode"><i class="fa fa-bars"></i>
             List</button>
-          <button id="grid" data-view="list-view" (click)="gridMode = !gridMode" class="g-l-b " [ngClass]="(gridMode)?'active':''"><i
-              class="fa fa-th-large"></i>
+          <button id="grid" data-view="list-view" (click)="gridMode = !gridMode" class="g-l-b "
+            [ngClass]="(gridMode)?'active':''"><i class="fa fa-th-large"></i>
             Grid</button>
+            <a class="notes-a" href="/site/ingredients/{{startDate}}/{{endDate}}#additional_products" title="Click here to add notes."><i class="fa fa-sticky-note"></i></a>
         </div>
         <div class="wrapper">
-          <div class="view_main" [ngClass]="(gridMode)?'grid-mode':'list-mode'"  >
-            <div class="view_wrap list-view" *ngFor="let item of viewData" >
+          <div class="view_main" [ngClass]="(gridMode)?'grid-mode':'list-mode'">
+            <div class="view_wrap list-view" *ngFor="let item of viewData">
               <div class="view_item">
                 <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
                 <div class="vi_left">
@@ -55,16 +57,14 @@
                   <p class="title">{{item.ProductName}}</p>
                 </div>
                 <div class="vi_right">
-                  <p class="content">2 Tbsp</p>
+                  <div class="content">
+                    <menu>
+                      <li *ngFor="let unit of item.Units;let i=index">{{unit.Amount}} {{unit.Unit}}
+                        <!-- <span *ngIf="item.Units[i+1]"> + </span> -->
+                      </li>
+                    </menu>
+                  </div>
                 </div>
-                <!-- <div class="content">
-                  <table class="table">
-                    <tr *ngFor="let unit of item.Units">
-                      <td>{{unit.Amount}}</td>
-                      <td>{{unit.Unit}}</td>
-                    </tr>
-                  </table>
-                </div> -->
                 <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes <span
                     class="badge badge-pill badge-primary is">
                     {{item.Recipes.length}} </span>
@@ -78,7 +78,7 @@
                 </div>
               </div>
             </div>
-            <div class="view_wrap grid-view" *ngFor="let item of viewData" >
+            <div class="view_wrap grid-view" *ngFor="let item of viewData">
               <div class="view_item">
                 <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
                 <div class="vi_left">
@@ -90,16 +90,14 @@
                   <p class="title">{{item.ProductName}}</p>
                 </div>
                 <div class="vi_right">
-                  <p class="content">2 Tbsp</p>
+                  <div class="content">
+                    <menu>
+                      <li *ngFor="let unit of item.Units;let i=index">{{unit.Amount}} {{unit.Unit}}
+                        <!-- <span *ngIf="item.Units[i+1]"> + </span> -->
+                      </li>
+                    </menu>
+                  </div>
                 </div>
-                <!-- <div class="content">
-                  <table class="table">
-                    <tr *ngFor="let unit of item.Units">
-                      <td>{{unit.Amount}}</td>
-                      <td>{{unit.Unit}}</td>
-                    </tr>
-                  </table>
-                </div> -->
                 <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes <span
                     class="badge badge-pill badge-primary is">
                     {{item.Recipes.length}} </span>
@@ -112,6 +110,10 @@
                   </div>
                 </div>
               </div>
+            </div>
+            <div class="col-sm-12 notes">
+              <label for="additional_products">Notes: </label>
+              <textarea id="additional_products" class="col-sm-12 add-p" rows="10"></textarea>
             </div>
           </div>
         </div>

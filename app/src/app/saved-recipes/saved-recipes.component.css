@@ -5,7 +5,7 @@
 }
 
 .row {
-    background-color: rgb(255, 255, 247);
+    background-color: rgb(243, 240, 233);
     margin: 10px 20px;
     padding: 20px;
 }
@@ -32,13 +32,12 @@ h3 h2 {
 .saveItem{
     background-color: white;
     margin: 0;
-    padding: 0;
-    margin-top: 10px;
-    height: 300px;
+    padding: 7px;
+    margin: 10px auto;
+    height: max-content;
 }
 
 .saveTxt{
-    /* z-index: 0; */
     position: relative;
     float: left;
     font-size: 16px;
@@ -50,6 +49,7 @@ h3 h2 {
 .saveTxt:hover {
     text-decoration: underline;
     text-decoration-thickness: 1px;
+    color: orange;
 }
 
 .saveImg{
@@ -67,6 +67,7 @@ h3 h2 {
     float: right;
     font-size: 18px;
     display: block;
+    margin: 5px 0px;
     cursor: pointer;
 }
 

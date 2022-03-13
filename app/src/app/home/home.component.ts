@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   public selectedDate2: Date = new Date();
   public listSelectedRecipes = [];
   public deleteOptions: number;
+  public minDate: Date = new Date(Date.now());
 
   constructor(
     private recipeService: RecipesService,
@@ -43,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
 
   async getOriginalData(d1?: Date, d2?: Date): Promise<void> {
-    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2022, 2, 1), d2 ? d2 : addMonths(new Date(), 1)).subscribe(
+    this.schedulesService.GetRecipesByUser(d1 ? d1 : new Date(2022, 1, 1), d2 ? d2 : addMonths(new Date(), 1)).subscribe(
       (response: any) => {
         if (response.Status) {
           this.listRecipes = response.Data as Record<string, any>[];
@@ -51,8 +52,24 @@ export class HomeComponent implements OnInit {
           if (this.scheduleObj)
             this.scheduleObj.refreshLayout();
         }
-        else
-          console.log(response.Error)
+        else {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'error',
+            iconColor: 'orange',
+            title: 'Oops...Something went wrong!',
+          })
+        }
       })
     if (this.scheduleObj) {
       this.scheduleObj.showQuickInfo = true;
@@ -69,11 +86,11 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  public getHeaderStyles(data: Record<string, any>): Record<string, any> {
+  public getHeaderStyles(): Record<string, any> {
     return { 'align-items': 'center', color: '#919191' };
   }
 
-  public getHeaderTitle(data: Record<string, any>): string {
+  public getHeaderTitle(): string {
     return 'Add Recipe';
   }
 
@@ -120,7 +137,7 @@ export class HomeComponent implements OnInit {
   }
 
   public onPopupOpen(args: PopupOpenEventArgs): void {
-    if (args.type === 'Editor')
+    if (args.type === 'Editor' || args.data.endTime <= this.minDate)
       args.cancel = true;
     this.listRecipesBySearch = null;
     this.searchWord = "";
@@ -139,8 +156,24 @@ export class HomeComponent implements OnInit {
             this.getOriginalData();
             this.scheduleObj.refreshTemplates();
           }
-          else
-            alert(response.Error)
+          else {
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 2000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'error',
+              iconColor: 'orange',
+              title: 'Oops...Something went wrong!',
+            })
+          }
         })
       this.newRecipe = new Recipe();
     }
@@ -192,7 +225,6 @@ export class HomeComponent implements OnInit {
   }
 
   public handleRemove(id: string) {
-    console.log(this.listSelectedRecipes)
     Swal.fire({
       title: 'Are you sure you want to delete this recipe?',
       icon: 'warning',
@@ -215,8 +247,24 @@ export class HomeComponent implements OnInit {
               this.savedRecipesService.numSaved--;
               this.savedRecipesService.savedRecipes.splice(this.savedRecipesService.savedRecipes.findIndex(x => x.Id === id), 1)
             }
-            else
-              console.log(res.Error);
+            else {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              Toast.fire({
+                icon: 'error',
+                iconColor: 'orange',
+                title: 'Oops...Something went wrong!',
+              })
+            }
           })
       }
     })

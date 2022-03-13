@@ -20,12 +20,12 @@
                             <a routerLink="/site/showDetails/{{item.Id}}" style="border: none;">
                                 <div class="numLikes" title="{{item.AggregateLikes}} peaple like the recipe">
                                     {{item.AggregateLikes}} <span><i class="fa fa-heart"></i></span></div>
-                                <!-- <div class="S-product-item__like-ctn"><div class="S-popover guOAVM"><span><span class="S-product-item__like"><span>21.5k</span> <i class="iconfont icon-like"></i></span></span></div></div> -->
                                 <img class="col-sm-12 saveImg" src="{{item.Image}}">
-                                <div class="col-sm-12 saveTxt">
-                                    {{item.Title}}
-                                </div>
                             </a>
+                            <div class="col-sm-10 saveTxt">
+                                <a routerLink="/site/showDetails/{{item.Id}}" style="border: none;">
+                                    {{item.Title}}</a>
+                            </div>
                             <span class="col-sm-2 tr"><i class="fa fa-trash-o"
                                     (click)="handleRemove(item.Id)"></i></span>
                         </div>

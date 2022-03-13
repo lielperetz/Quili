@@ -21,9 +21,10 @@ export class IngredientsComponent implements OnInit {
   viewData = []
   gridMode = true;
 
-  startDate: Date = new Date(Date.now())
-  endDate: Date = new Date(addDays(this.startDate, 7))
-
+  startDate: Date = new Date(Date.now());
+  endDate: Date = new Date(addDays(this.startDate, 7));
+  minDate: Date = new Date(Date.now());
+  
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) {
   }
 
@@ -168,7 +169,8 @@ export class IngredientsComponent implements OnInit {
       const recipe = this.viewRecipes.find(x => x.isChecked && x.Code == productItem.RecipeUniqeCode);
       if (recipe) {
         const existProduct = groupedByProductName.find(x => x.ProductName == productItem.ProductName);
-        const unitText = (productItem.Unit ? productItem.Unit : "--");
+        const unitText = (productItem.Unit ? productItem.Unit : "");
+        // const unitText = (productItem.Unit ? productItem.Unit : "--");
 
         if (!existProduct) {
           productItem.Recipes = Array(recipe);
