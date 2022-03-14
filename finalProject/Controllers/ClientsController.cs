@@ -12,36 +12,26 @@ namespace finalProject.Controllers
     [RoutePrefix("Api/Clients")]
     public class ClientsController : ApiController
     {
-        //הוספה
         [HttpPut]
         [Route("AddClient")]
         public JsonResult<ReturnObject> AddClient(ClientsEntities c)
         {
             if (string.IsNullOrEmpty(c.Mail))
-                return Json(new ReturnObject() { Status = false, Error = "Email is required!!" });
+                return Json(new ReturnObject() { Status = false, Error = "Email is required" });
             if (string.IsNullOrEmpty(c.Password))
-                return Json(new ReturnObject() { Status = false, Error = "Password is required!!" });
+                return Json(new ReturnObject() { Status = false, Error = "Password is required" });
             if (ClientsBl.IsExist(c.Mail))
-                return Json(new ReturnObject() { Status = false, Error = "User is exist!!" });
-            string error = "";
+                return Json(new ReturnObject() { Status = false, Error = "User already exists" });
             try
             {
                 ClientsBl.AddClient(c);
                 return Json(new ReturnObject() { Status = true, Data = c.Mail });
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                error = e.Message;
+                return Json(new ReturnObject() { Status = false, Error = ex.Message });
             }
-            return Json(new ReturnObject() { Status = false, Error = error });
         }
-        ////בדיקה האם קיים לקוח לפי מייל
-        //[HttpPost]
-        //[Route("IsExist/{mail}")]
-        //public bool IsExist(string mail)
-        //{
-        //    return ClientsBl.IsExist(mail);
-        //}
 
         [HttpPost]
         [Route("Login")]
@@ -50,20 +40,13 @@ namespace finalProject.Controllers
             try
             {
                 if (ClientsBl.Login(c.Mail, c.Password))
-                    return Json(new ReturnObject() { Status = true, Error = "", Data = c.Mail });
-                return Json(new ReturnObject() { Status = false, Error = "User does not exist!!" });
+                    return Json(new ReturnObject() { Status = true, Data = c.Mail });
+                return Json(new ReturnObject() { Status = false, Error = "User does not exists" });
             }
             catch (Exception ex)
             {
                 return Json(new ReturnObject() { Status = false, Error = ex.Message });
             }
-            //if (string.IsNullOrEmpty(c.Mail))
-            //    return Json(new ReturnObject() { Status = false, Error = "Email is required!!" });
-            //if (string.IsNullOrEmpty(c.Password))
-            //    return Json(new ReturnObject() { Status = false, Error = "Password is required!!" });
-            //if (ClientsBl.Login(c.Mail, c.Password))
-            //    return Json(new ReturnObject() { Status = true, Error = "", Data = c.Mail });
-            //return Json(new ReturnObject() { Status = false, Error = "User does not exist!!" });
         }
     }
 }
