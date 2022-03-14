@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web.Http;
-using System.Web.Http.Results;
 using BL;
 using Entities;
-using Microsoft.Ajax.Utilities;
-using Newtonsoft.Json;
 
 namespace finalProject.Controllers
 {
