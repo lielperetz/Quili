@@ -4,15 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="99e0d14cd5af4dfc8b3c0d76907cf690" Name="Diagram1" ZoomLevel="133">
-        <EntityTypeShape EntityType="FINAL_PROJECTModel.CLIENTS" Width="1.5" PointX="0.75" PointY="2.875" />
-        <EntityTypeShape EntityType="FINAL_PROJECTModel.PRODUCTS" Width="1.5" PointX="5.25" PointY="3.875" />
-        <EntityTypeShape EntityType="FINAL_PROJECTModel.RECIPES" Width="1.5" PointX="3" PointY="2.25" />
-        <EntityTypeShape EntityType="FINAL_PROJECTModel.SCHEDULES" Width="1.5" PointX="5.25" PointY="1.125" />
+      <Diagram DiagramId="99e0d14cd5af4dfc8b3c0d76907cf690" Name="Diagram1" ZoomLevel="109">
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.CLIENTS" Width="1.5" PointX="2.75" PointY="3.625" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.PRODUCTS" Width="1.5" PointX="6.125" PointY="2.625" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.RECIPES" Width="1.5" PointX="4.125" PointY="0.5" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.SCHEDULES" Width="1.5" PointX="6.125" PointY="0.5" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__RECIPES__MAIL__72C60C4A" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__787EE5A0" />
         <AssociationConnector Association="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__75A278F5" />
-        <EntityTypeShape EntityType="FINAL_PROJECTModel.SAVED_RECIPES" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="FINAL_PROJECTModel.SAVED_RECIPES" Width="1.5" PointX="1.75" PointY="0.5" />
         <AssociationConnector Association="FINAL_PROJECTModel.MC" />
         </Diagram>
     </edmx:Diagrams>

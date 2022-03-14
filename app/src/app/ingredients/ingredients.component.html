@@ -5,8 +5,7 @@
       <li class="col-sm-12" *ngFor="let item of viewRecipes;">
         <div class="col-sm-12 seperate"></div>
         <a class="col-sm-12" routerLink="/site/showDetails/{{item.RecipeId}}" target="_blank">
-          <input class="col-sm-1" id="as{{item.Code}}" type="checkbox" [(ngModel)]="item.isChecked"
-            (change)="createList()" />
+          <input class="col-sm-1" id="as{{item.Code}}" type="checkbox" [(ngModel)]="item.isChecked" (change)="createList()" />
           <div class="recipeDiv">
             <label class="col-sm-12 l" for="as{{item.Code}}">{{item.RecipeTitle}}</label>
             <label class="col-sm-12 d">{{item.Date | date:'yyyy-MM-dd'}}</label>
@@ -25,23 +24,20 @@
         <h1 class="col-sm-9 header">Ingredients List</h1>
         <div class="col-sm-3 export">
           <div class="e" title="Print" (click)="print()"><i class="fa fa-print icon"></i></div>
-          <!-- <div class="e" title="Excel"><i class="fa fa-file-excel-o icon"></i></div> -->
-          <!-- <div class="e es" title="Share"><i class="fa fa-mobile-phone icon s"></i></div> -->
         </div>
         <div class="col-sm-6">
           <input type="date" [value]="startDate | date:'yyyy-MM-dd'" (input)="startDate=parseDate($event.target.value)"
             (change)="changeDate()" [min]="minDate | date: 'yyyy-MM-dd'">
           <input type="date" [value]="endDate | date:'yyyy-MM-dd'" (input)="endDate=parseDate($event.target.value)"
             (change)="changeDate()" [min]="minDate | date: 'yyyy-MM-dd'">
-          </div>
+        </div>
         <div class="col-sm-6 grid-list-buttons">
           <button id="list" data-view="list-view" class="g-l-b" [ngClass]="(!gridMode)?'active':''"
-            (click)="gridMode = !gridMode"><i class="fa fa-bars"></i>
-            List</button>
+            (click)="gridMode = !gridMode"><i class="fa fa-bars"></i>List</button>
           <button id="grid" data-view="list-view" (click)="gridMode = !gridMode" class="g-l-b "
-            [ngClass]="(gridMode)?'active':''"><i class="fa fa-th-large"></i>
-            Grid</button>
-            <a class="notes-a" href="/site/ingredients/{{startDate}}/{{endDate}}#additional_products" title="Click here to add notes."><i class="fa fa-sticky-note"></i></a>
+            [ngClass]="(gridMode)?'active':''"><i class="fa fa-th-large"></i>Grid</button>
+          <a class="notes-a" href="/site/ingredients/{{startDate}}/{{endDate}}#additional_products"
+            title="Click here to add notes."><i class="fa fa-sticky-note"></i></a>
         </div>
         <div class="wrapper">
           <div class="view_main" [ngClass]="(gridMode)?'grid-mode':'list-mode'">
@@ -49,8 +45,7 @@
               <div class="view_item">
                 <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
                 <div class="vi_left">
-                  <img *ngIf="item.ProductImage"
-                    src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
+                  <img *ngIf="item.ProductImage" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
                   <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
                 </div>
                 <div class="vi_right">
@@ -59,18 +54,14 @@
                 <div class="vi_right">
                   <div class="content">
                     <menu>
-                      <li *ngFor="let unit of item.Units;let i=index">{{unit.Amount}} {{unit.Unit}}
-                        <!-- <span *ngIf="item.Units[i+1]"> + </span> -->
-                      </li>
+                      <li *ngFor="let unit of item.Units;let i=index">{{unit.Amount}} {{unit.Unit}}</li>
                     </menu>
                   </div>
                 </div>
-                <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes <span
-                    class="badge badge-pill badge-primary is">
-                    {{item.Recipes.length}} </span>
+                <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes 
+                  <span class="badge badge-pill badge-primary is">{{item.Recipes.length}} </span>
                   <div class="recipes-content" *ngIf="item.showRecipes">
-                    <a class="row" *ngFor="let r of item.Recipes; index as i"
-                      routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
+                    <a class="row" *ngFor="let r of item.Recipes; index as i" routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
                       <img class="col-sm-2" src="{{r.RecipeImage}}">
                       <p class="col-sm-10"> {{r.RecipeTitle}} - {{r.Date | date:'yyyy-MM-dd'}}</p>
                     </a>
@@ -82,8 +73,7 @@
               <div class="view_item">
                 <input class="checkbox" type="checkbox" [value]="item.code" (change)="ProductCheckbox($event)" />
                 <div class="vi_left">
-                  <img *ngIf="item.ProductImage"
-                    src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
+                  <img *ngIf="item.ProductImage" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
                   <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
                 </div>
                 <div class="vi_right">
@@ -92,18 +82,14 @@
                 <div class="vi_right">
                   <div class="content">
                     <menu>
-                      <li *ngFor="let unit of item.Units;let i=index">{{unit.Amount}} {{unit.Unit}}
-                        <!-- <span *ngIf="item.Units[i+1]"> + </span> -->
-                      </li>
+                      <li *ngFor="let unit of item.Units;let i=index">{{unit.Amount}} {{unit.Unit}}</li>
                     </menu>
                   </div>
                 </div>
-                <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes <span
-                    class="badge badge-pill badge-primary is">
-                    {{item.Recipes.length}} </span>
+                <div class="btn" [value]="item.code" (click)="item.showRecipes = !item.showRecipes">View Recipes 
+                  <span class="badge badge-pill badge-primary is">{{item.Recipes.length}} </span>
                   <div class="recipes-content" *ngIf="item.showRecipes">
-                    <a class="row" *ngFor="let r of item.Recipes; index as i"
-                      routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
+                    <a class="row" *ngFor="let r of item.Recipes; index as i" routerLink="/site/showDetails/{{r.RecipeId}}" target="_blank">
                       <img class="col-sm-2" src="{{r.RecipeImage}}">
                       <p class="col-sm-10"> {{r.RecipeTitle}} - {{r.Date | date:'yyyy-MM-dd'}}</p>
                     </a>
