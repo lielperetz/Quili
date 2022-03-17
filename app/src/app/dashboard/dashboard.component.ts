@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GraficoModel } from '../Model/grafico.model';
 import { RecipesService } from '../services/recipes.service';
+import { Title } from "@angular/platform-browser";
 
 @Component({
     selector: 'app-dashboard',
@@ -27,8 +28,10 @@ export class DashboardComponent implements OnInit {
         autoplay: true,
         autoplaySpeed: 2000
     };
-    constructor(public recipesService: RecipesService) { }
-
+    constructor(public recipesService: RecipesService, public titleService: Title) {
+        this.titleService.setTitle("Home - Quili");
+    }
+    
     ngOnInit(): void {
         this.randomList = []
         this.recipesService.GetPopular().subscribe(data => {
@@ -39,7 +42,7 @@ export class DashboardComponent implements OnInit {
                         img: element.recipes[1].RecipeImage,
                         title: element.recipes[1].RecipeTitle
                     })
-                    this.grafList.push({Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
+                    this.grafList.push({ Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
                 });
             }
             else

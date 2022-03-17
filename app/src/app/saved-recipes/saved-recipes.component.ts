@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { SavedRecipesService } from '../services/saved-recipes.service';
 
@@ -10,9 +11,8 @@ import { SavedRecipesService } from '../services/saved-recipes.service';
 export class SavedRecipesComponent implements OnInit {
   listSave: any;
 
-  constructor(
-    public savedRecipes: SavedRecipesService
-  ) {
+  constructor(public savedRecipes: SavedRecipesService, public titleService:Title) {
+    this.titleService.setTitle(" Saved Recipes - Quili");
     this.savedRecipes.GetSavedRecipes().subscribe(
       (response: any) => {
         if (response.Status) {

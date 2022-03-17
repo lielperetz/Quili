@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import * as feather from 'feather-icons';
 import { CookieService } from 'ngx-cookie-service';
 import Swal from 'sweetalert2';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-log-in',
@@ -18,7 +19,10 @@ export class LogInComponent implements OnInit {
   constructor(
     public cookies: CookieService,
     public router: Router,
-    public userService: UserService) { }
+    public userService: UserService,
+    public titleService: Title) {
+    this.titleService.setTitle("Log In - Quili");
+  }
 
   ngOnInit(): void {
     feather.replace();

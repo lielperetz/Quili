@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { RecipesService } from '../services/recipes.service';
@@ -21,9 +22,8 @@ export class ShowRecipeDetailsComponent implements OnInit {
     public recipes: RecipesService,
     public activeRoute: ActivatedRoute,
     public location: Location,
-    public savedRecipes: SavedRecipesService) {
-
-  }
+    public savedRecipes: SavedRecipesService,
+    public titleService: Title) { }
 
   ngOnInit(): void {
     this.showRecipe = null;
@@ -42,6 +42,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
           (response: any) => {
             if (response.Status) {
               this.showRecipe = response.Data;
+              this.titleService.setTitle(this.showRecipe.title + " - Quili");
               this.setE();
             }
             else
@@ -74,7 +75,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
 
   handleRemove() {
     Swal.fire({
-      title: 'Are you sure you want to delete this recipe?',
+      title: 'Are you sure you want to remove this recipe?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Ok',

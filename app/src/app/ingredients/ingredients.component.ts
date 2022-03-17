@@ -1,5 +1,6 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { addDays } from '@syncfusion/ej2-angular-schedule';
 import { Product } from '../classes/product';
@@ -16,7 +17,7 @@ export class IngredientsComponent implements OnInit {
   // savedRecipes = []
   schedulesRecipes = []
   viewRecipes = []
-  
+
   listPro: Array<Product> = new Array<Product>()
   viewData = []
   gridMode = true;
@@ -24,8 +25,9 @@ export class IngredientsComponent implements OnInit {
   startDate: Date = new Date(Date.now());
   endDate: Date = new Date(addDays(this.startDate, 7));
   minDate: Date = new Date(Date.now());
-  
-  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router) {
+
+  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title) {
+    this.titleService.setTitle("Shopping List - Quili");
   }
 
   ngOnInit(): void {
