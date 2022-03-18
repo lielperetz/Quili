@@ -8,6 +8,7 @@ import { SchedulesService } from '../services/schedules.service';
 import { Router } from '@angular/router';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SavedRecipesService } from '../services/saved-recipes.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -35,8 +36,9 @@ export class HomeComponent implements OnInit {
     private recipeService: RecipesService,
     private schedulesService: SchedulesService,
     public router: Router,
-    public savedRecipesService: SavedRecipesService
-  ) {
+    public savedRecipesService: SavedRecipesService,
+    public titleService: Title) {
+    this.titleService.setTitle("Meal Planner - Quili");
     this.getOriginalData();
   }
 
@@ -225,7 +227,7 @@ export class HomeComponent implements OnInit {
 
   public handleRemove(id: string) {
     Swal.fire({
-      title: 'Are you sure you want to delete this recipe from your Favorites?',
+      title: 'Are you sure you want to remove this recipe from Favorites?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Ok',
