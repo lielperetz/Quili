@@ -3,6 +3,7 @@ import { User } from '../classes/uesr';
 import { UserService } from '../services/user.service';
 import * as feather from 'feather-icons';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 
 @Component({
@@ -13,7 +14,9 @@ import { Router } from '@angular/router';
 export class SignUpComponent implements OnInit {
 
   user: User = new User()
-  constructor(public UserService: UserService, public router: Router) { }
+  constructor(public UserService: UserService, public router: Router, public titleService:Title) { 
+    this.titleService.setTitle("Sign Up - Quili");
+  }
 
   ngOnInit(): void {
     feather.replace();
