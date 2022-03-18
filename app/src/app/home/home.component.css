@@ -155,7 +155,7 @@ button[disabled] {
   bottom: 0;
   right: 0;
   border-radius: 50%;
-  background-color: hsla(0,0%,100%,.4);
+  background-color: white;
   display: flex;
   align-items: center;
 }
@@ -215,9 +215,10 @@ button[disabled] {
 
 .select-status {
   border: 0;
-  padding: 3px;
 }
-
+.e-schedule .e-content-wrap {
+  overflow: hidden;
+}
 .e-schedule .e-month-view .e-current-date .e-date-header, .e-calendar .e-content.e-year td.e-selected span.e-day {
   background-color: orange;
 }

@@ -137,12 +137,11 @@ export class HomeComponent implements OnInit {
   }
 
   public onPopupOpen(args: PopupOpenEventArgs): void {
-    if (args.type === 'Editor' || args.data.endTime <= this.minDate)
+    if (args.type === 'Editor')
       args.cancel = true;
     this.listRecipesBySearch = null;
     this.searchWord = "";
     this.newRecipe = new Recipe()
-    this.newRecipe.SchedulingStatuse = 1;
     this.newRecipe.Date = new Date(args.data.startTime);
   }
 
@@ -226,7 +225,7 @@ export class HomeComponent implements OnInit {
 
   public handleRemove(id: string) {
     Swal.fire({
-      title: 'Are you sure you want to delete this recipe?',
+      title: 'Are you sure you want to delete this recipe from your Favorites?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Ok',
@@ -248,6 +247,7 @@ export class HomeComponent implements OnInit {
               this.savedRecipesService.savedRecipes.splice(this.savedRecipesService.savedRecipes.findIndex(x => x.Id === id), 1)
             }
             else {
+              console.log(res.Error)
               const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',

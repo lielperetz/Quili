@@ -43,7 +43,7 @@ export class SiteComponent implements OnInit {
 
   handleRemove(id: string) {
     Swal.fire({
-      title: 'Are you sure you want to delete this recipe?',
+      title: 'Are you sure you want to delete this recipe from your Favorites?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Ok',
