@@ -18,37 +18,73 @@ export class DashboardComponent implements OnInit {
     ];
 
     //carousel
-    randomList = []
+    img = ["../../../assets/images/l_img1.jpg", "../../../assets/images/l_img2.jpg"]
     slideConfig = {
         "slidesToShow": 1,
         "slidesToScroll": 1,
         infinite: true,
-        dots: true,
+        dots: false,
         speed: 400,
         autoplay: true,
-        autoplaySpeed: 2000
+        autoplaySpeed: 4000,
+        fade: true,
+        cssEase: 'linear'
     };
+    popList = []
+    popSlideConfig = {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: false,
+        arrows: true,
+        autoplay: false,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1
+                }
+            }
+        ]
+    }
     constructor(public recipesService: RecipesService, public titleService: Title) {
         this.titleService.setTitle("Home - Quili");
     }
-    
+
     ngOnInit(): void {
-        this.randomList = []
+        this.popList = []
         this.recipesService.GetPopular().subscribe(data => {
             console.log(data)
             if (data.Status) {
                 data.Data.forEach(element => {
-                    this.randomList.push({
-                        img: element.recipes[1].RecipeImage,
-                        title: element.recipes[1].RecipeTitle
+                    this.popList.push({
+                        img: element.recipes[0].RecipeImage,
+                        title: element.recipes[0].RecipeTitle
                     })
-                    this.grafList.push({ Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
+                    // this.grafList.push({ Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
                 });
             }
             else
                 console.log("Error" + data.Error)
         })
-        console.log(this.randomList)
+        console.log(this.popList)
     }
 
     slickInit(e) {

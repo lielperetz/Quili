@@ -1,4 +1,16 @@
+<ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+    <div ngxSlickItem *ngFor="let slide of img;" class="slide" [style.background-image]="'url(' +  slide + ')'"></div>
+</ngx-slick-carousel>
+
 <div class="app-content content">
+    <div class="content-body">
+        <ngx-slick-carousel class="sm-carousel" #slickModal="slick-carousel" [config]="popSlideConfig">
+            <div ngxSlickItem *ngFor="let slide of popList;" class="sm-slide margin-20"
+                [style.background-image]="'url(' +  slide.img + ')'"></div>
+        </ngx-slick-carousel>
+    </div>
+</div>
+<!-- <div class="app-content content">
     <div class="content-wrapper">
         <div class="content-body">
             <ngx-slick-carousel class="carousel" 
@@ -16,11 +28,11 @@
             </ngx-slick-carousel>
             
        
-            <!-- <app-grafico-barras [List]='grafList'></app-grafico-barras> -->
+             <app-grafico-barras [List]='grafList'></app-grafico-barras> 
 
         </div>
     </div>
-</div>
+</div> -->
 
 
 
@@ -34,4 +46,3 @@
         </e-series>
     </e-series-collection>
 </ejs-chart> -->
-
