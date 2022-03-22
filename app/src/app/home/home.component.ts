@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { SavedRecipesService } from '../services/saved-recipes.service';
 import { Title } from '@angular/platform-browser';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-root',
@@ -37,7 +38,8 @@ export class HomeComponent implements OnInit {
     private schedulesService: SchedulesService,
     public router: Router,
     public savedRecipesService: SavedRecipesService,
-    public titleService: Title) {
+    public titleService: Title, private siteService:SiteService) {
+    siteService.setNormal();
     this.titleService.setTitle("Meal Planner - Quili");
     this.getOriginalData();
   }

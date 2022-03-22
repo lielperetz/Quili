@@ -6,6 +6,7 @@ import { addDays } from '@syncfusion/ej2-angular-schedule';
 import { Product } from '../classes/product';
 import { RecipesService } from '../services/recipes.service';
 import { SchedulesService } from '../services/schedules.service';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-ingredients',
@@ -26,8 +27,9 @@ export class IngredientsComponent implements OnInit {
   endDate: Date = new Date(addDays(this.startDate, 7));
   minDate: Date = new Date(Date.now());
 
-  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title) {
+  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title, private siteService:SiteService) {
     this.titleService.setTitle("Shopping List - Quili");
+    siteService.setNormal();
   }
 
   ngOnInit(): void {

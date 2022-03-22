@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { GraficoModel } from '../Model/grafico.model';
 import { RecipesService } from '../services/recipes.service';
 import { Title } from "@angular/platform-browser";
+import { SiteService } from '../services/site.service';
 
 @Component({
     selector: 'app-dashboard',
@@ -64,8 +65,10 @@ export class DashboardComponent implements OnInit {
             }
         ]
     }
-    constructor(public recipesService: RecipesService, public titleService: Title) {
+    constructor(public recipesService: RecipesService, public titleService: Title, private siteService:SiteService) {
         this.titleService.setTitle("Home - Quili");
+        siteService.setFullWidth();
+
     }
 
     ngOnInit(): void {

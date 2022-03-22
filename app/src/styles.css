@@ -11,3 +11,11 @@
 @import '../node_modules/@syncfusion/ej2-angular-inputs/styles/material.css';
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.full-w  .content.app-content{
+    margin-left:0 !important;
+}
+
+.full-w.header-navbar.floating-nav{
+    width: calc(100vw - (100vw - 100%) - 4rem);
+}

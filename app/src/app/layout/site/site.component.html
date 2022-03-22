@@ -1,5 +1,5 @@
 <!-- BEGIN: Header-->
-<nav class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
+<nav  [ngClass]="(siteService.fullWidth)?'full-w':''" class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
     <div class="navbar-container d-flex content">
         <div class="bookmark-wrapper d-flex align-items-center">
             <!-- open/close side nav -->
@@ -80,7 +80,10 @@
 <!-- END: Header-->
 
 <!-- BEGIN: Content-->
+<div [ngClass]="(siteService.fullWidth)?'full-w':''">
+
 <router-outlet></router-outlet>
+</div>
 <!-- END: Content-->
 
 <!-- BEGIN: Footer-->

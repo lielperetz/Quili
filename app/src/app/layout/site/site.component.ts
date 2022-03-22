@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import * as feather from 'feather-icons';
 import { CookieService } from 'ngx-cookie-service';
 import { SavedRecipesService } from 'src/app/services/saved-recipes.service';
+import { SiteService } from 'src/app/services/site.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,6 +17,7 @@ export class SiteComponent implements OnInit {
 
   constructor(
     private cookies: CookieService,
+    public siteService:SiteService,
     public router: Router,
     public saved: SavedRecipesService) {
     this.user = this.cookies.get('Token');
