@@ -275,7 +275,7 @@ menu li:last-child {
     display: none;
   }
   .checked-item {
-    display: none;
+    display: none !important;
   }
   input[type="date"] {
     font-size: x-large;

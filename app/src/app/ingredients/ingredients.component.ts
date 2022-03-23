@@ -195,6 +195,9 @@ export class IngredientsComponent implements OnInit {
       }
     })
     this.viewData = groupedByProductName;
+    this.viewData.map(x => {
+       x.checkbox = false; 
+    })
     // var groupedByProductName = this.listPro.reduce(function (rv, x) {
     //   (rv[x['ProductName']] = rv[x['ProductName']] || []).push(x);
     //   return rv;

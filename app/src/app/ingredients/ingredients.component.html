@@ -43,7 +43,7 @@
           <div class="view_main" [ngClass]="(gridMode)?'grid-mode':'list-mode'">
             <div class="view_wrap list-view" *ngFor="let item of viewData">
               <div class="view_item" [ngClass]="(item.checkbox)?'checked-item':''">
-                <input class="checkbox" type="checkbox" [value]="item.Code" (change)="ProductCheckbox($event)" />
+                <input class="checkbox" type="checkbox" [value]="item.Code" [(ngModel)]="item.checkbox"/>
                 <div class="vi_left">
                   <img *ngIf="item.ProductImage" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
                   <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
@@ -71,7 +71,7 @@
             </div>
             <div class="view_wrap grid-view" *ngFor="let item of viewData">
               <div class="view_item" [ngClass]="(item.checkbox)?'checked-item':''">
-                <input class="checkbox" type="checkbox" [value]="item.Code" (change)="ProductCheckbox($event)" />
+                <input class="checkbox" type="checkbox" [value]="item.Code" [(ngModel)]="item.checkbox"/>
                 <div class="vi_left">
                   <img *ngIf="item.ProductImage" src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
                   <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
