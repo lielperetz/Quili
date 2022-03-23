@@ -4,6 +4,7 @@ import { UserService } from '../services/user.service';
 import * as feather from 'feather-icons';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { Title } from '@angular/platform-browser';
 export class SignUpComponent implements OnInit {
 
   user: User = new User()
-  constructor(public UserService: UserService, public router: Router, public titleService:Title) { 
+  constructor(public UserService: UserService, public router: Router, public titleService: Title) {
     this.titleService.setTitle("Sign Up - Quili");
   }
 
@@ -28,7 +29,24 @@ export class SignUpComponent implements OnInit {
         if (response.Status) {
           this.router.navigate(['/auth/login'])
         }
-        else alert(response.Error)
+        else {
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'error',
+            iconColor: 'orange',
+            title: response.Error,
+          })
+        }
       })
   }
 }

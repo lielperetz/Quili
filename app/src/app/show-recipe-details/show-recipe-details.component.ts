@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { RecipesService } from '../services/recipes.service';
 import { SavedRecipesService } from '../services/saved-recipes.service';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-show-recipe-details',
@@ -23,7 +24,11 @@ export class ShowRecipeDetailsComponent implements OnInit {
     public activeRoute: ActivatedRoute,
     public location: Location,
     public savedRecipes: SavedRecipesService,
-    public titleService: Title) { }
+    public titleService: Title,
+    public siteService: SiteService) {
+    siteService.setFullWidth()
+
+  }
 
   ngOnInit(): void {
     this.showRecipe = null;

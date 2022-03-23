@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { SavedRecipesService } from '../services/saved-recipes.service';
+import { SiteService } from '../services/site.service';
 
 @Component({
   selector: 'app-saved-recipes',
@@ -11,8 +12,9 @@ import { SavedRecipesService } from '../services/saved-recipes.service';
 export class SavedRecipesComponent implements OnInit {
   listSave: any;
 
-  constructor(public savedRecipes: SavedRecipesService, public titleService:Title) {
+  constructor(public savedRecipes: SavedRecipesService, public titleService: Title, private siteService: SiteService) {
     this.titleService.setTitle(" Saved Recipes - Quili");
+    siteService.setFullWidth()
     this.savedRecipes.GetSavedRecipes().subscribe(
       (response: any) => {
         if (response.Status) {

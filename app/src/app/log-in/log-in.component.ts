@@ -55,8 +55,9 @@ export class LogInComponent implements OnInit {
           Toast.fire({
             icon: 'error',
             iconColor: 'orange',
-            title: 'Oops...Something went wrong!',
+            title: response.Error,
           })
+          this.router.navigate(['/auth/signup'])
         }
       })
   }

@@ -81,6 +81,7 @@
 
 .prop {
     margin: 10px auto;
+    display: flex;
 }
 
 .prop .icon {

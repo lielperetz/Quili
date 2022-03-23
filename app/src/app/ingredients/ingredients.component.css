@@ -96,7 +96,6 @@ input {
   padding: 5px;
 }
 .list-view .view_item {
-	background-color: white;
 	border: 1px solid #e2efe1;
 	margin: 3px auto;
 	padding: 5px 10px;
@@ -261,11 +260,21 @@ menu li:last-child {
 .notes label {
   font-size: medium;
 }
+.checked-item {
+  background-color: gainsboro;
+  text-decoration: line-through;
+}
+.checked-item img{
+  opacity: 0.5;
+}
 @media print {
   .export, .grid-list-buttons, .recipes-content, .notes-a {
     display: none;
   }
   .view_item .btn {
+    display: none;
+  }
+  .checked-item {
     display: none;
   }
   input[type="date"] {

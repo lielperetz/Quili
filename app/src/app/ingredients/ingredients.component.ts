@@ -27,7 +27,7 @@ export class IngredientsComponent implements OnInit {
   endDate: Date = new Date(addDays(this.startDate, 7));
   minDate: Date = new Date(Date.now());
 
-  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title, private siteService:SiteService) {
+  constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title, private siteService: SiteService) {
     this.titleService.setTitle("Shopping List - Quili");
     siteService.setNormal();
   }
@@ -106,7 +106,7 @@ export class IngredientsComponent implements OnInit {
 
   ProductCheckbox(e) {
     this.viewData.map(x => {
-      if (x.code == e.target.value) { x.checkbox = !x.checkbox; }
+      if (x.Code == e.target.value) { x.checkbox = !x.checkbox; }
     })
   }
 
