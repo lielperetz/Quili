@@ -5,8 +5,10 @@
 <div class="app-content content">
     <div class="content-body">
         <ngx-slick-carousel class="sm-carousel" #slickModal="slick-carousel" [config]="popSlideConfig">
-            <div ngxSlickItem *ngFor="let slide of popList;" class="sm-slide margin-20"
-                [style.background-image]="'url(' +  slide.img + ')'"></div>
+            <div ngxSlickItem *ngFor="let slide of popList;" class="popimg sm-slide margin-20"
+                [style.background-image]="'url(' +  slide.img + ')'" routerLink="/site/showDetails/{{slide.code}}">
+                <div class="poptxt">{{slide.title}}</div>
+            </div>
         </ngx-slick-carousel>
     </div>
 </div>
@@ -25,10 +27,8 @@
            
             <h1 class="SlideText">{{slide.title}}</h1>
             </div>
-            </ngx-slick-carousel>
-            
-       
-             <app-grafico-barras [List]='grafList'></app-grafico-barras> 
+            </ngx-slick-carousel>     
+            <app-grafico-barras [List]='grafList'></app-grafico-barras> 
 
         </div>
     </div>

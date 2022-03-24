@@ -67,5 +67,27 @@
     margin-top: 0;
 }
 
+.popimg {
+    opacity: 1;
+    display: block;
+    transition: .5s ease;
+    backface-visibility: hidden;
+  }
+  
+.poptxt{
+    transition: .5s ease;
+    opacity: 0;
+    position: absolute;
+    font-size: large;
+    color: white;
+    font: bold;
+    padding: 25px;
+    background-color: gray;
+    text-align: center;
+}
+.popimg:hover .poptxt{
+    opacity: 1;
+}
+
 
 

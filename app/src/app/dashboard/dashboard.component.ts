@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
             }
         ]
     }
-    constructor(public recipesService: RecipesService, public titleService: Title, private siteService:SiteService) {
+    constructor(public recipesService: RecipesService, public titleService: Title, private siteService: SiteService) {
         this.titleService.setTitle("Home - Quili");
         siteService.setFullWidth();
 
@@ -77,10 +77,13 @@ export class DashboardComponent implements OnInit {
             console.log(data)
             if (data.Status) {
                 data.Data.forEach(element => {
-                    this.popList.push({
-                        img: element.recipes[0].RecipeImage,
-                        title: element.recipes[0].RecipeTitle
-                    })
+                    if (this.popList.length < 10) {
+                        this.popList.push({
+                            img: element.recipes[0].RecipeImage,
+                            title: element.recipes[0].RecipeTitle,
+                            code: element.recipes[0].RecipeId
+                        })
+                    }
                     // this.grafList.push({ Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
                 });
             }
