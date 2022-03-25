@@ -3,10 +3,24 @@
 </ngx-slick-carousel>
 
 <div class="app-content content">
-    <div class="content-body">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <h2 class="col-sm-7">
+            Welcome to <b class="color">Quili</b> !
+            <br>
+            <b class="color">Quili</b> allows you to manage orderly meal planning and recipe management by dates, from
+            planning regular or
+            one-time meals from a huge database of recipes to managing your shopping list conveniently and most
+            importantly - in a more efficient way.
+        </h2>
+        <div></div>
+    </div>
+    <h1 class="col-sm-9 header">Our Favorites</h1>
+    <div class="col-sm-11">
         <ngx-slick-carousel class="sm-carousel" #slickModal="slick-carousel" [config]="popSlideConfig">
-            <div ngxSlickItem *ngFor="let slide of popList;" class="popimg sm-slide margin-20"
-                [style.background-image]="'url(' +  slide.img + ')'" routerLink="/site/showDetails/{{slide.code}}">
+            <div class="margin-20 pop" *ngFor="let slide of popList;" routerLink="/site/showDetails/{{slide.code}}">
+                <div ngxSlickItem class="popimg sm-slide" [style.background-image]="'url(' +  slide.img + ')'">
+                </div>
                 <div class="poptxt">{{slide.title}}</div>
             </div>
         </ngx-slick-carousel>

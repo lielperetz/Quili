@@ -23,7 +23,6 @@ import { SavedRecipesComponent } from './saved-recipes/saved-recipes.component';
 import { AuthGuard } from './services/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCarouselModule } from '@ngmodule/material-carousel';
-import { GraficoBarrasComponent } from './grafico-barras/grafico-barras.component';
 import { FooterComponent } from './footer/footer.component';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
 
@@ -39,7 +38,6 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     ShowRecipeDetailsComponent,
     DashboardComponent,
     SavedRecipesComponent,
-    GraficoBarrasComponent,
     FooterComponent
   ],
   imports: [

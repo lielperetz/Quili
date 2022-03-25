@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { GraficoModel } from '../Model/grafico.model';
 import { RecipesService } from '../services/recipes.service';
 import { Title } from "@angular/platform-browser";
 import { SiteService } from '../services/site.service';
@@ -11,12 +10,12 @@ import { SiteService } from '../services/site.service';
 })
 export class DashboardComponent implements OnInit {
 
-    public grafList: Array<GraficoModel> = [
-        { Value: 350, Color: '#498B94', Size: '', Legend: 'Monkeys' },
-        { Value: 2000, Color: '#F8C622', Size: '', Legend: 'Giraffes' },
-        { Value: 1000, Color: '#747474', Size: '', Legend: 'Lions' },
-        { Value: 500, Color: '#EC972D', Size: '', Legend: 'Tigers' },
-    ];
+    // public grafList: Array<GraficoModel> = [
+    //     { Value: 350, Color: '#498B94', Size: '', Legend: 'Monkeys' },
+    //     { Value: 2000, Color: '#F8C622', Size: '', Legend: 'Giraffes' },
+    //     { Value: 1000, Color: '#747474', Size: '', Legend: 'Lions' },
+    //     { Value: 500, Color: '#EC972D', Size: '', Legend: 'Tigers' },
+    // ];
 
     //carousel
     img = ["../../../assets/images/l_img1.jpg", "../../../assets/images/l_img2.jpg"]
@@ -44,9 +43,7 @@ export class DashboardComponent implements OnInit {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 3,
-                    slidesToScroll: 3,
-                    infinite: true,
-                    dots: true
+                    slidesToScroll: 3
                 }
             },
             {
@@ -68,7 +65,6 @@ export class DashboardComponent implements OnInit {
     constructor(public recipesService: RecipesService, public titleService: Title, private siteService: SiteService) {
         this.titleService.setTitle("Home - Quili");
         siteService.setFullWidth();
-
     }
 
     ngOnInit(): void {
@@ -90,22 +86,21 @@ export class DashboardComponent implements OnInit {
             else
                 console.log("Error" + data.Error)
         })
-        console.log(this.popList)
     }
 
-    slickInit(e) {
-        console.log('slick initialized');
-    }
+    // slickInit(e) {
+    //     console.log('slick initialized');
+    // }
 
-    breakpoint(e) {
-        console.log('breakpoint');
-    }
+    // breakpoint(e) {
+    //     console.log('breakpoint');
+    // }
 
-    afterChange(e) {
-        console.log('afterChange');
-    }
+    // afterChange(e) {
+    //     console.log('afterChange');
+    // }
 
-    beforeChange(e) {
-        console.log('beforeChange');
-    }
+    // beforeChange(e) {
+    //     console.log('beforeChange');
+    // }
 }

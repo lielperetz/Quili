@@ -1,12 +1,8 @@
 .slick-slider{
-        max-height: 300px;
-        height: 300px;
+    max-height: 300px;
+    height: 300px;
 }
 .carousel .slick-list{
-    min-height: 100%;
-    height: 100% !important;
-}
-.sm-carousel .slick-list{
     min-height: 100%;
     height: 100% !important;
 }
@@ -15,8 +11,8 @@
     height: 100% !important;
 }
 .sm-carousel .slick-track{
-    min-height: 100%;
-    height: 100% !important;
+    min-height: 200px;
+    height: 200px !important;
 }
 .slick-slide, .slide {
     background: no-repeat center 0;
@@ -28,13 +24,17 @@
     background: no-repeat center 0;
     background-size: cover;
     max-height: 200px;
-    height: 200px;
+    height: 200px !important;
 }
 .slick-slide img{
     max-height: 300px;
 }
-
-.slick-slide .SlideText{
+button.slick-prev:before,
+button.slick-next {
+  color: yellow !important;
+  background-color: yellow !important;
+}
+/* .slick-slide .SlideText{
     position:absolute;
     top: 40px;
     max-width: 50pc;
@@ -46,48 +46,70 @@
     height: auto;
     text-transform: uppercase;
     color: black;
-   
-}
+} */
 
-.slick-current .SlideText{
+/* .slick-current .SlideText{
     animation: mymove 0.5s;
     animation-iteration-count: unset;
     animation-delay: 250ms;
     animation-timing-function: linear;
 }
-
 @keyframes mymove {
     from {top: 400px;}
     to {top: 40px;}
-  }
-.margin-20{
+} */
+.margin-20 {
     margin: 20px;
+    margin-bottom: 0;
 }
-.content{
-    margin-top: 0;
-}
-
 .popimg {
     opacity: 1;
     display: block;
     transition: .5s ease;
     backface-visibility: hidden;
-  }
-  
-.poptxt{
-    transition: .5s ease;
-    opacity: 0;
-    position: absolute;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    height: 200px;
+}
+.poptxt {
     font-size: large;
-    color: white;
+    color: black;
     font: bold;
-    padding: 25px;
+    padding: 0;
+    margin: 0;
     background-color: gray;
     text-align: center;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: clip;
+    word-break: keep-all;
+    width: 100%;
 }
-.popimg:hover .poptxt{
-    opacity: 1;
+.pop{
+    padding: 0;
 }
-
-
+.pop:hover{
+    border-right: #E16F26 1px double !important;
+    border-bottom: #E16F26 1px double !important;
+}
+.header {
+    padding: 10px;
+    text-align: center;
+    font-family: "cursive";
+    font-weight: bold;
+    font-size: 42px;
+}
+.content {
+    padding-top: 50px !important;
+    margin-top: 0 !important;
+}
+.align-center {
+    align-items: center !important;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.color {
+    color: #E16F26;
+}
 
