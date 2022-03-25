@@ -1,23 +1,23 @@
-
 .align-center{
+    margin: auto;
     display: flex;
 	align-items: center;
 	justify-content: center;
 }
 input[type=text]:focus ,textarea:focus{
     outline: none;
-    border-bottom-color: darksalmon;    
+    border-bottom-color: black;    
 }
 input[type=text], textarea{
     color: gray;
     background-color: whitesmoke;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid #E16F26;
     margin-bottom: 20px;
-    border-bottom-color: black;
+    border-bottom-color: #E16F26;
 }
 input[type=submit]{
-    background-color: black;
+    background-color: gray;
     border: none;
     color: white;
     text-decoration: none;
@@ -27,6 +27,7 @@ input[type=submit]{
 }
 input[type=submit]:hover{
     background-color: darkgray;
+    color: #E16F26;
 }
 .float-right{
     float: right;
@@ -45,7 +46,6 @@ input[type=submit]:hover{
     font-size: large;
     width: 100%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    background-color: blue;
 }
 img{
     width: 50px;
