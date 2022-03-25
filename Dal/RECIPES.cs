@@ -28,6 +28,7 @@ namespace Dal
         public string RECIPE_IMAGE { get; set; }
         public Nullable<int> SCHEDULING_STATUSE { get; set; }
         public System.DateTime DATE { get; set; }
+        public Nullable<int> COUNT { get; set; }
     
         public virtual CLIENTS CLIENTS { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

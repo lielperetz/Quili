@@ -1,4 +1,3 @@
-import { Recipe } from "./Recipe";
 import { UnitItem } from "./UnitItem";
 
 export class Product {

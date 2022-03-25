@@ -11,18 +11,21 @@
     margin: 10px auto;
     font-weight: bold;
 }
+.quili { 
+    margin-top: 20px;
+}
 .quili, a {
-    color: orange;
+    color: #E16F26;
 }
 .t {
     text-align: center;
 }
 .button-q {
-    background-color: orange;
+    background-color: #E16F26;
     color: white;
-    opacity: 0.6;
-    margin: 20px auto;
-    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    width: 70%;
     border-radius: 30px;
 }
 .form-group {
@@ -40,7 +43,7 @@
     border-radius: 60px;
 }
 .valid {
-    color: orange;
+    color: #E16F26;
 }
 @media screen and (max-width:800px) {
     .card-text {

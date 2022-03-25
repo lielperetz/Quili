@@ -32,8 +32,10 @@ export class SavedRecipesComponent implements OnInit {
     Swal.fire({
       title: 'Are you sure you want to delete this recipe from your Favorites?',
       icon: 'warning',
+      iconColor: '#E16F26',
       showCancelButton: true,
       confirmButtonText: 'Ok',
+      confirmButtonColor: '#E16F26',
       cancelButtonText: 'Cancal'
     }).then((result) => {
       if (result.value) {
@@ -44,7 +46,7 @@ export class SavedRecipesComponent implements OnInit {
                 title: 'Deleted!',
                 text: 'Delete successfully.',
                 icon: 'success',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 timer: 3000,
                 showConfirmButton: false
               })

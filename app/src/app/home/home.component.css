@@ -15,7 +15,7 @@ button {
 }
 
 .creatList {
-  background-color: orange;
+  background-color: #E16F26;
   margin: 0px auto 20px;
   color: white;
   box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
@@ -25,7 +25,7 @@ button {
   letter-spacing: .25px;
   font-weight: 500;
   padding: 10px;
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .creatList:hover {
@@ -53,7 +53,7 @@ button[disabled] {
 
 .fa-arrow-up, .fa-arrow-right {
   margin: auto 5px;
-  color: orange;
+  color: #E16F26;
 }
 
 .seperate {
@@ -64,7 +64,7 @@ button[disabled] {
 .dateTitle {
   text-align: center;
   font-size: small;
-  color: rgb(252, 186, 65);
+  color: #E16F26;
   margin-top: 20px;
 }
 
@@ -89,12 +89,13 @@ button[disabled] {
 .bur {
   text-align: center;
   border: none;
-  background-color: orange;
-  opacity: 0.6;
+  background-color: #E16F26;
+  opacity: 0.8;
   color: white;
   font-size: medium;
   padding: 8px 5px;
   margin: 5px auto;
+  cursor: pointer;
 }
 
 .bur a{
@@ -106,14 +107,10 @@ button[disabled] {
 }
 
 .saved {
-  border: 1px solid orange;
+  border: 1px solid #E16F26;
   background-color: white;
-  color: orange;
+  color: #E16F26;
 }
-
-/* .saved .fa-heart {
-  color: orange;
-} */
 
 .divS {
   width: 100%; 
@@ -204,7 +201,7 @@ button[disabled] {
 
 .divDe a {
   color: black;
-  color: orange;
+  color: #E16F26;
   font-size: medium;
 }
 
@@ -220,20 +217,20 @@ button[disabled] {
   overflow: hidden;
 }
 .e-schedule .e-month-view .e-current-date .e-date-header, .e-calendar .e-content.e-year td.e-selected span.e-day {
-  background-color: orange;
+  background-color: #E16F26;
 }
 
 .e-calendar .e-content.e-year td.e-selected:hover span.e-day {
-  background-color: orange;
+  background-color: #E16F26;
   opacity: 0.6;
 }
 
 .e-schedule .e-month-view .e-date-header-wrap table td.e-current-day, .e-btn.e-flat.e-primary, .e-css.e-btn.e-flat.e-primary {
-  color: orange;
+  color: #E16F26;
 }
 
 .e-btn.e-flat.e-primary:hover, .e-css.e-btn.e-flat.e-primary:hover {
-  color: orange;
+  color: #E16F26;
   opacity: 0.6;
 }
 .e-schedule .e-month-view .e-other-month {

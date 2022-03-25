@@ -15,17 +15,18 @@ namespace Entities
         public string RecipeImage { get; set; }
         public int? SchedulingStatuse { get; set; }
         public DateTime Date { get; set; }
+        public int? Count { get; set; }
 
         //המרה מאובייקט מסוג מסד התונים לאובייקט מסוג אנטיטיז
         public static RecipesEntities ConvertToEntities(RECIPES r)
         {
-            RecipesEntities r2= new RecipesEntities() {Code=r.CODE, Mail = r.MAIL, Password = r.CLIENTS.PASSWORD, RecipeId = r.RECIPE_ID, RecipeTitle = r.RECIPE_TITLE, RecipeImage = r.RECIPE_IMAGE, SchedulingStatuse = r.SCHEDULING_STATUSE, Date = r.DATE };
+            RecipesEntities r2= new RecipesEntities() {Code=r.CODE, Mail = r.MAIL, Password = r.CLIENTS.PASSWORD, RecipeId = r.RECIPE_ID, RecipeTitle = r.RECIPE_TITLE, RecipeImage = r.RECIPE_IMAGE, SchedulingStatuse = r.SCHEDULING_STATUSE, Date = r.DATE, Count = r.COUNT };
             return r2;
         }
         //המרה מסוג אנטיטיז לסוג מסד נתונים
         public static RECIPES ConvertToDB(RecipesEntities r)
         {
-            return new RECIPES() { CODE = r.Code, MAIL = r.Mail, RECIPE_ID = r.RecipeId, RECIPE_TITLE = r.RecipeTitle, RECIPE_IMAGE = r.RecipeImage, SCHEDULING_STATUSE = r.SchedulingStatuse, DATE = r.Date };
+            return new RECIPES() { CODE = r.Code, MAIL = r.Mail, RECIPE_ID = r.RecipeId, RECIPE_TITLE = r.RecipeTitle, RECIPE_IMAGE = r.RecipeImage, SCHEDULING_STATUSE = r.SchedulingStatuse, DATE = r.Date, COUNT = r.Count };
         }
         //המרה מסוג רשימת מסד נתונים לרשימת אנטיטיז
         public static List<RecipesEntities> ConvertToListEntities(List<RECIPES> listR)

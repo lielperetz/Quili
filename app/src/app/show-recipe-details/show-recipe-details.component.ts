@@ -68,7 +68,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
             title: 'Success!',
             text: this.showRecipe.title + " was successfully added.",
             icon: 'success',
-            iconColor: 'orange',
+            iconColor: '#E16F26',
             timer: 3000,
             showConfirmButton: false
           })
@@ -82,8 +82,10 @@ export class ShowRecipeDetailsComponent implements OnInit {
     Swal.fire({
       title: 'Are you sure you want to remove this recipe?',
       icon: 'warning',
+      iconColor: '#E16F26',
       showCancelButton: true,
       confirmButtonText: 'Ok',
+      confirmButtonColor: '#E16F26',
       cancelButtonText: 'Cancal'
     }).then((result) => {
       if (result.value) {
@@ -95,7 +97,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
                 title: 'Deleted!',
                 text: this.showRecipe.title + ' was successfully deleted.',
                 icon: 'success',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 timer: 3000,
                 showConfirmButton: false
               })

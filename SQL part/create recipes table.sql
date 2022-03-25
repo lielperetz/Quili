@@ -1,7 +1,7 @@
 USE [FINAL_PROJECT]
 GO
 
-/****** Object:  Table [dbo].[RECIPES]    Script Date: 12/30/2021 1:34:04 PM ******/
+/****** Object:  Table [dbo].[RECIPES]    Script Date: 25/03/2022 14:58:03 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -16,6 +16,7 @@ CREATE TABLE [dbo].[RECIPES](
 	[RECIPE_IMAGE] [varchar](150) NULL,
 	[SCHEDULING_STATUSE] [int] NULL,
 	[DATE] [datetime] NOT NULL,
+	[COUNT] [int] NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[CODE] ASC
@@ -23,6 +24,8 @@ PRIMARY KEY CLUSTERED
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE  [dbo].[RECIPES] WITH CHECK ADD FOREIGN KEY([MAIL])
+ALTER TABLE [dbo].[RECIPES]  WITH CHECK ADD FOREIGN KEY([MAIL])
 REFERENCES [dbo].[CLIENTS] ([MAIL])
 GO
+
+

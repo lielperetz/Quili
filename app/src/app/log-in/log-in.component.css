@@ -11,7 +11,8 @@
     font-weight: bold;
 }
 .quili {
-    color: orange;
+    margin-top: 20px;
+    color: #E16F26;
 }
 .form-control, .input-group .input-group-merge .form-password-toggle {
     background-color: rgb(248, 247, 247);
@@ -23,11 +24,11 @@
     border-radius: 60px;
 }
 .button-q {
-    background-color: orange;
+    background-color: #E16F26;
     color: white;
-    opacity: 0.6;
-    margin: 20px auto;
-    width: 80%;
+    margin: auto;
+    margin-top: 30px;
+    width: 70%;
     border-radius: 30px;
 }
 .input-group:focus-within .input-group-append, .custom-control-input {
@@ -40,7 +41,7 @@
     margin: 10px auto;
 }
 .valid {
-    color: orange;
+    color: #E16F26;
 }
 @media screen and (max-width:800px) {
     .card-text {

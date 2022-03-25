@@ -40,7 +40,8 @@ namespace finalProject.Controllers
                         break;
                     //weekly
                     case 2:
-                        for (int i = 0; i < 48; i++)
+                        r.Count = 4 * r.Count;
+                        for (int i = 0; i < r.Count; i++)
                         {
                             s.Date = r.Date.AddDays(i * 7);
                             SchedulesBl.AddSchedules(s);
@@ -48,7 +49,7 @@ namespace finalProject.Controllers
                         break;
                     //monthly
                     case 3:
-                        for (int i = 0; i < 12; i++)
+                        for (int i = 0; i < r.Count; i++)
                         {
                             s.Date = r.Date.AddMonths(i);
                             SchedulesBl.AddSchedules(s);

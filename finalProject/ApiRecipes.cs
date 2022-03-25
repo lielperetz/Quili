@@ -8,8 +8,8 @@ namespace finalProject
     public class ApiRecipes
     {
         private const string URL = "https://api.spoonacular.com/recipes";
-        //private static string urlParameters = "?apiKey=52b9142911034ec3b82f8d31cb7410ca";
-        private static string urlParameters = "?apiKey=f49206d6e05d4dfdb0de78edf9b343c0";
+        private static string urlParameters = "?apiKey=52b9142911034ec3b82f8d31cb7410ca";
+        //private static string urlParameters = "?apiKey=f49206d6e05d4dfdb0de78edf9b343c0";
 
         public static object SearchRecipe(string w)
         {

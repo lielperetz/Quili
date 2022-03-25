@@ -20,7 +20,7 @@ export class SiteComponent implements OnInit {
     public siteService:SiteService,
     public router: Router,
     public saved: SavedRecipesService) {
-    this.user = this.cookies.get('Token');
+    this.user = this.cookies.get('Token').split("@")[0];
     saved.GetSavedRecipes().subscribe(
       (res: any) => {
         if (res.Status)
@@ -59,7 +59,7 @@ export class SiteComponent implements OnInit {
                 title: 'Deleted!',
                 text: 'Delete successfully.',
                 icon: 'success',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 timer: 3000,
                 showConfirmButton: false
               })

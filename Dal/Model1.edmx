@@ -35,6 +35,7 @@
           <Property Name="RECIPE_IMAGE" Type="varchar" MaxLength="150" />
           <Property Name="SCHEDULING_STATUSE" Type="int" />
           <Property Name="DATE" Type="datetime" Nullable="false" />
+          <Property Name="COUNT" Type="int" />
         </EntityType>
         <EntityType Name="SAVED_RECIPES">
           <Key>
@@ -193,6 +194,7 @@
           <NavigationProperty Name="CLIENTS" Relationship="FINAL_PROJECTModel.FK__RECIPES__MAIL__72C60C4A" FromRole="RECIPES" ToRole="CLIENTS" />
           <NavigationProperty Name="PRODUCTS" Relationship="FINAL_PROJECTModel.FK__PRODUCTS__RECIPE__787EE5A0" FromRole="RECIPES" ToRole="PRODUCTS" />
           <NavigationProperty Name="SCHEDULES" Relationship="FINAL_PROJECTModel.FK__SCHEDULES__RECIP__75A278F5" FromRole="RECIPES" ToRole="SCHEDULES" />
+          <Property Name="COUNT" Type="Int32" />
         </EntityType>
         <EntityType Name="SCHEDULES">
           <Key>
@@ -297,6 +299,7 @@
           <EntitySetMapping Name="RECIPES">
             <EntityTypeMapping TypeName="FINAL_PROJECTModel.RECIPES">
               <MappingFragment StoreEntitySet="RECIPES">
+                <ScalarProperty Name="COUNT" ColumnName="COUNT" />
                 <ScalarProperty Name="DATE" ColumnName="DATE" />
                 <ScalarProperty Name="SCHEDULING_STATUSE" ColumnName="SCHEDULING_STATUSE" />
                 <ScalarProperty Name="RECIPE_IMAGE" ColumnName="RECIPE_IMAGE" />

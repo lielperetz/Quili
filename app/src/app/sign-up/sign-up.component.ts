@@ -43,7 +43,7 @@ export class SignUpComponent implements OnInit {
           })
           Toast.fire({
             icon: 'error',
-            iconColor: 'orange',
+            iconColor: '#E16F26',
             title: response.Error,
           })
         }

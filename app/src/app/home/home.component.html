@@ -2,7 +2,8 @@
 <div class="main-menu menu-fixed menu-light menu-accordion menu-shadow men" data-scroll-to-active="true">
   <div class="row">
     <button class="col-sm-8 creatList" [disabled]="noRecipes()" title="Create shopping list"><a
-        routerLink="/site/ingredients/{{selectedDate1 | date: 'yyyy-MM-dd'}}/{{selectedDate2 | date: 'yyyy-MM-dd'}}">Create shopping list</a></button>
+        routerLink="/site/ingredients/{{selectedDate1 | date: 'yyyy-MM-dd'}}/{{selectedDate2 | date: 'yyyy-MM-dd'}}">Create
+        shopping list</a></button>
     <div *ngIf="noRecipes()">
       <div class="col-sm-12 seperate"></div>
       <div class="col-sm-12 notFound">There is no recipes in the menu. <br>
@@ -46,7 +47,7 @@
           <div class="sidebar-wrapper">
             <div class="control-section">
               <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
-               height="730px" [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
+                height="730px" [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
                 (actionComplete)="onActionComplete($event)" (popupOpen)="onPopupOpen($event)">
                 <ng-template #cellTemplate let-data>
                   <div class="e-work-cells row"
@@ -63,7 +64,7 @@
                               style="border: none;">
                               <p class="col-sm-12 p-title">{{slide.RecipeTitle}}</p>
                               <a href="javascript:void(0)"><span class="tr"><i class="fa fa-trash-o"
-                                    (click)="delete(slide.Code)" style="color: black;"></i></span></a>
+                                    (click)="delete(slide.Code)" style="color: #E16F26;"></i></span></a>
                             </a>
                           </div>
                         </mat-carousel-slide>
@@ -95,7 +96,7 @@
                         <input class="e-input searchInput" type="search" placeholder="Search"
                           (ngModelChange)="searchRecipe($event)" [(ngModel)]="searchWord" />
                         <p class="noResults" *ngIf="!listRecipesBySearch && searchWord!=''">Your search <span
-                            style="color: orange;">{{searchWord}}</span> did not match any recipes.</p>
+                            style="color: #E16F26;">{{searchWord}}</span> did not match any recipes.</p>
                       </div>
                       <div class="row searchList" *ngIf="listRecipesBySearch">
                         <div *ngFor="let item of listRecipesBySearch" (click)="chooseRecipe(item.id)"
@@ -110,26 +111,37 @@
                       <div *ngIf="newRecipe.RecipeTitle" class="content-area">
                         <label>Title</label>
                         <input id="title" class="e-input" type="text" placeholder="Title" style="font-weight: bold;"
-                          [(ngModel)]="newRecipe.RecipeTitle" readonly/>
-                          <a routerLink="/site/showDetails/{{newRecipe.RecipeId}}" target="_blank"
-                            style="border: none;"><img src="{{newRecipe.RecipeImage}}" /></a>
-                        </div>
-                        <div class="content-area">
-                          <label>Start Date</label>
-                          <input id="date" class="e-input" type="date" [value]="newRecipe.Date | date:'yyyy-MM-dd'"
-                            (input)="newRecipe.Date=parseDate($event.target.value)"/>
-                        </div>
-                        <div class="content-area">
-                          <label>Repeat</label>
-                          <select id="status" class="e-float-input e-input-group select-status"
-                            [(ngModel)]="newRecipe.SchedulingStatuse">
-                            <option value="1">Never</option>
-                            <option value="2">Weekly</option>
-                            <option value="3">Monthly</option>
-                          </select>
-                        </div>
+                          [(ngModel)]="newRecipe.RecipeTitle" readonly />
+                        <a routerLink="/site/showDetails/{{newRecipe.RecipeId}}" target="_blank"
+                          style="border: none;"><img src="{{newRecipe.RecipeImage}}" /></a>
+                      </div>
+                      <div class="content-area">
+                        <label>Start Date</label>
+                        <input id="date" class="e-input" type="date" [value]="newRecipe.Date | date:'yyyy-MM-dd'"
+                          (input)="newRecipe.Date=parseDate($event.target.value)" max="9999-12-31" />
+                      </div>
+                      <div class="content-area">
+                        <label>Repeat</label>
+                        <select id="status" class="e-float-input e-input-group select-status"
+                          [(ngModel)]="newRecipe.SchedulingStatuse">
+                          <option value="1">Never</option>
+                          <option value="2">Weekly</option>
+                          <option value="3">Monthly</option>
+                        </select>
+                      </div>
+                      <div *ngIf="newRecipe.SchedulingStatuse!=1" class="content-area">
+                        <label>Count</label>
+                        <select id="count" class="e-float-input e-input-group select-status"
+                          [(ngModel)]="newRecipe.Count">
+                          <option value="1">Month</option>
+                          <option value="2">2 Months</option>
+                          <option value="3">3 Months</option>
+                          <option value="6">Half an Year</option>
+                          <option value="12">Year</option>
+                        </select>
                       </div>
                     </div>
+                  </div>
                 </ng-template>
                 <ng-template #quickInfoTemplatesFooter let-data>
                   <ng-container [ngTemplateOutlet]="cellFooter" [ngTemplateOutletContext]="{data:data}">
@@ -138,7 +150,7 @@
                 <ng-template #cellFooter let-data="data">
                   <div class="e-cell-footer">
                     <button ejs-button id="save" cssClass="e-flat buttons" [isPrimary]="true"
-                      (click)="buttonClickActions($event)" [disabled]="!newRecipe.RecipeTitle">Save</button>
+                      (click)="buttonClickActions($event)">Save</button>
                   </div>
                 </ng-template>
               </ejs-schedule>

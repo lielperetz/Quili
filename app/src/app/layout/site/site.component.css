@@ -4,11 +4,11 @@
     }
 }
 .log:hover {
-    color: orange;
+    color: #E16F26;
     background-color: gainsboro;
 }
 .icon {
-    color: orange;
+    color: #E16F26;
     cursor: pointer;
     font-size: x-large;
 }
@@ -18,7 +18,8 @@
 .mail {
     font-weight: bold;
     display: block;
-    padding: 0.65rem 1.28rem;
+    text-align: center;
+    /* padding: 0.65rem 1.28rem; */
 }
 .mn {
     margin: auto 2px;
@@ -35,13 +36,13 @@ a:focus {
 }
 
 .to {
-    background-color: orange;
-    border-color: orange;
+    background-color: #E16F26;
+    border-color: #E16F26;
     color: white;
 }
 .nums {
     background-color: inherit;
-    color: orange;
+    color: #E16F26;
 }
 /* .saved-menu {
     display: none;
@@ -57,10 +58,10 @@ a:focus {
     background-color: inherit;
 }
 .cart-item-title:hover {
-    color: orange;
+    color: #E16F26;
 }
 .dropdown-menu-footer .to:hover {
-    background-color: orange;
+    background-color: #E16F26;
     opacity: 0.5;
 }
 .cart-item-price {
@@ -72,4 +73,7 @@ a:focus {
 }
 .img-h {
     margin: auto;
+}
+.num {
+    background-color: rgb(133 131 144);
 }

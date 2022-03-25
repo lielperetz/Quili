@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     private schedulesService: SchedulesService,
     public router: Router,
     public savedRecipesService: SavedRecipesService,
-    public titleService: Title, private siteService:SiteService) {
+    public titleService: Title, private siteService: SiteService) {
     siteService.setNormal();
     this.titleService.setTitle("Meal Planner - Quili");
     this.getOriginalData();
@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
           })
           Toast.fire({
             icon: 'error',
-            iconColor: 'orange',
+            iconColor: '#E16F26',
             title: 'Oops...Something went wrong!',
           })
         }
@@ -146,41 +146,65 @@ export class HomeComponent implements OnInit {
     this.listRecipesBySearch = null;
     this.searchWord = "";
     this.newRecipe = new Recipe()
+    this.newRecipe.SchedulingStatuse = 1;
+    this.newRecipe.Count = 1;
     this.newRecipe.Date = new Date(args.data.startTime);
   }
 
   public buttonClickActions(e: Event): void {
     if ((e.target as HTMLElement).id === 'save') {
-      this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
-      this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
-      this.recipeService.AddRecipe(this.newRecipe).subscribe(
-        (response: any) => {
-          if (response.Status) {
-            this.getOriginalData();
-            this.scheduleObj.refreshTemplates();
-          }
-          else {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 2000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-              }
-            })
-            Toast.fire({
-              icon: 'error',
-              iconColor: 'orange',
-              title: 'Oops...Something went wrong!',
-            })
-          }
+      if (!this.newRecipe.Date) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          iconColor: '#E16F26',
+          title: 'Date is required!',
+          showConfirmButton: false,
+          timer: 3000
         })
-      this.newRecipe = new Recipe();
+      }
+      if (!this.newRecipe.RecipeTitle) {
+        Swal.fire({
+          position: 'center',
+          icon: 'warning',
+          iconColor: '#E16F26',
+          title: 'You must select a recipe to add!',
+          showConfirmButton: false,
+          timer: 3000
+        })
+      }
+      else {
+        this.newRecipe.Date = this.newRecipe.Date ? this.newRecipe.Date : new Date();
+        this.newRecipe.SchedulingStatuse = this.newRecipe.SchedulingStatuse ? this.newRecipe.SchedulingStatuse : 1;
+        this.recipeService.AddRecipe(this.newRecipe).subscribe(
+          (response: any) => {
+            if (response.Status) {
+              this.getOriginalData();
+              this.scheduleObj.refreshTemplates();
+            }
+            else {
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              Toast.fire({
+                icon: 'error',
+                iconColor: '#E16F26',
+                title: 'Oops...Something went wrong!',
+              })
+            }
+          })
+        this.newRecipe = new Recipe();
+        this.scheduleObj.closeQuickInfoPopup();
+      }
     }
-    this.scheduleObj.closeQuickInfoPopup();
   }
 
   public onSelect(args: SelectEventArgs) {
@@ -243,7 +267,7 @@ export class HomeComponent implements OnInit {
                 title: 'Deleted!',
                 text: 'Delete successfully.',
                 icon: 'success',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 timer: 3000,
                 showConfirmButton: false
               })
@@ -265,7 +289,7 @@ export class HomeComponent implements OnInit {
               })
               Toast.fire({
                 icon: 'error',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 title: 'Oops...Something went wrong!',
               })
             }
@@ -287,7 +311,7 @@ export class HomeComponent implements OnInit {
                   title: 'Success!',
                   text: res.Data.Title + " was successfully added.",
                   icon: 'success',
-                  iconColor: 'orange',
+                  iconColor: '#E16F26',
                   timer: 3000,
                   showConfirmButton: false
                 })
@@ -313,9 +337,9 @@ export class HomeComponent implements OnInit {
         this.deleteOptions = 3; //delete this recipe, following recipes or entire series
     let optionsInDelete: SweetAlertOptions = {
       icon: 'warning',
-      iconColor: 'orange',
+      iconColor: '#E16F26',
       showCancelButton: true,
-      confirmButtonColor: 'orange',
+      confirmButtonColor: '#E16F26',
       denyButtonColor: '#6e7881',
       confirmButtonText: 'Delete Recipe',
       showCloseButton: true,
@@ -353,7 +377,7 @@ export class HomeComponent implements OnInit {
                 title: 'Deleted!',
                 text: l.RecipeTitle + ' was successfully deleted.',
                 icon: 'success',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 timer: 3000,
                 showConfirmButton: false
               })
@@ -361,7 +385,7 @@ export class HomeComponent implements OnInit {
             else {
               Swal.fire({
                 icon: 'error',
-                iconColor: 'orange',
+                iconColor: '#E16F26',
                 title: 'Oops...',
                 text: 'Something went wrong!',
               })

@@ -16,7 +16,7 @@
   padding-right: 20px;
 }
 .e {
-  background-color: orange;
+  background-color: #E16F26;
   border-radius: 3px;
   margin: 3px;
   padding: 5px; 
@@ -135,10 +135,10 @@ input {
   margin-right: 0px;
 }
 .view_item .btn:hover{
-  color: orange;
+  color: #E16F26;
 }
 .is {
-  background-color: orange;
+  background-color: #E16F26;
   color: white;
   padding: 4px 6px;
 }
@@ -156,7 +156,7 @@ input {
   display: block;
 }
 .recipes-content a:hover {
-  color: orange;
+  color: #E16F26;
   width: 200%;
 } 
 .recipes-content a img, .recipes-content a p {
