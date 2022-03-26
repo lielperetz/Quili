@@ -31,33 +31,9 @@
 }
 button.slick-prev:before,
 button.slick-next {
-  color: yellow !important;
-  background-color: yellow !important;
+  color: #E16F26 !important;
+  background-color: #E16F26 !important;
 }
-/* .slick-slide .SlideText{
-    position:absolute;
-    top: 40px;
-    max-width: 50pc;
-    margin: 40px;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 20px;
-    border-radius: 25px;
-    max-height: none;
-    height: auto;
-    text-transform: uppercase;
-    color: black;
-} */
-
-/* .slick-current .SlideText{
-    animation: mymove 0.5s;
-    animation-iteration-count: unset;
-    animation-delay: 250ms;
-    animation-timing-function: linear;
-}
-@keyframes mymove {
-    from {top: 400px;}
-    to {top: 40px;}
-} */
 .margin-20 {
     margin: 20px;
     margin-bottom: 0;
@@ -71,45 +47,45 @@ button.slick-next {
     margin-bottom: 0;
     height: 200px;
 }
+.pop:hover .poptxt {
+    border-top: #E16F26 1px;
+}
 .poptxt {
     font-size: large;
     color: black;
     font: bold;
-    padding: 0;
+    padding: 10px;
     margin: 0;
-    background-color: gray;
+    background-color: whitesmoke;
     text-align: center;
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: clip;
     word-break: keep-all;
+    font-size: 14px;
     width: 100%;
-}
-.pop{
-    padding: 0;
-}
-.pop:hover{
-    border-right: #E16F26 1px double !important;
-    border-bottom: #E16F26 1px double !important;
+    border: #E16F26 !important;
 }
 .header {
-    padding: 10px;
-    text-align: center;
-    font-family: "cursive";
-    font-weight: bold;
-    font-size: 42px;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    margin-right: 70px;
+    text-align: right;
+    font-size: 40px;
+    font-family: "Lobster", serif;
+    border-bottom: 0;
+    text-decoration: underline 3px lightgray;
+}
+.header:hover .s{
+    color: lightgray;
+}
+.header:hover{
+    text-decoration: underline 3px #E16F26;
 }
 .content {
     padding-top: 50px !important;
     margin-top: 0 !important;
 }
-.align-center {
-    align-items: center !important;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
 .color {
     color: #E16F26;
 }
-
