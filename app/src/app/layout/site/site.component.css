@@ -1,55 +1,53 @@
+.mn {
+    margin: 10px;
+    margin-bottom: 0px;
+    padding: 0 !important;
+}
 @media screen and (max-width: 600px) {
     .d-s-none {
         display: none;
     }
 }
-.log:hover {
+.d-s-none {
+    margin-bottom: 0;
     color: #E16F26;
-    background-color: gainsboro;
+    margin-left: 5px;
 }
 .icon {
     color: #E16F26;
     cursor: pointer;
-    font-size: x-large;
 }
-.home {
-    font-size: xx-large;
+a:hover {
+    background-color: white !important;
+}
+a:hover .d-s-none, a:hover .icon {
+    color: #6e6b7b;
+}
+a:focus {
+    background-color: white !important;
+}
+.num {
+    background-color: rgb(133 131 144);
+}
+.log:hover {
+    color: #E16F26;
+    background-color: gainsboro;
 }
 .mail {
     font-weight: bold;
     display: block;
     text-align: center;
-    /* padding: 0.65rem 1.28rem; */
-}
-.mn {
-    margin: auto 2px;
-}
-.logo-li {
-    margin-left: 0px;
-}
-a:hover {
-    background-color: white;
-}
-
-a:focus {
-    background-color: white;
-}
-
-.to {
-    background-color: #E16F26;
-    border-color: #E16F26;
-    color: white;
+    padding: 0.65rem 1.28rem;
 }
 .nums {
     background-color: inherit;
     color: #E16F26;
 }
-/* .saved-menu {
-    display: none;
+.to {
+    background-color: #E16F26;
+    border-color: #E16F26;
+    color: white;
 }
-#saved:hover .saved-menu {
-    display: block;
-} */
 .ap {
     margin: auto;
     background-color: inherit;
@@ -74,6 +72,4 @@ a:focus {
 .img-h {
     margin: auto;
 }
-.num {
-    background-color: rgb(133 131 144);
-}
+
