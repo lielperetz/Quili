@@ -10,20 +10,13 @@ import { SiteService } from '../services/site.service';
 })
 export class DashboardComponent implements OnInit {
 
-    // public grafList: Array<GraficoModel> = [
-    //     { Value: 350, Color: '#498B94', Size: '', Legend: 'Monkeys' },
-    //     { Value: 2000, Color: '#F8C622', Size: '', Legend: 'Giraffes' },
-    //     { Value: 1000, Color: '#747474', Size: '', Legend: 'Lions' },
-    //     { Value: 500, Color: '#EC972D', Size: '', Legend: 'Tigers' },
-    // ];
-
-    //carousel
     img = ["../../../assets/images/l_img1.jpg", "../../../assets/images/l_img2.jpg"]
     slideConfig = {
         "slidesToShow": 1,
         "slidesToScroll": 1,
         infinite: true,
         dots: false,
+        arrows: false,
         speed: 400,
         autoplay: true,
         autoplaySpeed: 4000,
@@ -80,11 +73,10 @@ export class DashboardComponent implements OnInit {
                             code: element.recipes[0].RecipeId
                         })
                     }
-                    // this.grafList.push({ Value: element.count, Color: '#498B94', Size: '', Legend: element.recipes[1].RecipeImage })
                 });
             }
             else
-                console.log("Error" + data.Error)
+                console.log("Error")
         })
     }
 
