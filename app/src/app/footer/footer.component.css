@@ -23,7 +23,8 @@ input[type=submit]{
     text-decoration: none;
     padding: 7px 12px;
     cursor: pointer;
-    margin-right: 10px;
+    float: right;
+    margin-right: 80px;
 }
 input[type=submit]:hover{
     background-color: darkgray;
@@ -32,21 +33,37 @@ input[type=submit]:hover{
 .float-right{
     float: right;
 }
+.float-left{
+    float: left;
+}
 .line{
+    margin-top: 80px;
     border-right: 1px solid black;
 }
-.margin-top-100{
-    margin-top: 100px;
+.padding-top-200{
+    padding-top: 200px;
 }
 .margin-top-50{
     margin-top: 50px;
 }
-.margin-bottom-50{
-    margin-bottom: 50px;
-    font-size: large;
-    width: 100%;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-}
 img{
     width: 50px;
+}
+.r{
+    width: 100%;
+}
+.Copyright{
+    font-size: 9px;
+    margin-top: 10px;
+}
+.pen {
+    margin: 20px;
+}
+.pt{
+    padding-left: 20px;
+    padding-top: 40px;
+    font-size: medium;
+}
+.color{
+    color: #E16F26;
 }

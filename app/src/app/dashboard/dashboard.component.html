@@ -4,8 +4,7 @@
 
 <div class="app-content content">
     <div class="row">
-        <div class="col-sm-1"></div>
-        <h2 class="col-sm-7 w3-animate-opacity w3-animate-bottom">
+        <h2 class="col-sm-7 w3-animate-opacity w3-animate-bottom w3-display-topmiddle">
             Welcome to <b class="color w3-hover-opacity">Quili</b> !
             <br>
             <b class="color w3-hover-opacity">Quili</b> allows you to manage orderly meal planning and recipe management
@@ -14,7 +13,6 @@
             one-time meals from a huge database of recipes to managing your shopping list conveniently and most
             importantly - in a more efficient way.
         </h2>
-        <div></div>
     </div>
     <h1 class="header"> <b class="s color"><< </b> Our Favorites</h1>
     <div class="w3-display-topmiddle col-sm-10">
@@ -28,24 +26,3 @@
         </ngx-slick-carousel>
     </div>
 </div>
-<!-- <div class="app-content content">
-    <div class="content-wrapper">
-        <div class="content-body">
-            <ngx-slick-carousel class="carousel" 
-            #slickModal="slick-carousel" 
-            [config]="slideConfig" 
-            (init)="slickInit($event)"
-            (breakpoint)="breakpoint($event)"
-            (afterChange)="afterChange($event)"
-            (beforeChange)="beforeChange($event)">
-            <div ngxSlickItem *ngFor="let slide of randomList; let i = index" class="slide"
-            [style.background-image]="'url(' +  slide.img  + ')'">
-           
-            <h1 class="SlideText">{{slide.title}}</h1>
-            </div>
-            </ngx-slick-carousel>     
-            <app-grafico-barras [List]='grafList'></app-grafico-barras> 
-
-        </div>
-    </div>
-</div> -->
