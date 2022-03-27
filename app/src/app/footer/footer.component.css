@@ -64,6 +64,6 @@ img{
     padding-top: 40px;
     font-size: medium;
 }
-.color{
+h3:hover .color{
     color: #E16F26;
 }
