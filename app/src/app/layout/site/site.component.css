@@ -72,4 +72,10 @@ a:focus {
 .img-h {
     margin: auto;
 }
+.logo-li {
+    margin-left: 10px;
+}
+.ml-auto {
+    margin-right: 10px;
+}
 

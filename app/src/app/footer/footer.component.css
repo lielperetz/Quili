@@ -67,3 +67,8 @@ img{
 h3:hover .color{
     color: #E16F26;
 }
+@media print {
+    footer {
+        display: none;
+    }
+}

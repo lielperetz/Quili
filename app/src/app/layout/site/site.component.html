@@ -3,7 +3,7 @@
     class="header-navbar navbar navbar-expand-lg align-items-center floating-nav navbar-light navbar-shadow">
     <div class="navbar-container d-flex content w3-display-container">
         <ul class="nav navbar-nav w3-display-left">
-            <li class="nav-item d-lg-block mn logo-li">
+            <li class="nav-item d-lg-block logo-li">
                 <a routerLink="/site" class="nav-link" title="Dashboard">
                     <img src="../../../assets/images/logo/logo.png" width="80px">
                 </a>
@@ -49,7 +49,7 @@
                                     {{s.Title}}</h3>
                             </a>
                             <h5 class="cart-item-price col-sm-2" (click)="handleRemove(s.Id)"><i
-                                    class="fa fa-trash-o icon"></i></h5>
+                                    class="fa fa-trash-o w3-xlarge icon"></i></h5>
                         </div>
                     </li>
                     <li class="dropdown-menu-footer">
@@ -86,7 +86,7 @@
 <!-- END: Content-->
 
 <!-- BEGIN: Footer-->
-<app-footer></app-footer>
+<app-footer [ngClass]="(siteService.fullWidth)?'full-w':''"></app-footer>
 <button id="bst" class="btn btn-icon scroll-top to" type="button" (click)="scrollTop()"><i
         data-feather="arrow-up"></i></button>
 <!-- END: Footer-->
