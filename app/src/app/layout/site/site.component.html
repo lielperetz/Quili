@@ -11,7 +11,7 @@
         </ul>
         <div class="bookmark-wrapper d-flex align-items-center w3-display-middle">
             <ul class="nav navbar-nav flex-row">
-                <li class="nav-item d-lg-block mn">
+                <li [ngClass]="siteService.currentPage=='Home'?'active':''" class="nav-item d-lg-block mn">
                     <a routerLink="/site" class="nav-link" title="Home">
                         <i class="fa fa-home w3-xlarge icon"></i><span class="d-s-none">Home</span></a>
                 </li>

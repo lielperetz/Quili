@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
     constructor(public recipesService: RecipesService, public titleService: Title, private siteService: SiteService) {
         this.titleService.setTitle("Home - Quili");
         siteService.setFullWidth();
+        this.siteService.setCurrentPage("Home");
     }
 
     ngOnInit(): void {
@@ -77,20 +78,4 @@ export class DashboardComponent implements OnInit {
                 console.log("Error")
         })
     }
-
-    // slickInit(e) {
-    //     console.log('slick initialized');
-    // }
-
-    // breakpoint(e) {
-    //     console.log('breakpoint');
-    // }
-
-    // afterChange(e) {
-    //     console.log('afterChange');
-    // }
-
-    // beforeChange(e) {
-    //     console.log('beforeChange');
-    // }
 }
