@@ -27,7 +27,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
     public titleService: Title,
     public siteService: SiteService) {
     siteService.setFullWidth()
-
+    this.siteService.setCurrentPage("recipe")
   }
 
   ngOnInit(): void {

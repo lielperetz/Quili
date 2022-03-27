@@ -11,12 +11,23 @@
 }
 .header {
     margin: 30px auto;
-    font-family: "cursive";
-    font-weight: bold;
-    font-size: 44px;
     text-transform: capitalize;
+    text-align: center;
+    font-size: 40px;
+    font-family: "Lobster", serif;
+    border-bottom: 0;
+    text-decoration: underline 3px lightgray;
 }
-
+.header:hover .s{
+    color: lightgray;
+}
+.header:hover{
+    text-decoration: underline 3px #E16F26;
+}
+.content {
+    padding-top: 50px !important;
+    margin-top: 0 !important;
+}
 h3 h2 {
     font-weight: 800;
     margin: 10px auto;
@@ -82,5 +93,8 @@ h3 h2 {
 }
 
 .fa-heart {
+    color: #E16F26;
+}
+.color{
     color: #E16F26;
 }

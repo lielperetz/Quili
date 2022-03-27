@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
     siteService.setNormal();
     this.titleService.setTitle("Meal Planner - Quili");
     this.getOriginalData();
+    this.siteService.setCurrentPage("MealPlanner");
   }
 
   public ngOnInit(): void {
