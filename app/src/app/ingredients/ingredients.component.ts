@@ -30,6 +30,7 @@ export class IngredientsComponent implements OnInit {
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title, private siteService: SiteService) {
     this.titleService.setTitle("Shopping List - Quili");
     siteService.setNormal();
+    this.siteService.setCurrentPage("ShoppingList");
   }
 
   ngOnInit(): void {

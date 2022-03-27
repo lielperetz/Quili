@@ -29,11 +29,6 @@
 .slick-slide img{
     max-height: 300px;
 }
-.slick-prev:before,
-.slick-next:before {
-  color: #E16F26 !important;
-  background-color: #E16F26 !important;
-}
 .margin-20 {
     margin: 20px;
     margin-bottom: 0;

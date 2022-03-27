@@ -4,12 +4,22 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+.color{
+  color: #E16F26;
+}
 .header {
   padding: 10px;
   text-align: center;
-  font-family: "cursive";
-  font-weight: bold;
-  font-size: 42px;
+  font-size: 40px;
+  font-family: "Lobster", serif;
+  border-bottom: 0;
+  text-decoration: underline 3px lightgray;
+}
+.header:hover .s{
+  color: lightgray;
+}
+.header:hover{
+  text-decoration: underline 3px #E16F26;
 }
 .export {
   float: right;
@@ -268,7 +278,7 @@ menu li:last-child {
   opacity: 0.5;
 }
 @media print {
-  .export, .grid-list-buttons, .recipes-content, .notes-a {
+  .export, .grid-list-buttons, .recipes-content, .notes-a, app-footer {
     display: none;
   }
   .view_item .btn {
