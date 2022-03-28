@@ -1,5 +1,6 @@
 <!-- BEGIN: Main Menu-->
-<div class="main-menu menu-fixed menu-light menu-accordion menu-shadow men" data-scroll-to-active="true">
+<div class="row no-gutters col-page"  >
+<div class="col-md-2 d-none d-md-block" data-scroll-to-active="true">
   <div class="row">
     <button class="col-sm-8 creatList" [disabled]="noRecipes()" title="Create shopping list"><a
         routerLink="/site/ingredients/{{selectedDate1 | date: 'yyyy-MM-dd'}}/{{selectedDate2 | date: 'yyyy-MM-dd'}}">Create
@@ -38,7 +39,7 @@
   </div>
 </div>
 <!-- END: Main Menu-->
-<div class="app-content content ">
+<div class="app-content col ">
   <div class="content-wrapper">
     <div class="content-body">
       <div class="overview-scheduler">
@@ -161,4 +162,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

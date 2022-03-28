@@ -10,7 +10,8 @@ export class Product {
         public Unit?: string,
         public Category?: number,
         public Recipes?:any[],
-        public Units?: UnitItem[]
+        public Units?: UnitItem[],
+        public ZIndex?: number
         ) {
          }
         

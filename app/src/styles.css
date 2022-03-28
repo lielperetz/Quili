@@ -19,3 +19,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .full-w.header-navbar.floating-nav{
     width: calc(100vw - (100vw - 100%) - 4rem);
 }
+
+
+.col-page{
+    padding-top: 90px !important;
+  }
+  .col-page ul{
+    margin: 0px;
+    padding: 0px;
+  }
+  .col-page ul li{
+    list-style: none;
+  }
