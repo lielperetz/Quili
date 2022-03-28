@@ -157,6 +157,8 @@ input {
   width: 100%;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   position: absolute;
+  z-index: 100;
+  background-color: #fff;
 }
 .recipes-content a {
   color: black;
@@ -164,6 +166,7 @@ input {
   text-decoration: none;
   position: relative;
   display: block;
+
 }
 .recipes-content a:hover {
   color: #E16F26;
@@ -276,6 +279,26 @@ menu li:last-child {
 }
 .checked-item img{
   opacity: 0.5;
+}
+.item-container{
+  margin: 15px;
+  margin-bottom: 0px;
+  padding: 10px;
+  display: block;
+  border: solid 1px;
+  border-radius: 1rem;
+  border-color: #fff;
+  position: relative;
+
+}
+.item-container.check{
+  border-color: #E16F26;
+}
+
+.item-container .custom-control-warning{
+  position: absolute;
+  top:-1px;
+  right: -7px;;
 }
 @media print {
   .export, .grid-list-buttons, .recipes-content, .notes-a, app-footer {

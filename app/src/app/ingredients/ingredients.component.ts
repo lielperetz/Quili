@@ -29,7 +29,7 @@ export class IngredientsComponent implements OnInit {
 
   constructor(public schedulesService: SchedulesService, public recipesService: RecipesService, public activatedRoute: ActivatedRoute, public router: Router, public titleService: Title, private siteService: SiteService) {
     this.titleService.setTitle("Shopping List - Quili");
-    siteService.setNormal();
+    siteService.setFullWidth();
     this.siteService.setCurrentPage("ShoppingList");
   }
 
@@ -169,8 +169,11 @@ export class IngredientsComponent implements OnInit {
 
   createList() {
     let groupedByProductName: Product[] = [];
+    let zIndex = 0;
     this.listPro.forEach(item => {
+      zIndex++;
       var productItem = Object.assign({}, item)
+      productItem.ZIndex= this.listPro.length -zIndex
       const recipe = this.viewRecipes.find(x => x.isChecked && x.Code == productItem.RecipeUniqeCode);
       if (recipe) {
         const existProduct = groupedByProductName.find(x => x.ProductName == productItem.ProductName);
@@ -190,7 +193,7 @@ export class IngredientsComponent implements OnInit {
           if (currSameUnit) {
             currSameUnit.Amount = currSameUnit.Amount + item.Amount;
           } else {
-            existProduct.Units.push({ Amount: item.Amount, Unit: unitText });
+            existProduct.Units.push({ Amount: item.Amount, Unit: unitText  });
           }
         }
       }

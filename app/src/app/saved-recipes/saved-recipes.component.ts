@@ -14,6 +14,7 @@ export class SavedRecipesComponent implements OnInit {
 
   constructor(public savedRecipes: SavedRecipesService, public titleService: Title, private siteService: SiteService) {
     this.titleService.setTitle(" Saved Recipes - Quili");
+    this.siteService.setCurrentPage("SavedRecipes")
     siteService.setFullWidth()
     this.savedRecipes.GetSavedRecipes().subscribe(
       (response: any) => {

@@ -39,9 +39,10 @@ export class HomeComponent implements OnInit {
     public router: Router,
     public savedRecipesService: SavedRecipesService,
     public titleService: Title, private siteService: SiteService) {
-    siteService.setNormal();
+    siteService.setFullWidth();
     this.titleService.setTitle("Meal Planner - Quili");
     this.getOriginalData();
+    this.siteService.setCurrentPage("MealPlanner");
   }
 
   public ngOnInit(): void {

@@ -78,4 +78,7 @@ a:focus {
 .ml-auto {
     margin-right: 10px;
 }
+.active .d-s-none, .active .icon{
+    color: #6e6b7b;
+}
 
