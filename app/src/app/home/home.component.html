@@ -1,5 +1,5 @@
 <!-- BEGIN: Main Menu-->
-<div class="row no-gutters col-page"  >
+<div class="row no-gutters col-page">
 <div class="col-md-2 d-none d-md-block" data-scroll-to-active="true">
   <div class="row">
     <button class="col-sm-8 creatList" [disabled]="noRecipes()" title="Create shopping list"><a
@@ -11,7 +11,7 @@
         To add a new recipe - press the button above <i class="fa fa-arrow-up"></i>or press the required day in the Meal
         Planner<i class="fa fa-arrow-right"></i></div>
     </div>
-    <ul class="col-sm-12">
+    <ul class="col-sm-12 recipes-ul">
       <li class="col-sm-12" *ngFor="let items of listSelectedRecipes">
         <div class="col-sm-12 seperate"></div>
         <label class="col-sm-12 dateTitle">{{items[0].Date | date:'yyyy-MM-dd'}}</label>
@@ -48,7 +48,7 @@
           <div class="sidebar-wrapper">
             <div class="control-section">
               <ejs-schedule #scheduleObj [(currentView)]="currentView" cssClass='schedule-overview' width='100%'
-                height="730px" [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
+                height="740px" [rowAutoHeight]="rowAutoHeight" (select)="onSelect($event)"
                 (actionComplete)="onActionComplete($event)" (popupOpen)="onPopupOpen($event)">
                 <ng-template #cellTemplate let-data>
                   <div class="e-work-cells row"

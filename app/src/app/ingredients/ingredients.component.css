@@ -4,6 +4,36 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+.app-content {
+  padding: 24px 36px;
+  padding-left: 0;
+}
+h2 {
+  font-size: 24px;
+  margin: 10px auto;
+  text-align: center;
+  color: #ddd;
+  border-bottom: 0;
+  text-decoration: underline 2px #E16F26;
+}
+.notFound {
+  text-align: center;
+  margin: 15px auto;
+  font-size: 18px;
+  line-height: 40px;
+  padding: 30px;
+}
+.empty-cart {
+  padding: 50px;
+  justify-content: center;
+  text-align: center;
+}
+.empty-mode {
+  display: none;
+}
+.empty-mode .notes-a {
+  display: block;
+}
 .color{
   color: #E16F26;
 }
@@ -15,29 +45,30 @@
   border-bottom: 0;
   text-decoration: underline 3px lightgray;
 }
-.header:hover .s{
-  color: lightgray;
-}
-.header:hover{
-  text-decoration: underline 3px #E16F26;
-}
 .export {
   float: right;
   padding-right: 20px;
 }
 .e {
-  background-color: #E16F26;
+  border: 2px solid #E16F26;
   border-radius: 3px;
   margin: 3px;
   padding: 5px; 
   cursor: pointer;
   float: right;
+  color: black;
+  text-align: center;
 }
+.e:hover {
+  background-color: #e16f266e;
+} 
 .es {
   padding: 2.1px 6px;
 }
 .icon {
   font-size: large;
+  margin: 2px auto;
+  color: #E16F26;
 }
 .s {
   font-size: x-large;
@@ -221,25 +252,15 @@ input {
 .grid-view .view_item .recipes-content a {
   padding: 5px;
 }
-.men {
-  padding: 20px 0px;
-  position: fixed;
-  overflow-x: hidden;
-  overflow-y: auto;
-  height: 100%;
-}
 .seperate {
   height: 8px;
   background-color: #f5f5f5;
 }
-.men a {
-  color: #6e6b7b;
-  padding: 10px 20px;
-  display: flex;
-  letter-spacing: 0.25px;
+ul li {
+  cursor: pointer;
+  margin: 10px auto;
 }
-.men a:hover, .men a:hover .l {
-  background-color: rgb(228, 227, 227);
+ul li:hover .recipeDiv {
   text-decoration: underline;
 }
 .recipeDiv {
@@ -287,24 +308,36 @@ menu li:last-child {
   display: block;
   border: solid 1px;
   border-radius: 1rem;
-  border-color: #fff;
+  border-color: #e2e2e2;
   position: relative;
-
+  cursor: pointer;
 }
 .item-container.check{
   border-color: #E16F26;
 }
-
+.item-container:hover {
+  background-color: #cccccc45;
+}
+.item-container:hover label {
+  text-decoration: underline;
+}
 .item-container .custom-control-warning{
   position: absolute;
   top:-1px;
   right: -7px;;
+}
+.custom-control-warning .custom-control-input:checked~.custom-control-label:before {
+  color: #E16F26;
+  background-color: #E16F26;
 }
 @media print {
   .export, .grid-list-buttons, .recipes-content, .notes-a, app-footer {
     display: none;
   }
   .view_item .btn {
+    display: none;
+  }
+  .noPrint {
     display: none;
   }
   .checked-item {

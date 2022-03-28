@@ -25,3 +25,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     /* color: #E16F26 !important; */
     color: #d3d3d3 !important;
 }
+.col-page{
+    padding-top: 90px !important;
+}
+.col-page ul{
+    margin: 0px;
+    padding: 0px;
+}
+.col-page ul li{
+    list-style: none;
+}
