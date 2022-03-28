@@ -13,11 +13,33 @@
         <p class="pt float-left">we'll be glad to hear from you...</p>
         <img class="pen float-left" src="../../../assets/images/pen.png" />
         <div class="col-sm-12">
-            <form class="form">
-                <input placeholder="Name" type="text" class="col-sm-4">
-                <input placeholder="Mail" type="text" class="col-sm-7 float-right">
-                <textarea placeholder="Message" class="col-sm-12" rows="2"></textarea>
-                <input type="submit" value="SEND"/>
+            <form class="form" #myForm="ngForm">
+                <div class="col-sm-5 w3-display-container">
+                    <input class="col-sm-12" placeholder="Name" type="text" [(ngModel)]="feedback.name" required
+                        #userName="ngModel" minlength="2" maxlength="20">
+                    <div *ngIf="userName.invalid && (userName.dirty || userName.touched)" class="alert">
+                        <label *ngIf="userName.errors?.['required']">Name is required.</label>
+                        <label *ngIf="userName.errors?.['minlength']">Name too short.</label>
+                        <label *ngIf="userName.errors?.['maxlength']">Name too long.</label>
+                    </div>
+                </div>
+                <div class="col-sm-7 float-right w3-display-container">
+                    <input class="col-sm-12" placeholder="Mail" type="email" [(ngModel)]="feedback.mail" [email]="true"
+                        required #userEmail="ngModel">
+                    <div *ngIf="userEmail.invalid && (userEmail.dirty || userEmail.touched)" class="alert">
+                        <label *ngIf="userEmail.errors?.['email']">Email not valid.</label>
+                        <label *ngIf="userEmail.errors?.['required']">Email is required.</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 w3-display-container">
+                    <textarea placeholder="Message" class="col-sm-12" rows="2" [(ngModel)]="feedback.message"
+                        #userMessage="ngModel" required></textarea>
+                    <div *ngIf="userMessage.invalid && (userMessage.dirty || userMessage.touched)" class="alert">
+                        <label *ngIf="userMessage.errors?.['required']">Message is required.</label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-block" (click)="send()" [disabled]="!myForm.valid">SEND</button>
+                <!-- <input type="submit" value="SEND" [disabled]="!myForm.valid" /> -->
             </form>
         </div>
     </div>

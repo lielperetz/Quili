@@ -19,7 +19,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .full-w.header-navbar.floating-nav{
     width: calc(100vw - (100vw - 100%) - 4rem);
 }
-.slick-prev::before,
-.slick-next::before {
-    color: #E16F26;
+.slick-next::before,
+.slick-prev::before {
+    content: "\2192";
+    /* color: #E16F26 !important; */
+    color: #d3d3d3 !important;
 }
