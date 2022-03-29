@@ -10,7 +10,7 @@ import { SiteService } from '../services/site.service';
 })
 export class DashboardComponent implements OnInit {
 
-    img = ["../../../assets/images/l_img1.jpg", "../../../assets/images/l_img2.jpg"]
+    img = ["assets/images/l_img1.jpg", "assets/images/l_img2.jpg"]
     slideConfig = {
         "slidesToShow": 1,
         "slidesToScroll": 1,

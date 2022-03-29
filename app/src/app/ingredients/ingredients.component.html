@@ -56,7 +56,7 @@
           </div>
           <div class="wrapper">
             <div *ngIf="viewData.length==0" class="row empty-cart">
-              <img class="col-sm-2" src="../../assets/images/empty-cart.jpg"><br>
+              <img class="col-sm-2" src="assets/images/empty-cart.jpg"><br>
               <h3 class="col-sm-12">Your Shopping List Is Empty.</h3>
             </div>
             <div class="view_main" [ngClass]="(gridMode)?'grid-mode':'list-mode'">
@@ -66,7 +66,7 @@
                   <div class="vi_left">
                     <img *ngIf="item.ProductImage"
                       src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
-                    <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
+                    <img *ngIf="!item.ProductImage" src="assets/images/dish.jpg">
                   </div>
                   <div class="vi_right">
                     <p class="title">{{item.ProductName}} </p>
@@ -96,7 +96,7 @@
                   <div class="vi_left">
                     <img *ngIf="item.ProductImage"
                       src="https://spoonacular.com/cdn/ingredients_500x500/{{item.ProductImage}}" />
-                    <img *ngIf="!item.ProductImage" src="../../assets/images/dish.jpg">
+                    <img *ngIf="!item.ProductImage" src="assets/images/dish.jpg">
                   </div>
                   <div class="vi_right">
                     <p class="title">{{item.ProductName}}</p>
