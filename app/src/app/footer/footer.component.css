@@ -4,18 +4,19 @@
 	align-items: center;
 	justify-content: center;
 }
-input[type=text]:focus, input[type=email]:focus ,textarea:focus{
+input[type=text]:focus,textarea:focus{
     outline: none;
     border-bottom-color: black;    
 }
-input[type=text], input[type=email], textarea{
+input[type=text], textarea{
     color: gray;
     background-color: whitesmoke;
     border: none;
+    margin-bottom: 20px;
     border-bottom: 1px solid #E16F26;
     border-bottom-color: #E16F26;
 }
-input[type=submit]{
+.send{
     background-color: gray;
     border: none;
     color: white;
@@ -25,9 +26,13 @@ input[type=submit]{
     float: right;
     margin-right: 80px;
 }
-input[type=submit]:hover{
+.send:hover{
     background-color: darkgray;
     color: #E16F26;
+}
+.send:disabled {
+    background-color: gray;
+    opacity: 0.5;
 }
 .w3-display-container {
     margin-bottom: 20px;

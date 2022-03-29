@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -8,15 +10,16 @@ import Swal from 'sweetalert2';
 })
 export class FooterComponent implements OnInit {
 
-  feedback: Record<string, any> = { 'name': '', 'mail': '', 'message': '' }
+  name: string;
+  email: string;
+  message: string;
 
-  constructor() { }
+  constructor(public http: HttpClient) { }
 
   ngOnInit(): void {
   }
 
   send() {
-    console.log(this.feedback)
     Swal.fire({
       title: 'Thank you for your feedback🤍',
       icon: 'success',

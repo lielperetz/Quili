@@ -276,7 +276,6 @@ export class HomeComponent implements OnInit {
               this.savedRecipesService.savedRecipes.splice(this.savedRecipesService.savedRecipes.findIndex(x => x.Id === id), 1)
             }
             else {
-              console.log(res.Error)
               const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',

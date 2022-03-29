@@ -62,7 +62,6 @@ export class DashboardComponent implements OnInit {
     ngOnInit(): void {
         this.popList = []
         this.recipesService.GetPopular().subscribe(data => {
-            console.log(data)
             if (data.Status) {
                 data.Data.forEach(element => {
                     if (this.popList.length < 10) {
