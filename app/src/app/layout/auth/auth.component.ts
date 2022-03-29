@@ -6,12 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  imgSrc: string = '../../assets/textImg/About1.png';
+  imgSrc: string = 'assets/textImg/About1.png';
 
   constructor() { }
 
   ngOnInit(): void {
-    var images = ['../../assets/textImg/About1.png', '../../assets/textImg/About2.png']
+    var images = ['assets/textImg/About1.png', 'assets/textImg/About2.png']
     let i = 1;
     setInterval(() => {
       this.imgSrc = images[i]
