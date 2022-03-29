@@ -2,12 +2,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SavedRecipesService {
-  url: string = "http://localhost:44376/Api/SavedRecipes/";
+  url: string = environment.baseUrl + 'SavedRecipes/';
   numSaved: number = 0;
   savedRecipes: any[];
   constructor(private httpClient: HttpClient, private cookies: CookieService) { }

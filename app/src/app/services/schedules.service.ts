@@ -3,12 +3,13 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchedulesService {
-  url: string = "http://localhost:44376/Api/Schedules/"
+  url: string = environment.baseUrl + 'Schedules/';
 
   constructor(private httpClient: HttpClient, private cookies: CookieService) { }
   GetRecipesByUser(d1: Date, d2: Date): Observable<any> {

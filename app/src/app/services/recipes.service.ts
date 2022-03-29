@@ -2,6 +2,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Recipe } from '../classes/Recipe';
 
 @Injectable({
@@ -9,8 +10,10 @@ import { Recipe } from '../classes/Recipe';
 })
 export class RecipesService {
   isEdit: boolean = false
-  url: string = "http://localhost:44376/Api/Recipes/"
+  url: string = environment.baseUrl + 'Recipes/';
+
   constructor(private httpClient: HttpClient, private cookies: CookieService) { }
+  
   AddRecipe(rec: Recipe): Observable<any> {
     const header = new HttpHeaders({ 'Content-Type': 'application/json' }).set('Authorization', this.cookies.get('Token'))
     return this.httpClient.put<any>(this.url + "AddRecipe", JSON.stringify(rec), { headers: header }).pipe(catchError(this.handleError))
