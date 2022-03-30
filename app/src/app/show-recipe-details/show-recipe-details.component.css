@@ -97,6 +97,11 @@
 .subT {
     font-weight: bold;
     padding: 0px 3px;
+    margin: auto 0px;
+}
+
+.con {
+    font-weight: normal;
 }
 
 .ingr {

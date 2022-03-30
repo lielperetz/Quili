@@ -43,7 +43,7 @@
                             <h4 class="col-sm-12">Your Favorites is Empty.</h4>
                         </div>
                         <div class="media align-items-center row" *ngFor="let s of saved.savedRecipes">
-                            <a class="col-sm-10 ap" href="/site/showDetails/{{s.Id}}"><img
+                            <a class="col-sm-10 ap" routerLink="/site/showDetails/{{s.Id}}"><img
                                     class="col-sm-4 d-block rounded mr-1 " src="{{s.Image}}" width="70">
                                 <h3 class="cart-item-title col-sm-7">
                                     {{s.Title}}</h3>
@@ -54,7 +54,7 @@
                     </li>
                     <li class="dropdown-menu-footer">
                         <div class="d-flex justify-content-between mb-1">
-                        </div><a class="btn btn-block to" href="/site/savedRecipes">See More</a>
+                        </div><a class="btn btn-block to" routerLink="/site/savedRecipes">See More</a>
                     </li>
                 </ul>
             </li>

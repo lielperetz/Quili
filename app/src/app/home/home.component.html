@@ -61,7 +61,7 @@
                         <mat-carousel-slide #matCarouselSlide *ngFor="let slide of recipesForDay; let i = index"
                           [image]="slide.RecipeImage" overlayColor="#00000040" [hideOverlay]="true">
                           <div class="divS">
-                            <a id="aImg" class="col-sm-12" href="/site/showDetails/{{slide.RecipeId}}" target="_blank"
+                            <a id="aImg" class="col-sm-12" routerLink="/site/showDetails/{{slide.RecipeId}}" target="_blank"
                               style="border: none;">
                               <p class="col-sm-12 p-title">{{slide.RecipeTitle}}</p>
                               <a href="javascript:void(0)"><span class="tr"><i class="fa fa-trash-o"

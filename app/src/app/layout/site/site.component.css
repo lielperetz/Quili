@@ -7,6 +7,9 @@
     .d-s-none {
         display: none;
     }
+    ul li {
+        margin: 0;
+    }
 }
 .d-s-none {
     margin-bottom: 0;

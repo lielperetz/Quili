@@ -174,8 +174,18 @@ button[disabled] {
 
 /* On screens that are 800px wide or less */
 @media screen and (max-width: 800px) {
-  .p-title {
+  .p-title, .e-toolbar-right {
     display: none;
+  }
+  section {
+    padding: 4px 8px;
+  }
+  html body .app-content {
+    padding: 0 !important;
+    margin: auto;
+  }
+  ejs-schedule {
+    height: 500px;
   }
 }
 
