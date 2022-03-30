@@ -66,6 +66,7 @@ img{
 }
 .pen {
     margin: 20px;
+    width: 30px;
 }
 .pt{
     padding-left: 20px;
@@ -79,4 +80,7 @@ h3:hover .color{
     footer {
         display: none;
     }
+}
+.padding-b-10{
+    padding-bottom: 10px;
 }

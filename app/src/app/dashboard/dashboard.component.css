@@ -70,16 +70,13 @@
     border-bottom: 0;
     text-decoration: underline 3px lightgray;
 }
-.header:hover .s{
-    color: lightgray;
-}
-.header:hover{
-    text-decoration: underline 3px #E16F26;
-}
 .content {
     padding-top: 50px !important;
     margin-top: 0 !important;
 }
 .color {
     color: #E16F26;
+}
+.bg{
+    background-color: gray;
 }
