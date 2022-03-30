@@ -41,10 +41,9 @@
           </div>
           <div class="col-sm-6">
             <input type="date" [value]="startDate | date:'yyyy-MM-dd'"
-              (input)="startDate=parseDate($event.target.value)" (change)="changeDate()"
-              [min]="minDate | date: 'yyyy-MM-dd'">
+              (input)="startDate=parseDate($event.target.value)" (change)="changeDate()">
             <input type="date" [value]="endDate | date:'yyyy-MM-dd'" (input)="endDate=parseDate($event.target.value)"
-              (change)="changeDate()" [min]="minDate | date: 'yyyy-MM-dd'">
+              (change)="changeDate()">
           </div>
           <div class="col-sm-6 grid-list-buttons" [ngClass]="viewData.length==0?'empty-mode':''">
             <button id="list" data-view="list-view" class="g-l-b" [ngClass]="(!gridMode)?'active':''"
