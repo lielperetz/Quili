@@ -22,7 +22,7 @@ export class SavedRecipesComponent implements OnInit {
           this.listSave = response.Data;
         }
         else
-          alert(response.Error);
+          this.siteService.errorAlert("Oops something went wrong")
       })
   }
 

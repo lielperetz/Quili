@@ -40,7 +40,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
             if (res.Status)
               this.addedToSavedList = res.Data;
             else
-              alert(res.Error)
+              this.siteService.errorAlert("Oops something went wrong")
           }
         )
         this.recipes.GetRecipeById(x["idRecipe"]).subscribe(
@@ -51,7 +51,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
               this.setE();
             }
             else
-              alert(response.Error);
+              this.siteService.errorAlert("Oops something went wrong")
           })
       }
     });
@@ -74,7 +74,7 @@ export class ShowRecipeDetailsComponent implements OnInit {
           })
         }
         else
-          alert(res.Error)
+          this.siteService.errorAlert("Oops something went wrong")
       })
   }
 

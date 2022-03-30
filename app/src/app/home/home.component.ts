@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
             this.listRecipesBySearch = null
         }
         else
-          alert(response.Error)
+          this.siteService.errorAlert("Oops something went wrong")
       })
   }
 
@@ -317,11 +317,11 @@ export class HomeComponent implements OnInit {
                 })
               }
               else
-                alert(res.Error)
+                this.siteService.errorAlert("Oops something went wrong")
             })
         }
         else
-          alert(response.Error);
+          this.siteService.errorAlert("Oops something went wrong")
       })
 
   }

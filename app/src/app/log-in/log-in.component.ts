@@ -57,7 +57,6 @@ export class LogInComponent implements OnInit {
             iconColor: '#E16F26',
             title: response.Error,
           })
-          this.router.navigate(['/auth/signup'])
         }
       })
   }
